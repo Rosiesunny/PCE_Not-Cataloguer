@@ -147,7 +147,7 @@ function findPhysicalTraits(catPageInfo, catVillageRole) {
     console.log("Birthday: "+catBirthday)
     let catAge = simpleLineSearch(catPageInfo, "Age:", lastCheckedLandmark).split(" (")[0]
     console.log("Age: "+catAge)
-    let catAspect = "unknown" // for now this is all cats so just auto assigning it to any of them
+    let catAspect = "Undiscovered" // for now this is all cats so just auto assigning it to any of them
     console.log("Aspect: "+catAspect)
     let catOrigin = simpleLineSearch(catPageInfo, "Origin:", lastCheckedLandmark)
     console.log("Origin: "+catOrigin)
@@ -159,37 +159,56 @@ function findPhysicalTraits(catPageInfo, catVillageRole) {
     console.log("Size: "+catSize)
     let catFurLength = simpleLineSearch(catPageInfo, "Fur:", lastCheckedLandmark)
     console.log("Fur: "+catFurLength)
-    let catColor = simpleLineSearch(catPageInfo, "Color:", lastCheckedLandmark).split(" ")[0]
+    let catColor = simpleLineSearch(catPageInfo, "Color:", lastCheckedLandmark)
+    if (catColor != "-hidden-") {
+        catColor = catColor.split(" ")[0]
+    }
     console.log("Color: "+catColor)
     let catColorType = simpleLineSearch(catPageInfo, "Color:", lastCheckedLandmark).split(" ")[1]
+    if (catColorType != "-hidden-") {
+        catColorType = catColorType.split(" ")[0]
+    }
     console.log("Color Type: "+catColorType)
     let catPattern = simpleLineSearch(catPageInfo, "Pattern:", lastCheckedLandmark)
     console.log("Pattern: "+catPattern)
     let catWhiteMarks = simpleLineSearch(catPageInfo, "White Marks:", lastCheckedLandmark).split(" /")[0]
     console.log("White Marks: "+catWhiteMarks)
-    let catWhiteTypeLevel = simpleLineSearch(catPageInfo, "White Marks:", lastCheckedLandmark).split("/ ")[1]
-    console.log(catWhiteTypeLevel)
+    let catWhiteTypeLevel = ""
+    if (catWhiteMarks != "None") {
+        catWhiteTypeLevel = simpleLineSearch(catPageInfo, "White Marks:", lastCheckedLandmark).split("/ ")[1]
+        console.log(catWhiteTypeLevel)
+    }
+    else {
+        catWhiteTypeLevel = "-hidden-"
+    }
     let catEyeColor = simpleLineSearch(catPageInfo, "Eye Color:", lastCheckedLandmark)
     let eyeColorOffset = simpleLineNumberSearch(catPageInfo, "Eye Color:", lastCheckedLandmark)+2
     console.log("Eye Color: "+catEyeColor)
-    let catGeneticString = catPageInfo[eyeColorOffset]
-    console.log("Genetic String: "+catGeneticString)
-    let physicalTraitsArray = [catAge, catID, catName, catWind, catPrimaryPronouns, catSecondaryPronouns, catPersonality, catBirthday, catAspect, catOrigin, catSpecies, catSize, catFurLength, catColor, catColorType, catPattern, catWhiteMarks, catWhiteTypeLevel, catEyeColor, catGeneticString]
+    let tempGeneticString = catPageInfo[eyeColorOffset]
+    console.log("Genetic String on page: "+tempGeneticString)
+    let catGeneString = ""
+    let physicalTraitsArray = [catAge, catID, catName, catWind, catPrimaryPronouns, catSecondaryPronouns, catPersonality, catBirthday, catAspect, catOrigin, catSpecies, catSize, catFurLength, catColor, catColorType, catPattern, catWhiteMarks, catWhiteTypeLevel, catEyeColor]
+    if (tempGeneticString == "[ Unknown Genetic String ]") {
+        let tempPhysicalTraitsArray = physicalTraitsArray.slice()
+        tempPhysicalTraitsArray.shift()
+        catGeneString = autoFillGeneticStringFromPhysicalTraits(tempPhysicalTraitsArray)
+        console.log("Genetic String generated from Physical Traits: " + catGeneString)
+    }
     console.log(physicalTraitsArray)
     // IMPORTANT, I NEED TO SEND OVER ALL THE DATA I GATHERED FROM HERE TO THE NEXT FUNCTION! GOTTA PUT IT ALL TOGETHER IN A STRING HERE N MOVE IT OVER
     if (physicalTraitsArray[0] != "Bean") {
-        let finalString = findCatStats(catPageInfo, lastCheckedLandmark, physicalTraitsArray, catVillageRole)
+        let finalString = findCatStats(catPageInfo, lastCheckedLandmark, physicalTraitsArray, catVillageRole, catGeneString)
         return finalString
     }
     else {
-        let finalString = findCatFriendsAndFamily(catPageInfo, lastCheckedLandmark, "", physicalTraitsArray, catVillageRole)
+        let finalString = findCatFriendsAndFamily(catPageInfo, lastCheckedLandmark, "", physicalTraitsArray, catVillageRole, catGeneString)
         return finalString
     }
     
 }
 
 //eventually add a third variable here for the above screaming
-function findCatStats(catPageInfo, lastCheckedLandmark, physicalTraitsArray, catVillageRole) {
+function findCatStats(catPageInfo, lastCheckedLandmark, physicalTraitsArray, catVillageRole, catGeneString) {
     //personality stats start here
     let catPersonalityTraitsList = []
     let personalityTraitsList = ["Bravery:", "Benevolence:", "Energy:", "Extroversion:", "Dedication:"]
@@ -208,8 +227,6 @@ function findCatStats(catPageInfo, lastCheckedLandmark, physicalTraitsArray, cat
         catHeldTrinketStat = "None"
     }
     console.log("Trinket: " + catHeldTrinketName + " - " + catHeldTrinketStat)  
-    
-    
     let jobLineNumber = simpleLineNumberSearch(catPageInfo, "Day Job:", lastCheckedLandmark)
     let jobList = ["Hunter", "Gatherer", "Miner", "Fisher", "Bug Catcher", "Gardener", "Herbalist", "Farmer", "Flockherd", "Apothecary", "Clothier", "Scribe", "Artist", "Blacksmith", "Craftscat", "Builder", "Mason", "Baker"]
     let catJobLevelList = []
@@ -224,8 +241,7 @@ function findCatStats(catPageInfo, lastCheckedLandmark, physicalTraitsArray, cat
     }
     let currentJobData = ""
     for (let jobcheckcounter=0; jobcheckcounter < jobList.length; jobcheckcounter++) {
-        currentJobData = simpleLineSearchSameLine(catPageInfo, jobList[jobcheckcounter], jobLineNumber+1) ?? ""
-        console.log(jobList[jobcheckcounter])                                                   //// TEMP HERE
+        currentJobData = simpleLineSearchSameLine(catPageInfo, jobList[jobcheckcounter], jobLineNumber+1) ?? ""      
         if (currentJobData != "") {
             catJobLevelList[jobcheckcounter] = currentJobData.split("Level ")[1].split(" [")[0]
             if (currentJobData.includes("Maximum Level")) {
@@ -243,7 +259,6 @@ function findCatStats(catPageInfo, lastCheckedLandmark, physicalTraitsArray, cat
     console.log("Job Level/Experience Lists:")
     console.log(catJobLevelList)
     console.log(catJobExperienceList)
-
     let adventureClassLineNumber = simpleLineNumberSearch(catPageInfo, "Adventuring Class:", lastCheckedLandmark)
     let adventureClassList = ["Fighter", "Thief", "Guardian", "Ranger", "Medic", "Scout", "Bard"]
     let catAdventureClassLevelList = []
@@ -255,7 +270,6 @@ function findCatStats(catPageInfo, lastCheckedLandmark, physicalTraitsArray, cat
     let currentClassData = ""
     for (let classcheckcounter=0; classcheckcounter < adventureClassList.length; classcheckcounter++) {
         currentClassData = simpleLineSearchSameLine(catPageInfo, adventureClassList[classcheckcounter], adventureClassLineNumber+1) ?? ""
-        console.log(adventureClassList[classcheckcounter])
         if (currentClassData != "") {
             catAdventureClassLevelList[classcheckcounter] = currentClassData.split("Level ")[1].split(" [")[0]
             if (currentClassData.includes("Maximum Level")) {
@@ -344,12 +358,12 @@ function findCatStats(catPageInfo, lastCheckedLandmark, physicalTraitsArray, cat
         statsArray[attributecounter+overallcounter] = catAttributeList[attributecounter].toString()
     }
     console.log(statsArray)
-    let finalString = findCatFriendsAndFamily(catPageInfo, lastCheckedLandmark, statsArray, physicalTraitsArray, catVillageRole)
+    let finalString = findCatFriendsAndFamily(catPageInfo, lastCheckedLandmark, statsArray, physicalTraitsArray, catVillageRole, catGeneString)
     return finalString
     //IMPORTANT, ALSO GOTTA TRANSFER DATA OVER THIS TIME!!
 }
 
-function findCatFriendsAndFamily(catPageInfo, lastCheckedLandmark, statsArray, physicalTraitsArray, catVillageRole) {
+function findCatFriendsAndFamily(catPageInfo, lastCheckedLandmark, statsArray, physicalTraitsArray, catVillageRole, catGeneString) {
     let friendsStartPosition = simpleLineNumberSearch(catPageInfo, "Friends:", lastCheckedLandmark)+1 // first friend on the list, not the header
     let familyStartPosition = simpleLineNumberSearch(catPageInfo, "Family:", lastCheckedLandmark)+1 // first family on the list, not the header
     let catFriendsList = []
@@ -397,13 +411,12 @@ function findCatFriendsAndFamily(catPageInfo, lastCheckedLandmark, statsArray, p
     }
     console.log("Family:")
     console.log(catFamilyList)
-    console.log("uwu")
-    console.log(biographyStartPosition)
-    let finalString = buildKeyValueString(statsArray, physicalTraitsArray, catVillageRole, familyOfBeansTravelDate, catFriendsList, catFamilyList)
+    console.log(biographyStartPosition + ": Biography Start Position")
+    let finalString = buildKeyValueString(statsArray, physicalTraitsArray, catVillageRole, familyOfBeansTravelDate, catFriendsList, catFamilyList, catGeneString)
     return finalString
 }
 
-function buildKeyValueString(statsArray, physicalTraitsArray, catVillageRole, familyOfBeansTravelDate, catFriendsList, catFamilyList) {
+function buildKeyValueString(statsArray, physicalTraitsArray, catVillageRole, familyOfBeansTravelDate, catFriendsList, catFamilyList, catGeneString) {
     console.log(physicalTraitsArray)
     console.log(statsArray)
     console.log(catVillageRole)
@@ -439,7 +452,7 @@ function buildKeyValueString(statsArray, physicalTraitsArray, catVillageRole, fa
     +keyTitleSymbol+"White Marks"+singleValueSymbol+physicalTraitsArray[15]
     +keyTitleSymbol+"White Type/Level"+singleValueSymbol+physicalTraitsArray[16]
     +keyTitleSymbol+"Eye Color"+singleValueSymbol+physicalTraitsArray[17]
-    +keyTitleSymbol+"Genetic String"+singleValueSymbol+physicalTraitsArray[18]
+    +keyTitleSymbol+"Genetic String"+singleValueSymbol+catGeneString
 
     if (catAge != "Bean") {
         finalString +=
@@ -524,6 +537,14 @@ function buildKeyValueString(statsArray, physicalTraitsArray, catVillageRole, fa
     console.log(finalString)
 
     let ageAndFinalStringArray = [catAge, finalString]
+
+
+
+
+
+
+    // WHHEN I A CTUALLY DO IMPLEMENT THIS I SHOULD DO AN IF STATEMENT TO CHECK IF THE GENE STRING IS ALREADY FILLED OUT VIA GENE REVEAL THINGS. NO NEED TO DO THIS IF SO
+    autoFillGeneticStringFromPhysicalTraits(physicalTraitsArray)
     return ageAndFinalStringArray
 }
 
@@ -577,7 +598,196 @@ function getCanTravelDate(days) {
     let returnDate = seasons[catSeasons] + " " + catDays + ", Year " + catYears
     return returnDate
 }
+
+function autoFillGeneticStringFromPhysicalTraits(physicalTraitsArray) {
+    let geneStringGenerated = "[C] " // auto filling in cat for now since everyone is cat
+    let wind = ""
+    //wind
+    switch(physicalTraitsArray[2]) {
+        case "North":
+            geneStringGenerated += "[N?] "
+            wind = "North"
+            break
+        case "South":
+            geneStringGenerated += "[S?] "
+            wind = "South"
+            break
+        case "Trade":
+            geneStringGenerated += "[NS] "
+            wind = "Trade"
+            break
+        case "Null":
+            geneStringGenerated += "[OO] "
+            wind = "Null"
+            break
+    }
+    //fur
+    switch(physicalTraitsArray[11]) {
+        case "Shorthair":
+            geneStringGenerated += "[S?] "
+            break
+        case "Longhair":
+            geneStringGenerated += "[LL] "
+            break
+    }
+    //color type, color, dilute, density
+    switch(physicalTraitsArray[13]) {
+        case "Standard":
+            geneStringGenerated += checkStandardColorsFunction(physicalTraitsArray[12], wind)
+            break
+        case "Watercolor":
+            geneStringGenerated += checkWatercolorsAndTortiesFunction(physicalTraitsArray[12], "Watercolor")
+            break
+        case "Tortoiseshell":
+            geneStringGenerated += checkWatercolorsAndTortiesFunction(physicalTraitsArray[12], "Tortoiseshell")
+            break
+        case "-hidden-":
+            geneStringGenerated += "[?????] "
+            break
+    }
+    //pattern
+    geneStringGenerated += checkPattern(physicalTraitsArray[14]) 
+    //white 
+    if (physicalTraitsArray[15] != "None") {
+        if (physicalTraitsArray[16][2]) {
+            geneStringGenerated += "[Y?" + physicalTraitsArray[16][1] + physicalTraitsArray[16][2] + physicalTraitsArray[16][0] + "]" // gonna leave no space here in case I add a setting later to not add growth/mystery genes automatically
+        }
+        else {
+            geneStringGenerated += "[Y?" + physicalTraitsArray[16][1] + physicalTraitsArray[16][0] + "]" // gonna leave no space here in case I add a setting later to not add growth/mystery genes automatically
+        }
+    }
+    else {
+        geneStringGenerated += "[????]"
+    }
+    geneStringGenerated += " [??] [??]"
+    return geneStringGenerated
+}
+
+function checkPattern(pattern) {
+    let finalstring = ""
+    switch(pattern) {
+        case "Solid":
+            finalstring = "[NN??] "
+            break
+        case "Mackerel":
+            finalstring = "[Y?TT] "
+            break
+        case "Classic":
+            finalstring = "[Y?TM] "
+            break
+        case "Broken":
+            finalstring = "[Y?TS] "
+            break
+        case "Clouded":
+            finalstring = "[Y?MM] "
+            break     
+        case "Spotted":
+            finalstring = "[Y?SS] "
+            break
+        case "Rosette":
+            finalstring = "[Y?MS] "
+            break
+        case "Lynxpoint":
+            finalstring = "[Y?TP] "
+            break
+        case "Mink":
+            finalstring = "[Y?SP] "
+            break  
+        case "Cloudpoint":
+            finalstring = "[Y?MP] "
+            break
+        case "Colorpoint":
+            finalstring = "[Y?PP] "
+            break
+        case "-hidden-":
+            finalstring = "[????] "
+            break
+    }
+    return finalstring
+}
+
+function checkWatercolorsAndTortiesFunction(color, colortype) {
+    let blackList = ["Tan", "Chocolate", "Brown", "Black", "Silver", "Smoke", "Grey","Charcoal"]
+    let orangeList = ["Apricot", "Orange", "Ginger", "Red", "Beige", "Almond", "Cream", "Buff"]
+    let i = 0
+    let dilute = ""
+    let colorGene = ""
+    let density = ""
+    let finalstring = "["
+    let primarycolor = color.split("-")[0]
+    switch (colortype) {
+        case "Tortoiseshell":
+            for (i = 0; i < blackList.length; i++) {
+                if (primarycolor == blackList[i]) {
+                    colorGene = "BO"
+                    break
+                }
+                if (primarycolor == orangeList[i]) {
+                    colorGene = "OB"
+                    break
+                }
+            }
+            break
+        case "Watercolor":
+            for (i = 0; i < blackList.length; i++) {
+                if (primarycolor == blackList[i]) {
+                    colorGene = "BB"
+                    break
+                }
+                if (primarycolor == orangeList[i]) {
+                    colorGene = "OO"
+                    break
+                }
+            }
+            break
+    }
+    if (i>3) {
+        dilute = "DD"
+        density = (i+1)/2
+    }
+    else {
+        dilute = "F?"
+        density = (i+1)
+    }
+    finalstring += colorGene + dilute + density + "] "
+    return finalstring
+}
     
+function checkStandardColorsFunction(color, wind) {
+    let blackList = ["Tan", "Chocolate", "Brown", "Black", "Silver", "Smoke", "Grey","Charcoal"]
+    let orangeList = ["Apricot", "Orange", "Ginger", "Red", "Beige", "Almond", "Cream", "Buff"]
+    let i = 0
+    let dilute = ""
+    let colorGene = ""
+    let density = ""
+    let finalstring = "["
+    for (i = 0; i < blackList.length; i++) {
+        if (color == blackList[i]) {
+            colorGene = "B"
+            break
+        }
+        if (color == orangeList[i]) {
+            colorGene = "O"
+            break
+        }
+    }
+    if (i>3) {
+        dilute = "DD"
+        density = (i+1)/2
+    }
+    else {
+        dilute = "F?"
+        density = (i+1)
+    }
+    switch(wind) {
+        case "North":
+            finalstring += colorGene + "?" + dilute + density + "] "
+        case "South":
+            finalstring += "?" + colorGene + dilute + density + "] "
+    }
+    return finalstring
+}
+
 
 // ngl prob don't need this here so much as in search functions and stuff so it'll auto find if a cat has aged up
 function getCatAge() {}
