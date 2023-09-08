@@ -34,32 +34,89 @@ reason*/
 // with spacers that can be easily tracked/not repeated by users frequently so I can just split it up piece by piece when I read from it
 // cool
 
-
+function readLocalStorageInfo() {
+    
+    let sectionHeadSymbol = "[☎⌦]"
+    let keyTitleSymbol = "[⬤⊝]"
+    let singleValueSymbol = "[⧯▣]"
+    let multipleValueSymbol = "[⧮🈩]"
+    let subValue1Symbol = "[▲⊝]"
+    let subValue2Symbol = "[△☉]"
+    let symbols = [sectionHeadSymbol, keyTitleSymbol, singleValueSymbol, multipleValueSymbol, subValue1Symbol, subValue2Symbol]
+    let catIDsList = localStorage.getItem("catIDsList")
+    console.log(catIDsList)
+    let arrayMaker = catIDsList.split("<>")
+    for (let i = 0; i < arrayMaker.length; i++) {
+        let catIDGet = arrayMaker[i]
+        let catInfoByID = localStorage.getItem(catIDGet)
+        let catInfoArray = catInfoByID.split(symbols)
+        let catInfoArrayLengthInitial = catInfoArray.length
+        let catInfoArrayNew = []
+        for (let j = 0; j < catInfoArrayLengthInitial; j++) {
+            catInfoArrayNew = catInfoArray[j].split(keyTitleSymbol)
+            console.log(catInfoArrayNew)
+        }
+        let catInfoArrayNew2 = []
+        for (let k = 0; k < catInfoArrayNew.length; k++) {
+            catInfoArrayNew2[k] = catInfoArrayNew[k].split(singleValueSymbol)
+        }
+        console.log(catInfoArrayNew2)
+        console.log("==========================================================================================================================")
+    }
+    localStorage.setItem("catIDsList", catIDsList)
+    console.log(catIDsList)
+    return
+}
 
 function kibbyDirector() {
+    readLocalStorageInfo()
+    fhjfkshdf
     let textBoxEntry = document.querySelector(".testTextBox")
     let catPageInfoINITIAL = textBoxEntry.value.split("\n")
     let catVillageRole = checkForTravelingText(catPageInfoINITIAL) ?? ""
     console.log(catVillageRole)
     let catPageInfo = ensmallenCatPageInfo(catPageInfoINITIAL)
-    //textBoxEntry.value = ""                      UNCOMMENT THIS FOR THE OFFICIAL VERSION
+    textBoxEntry.value = ""                    //  UNCOMMENT THIS FOR THE OFFICIAL VERSION
     let catKeyDataList = ""
     catKeyDataList = findPhysicalTraits(catPageInfo, catVillageRole)
-    
     let ageSuffix = catKeyDataList.shift()
-    catKeyDataList = catKeyDataList[0]
-    let displayTest = catKeyDataList.replaceAll("[☎⌦]", "\n").replaceAll("[⬤⊝]", "\n").replaceAll("[⧯▣]", "\n").replaceAll("[⧮🈩]", "\n").replaceAll("[▲⊝]", "\n").replaceAll("[△☉]", "\n")
-    document.querySelector(".poopee").innerText = displayTest
-    
-    //AGE CHECK HERE THAT DETERMINES WHAT ELSE GETS CALLED
-    if (ageSuffix != "Bean") {
-        console.log("not a bean")
-         // add in whatever here that I need as variables for params
+    if (ageSuffix == "Young Kitten") {
+        ageSuffix = "YoungKitten"
     }
+    let catID = catKeyDataList.shift()
+    catKeyDataList = catKeyDataList[0]
+    let displayText = catKeyDataList.replaceAll("[☎⌦]", "\n").replaceAll("[⬤⊝]", "\n").replaceAll("[⧯▣]", "\n").replaceAll("[⧮🈩]", "\n").replaceAll("[▲⊝]", "\n").replaceAll("[△☉]", "\n")
+    document.querySelector(".poopee").innerText = displayText
+    console.log(catID)
+    let catKey = ""
+    //AGE CHECK HERE THAT DETERMINES WHAT ELSE GETS CALLED
+    catKey = catID + "-" + ageSuffix
+    console.log(catKey)
+    localStorage.setItem(catKey, catKeyDataList)
+    console.log(localStorage.getItem("catIDsList"))
+    checkLocalStorageForID(catKey)
+    console.log(localStorage.getItem("catIDsList"))
 
     // ADD IN A VARIABLE FOR USER NOTES OTHER THAN THE CAT BIO! ONE THEY CAN EDIT IN-PROGRAM
     // ALSO ADD IN A VARIABLE THAT'LL BE A PLACEHOLDER FOR WHEN EVENTUALLY I'LL HAVE IT AUTO RECORD DATES OF STAT INCREASES FOR STUDENTS
     // OOO I COULD JUST MAKE IT SO THIS IS STORED IN THE NON-ADULT DATA? then it won't clutter the adult data as much for stuff that will never apply to MFE/gardenhome adults
+}
+//checks if the specified ID is already stored, and if it isn't, adds it to the list
+function checkLocalStorageForID(catKey) {
+    let catIDsList = localStorage.getItem("catIDsList")
+    console.log(catIDsList)
+    let arrayMaker = catIDsList.split("<>")
+    console.log(arrayMaker)
+    for (let i = 0; i < arrayMaker.length; i++) {
+        if (arrayMaker[i] == catKey) {
+            console.log("Key already exists")
+            return
+        }
+    }
+    catIDsList += catKey + "<>"
+    localStorage.setItem("catIDsList", catIDsList)
+    console.log(catIDsList)
+    return
 }
 
 function checkForTravelingText(catPageInfoINITIAL) {
@@ -193,6 +250,9 @@ function findPhysicalTraits(catPageInfo, catVillageRole) {
         tempPhysicalTraitsArray.shift()
         catGeneString = autoFillGeneticStringFromPhysicalTraits(tempPhysicalTraitsArray)
         console.log("Genetic String generated from Physical Traits: " + catGeneString)
+    }
+    else {
+        catGeneString = tempGeneticString
     }
     console.log(physicalTraitsArray)
     // IMPORTANT, I NEED TO SEND OVER ALL THE DATA I GATHERED FROM HERE TO THE NEXT FUNCTION! GOTTA PUT IT ALL TOGETHER IN A STRING HERE N MOVE IT OVER
@@ -420,7 +480,7 @@ function buildKeyValueString(statsArray, physicalTraitsArray, catVillageRole, fa
     console.log(physicalTraitsArray)
     console.log(statsArray)
     console.log(catVillageRole)
-    console.log(familyOfBeansTravelDate+"eEEEEEEEEEEEEEEE family of beans")
+    console.log("Can Travel On: " +familyOfBeansTravelDate)
     let catAge = physicalTraitsArray.shift()
 
     let sectionHeadSymbol = "[☎⌦]"
@@ -533,18 +593,8 @@ function buildKeyValueString(statsArray, physicalTraitsArray, catVillageRole, fa
     +keyTitleSymbol+"Sort Group"+singleValueSymbol
     +keyTitleSymbol+"Sort Group Position"+singleValueSymbol
     +keyTitleSymbol+"Flags"+multipleValueSymbol
-
     console.log(finalString)
-
-    let ageAndFinalStringArray = [catAge, finalString]
-
-
-
-
-
-
-    // WHHEN I A CTUALLY DO IMPLEMENT THIS I SHOULD DO AN IF STATEMENT TO CHECK IF THE GENE STRING IS ALREADY FILLED OUT VIA GENE REVEAL THINGS. NO NEED TO DO THIS IF SO
-    autoFillGeneticStringFromPhysicalTraits(physicalTraitsArray)
+    let ageAndFinalStringArray = [catAge, physicalTraitsArray[0], finalString]
     return ageAndFinalStringArray
 }
 
@@ -788,7 +838,5 @@ function checkStandardColorsFunction(color, wind) {
     return finalstring
 }
 
-
 // ngl prob don't need this here so much as in search functions and stuff so it'll auto find if a cat has aged up
 function getCatAge() {}
-
