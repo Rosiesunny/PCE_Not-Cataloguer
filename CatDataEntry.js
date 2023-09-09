@@ -837,8 +837,10 @@ function checkStandardColorsFunction(color, wind) {
     switch(wind) {
         case "North":
             finalstring += colorGene + "?" + dilute + density + "] "
+            break
         case "South":
             finalstring += "?" + colorGene + dilute + density + "] "
+            break
     }
     return finalstring
 }
