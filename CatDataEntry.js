@@ -69,8 +69,7 @@ function readLocalStorageInfo() {
 }
 
 function kibbyDirector() {
-    readLocalStorageInfo()
-    fhjfkshdf
+    //readLocalStorageInfo()
     let textBoxEntry = document.querySelector(".testTextBox")
     let catPageInfoINITIAL = textBoxEntry.value.split("\n")
     let catVillageRole = checkForTravelingText(catPageInfoINITIAL) ?? ""
@@ -92,10 +91,9 @@ function kibbyDirector() {
     //AGE CHECK HERE THAT DETERMINES WHAT ELSE GETS CALLED
     catKey = catID + "-" + ageSuffix
     console.log(catKey)
-    localStorage.setItem(catKey, catKeyDataList)
-    console.log(localStorage.getItem("catIDsList"))
-    checkLocalStorageForID(catKey)
-    console.log(localStorage.getItem("catIDsList"))
+    //localStorage.setItem(catKey, catKeyDataList)
+    ///console.log(localStorage.getItem("catIDsList"))
+    //checkLocalStorageForID(catKey)
 
     // ADD IN A VARIABLE FOR USER NOTES OTHER THAN THE CAT BIO! ONE THEY CAN EDIT IN-PROGRAM
     // ALSO ADD IN A VARIABLE THAT'LL BE A PLACEHOLDER FOR WHEN EVENTUALLY I'LL HAVE IT AUTO RECORD DATES OF STAT INCREASES FOR STUDENTS
@@ -217,12 +215,16 @@ function findPhysicalTraits(catPageInfo, catVillageRole) {
     let catFurLength = simpleLineSearch(catPageInfo, "Fur:", lastCheckedLandmark)
     console.log("Fur: "+catFurLength)
     let catColor = simpleLineSearch(catPageInfo, "Color:", lastCheckedLandmark)
+    let catColorType
     if (catColor != "-hidden-") {
         catColor = catColor.split(" ")[0]
     }
+    else {
+        catColorType = "-hidden-"
+    }
     console.log("Color: "+catColor)
-    let catColorType = simpleLineSearch(catPageInfo, "Color:", lastCheckedLandmark).split(" ")[1]
     if (catColorType != "-hidden-") {
+        catColorType = simpleLineSearch(catPageInfo, "Color:", lastCheckedLandmark)
         catColorType = catColorType.split(" ")[0]
     }
     console.log("Color Type: "+catColorType)
@@ -699,6 +701,8 @@ function autoFillGeneticStringFromPhysicalTraits(physicalTraitsArray) {
     geneStringGenerated += checkPattern(physicalTraitsArray[14]) 
     //white 
     if (physicalTraitsArray[15] != "None") {
+        console.log(physicalTraitsArray[15])
+        console.log(physicalTraitsArray)
         if (physicalTraitsArray[16][2]) {
             geneStringGenerated += "[Y?" + physicalTraitsArray[16][1] + physicalTraitsArray[16][2] + physicalTraitsArray[16][0] + "]" // gonna leave no space here in case I add a setting later to not add growth/mystery genes automatically
         }
@@ -759,6 +763,7 @@ function checkPattern(pattern) {
 function checkWatercolorsAndTortiesFunction(color, colortype) {
     let blackList = ["Tan", "Chocolate", "Brown", "Black", "Silver", "Smoke", "Grey","Charcoal"]
     let orangeList = ["Apricot", "Orange", "Ginger", "Red", "Beige", "Almond", "Cream", "Buff"]
+    let densityList = [1, 2, 3, 4, 1, 2, 3, 4]
     let i = 0
     let dilute = ""
     let colorGene = ""
@@ -793,11 +798,11 @@ function checkWatercolorsAndTortiesFunction(color, colortype) {
     }
     if (i>3) {
         dilute = "DD"
-        density = (i+1)/2
+        density = densityList[i]
     }
     else {
         dilute = "F?"
-        density = (i+1)
+        density = densityList[i]
     }
     finalstring += colorGene + dilute + density + "] "
     return finalstring
@@ -806,6 +811,7 @@ function checkWatercolorsAndTortiesFunction(color, colortype) {
 function checkStandardColorsFunction(color, wind) {
     let blackList = ["Tan", "Chocolate", "Brown", "Black", "Silver", "Smoke", "Grey","Charcoal"]
     let orangeList = ["Apricot", "Orange", "Ginger", "Red", "Beige", "Almond", "Cream", "Buff"]
+    let densityList = [1, 2, 3, 4, 1, 2, 3, 4]
     let i = 0
     let dilute = ""
     let colorGene = ""
@@ -823,11 +829,11 @@ function checkStandardColorsFunction(color, wind) {
     }
     if (i>3) {
         dilute = "DD"
-        density = (i+1)/2
+        density = densityList[i]
     }
     else {
         dilute = "F?"
-        density = (i+1)
+        density = densityList[i]
     }
     switch(wind) {
         case "North":
