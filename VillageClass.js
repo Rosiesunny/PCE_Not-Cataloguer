@@ -3,14 +3,14 @@
 class Village {
     constructor () {
         // profile info
-        this.userID;
-        this.username;
-        this.villageName;
+        this.userID
+        this.username
+        this.villageName
 
         // Mayor
-        this.mayor;                             // mayor cat's ID
-        this.mayorBonus;                        // Array w/ [Str, Agi, Hlt, Fin, Clv, Per, Lck]
-        this.personalityModEnabled;             // Boolean
-        this.personalityMod;                    // Array w/ [Bravery, Benevlonence, Energy, Extroversion, Dedication]
+        this.mayor                             // mayor cat's ID
+        this.mayorBonus                        // Array w/ [Str, Agi, Hlt, Fin, Clv, Per, Lck]
+        this.personalityModEnabled             // Boolean
+        this.personalityMod                    // Array w/ [Bravery, Benevlonence, Energy, Extroversion, Dedication]
     }
 }

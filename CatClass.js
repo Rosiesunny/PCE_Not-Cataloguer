@@ -15,51 +15,51 @@ class Cat {
 
 constructor (textBoxData) {
 // basic info
-this.catID;
-this.name;
-this.travelling;                    // boolean value
+this.catID
+this.name
+this.travelling                    // boolean value
 
 // basic data
-this.birthday;
-this.age;
-this.wind;
-this.primaryPronoun;                // "they", "he", "she", etc.
-this.secondaryPronoun;              // same as above
-this.aspect;
-this.origin;
+this.birthday
+this.age
+this.wind
+this.primaryPronoun                // "they", "he", "she", etc.
+this.secondaryPronoun              // same as above
+this.aspect
+this.origin
 
 // appearance
-this.species;
-this.size;
-this.furLength;
-this.furColor;
-this.pattern;
-this.whiteType;                     // one letter representation: C, P, L, R, I
-this.whiteLevel;
-this.eyeColor;
+this.species
+this.size
+this.furLength
+this.furColor
+this.pattern
+this.whiteType                     // one letter representation: C, P, L, R, I
+this.whiteLevel
+this.eyeColor
 
 // personality
-this.personalityType;
-this.personalityStats;              // Array w/ [Bravery, Benevlonence, Energy, Extroversion, Dedication]
-this.heldTrinket;
+this.personalityType
+this.personalityStats              // Array w/ [Bravery, Benevlonence, Energy, Extroversion, Dedication]
+this.heldTrinket
 
 // attributes and occupations
-this.dayJob;
-this.jobEXP;                        // Some sort of key-value pair structure
-this.advClass;
-this.advEXP;                        // Same structure as jobExp
-this.baseStats;                     // Array w/ [Str, Agi, Hlt, Fin, Clv, Per, Lck]
+this.dayJob
+this.jobEXP                        // Some sort of key-value pair structure
+this.advClass
+this.advEXP                        // Same structure as jobExp
+this.baseStats                     // Array w/ [Str, Agi, Hlt, Fin, Clv, Per, Lck]
 
 // friends and family
-this.partners;
-this.bestFriends;
-this.friends;
+this.partners
+this.bestFriends
+this.friends
 
-this.family;                        // might need some thinking for family tree generation
+this.family                        // might need some thinking for family tree generation
 
 // other
-this.wearing;                       // the clothes the cat is currently wearing
-this.outfitPlan;                    // to store an outfit plan
+this.wearing                       // the clothes the cat is currently wearing
+this.outfitPlan                    // to store an outfit plan
 
 }
 
