@@ -26,45 +26,98 @@ reason*/
 //
 // profit
 
-
-
 // thinking maybe when I store non-adult data it can save to different variables. like, main sequence is just gonna be the id number as the key
 // but maybe for each age it'll have something like an id of "######-bean" "######-young-kitten" etc. Would make it easier to store the datasets I think
 // for the contents I think that storing by id in any of them, the contents/data contained will just be a very long string of all of the above information
 // with spacers that can be easily tracked/not repeated by users frequently so I can just split it up piece by piece when I read from it
 // cool
 
-
+function readLocalStorageInfo() {
+    let sectionHeadSymbol = "[☎⌦]"
+    let keyTitleSymbol = "[⬤⊝]"
+    let singleValueSymbol = "[⧯▣]"
+    let multipleValueSymbol = "[⧮🈩]"
+    let subValue1Symbol = "[▲⊝]"
+    let subValue2Symbol = "[△☉]"
+    let symbols = [sectionHeadSymbol, keyTitleSymbol, singleValueSymbol, multipleValueSymbol, subValue1Symbol, subValue2Symbol]
+    let catIDsList = localStorage.getItem("catIDsList")
+    console.log(catIDsList)
+    let arrayMaker = catIDsList.split("<>")
+    for (let i = 0; i < arrayMaker.length; i++) {
+        let catIDGet = arrayMaker[i]
+        let catInfoByID = localStorage.getItem(catIDGet)
+        let catInfoArray = catInfoByID.split(symbols)
+        let catInfoArrayLengthInitial = catInfoArray.length
+        let catInfoArrayNew = []
+        for (let j = 0; j < catInfoArrayLengthInitial; j++) {
+            catInfoArrayNew = catInfoArray[j].split(keyTitleSymbol)
+            console.log(catInfoArrayNew)
+        }
+        let catInfoArrayNew2 = []
+        for (let k = 0; k < catInfoArrayNew.length; k++) {
+            catInfoArrayNew2[k] = catInfoArrayNew[k].split(singleValueSymbol)
+        }
+        console.log(catInfoArrayNew2)
+        console.log("==========================================================================================================================")
+    }
+    localStorage.setItem("catIDsList", catIDsList)
+    console.log(catIDsList)
+    return
+}
 
 function kibbyDirector() {
+    //readLocalStorageInfo()                // commented out for now so it doesn't record in localStorage
     let textBoxEntry = document.querySelector(".testTextBox")
     let catPageInfoINITIAL = textBoxEntry.value.split("\n")
     let catVillageRole = checkForTravelingText(catPageInfoINITIAL) ?? ""
     console.log(catVillageRole)
     let catPageInfo = ensmallenCatPageInfo(catPageInfoINITIAL)
-    //textBoxEntry.value = ""                      UNCOMMENT THIS FOR THE OFFICIAL VERSION
+    textBoxEntry.value = ""                    //  UNCOMMENT THIS FOR THE OFFICIAL VERSION. sometimes helpful to comment during testing tho
     let catKeyDataList = ""
     catKeyDataList = findPhysicalTraits(catPageInfo, catVillageRole)
-    
     let ageSuffix = catKeyDataList.shift()
-    catKeyDataList = catKeyDataList[0]
-    let displayTest = catKeyDataList.replaceAll("[☎⌦]", "\n").replaceAll("[⬤⊝]", "\n").replaceAll("[⧯▣]", "\n").replaceAll("[⧮🈩]", "\n").replaceAll("[▲⊝]", "\n").replaceAll("[△☉]", "\n")
-    document.querySelector(".poopee").innerText = displayTest
-    
-    //AGE CHECK HERE THAT DETERMINES WHAT ELSE GETS CALLED
-    if (ageSuffix != "Bean") {
-        console.log("not a bean")
-         // add in whatever here that I need as variables for params
+    if (ageSuffix == "Young Kitten") {
+        ageSuffix = "YoungKitten"
     }
+    let catID = catKeyDataList.shift()
+    catKeyDataList = catKeyDataList[0]
+    let displayText = catKeyDataList.replaceAll("[☎⌦]", "\n").replaceAll("[⬤⊝]", "\n").replaceAll("[⧯▣]", "\n").replaceAll("[⧮🈩]", "\n").replaceAll("[▲⊝]", "\n").replaceAll("[△☉]", "\n")
+    document.querySelector(".poopee").innerText = displayText
+    console.log(catID)
+    let catKey = ""
+    //AGE CHECK HERE THAT DETERMINES WHAT ELSE GETS CALLED
+    catKey = catID + "-" + ageSuffix
+    console.log(catKey)
+    //localStorage.setItem(catKey, catKeyDataList)             // commented out for now so it doesn't record in localStorage
+    ///console.log(localStorage.getItem("catIDsList"))
+    //checkLocalStorageForID(catKey)
 
     // ADD IN A VARIABLE FOR USER NOTES OTHER THAN THE CAT BIO! ONE THEY CAN EDIT IN-PROGRAM
     // ALSO ADD IN A VARIABLE THAT'LL BE A PLACEHOLDER FOR WHEN EVENTUALLY I'LL HAVE IT AUTO RECORD DATES OF STAT INCREASES FOR STUDENTS
     // OOO I COULD JUST MAKE IT SO THIS IS STORED IN THE NON-ADULT DATA? then it won't clutter the adult data as much for stuff that will never apply to MFE/gardenhome adults
 }
 
+//checks if the specified ID is already stored, and if it isn't, adds it to the list
+function checkLocalStorageForID(catKey) {
+    let catIDsList = localStorage.getItem("catIDsList")
+    console.log(catIDsList)
+    let arrayMaker = catIDsList.split("<>")
+    console.log(arrayMaker)
+    for (let i = 0; i < arrayMaker.length; i++) {
+        if (arrayMaker[i] == catKey) {
+            console.log("Key already exists")
+            return
+        }
+    }
+    catIDsList += catKey + "<>"
+    localStorage.setItem("catIDsList", catIDsList)
+    console.log(catIDsList)
+    return
+}
+
 function checkForTravelingText(catPageInfoINITIAL) {
-    for (let travelcounter = 0; travelcounter < catPageInfoINITIAL.length; travelcounter++) {
-        if (catPageInfoINITIAL[travelcounter].includes("This not-cat is currently out traveling the world!")) {
+    for (let i = 0; i < catPageInfoINITIAL.length; i++) {
+        if (catPageInfoINITIAL[i].includes("This not-cat is currently out traveling the world!")) {
             return "Traveler"
         }
     }
@@ -72,36 +125,35 @@ function checkForTravelingText(catPageInfoINITIAL) {
 }
 
 function ensmallenCatPageInfo(catPageInfoINITIAL) {
-    //make new variable after sorting out possible initial redundant text
     let catPageInfo = []
     if (catPageInfoINITIAL[1].includes("[") == false) {
         console.log(catPageInfoINITIAL)
         let catNameLineStart = -1
         let correctLineFound = false
-        for (findstartofcatprofilecounter = 0; findstartofcatprofilecounter < catPageInfoINITIAL.length && correctLineFound == false; findstartofcatprofilecounter++) {
-            if (catPageInfoINITIAL[findstartofcatprofilecounter].includes("[")) {
-                catNameLineStart = findstartofcatprofilecounter
+        for (let i = 0; i < catPageInfoINITIAL.length && correctLineFound == false; i++) {
+            if (catPageInfoINITIAL[i].includes("[")) {
+                catNameLineStart = i
                 correctLineFound = true
                 break
             }
         }
-        for (let newarraycounter = 0; newarraycounter < catPageInfoINITIAL.length-catNameLineStart; newarraycounter++) {
-            catPageInfo[newarraycounter] = catPageInfoINITIAL[newarraycounter+catNameLineStart-1]
+        for (let i = 0; i < catPageInfoINITIAL.length-catNameLineStart; i++) {
+            catPageInfo[i] = catPageInfoINITIAL[i+catNameLineStart-1]
         }
     }
     else {
         catPageInfo = catPageInfoINITIAL
     }
     let lastLine = -1
-    for (let findendofcatprofilecounter = 125; findendofcatprofilecounter < catPageInfo.length; findendofcatprofilecounter++) {
-        if (catPageInfo[findendofcatprofilecounter].includes("Users Online")) {
-            lastLine = findendofcatprofilecounter
+    for (let i = 125; i < catPageInfo.length; i++) {
+        if (catPageInfo[i].includes("Users Online")) {
+            lastLine = i
             break
         }
     }
     let initialLength = catPageInfo.length
     if (lastLine > 0) {
-        for (let trimendcounter = 0; trimendcounter < initialLength-lastLine; trimendcounter++) {
+        for (let i = 0; i < initialLength-lastLine; i++) {
             catPageInfo.pop()
         }
     }
@@ -120,20 +172,20 @@ function findPhysicalTraits(catPageInfo, catVillageRole) {
     let catPrimaryPronouns = ""
     let catSecondaryPronouns = ""
     // if the way pronouns are listed in the future changes this will be broken but for now it checks for the slash and relies on consistent formatting of he/it, ae/aer etc. if in the future they were like, they/them and she/her it could change.
-    for (let pronouncount = 0; pronouncount < pronounsSearchList.length; pronouncount++) {
-        if(catPronouns == pronounsSearchList[pronouncount]) {
+    for (let i = 0; i < pronounsSearchList.length; i++) {
+        if(catPronouns == pronounsSearchList[i]) {
             catPrimaryPronouns = catPronouns
             catSecondaryPronouns = "none"
             break;
         }
     }
     if (catPrimaryPronouns == "") {
-        for (let pronouncount = 0; pronouncount < pronounsSearchList.length; pronouncount++) {
-            if (catPronouns.split("/")[0] == pronounsSearchList[pronouncount].split("/")[0]) {
-                catPrimaryPronouns = pronounsSearchList[pronouncount]
+        for (let i = 0; i < pronounsSearchList.length; i++) {
+            if (catPronouns.split("/")[0] == pronounsSearchList[i].split("/")[0]) {
+                catPrimaryPronouns = pronounsSearchList[i]
             }
-            if (catPronouns.split("/")[1] == pronounsSearchList[pronouncount].split("/")[0]) {
-                catSecondaryPronouns = pronounsSearchList[pronouncount]
+            if (catPronouns.split("/")[1] == pronounsSearchList[i].split("/")[0]) {
+                catSecondaryPronouns = pronounsSearchList[i]
             }
             if (catPrimaryPronouns != "" && catSecondaryPronouns != "") {
                 break;
@@ -160,13 +212,17 @@ function findPhysicalTraits(catPageInfo, catVillageRole) {
     let catFurLength = simpleLineSearch(catPageInfo, "Fur:", lastCheckedLandmark)
     console.log("Fur: "+catFurLength)
     let catColor = simpleLineSearch(catPageInfo, "Color:", lastCheckedLandmark)
+    let catColorType
     if (catColor != "-hidden-") {
         catColor = catColor.split(" ")[0]
     }
+    else {
+        catColorType = "-hidden-"
+    }
     console.log("Color: "+catColor)
-    let catColorType = simpleLineSearch(catPageInfo, "Color:", lastCheckedLandmark).split(" ")[1]
     if (catColorType != "-hidden-") {
-        catColorType = catColorType.split(" ")[0]
+        catColorType = simpleLineSearch(catPageInfo, "Color:", lastCheckedLandmark)
+        catColorType = catColorType.split(" ")[1]
     }
     console.log("Color Type: "+catColorType)
     let catPattern = simpleLineSearch(catPageInfo, "Pattern:", lastCheckedLandmark)
@@ -194,6 +250,9 @@ function findPhysicalTraits(catPageInfo, catVillageRole) {
         catGeneString = autoFillGeneticStringFromPhysicalTraits(tempPhysicalTraitsArray)
         console.log("Genetic String generated from Physical Traits: " + catGeneString)
     }
+    else {
+        catGeneString = tempGeneticString
+    }
     console.log(physicalTraitsArray)
     // IMPORTANT, I NEED TO SEND OVER ALL THE DATA I GATHERED FROM HERE TO THE NEXT FUNCTION! GOTTA PUT IT ALL TOGETHER IN A STRING HERE N MOVE IT OVER
     if (physicalTraitsArray[0] != "Bean") {
@@ -212,8 +271,8 @@ function findCatStats(catPageInfo, lastCheckedLandmark, physicalTraitsArray, cat
     //personality stats start here
     let catPersonalityTraitsList = []
     let personalityTraitsList = ["Bravery:", "Benevolence:", "Energy:", "Extroversion:", "Dedication:"]
-    for (let personalitylistcounter = 0; personalitylistcounter < personalityTraitsList.length; personalitylistcounter++) {
-        catPersonalityTraitsList[personalitylistcounter] = simpleLineSearch(catPageInfo, personalityTraitsList[personalitylistcounter], lastCheckedLandmark)
+    for (let i = 0; i < personalityTraitsList.length; i++) {
+        catPersonalityTraitsList[i] = simpleLineSearch(catPageInfo, personalityTraitsList[i], lastCheckedLandmark)
     }
     console.log("Cat Personality Traits:")
     console.log(catPersonalityTraitsList)
@@ -234,26 +293,26 @@ function findCatStats(catPageInfo, lastCheckedLandmark, physicalTraitsArray, cat
     let catJobCurrent = catPageInfo[jobLineNumber].split(": ")[1].split(" (")[0]
     console.log("Current Job: " + catJobCurrent)
     let specialtyOccupationsList = ["Mayor", "Doctor", "Innkeeper", "Merchant", "Teacher", "Mail Carrier"]
-    for (let specialtyoccupationcounter = 0; specialtyoccupationcounter < specialtyOccupationsList.length; specialtyoccupationcounter++) {
-        if (catJobCurrent == specialtyOccupationsList[specialtyoccupationcounter]) {
+    for (let i = 0; i < specialtyOccupationsList.length; i++) {
+        if (catJobCurrent == specialtyOccupationsList[i]) {
             catVillageRole = catJobCurrent
         }
     }
     let currentJobData = ""
-    for (let jobcheckcounter=0; jobcheckcounter < jobList.length; jobcheckcounter++) {
-        currentJobData = simpleLineSearchSameLine(catPageInfo, jobList[jobcheckcounter], jobLineNumber+1) ?? ""      
+    for (let i=0; i < jobList.length; i++) {
+        currentJobData = simpleLineSearchSameLine(catPageInfo, jobList[i], jobLineNumber+1) ?? ""      
         if (currentJobData != "") {
-            catJobLevelList[jobcheckcounter] = currentJobData.split("Level ")[1].split(" [")[0]
+            catJobLevelList[i] = currentJobData.split("Level ")[1].split(" [")[0]
             if (currentJobData.includes("Maximum Level")) {
-                catJobExperienceList[jobcheckcounter] = "Maximum Level"
+                catJobExperienceList[i] = "Maximum Level"
             }
             else{
-                catJobExperienceList[jobcheckcounter] = currentJobData.split("[")[1].split("/")[0]
+                catJobExperienceList[i] = currentJobData.split("[")[1].split("/")[0]
             }
         }
         else {
-            catJobLevelList[jobcheckcounter] = "0"
-            catJobExperienceList[jobcheckcounter] = "0"
+            catJobLevelList[i] = "0"
+            catJobExperienceList[i] = "0"
         }
     }
     console.log("Job Level/Experience Lists:")
@@ -268,20 +327,20 @@ function findCatStats(catPageInfo, lastCheckedLandmark, physicalTraitsArray, cat
     // for adventure classes I'm also gonna just do 2 arrays that have the exact positions like the last one
     // fighter will always be 0, thief always 1, etc
     let currentClassData = ""
-    for (let classcheckcounter=0; classcheckcounter < adventureClassList.length; classcheckcounter++) {
-        currentClassData = simpleLineSearchSameLine(catPageInfo, adventureClassList[classcheckcounter], adventureClassLineNumber+1) ?? ""
+    for (let i=0; i < adventureClassList.length; i++) {
+        currentClassData = simpleLineSearchSameLine(catPageInfo, adventureClassList[i], adventureClassLineNumber+1) ?? ""
         if (currentClassData != "") {
-            catAdventureClassLevelList[classcheckcounter] = currentClassData.split("Level ")[1].split(" [")[0]
+            catAdventureClassLevelList[i] = currentClassData.split("Level ")[1].split(" [")[0]
             if (currentClassData.includes("Maximum Level")) {
-                catAdventureClassExperienceList[classcheckcounter] = "Maximum Level"
+                catAdventureClassExperienceList[i] = "Maximum Level"
             }
             else{
-                catAdventureClassExperienceList[classcheckcounter] = currentClassData.split("[")[1].split("/")[0]
+                catAdventureClassExperienceList[i] = currentClassData.split("[")[1].split("/")[0]
             }
         }
         else {
-            catAdventureClassLevelList[classcheckcounter] = "0"
-            catAdventureClassExperienceList[classcheckcounter] = "0"
+            catAdventureClassLevelList[i] = "0"
+            catAdventureClassExperienceList[i] = "0"
         }
     }
     console.log("Adventuring Class Level/Experience Lists:")
@@ -292,8 +351,8 @@ function findCatStats(catPageInfo, lastCheckedLandmark, physicalTraitsArray, cat
     let attributeList = ["Strength", "Agility", "Health", "Finesse", "Cleverness", "Perception", "Luck"]
     let attributeLineStartPosition = simpleLineNumberSearch(catPageInfo, "Strength", lastCheckedLandmark)+2
     let catAttributeList = []
-    for (let attributecheckcounter = 0; attributecheckcounter < attributeList.length; attributecheckcounter++) {
-        catAttributeList[attributecheckcounter] = catPageInfo[attributeLineStartPosition]
+    for (let i = 0; i < attributeList.length; i++) {
+        catAttributeList[i] = catPageInfo[attributeLineStartPosition]
         attributeLineStartPosition += 10
     }
     console.log("Stat Attributes:")
@@ -302,28 +361,30 @@ function findCatStats(catPageInfo, lastCheckedLandmark, physicalTraitsArray, cat
     let catMayorBoostModifiers = ["", "", "", "", "", "", "", "", "", "", "", ""]
     let mayorBoostStartPosition = simpleLineNumberSearch(catPageInfo, "The Mayor is currently providing the following effects to this cat:", lastCheckedLandmark)+1 ?? -1
     if (mayorBoostStartPosition > 1) { // checks if there is a mayor basically
-        for (let mayorboostcounter = 0; mayorboostcounter < attributeList.length; mayorboostcounter++) {
-            if (catPageInfo[mayorBoostStartPosition].includes(attributeList[mayorboostcounter])) {      
-                catMayorBoostModifiers[mayorboostcounter] = catPageInfo[mayorBoostStartPosition].split(" "+attributeList[mayorboostcounter])[0]
-                if (catMayorBoostModifiers[mayorboostcounter].includes(", ")) {
-                    catMayorBoostModifiers[mayorboostcounter] = catMayorBoostModifiers[mayorboostcounter].split(", ")[1]
+        for (let i = 0; i < attributeList.length; i++) {
+            if (catPageInfo[mayorBoostStartPosition].includes(attributeList[i])) {      
+                catMayorBoostModifiers[i] = catPageInfo[mayorBoostStartPosition].split(" "+attributeList[i])[0]
+                if (catMayorBoostModifiers[i].includes(", ")) {
+                    catMayorBoostModifiers[i] = catMayorBoostModifiers[i].split(", ")[1]
                 }
             }
         }
-        for (let mayorpersonalityboostcounter = 0; mayorpersonalityboostcounter < personalityMayorList.length; mayorpersonalityboostcounter++) {
-            if (catPageInfo[mayorBoostStartPosition].includes(personalityMayorList[mayorpersonalityboostcounter])) {  
-                catMayorBoostModifiers[mayorpersonalityboostcounter+attributeList.length] = catPageInfo[mayorBoostStartPosition].split("& ")[1].split(" ")[0] ?? ""
+        for (let i = 0; i < personalityMayorList.length; i++) {
+            if (catPageInfo[mayorBoostStartPosition].includes(personalityMayorList[i])) {  
+                catMayorBoostModifiers[i+attributeList.length] = catPageInfo[mayorBoostStartPosition].split("& ")[1].split(" ")[0] ?? ""
                 break
             }
         }
     }
     console.log("Mayor Boosts: ")
     console.log(catMayorBoostModifiers) //all the numbers in order, first str agi hlth fin clv per lck, then personality stats in order bravery, benv, enrgy, extroversion, dedi
-    for (let mayorboostdeductionscounter = 0; mayorboostdeductionscounter < catAttributeList.length; mayorboostdeductionscounter++) {
-        catAttributeList[mayorboostdeductionscounter] = Number(catAttributeList[mayorboostdeductionscounter])-Number(catMayorBoostModifiers[mayorboostdeductionscounter])
+    // Mayor attribute deductions from stats to get base stats accurate
+    for (let i = 0; i < catAttributeList.length; i++) {
+        catAttributeList[i] = Number(catAttributeList[i])-Number(catMayorBoostModifiers[i])
     }
-    for (let mayorboostpersodeductionscounter = 0; mayorboostpersodeductionscounter < catPersonalityTraitsList.length; mayorboostpersodeductionscounter++) {
-        catPersonalityTraitsList[mayorboostpersodeductionscounter] = Number(catPersonalityTraitsList[mayorboostpersodeductionscounter])-Number(catMayorBoostModifiers[mayorboostpersodeductionscounter+catAttributeList.length])
+    // Mayor personality deductions from stats to get base stats accurate
+    for (let i = 0; i < catPersonalityTraitsList.length; i++) {
+        catPersonalityTraitsList[i] = Number(catPersonalityTraitsList[i])-Number(catMayorBoostModifiers[i+catAttributeList.length])
     }
     console.log("Adjusted Personality Traits:")
     console.log(catPersonalityTraitsList)
@@ -331,31 +392,31 @@ function findCatStats(catPageInfo, lastCheckedLandmark, physicalTraitsArray, cat
     console.log(catAttributeList)
     let statsArray = []
     let overallcounter = 0
-    for (let persotraitcounter = 0; persotraitcounter < catPersonalityTraitsList.length; persotraitcounter++) {
-        statsArray[persotraitcounter] = catPersonalityTraitsList[persotraitcounter].toString()
+    for (let i = 0; i < catPersonalityTraitsList.length; i++) {
+        statsArray[i] = catPersonalityTraitsList[i].toString()
         overallcounter++
     }
     statsArray[overallcounter] = catHeldTrinketName
     statsArray[overallcounter+1] = catHeldTrinketStat
     statsArray[overallcounter+2] = catJobCurrent
     overallcounter+=3
-    for (let joblistcounter = 0; joblistcounter < catJobLevelList.length; joblistcounter++) {
-        statsArray[joblistcounter+overallcounter] = catJobLevelList[joblistcounter]
-        statsArray[joblistcounter+overallcounter+1] = catJobExperienceList[joblistcounter]
+    for (let i = 0; i < catJobLevelList.length; i++) {
+        statsArray[i+overallcounter] = catJobLevelList[i]
+        statsArray[i+overallcounter+1] = catJobExperienceList[i]
         overallcounter++
     }
     overallcounter += catJobLevelList.length
     statsArray[overallcounter] = catAdventureClassCurrent
     overallcounter++
-    for (let classlistcounter = 0; classlistcounter < catAdventureClassLevelList.length; classlistcounter++) {
-        statsArray[classlistcounter+overallcounter] = catAdventureClassLevelList[classlistcounter]
-        statsArray[classlistcounter+overallcounter+1] = catAdventureClassExperienceList[classlistcounter]
+    for (let i = 0; i < catAdventureClassLevelList.length; i++) {
+        statsArray[i+overallcounter] = catAdventureClassLevelList[i]
+        statsArray[i+overallcounter+1] = catAdventureClassExperienceList[i]
         overallcounter++
     }
     overallcounter += catAdventureClassLevelList.length
 
-    for (let attributecounter = 0; attributecounter < catAttributeList.length; attributecounter++) {
-        statsArray[attributecounter+overallcounter] = catAttributeList[attributecounter].toString()
+    for (let i = 0; i < catAttributeList.length; i++) {
+        statsArray[i+overallcounter] = catAttributeList[i].toString()
     }
     console.log(statsArray)
     let finalString = findCatFriendsAndFamily(catPageInfo, lastCheckedLandmark, statsArray, physicalTraitsArray, catVillageRole, catGeneString)
@@ -368,14 +429,14 @@ function findCatFriendsAndFamily(catPageInfo, lastCheckedLandmark, statsArray, p
     let familyStartPosition = simpleLineNumberSearch(catPageInfo, "Family:", lastCheckedLandmark)+1 // first family on the list, not the header
     let catFriendsList = []
     let tempNAcheck = ""
-    for (let friendcounter = 0; friendcounter < (familyStartPosition-friendsStartPosition-1); friendcounter++) {
-        tempNAcheck = catPageInfo[friendsStartPosition+friendcounter]
+    for (let i = 0; i < (familyStartPosition-friendsStartPosition-1); i++) {
+        tempNAcheck = catPageInfo[friendsStartPosition+i]
         if (tempNAcheck == "n/a") {
-            catFriendsList[friendcounter] = ""
+            catFriendsList[i] = ""
             break
         }
         else {
-            catFriendsList[friendcounter] = catPageInfo[friendsStartPosition+friendcounter].split(" - ")
+            catFriendsList[i] = catPageInfo[friendsStartPosition+i].split(" - ")
         }
     }
     console.log("Friends:")
@@ -399,14 +460,14 @@ function findCatFriendsAndFamily(catPageInfo, lastCheckedLandmark, statsArray, p
         familyOfBeansTravelDate = getCanTravelDate(tempBeanDaysNumber)
     }  
     
-    for (let familycounter = 0; familycounter < (biographyStartPosition-familyStartPosition-2-familyOfBeansCheck); familycounter++) {
-        tempNAcheck = catPageInfo[familyStartPosition+familycounter]
+    for (let i = 0; i < (biographyStartPosition-familyStartPosition-2-familyOfBeansCheck); i++) {
+        tempNAcheck = catPageInfo[familyStartPosition+i]
         if (tempNAcheck == "n/a") {
-            catFamilyList[familycounter] = ""
+            catFamilyList[i] = ""
             break
         }
         else {
-            catFamilyList[familycounter] = catPageInfo[familyStartPosition+familycounter].split(" - ")
+            catFamilyList[i] = catPageInfo[familyStartPosition+i].split(" - ")
         }
     }
     console.log("Family:")
@@ -420,7 +481,7 @@ function buildKeyValueString(statsArray, physicalTraitsArray, catVillageRole, fa
     console.log(physicalTraitsArray)
     console.log(statsArray)
     console.log(catVillageRole)
-    console.log(familyOfBeansTravelDate+"eEEEEEEEEEEEEEEE family of beans")
+    console.log("Can Travel On: " +familyOfBeansTravelDate)
     let catAge = physicalTraitsArray.shift()
 
     let sectionHeadSymbol = "[☎⌦]"
@@ -508,8 +569,8 @@ function buildKeyValueString(statsArray, physicalTraitsArray, catVillageRole, fa
     +keyTitleSymbol+"Friends"
 
     if (catFriendsList[0] != "") {
-        for (let friendscounter = 0; friendscounter < catFriendsList.length; friendscounter++) {
-            finalString += multipleValueSymbol+catFriendsList[friendscounter][0]+subValue1Symbol+catFriendsList[friendscounter][1]
+        for (let i = 0; i < catFriendsList.length; i++) {
+            finalString += multipleValueSymbol+catFriendsList[i][0]+subValue1Symbol+catFriendsList[i][1]
         }
     }
 
@@ -517,8 +578,8 @@ function buildKeyValueString(statsArray, physicalTraitsArray, catVillageRole, fa
     keyTitleSymbol+"Family"
 
     if (catFamilyList[0] != "") {
-        for (let familycounter = 0; familycounter < catFamilyList.length; familycounter++) {
-            finalString += multipleValueSymbol+catFamilyList[familycounter][0]+subValue1Symbol+catFamilyList[familycounter][1]
+        for (let i = 0; i < catFamilyList.length; i++) {
+            finalString += multipleValueSymbol+catFamilyList[i][0]+subValue1Symbol+catFamilyList[i][1]
         }
     }
     finalString +=
@@ -533,44 +594,34 @@ function buildKeyValueString(statsArray, physicalTraitsArray, catVillageRole, fa
     +keyTitleSymbol+"Sort Group"+singleValueSymbol
     +keyTitleSymbol+"Sort Group Position"+singleValueSymbol
     +keyTitleSymbol+"Flags"+multipleValueSymbol
-
     console.log(finalString)
-
-    let ageAndFinalStringArray = [catAge, finalString]
-
-
-
-
-
-
-    // WHHEN I A CTUALLY DO IMPLEMENT THIS I SHOULD DO AN IF STATEMENT TO CHECK IF THE GENE STRING IS ALREADY FILLED OUT VIA GENE REVEAL THINGS. NO NEED TO DO THIS IF SO
-    autoFillGeneticStringFromPhysicalTraits(physicalTraitsArray)
+    let ageAndFinalStringArray = [catAge, physicalTraitsArray[0], finalString]
     return ageAndFinalStringArray
 }
 
 // UTILITY FUNCTIONS
 // finds the text requested and returns the next line, for things where the "answer" to the searched things is on the next line
 function simpleLineSearch(catPageInfo, textToCheck, lastCheckedLandmark) {
-    for (let arraycounter = lastCheckedLandmark; arraycounter < catPageInfo.length; arraycounter++) {
-        if (catPageInfo[arraycounter].includes(textToCheck)) {
-            return catPageInfo[arraycounter+1]
+    for (let i = lastCheckedLandmark; i < catPageInfo.length; i++) {
+        if (catPageInfo[i].includes(textToCheck)) {
+            return catPageInfo[i+1]
         }
     }
 }
 // same as last but returns the same line for things that are found on the same line, like adventure class
 function simpleLineSearchSameLine(catPageInfo, textToCheck, lastCheckedLandmark) {
-    for (let arraycounter = lastCheckedLandmark; arraycounter < catPageInfo.length; arraycounter++) {
-        if (catPageInfo[arraycounter].includes(textToCheck)) {
-            return catPageInfo[arraycounter]
+    for (let i = lastCheckedLandmark; i < catPageInfo.length; i++) {
+        if (catPageInfo[i].includes(textToCheck)) {
+            return catPageInfo[i]
         }
     }
 }
 
 //finds what line some text is on
 function simpleLineNumberSearch(catPageInfo, textToCheck, lastCheckedLandmark) {
-    for (let arraycounter = lastCheckedLandmark; arraycounter < catPageInfo.length; arraycounter++) {
-        if (catPageInfo[arraycounter].includes(textToCheck)) {
-            return arraycounter
+    for (let i = lastCheckedLandmark; i < catPageInfo.length; i++) {
+        if (catPageInfo[i].includes(textToCheck)) {
+            return i
         }
     }
 }
@@ -649,6 +700,8 @@ function autoFillGeneticStringFromPhysicalTraits(physicalTraitsArray) {
     geneStringGenerated += checkPattern(physicalTraitsArray[14]) 
     //white 
     if (physicalTraitsArray[15] != "None") {
+        console.log(physicalTraitsArray[15])
+        console.log(physicalTraitsArray)
         if (physicalTraitsArray[16][2]) {
             geneStringGenerated += "[Y?" + physicalTraitsArray[16][1] + physicalTraitsArray[16][2] + physicalTraitsArray[16][0] + "]" // gonna leave no space here in case I add a setting later to not add growth/mystery genes automatically
         }
@@ -709,6 +762,7 @@ function checkPattern(pattern) {
 function checkWatercolorsAndTortiesFunction(color, colortype) {
     let blackList = ["Tan", "Chocolate", "Brown", "Black", "Silver", "Smoke", "Grey","Charcoal"]
     let orangeList = ["Apricot", "Orange", "Ginger", "Red", "Beige", "Almond", "Cream", "Buff"]
+    let densityList = [1, 2, 3, 4, 1, 2, 3, 4]
     let i = 0
     let dilute = ""
     let colorGene = ""
@@ -743,11 +797,11 @@ function checkWatercolorsAndTortiesFunction(color, colortype) {
     }
     if (i>3) {
         dilute = "DD"
-        density = (i+1)/2
+        density = densityList[i]
     }
     else {
         dilute = "F?"
-        density = (i+1)
+        density = densityList[i]
     }
     finalstring += colorGene + dilute + density + "] "
     return finalstring
@@ -756,6 +810,7 @@ function checkWatercolorsAndTortiesFunction(color, colortype) {
 function checkStandardColorsFunction(color, wind) {
     let blackList = ["Tan", "Chocolate", "Brown", "Black", "Silver", "Smoke", "Grey","Charcoal"]
     let orangeList = ["Apricot", "Orange", "Ginger", "Red", "Beige", "Almond", "Cream", "Buff"]
+    let densityList = [1, 2, 3, 4, 1, 2, 3, 4]
     let i = 0
     let dilute = ""
     let colorGene = ""
@@ -773,11 +828,11 @@ function checkStandardColorsFunction(color, wind) {
     }
     if (i>3) {
         dilute = "DD"
-        density = (i+1)/2
+        density = densityList[i]
     }
     else {
         dilute = "F?"
-        density = (i+1)
+        density = densityList[i]
     }
     switch(wind) {
         case "North":
@@ -788,7 +843,5 @@ function checkStandardColorsFunction(color, wind) {
     return finalstring
 }
 
-
 // ngl prob don't need this here so much as in search functions and stuff so it'll auto find if a cat has aged up
 function getCatAge() {}
-
