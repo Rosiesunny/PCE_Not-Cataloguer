@@ -222,7 +222,7 @@ function findPhysicalTraits(catPageInfo, catVillageRole) {
     console.log("Color: "+catColor)
     if (catColorType != "-hidden-") {
         catColorType = simpleLineSearch(catPageInfo, "Color:", lastCheckedLandmark)
-        catColorType = catColorType.split(" ")[0]
+        catColorType = catColorType.split(" ")[1]
     }
     console.log("Color Type: "+catColorType)
     let catPattern = simpleLineSearch(catPageInfo, "Pattern:", lastCheckedLandmark)
