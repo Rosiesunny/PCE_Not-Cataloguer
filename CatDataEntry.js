@@ -353,6 +353,7 @@ function findCatStats(catPageInfo, lastCheckedLandmark, physicalTraitsArray, cat
     let catAttributeList = []
     for (let i = 0; i < attributeList.length; i++) {
         catAttributeList[i] = catPageInfo[attributeLineStartPosition]
+        console.log(catAttributeList[i])
         attributeLineStartPosition += 10
     }
     console.log("Stat Attributes:")
@@ -362,10 +363,11 @@ function findCatStats(catPageInfo, lastCheckedLandmark, physicalTraitsArray, cat
     let mayorBoostStartPosition = simpleLineNumberSearch(catPageInfo, "The Mayor is currently providing the following effects to this cat:", lastCheckedLandmark)+1 ?? -1
     if (mayorBoostStartPosition > 1) { // checks if there is a mayor basically
         for (let i = 0; i < attributeList.length; i++) {
-            if (catPageInfo[mayorBoostStartPosition].includes(attributeList[i])) {      
+            if (catPageInfo[mayorBoostStartPosition].includes(attributeList[i])) {     
                 catMayorBoostModifiers[i] = catPageInfo[mayorBoostStartPosition].split(" "+attributeList[i])[0]
                 if (catMayorBoostModifiers[i].includes(", ")) {
-                    catMayorBoostModifiers[i] = catMayorBoostModifiers[i].split(", ")[1]
+                    let tempSplitVariable = catMayorBoostModifiers[i].lastIndexOf(", ")
+                    catMayorBoostModifiers[i] = catMayorBoostModifiers[i].slice(tempSplitVariable + 1).replaceAll(" ", "")
                 }
             }
         }
@@ -381,11 +383,22 @@ function findCatStats(catPageInfo, lastCheckedLandmark, physicalTraitsArray, cat
     // Mayor attribute deductions from stats to get base stats accurate
     for (let i = 0; i < catAttributeList.length; i++) {
         catAttributeList[i] = Number(catAttributeList[i])-Number(catMayorBoostModifiers[i])
+        //if trinket matches, subtracting it from the total too for that slot
+        if (catHeldTrinketStat.includes(attributeList[i])) {
+            catAttributeList[i] = catAttributeList[i] - Number(catHeldTrinketStat.split(" ")[1])
+        }
     }
     // Mayor personality deductions from stats to get base stats accurate
     for (let i = 0; i < catPersonalityTraitsList.length; i++) {
         catPersonalityTraitsList[i] = Number(catPersonalityTraitsList[i])-Number(catMayorBoostModifiers[i+catAttributeList.length])
+        //if trinket matches, subtracting it from the total too for that slot
+        if (catHeldTrinketStat.includes(personalityMayorList[i])) {
+            catPersonalityTraitsList[i] = catPersonalityTraitsList[i] - Number(catHeldTrinketStat.split(" ")[1])
+        }
     }
+
+    // RIGHT NOW the program relies on people copying the page WITHOUT clicking "View Base Stats", so "View Base Stats" copied cats currently give the wrong scores
+    // hard to change that though since the button doesn't show up in copied text so like. Idk just do it correctly. I did *want* to make a check so it'd work regardless but alas
     console.log("Adjusted Personality Traits:")
     console.log(catPersonalityTraitsList)
     console.log("Adjusted Stat Attributes:")
