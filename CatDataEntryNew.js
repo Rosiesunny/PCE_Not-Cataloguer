@@ -12,6 +12,8 @@ function kibbyDirector() {
     let catVillageRole = checkForTravelingText(catPageInfoINITIAL) ?? ""          // checks for traveling text whatever
     let catPageInfo = ensmallenCatPageInfo(catPageInfoINITIAL)
     console.log(catPageInfo)
+    makeArray("aaaaa", "B", "C", 14, "D")
+    getDataCheckpoints(catPageInfo)
 }
 
 function checkForTravelingText(catPageInfoINITIAL) {
@@ -56,6 +58,52 @@ function ensmallenCatPageInfo(catPageInfoINITIAL) {
         }
     }
     return catPageInfo
+}
+
+//finds what line some text is on
+function simpleLineNumberSearch(catPageInfo, textToCheck, lastCheckedLandmark) {
+    for (let i = lastCheckedLandmark; i < catPageInfo.length; i++) {
+        if (catPageInfo[i].includes(textToCheck)) {
+            return i
+        }
+    }
+}
+
+function getDataCheckpoints(dataArray) {
+    let initialLine = simpleLineNumberSearch(dataArray, "Basic Data:", 0)
+    let currentLine = initialLine
+    let lineNum = initialLine
+    console.log(initialLine)
+    //while determining lines w text patterns, -1 means line after // -2 means same line
+    // the final line number should always be the line the actual data is on, not the title declaring what the data is
+    // -5 is genetic string, for this one it's gonna be same line and then we need to increment currentLine +2 so it doesn't get stuck on "Personality Traits" instead of "X personality" line after that
+    // -4 is the held trinket. in the list it has name line, effect line, name line again. idk make that work
+    let searchNums = [
+        "Name", 0, "Birthday", -1, "Age", -1, "Wind", -1, "Pronouns", -1, "Aspect", -1, "Origin", -1, "ID", -1, 
+        "Species", -1, "Size", -1, "Fur", -1, "Color", -1, "Pattern", -1, "White Marks", -1, "Eye Color", -1, "Genetic String", -5, "Personality", -2, 
+        "Bravery", -1, "Benevolence", -1,  "Energy", -1, "Extroversion", -1, "Dedication", -1, "Held Trinket", -4
+    ]     // need to get jobs after this which is more complicated. also held trinket complicated a bit by above dealio
+    for (let i = 2; i < searchNums.length; i = i+2) {
+        console.log(searchNums[i])
+        lineNum = simpleLineNumberSearch(dataArray, searchNums[i], currentLine) ?? "NOT FOUND"
+        
+        if (searchNums[i+1] == -1) {
+            currentLine = lineNum-1 // just in case buffer -1
+            searchNums[i+1] = lineNum+1  // because it's -1/line after, we add 1 to line
+        }
+        if (searchNums[i+1] == -2) {
+            currentLine = lineNum-1 // just in case buffer -1
+            searchNums[i+1] = lineNum  // because it's -2 it's the same line, no +1
+        }
+        if (i == 28) {
+            currentLine = currentLine+5 // spacer to keep personality check on the actual personality, not "personality traits" 
+            console.log(currentLine)
+            searchNums[i+3] = lineNum+2 // defines the gene sequence
+        }
+        
+
+    }
+    console.log(searchNums)
 }
 
 function parseName(dataArray, line) {
@@ -235,6 +283,11 @@ function parseWearing(dataArray, line) {
 
 }
 
-function checkTravelling(dataArray, line) {
+function makeArray(par1name, par1, par2name, par2, par3name, par3, par4name, par4, par5name, par5, par6name, par6, par7name, par7) {
+    let tempArray = [par1, par2, par3, par4, par5, par6, par7]
+    console.log(tempArray)
+}
+
+function parseArray() {
     
 }
