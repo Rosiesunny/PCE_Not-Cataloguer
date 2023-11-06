@@ -80,12 +80,29 @@ function getDataCheckpoints(dataArray) {
     // -4 is the held trinket. in the list it has name line, effect line, name line again. idk make that work
     let searchNums = [
         "Name", 0, "Birthday", -1, "Age", -1, "Wind", -1, "Pronouns", -1, "Aspect", -1, "Origin", -1, "ID", -1, 
-        "Species", -1, "Size", -1, "Fur", -1, "Color", -1, "Pattern", -1, "White Marks", -1, "Eye Color", -1, "Genetic String", -5, "Personality", -2, 
-        "Bravery", -1, "Benevolence", -1,  "Energy", -1, "Extroversion", -1, "Dedication", -1, "Held Trinket", -4
+        "Species", -1, "Size", -1, "Fur", -1, "Color", -1, "Pattern", -1, "White Marks", -1, "Eye Color", -1, 
+        "Genetic String", -5, "Personality", -2, 
+        "Bravery", -1, "Benevolence", -1,  "Energy", -1, "Extroversion", -1, "Dedication", -1, "Held Trinket", -4, -4, //name and stat effect
+        "Day Job", -6, 
+        "Hunter", -6, "Gatherer", -6, "Miner", -6, 
+        "Fisher", -6, "Bug Catcher", -6, "Gardener", -6, 
+        "Herbalist", -6, "Farmer", -6, "Flockherd", -6, 
+        "Apothecary", -6, "Clothier", -6, "Scribe", -6, 
+        "Artist", -6, "Blacksmith", -6, "Craftscat", -6, 
+        "Builder", -6, "Mason", -6, "Baker", -6,
+        "Adventuring Class", -6,
+        "Fighter", -6, "Thief", -6, "Ranger", -6, "Medic", -6, "Scout", -6, "Bard", -6,
+        "Strength", -7, "Agility", -7, "Health", -7, "Finesse", -7, "Cleverness", -7, "Perception", -7, "Luck", -7, 
+        "The Mayor is currently providing the following effects to this cat:", -1, 
+        "Friends", -8, -8, "Family", -8, -8, 
+        "Biography", -1
     ]     // need to get jobs after this which is more complicated. also held trinket complicated a bit by above dealio
     for (let i = 2; i < searchNums.length; i = i+2) {
-        console.log(searchNums[i])
         lineNum = simpleLineNumberSearch(dataArray, searchNums[i], currentLine) ?? "NOT FOUND"
+        console.log(searchNums[i-2]+ ":")
+        console.log("Line #: " + searchNums[i-1])
+        console.log("Line Contents: \"" + dataArray[searchNums[i-1]]+"\"")
+        console.log()
         
         if (searchNums[i+1] == -1) {
             currentLine = lineNum-1 // just in case buffer -1
@@ -97,13 +114,58 @@ function getDataCheckpoints(dataArray) {
         }
         if (i == 28) {
             currentLine = currentLine+5 // spacer to keep personality check on the actual personality, not "personality traits" 
-            console.log(currentLine)
-            searchNums[i+3] = lineNum+2 // defines the gene sequence
+            searchNums[i+3] = lineNum+2 // defines the gene sequence line
         }
-        
+        if (searchNums[i+1] == -4) {
+            currentLine = lineNum-1  // just in case buffer -1
+            searchNums[i+1] = lineNum+1 //trinket name
+            searchNums[i+2] = lineNum+2 //trinket boost
+            i = i+1
+        }
+        if (searchNums[i+1] == -6) {
+            if (lineNum != "NOT FOUND") {
+                currentLine = lineNum-1 // just in case buffer -1
+                searchNums[i+1] = lineNum  // because it's -2 it's the same line, no +1
+            }
+            else {
+                searchNums[i+1] = "NOT FOUND"
+            }
 
+            if (searchNums[i] == "Day Job" || searchNums[i] == "Adventuring Class") {
+                currentLine = lineNum+1 // spacer so it doesn't repeat day job line
+            }
+        }
+        if (searchNums[i+1] == -7) {
+            currentLine = lineNum+9 // just in case buffer -1
+            searchNums[i+1] = lineNum+2  // because it's -1/line after, we add 1 to line
+        }
+        if (searchNums[i+1] == -8) {
+            if (searchNums[i] == "Friends") {
+                if (dataArray[lineNum+1] == "n/a") {
+                    currentLine = lineNum+1
+                }
+                else {
+                    currentLine = lineNum-1 // just in case buffer -1
+                    searchNums[i+1] = lineNum+1  // because it's -1/line after, we add 1 to line
+                    searchNums[i+2] = simpleLineNumberSearch(dataArray, "Family", currentLine)-1 ?? "NOT FOUND"
+                    searchNums[i+4] = searchNums[i+2]+2 ?? "NOT FOUND"
+                    searchNums[i+5] = simpleLineNumberSearch(dataArray, "Biography", currentLine)-2 ?? "NOT FOUND"
+                }
+            }
+        }
     }
     console.log(searchNums)
+    // temp spacing bc I have a tiny af second monitor rn that doesn't wanna show the bottom of the screen so we moving the text up in the console so I don't have to worry
+    console.log()
+    console.log()
+    console.log()
+    console.log()
+    console.log()
+    console.log()
+    console.log()
+    console.log()
+    console.log()
+    console.log()
 }
 
 function parseName(dataArray, line) {
