@@ -126,13 +126,13 @@ function getDataCheckpoints(dataArray) {
         "The Mayor is currently providing the following effects to this cat:", -1, 
         "Friends", -8, -8, "Family", -8, -8, 
         "Biography", -1
-    ]     // need to get jobs after this which is more complicated. also held trinket complicated a bit by above dealio
+    ]  
     for (let i = 2; i < searchNums.length; i = i+2) {
         lineNum = simpleLineNumberSearch(dataArray, searchNums[i], currentLine) ?? "NOT FOUND"
-        console.log(searchNums[i-2]+ ":")
-        console.log("Line #: " + searchNums[i-1])
-        console.log("Line Contents: \"" + dataArray[searchNums[i-1]]+"\"")
-        console.log()
+        // console.log(searchNums[i-2]+ ":")
+        // console.log("Line #: " + searchNums[i-1])
+        // console.log("Line Contents: \"" + dataArray[searchNums[i-1]]+"\"")
+        // console.log()
         
         if (searchNums[i+1] == -1) {
             currentLine = lineNum-1 // just in case buffer -1
@@ -184,18 +184,6 @@ function getDataCheckpoints(dataArray) {
             }
         }
     }
-    console.log(searchNums)
-    // temp spacing bc I have a tiny af second monitor rn that doesn't wanna show the bottom of the screen so we moving the text up in the console so I don't have to worry
-    console.log()
-    console.log()
-    console.log()
-    console.log()
-    console.log()
-    console.log()
-    console.log()
-    console.log()
-    console.log()
-    console.log()
     return searchNums
 }
 
@@ -402,6 +390,7 @@ function parseBaseStats(dataArray, lines) {
 }
 
 function parseMayorBonus(dataArray, line) {
+    console.log("Mayor Bonuses:")
     if (dataArray[line]) { 
         let catMayorBonuses = dataArray[line].split(", ")
         let statNamesDictionary = ["Strength", "Agility", "Health", "Finesse", "Cleverness", "Perception", "Luck", "Bravery", "Benevolence", "Energy", "Extroversion", "Dedication"]
@@ -410,7 +399,6 @@ function parseMayorBonus(dataArray, line) {
         for (let i = 0; i < catMayorBonuses.length; i++) {
             for (let j = 0; j < statNamesDictionary.length; j++) {
                 if (catMayorBonuses[i].includes(statNamesDictionary[j])) {
-                    console.log(statNamesDictionary[j])
                     catMayorBonusStatName[i] = statNamesDictionary[j]
                     if (j > 6) {
                         catMayorBonusStatMod[i] = Number(catMayorBonuses[i].split("& ")[1].split(" ")[0])
