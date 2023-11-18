@@ -9,11 +9,41 @@
 function kibbyDirector() {
     let textBoxEntry = document.querySelector(".testTextBox")
     let catPageInfoINITIAL = textBoxEntry.value.split("\n")
-    let catVillageRole = checkForTravelingText(catPageInfoINITIAL) ?? ""          // checks for traveling text whatever
+    let catVillageRole = checkForTravelingText(catPageInfoINITIAL) ?? ""          // checks for traveling text before deleting unneeded stuff
+    console.log(catVillageRole)
     let catPageInfo = ensmallenCatPageInfo(catPageInfoINITIAL)
     console.log(catPageInfo)
-    makeArray("aaaaa", "B", "C", 14, "D")
-    getDataCheckpoints(catPageInfo)
+    let checkpointArray = getDataCheckpoints(catPageInfo)
+    console.log(checkpointArray)
+    // data checkpoints gotten let's do the actual processing
+    // NOTE: FOR STATS, I STILL NEED TO ACCOUNT FOR MAYOR BONUS!! I HAVEN'T ADDED THAT IN HERE YET
+    console.log(parseName(catPageInfo, checkpointArray[1]))
+    console.log(parseBirthday(catPageInfo, checkpointArray[3]))
+    console.log(parseAge(catPageInfo, checkpointArray[5]))
+    console.log(parseWind(catPageInfo, checkpointArray[7]))
+    console.log(parsePronouns(catPageInfo, checkpointArray[9]))
+    console.log(parseAspect(catPageInfo, checkpointArray[11]))
+    console.log(parseOrigin(catPageInfo, checkpointArray[13]))
+    console.log(parseID(catPageInfo, checkpointArray[15]))
+    console.log(parseSpecies(catPageInfo, checkpointArray[17]))
+    console.log(parseSize(catPageInfo, checkpointArray[19]))
+    console.log(parseFurLength(catPageInfo, checkpointArray[21]))
+    console.log(parseColor(catPageInfo, checkpointArray[23]))
+    console.log(parsePattern(catPageInfo, checkpointArray[25]))
+    console.log(parseWhiteMarks(catPageInfo, checkpointArray[27]))
+    console.log(parseEyeColor(catPageInfo, checkpointArray[29]))
+    console.log(parsePersonalityType(catPageInfo, checkpointArray[33]))
+    let basePersonalityStats = parsePersonalityStats(catPageInfo, checkpointArray)
+    let heldTrinketInfo = parseHeldTrinket(catPageInfo, checkpointArray[45], checkpointArray[46])
+    console.log(parseDayJob(catPageInfo, checkpointArray[48]))
+    console.log(parseJobs(catPageInfo, checkpointArray))
+    console.log(parseAdvClass(catPageInfo, checkpointArray[86]))
+    console.log(parseAdvClasses(catPageInfo, checkpointArray))
+    let baseStats = parseBaseStats(catPageInfo, checkpointArray)
+    let mayorBonuses = parseMayorBonus(catPageInfo, checkpointArray[114]) ?? "None"
+    modifyStats(baseStats, basePersonalityStats, heldTrinketInfo, mayorBonuses)
+    // CURRENTLY THE SYSTEM BREAKS IF YOU HAVE SOMEONE WHO DOES NOT HAVE A MAYOR BONUS ACTIVE! HAS TO DO WITH THE THINGS FOL
+
 }
 
 function checkForTravelingText(catPageInfoINITIAL) {
@@ -166,6 +196,7 @@ function getDataCheckpoints(dataArray) {
     console.log()
     console.log()
     console.log()
+    return searchNums
 }
 
 function parseName(dataArray, line) {
@@ -183,7 +214,6 @@ function parseAge(dataArray, line) {
     return catAge
 }
 
-// need to change prev method since I used to check wind below name instead of on the profile iirc? I mean should auto do that w/ new system but double check it worked
 function parseWind(dataArray, line) {
     let catWind = dataArray[line]
     return catWind
@@ -192,8 +222,9 @@ function parseWind(dataArray, line) {
 // @ Gou, not sure how you wanted to mess with pronouns dictionary stuff? just gonna do regular stuff for now
 function parsePronouns(dataArray, line) {
     let catPronouns = dataArray[line]
-    // FIGURE OUT HOW WE WANNA STORE PRIMARY VS SECONDARY PRONOUNS! 
-    // not returning for now bc Idek how this is gonna look
+    let catPrimaryPronouns = catPronouns.split("/")[0]
+    let catSecondaryPronouns = catPronouns.split("/")[1]
+    return([catPrimaryPronouns, catSecondaryPronouns])
 }
 
 function parseAspect(dataArray, line) {
@@ -206,9 +237,9 @@ function parseOrigin(dataArray, line) {
     return catOrigin
 }
 
-// haven't tested if the number transformation here breaks stuff, prob should check that? might try n do decimals or smth
+
 function parseID(dataArray, line) {
-    let catID = Number(dataArray[line].split(" (")[0])
+    let catID = Number(dataArray[line].split("[cat=")[1].split("]")[0])
     return catID
 }
 
@@ -217,9 +248,11 @@ function parseSpecies(dataArray, line) {
     return catSpecies
 }
 
-// figure out if we wanna save the lbs and kg as different things or both in one? Also could jsut record lbs and auto convert kg for people who use kg? would need to get the same decimal rounding tho
 function parseSize(dataArray, line) {
     let catSize = dataArray[line]
+    let catSizePounds = Number(catSize.split(" lbs. / ")[0])
+    let catSizeKilos = Number(catSize.split(" lbs. / ")[1].split(" kg")[0])
+    return([catSizePounds, catSizeKilos])
 }
 
 function parseFurLength(dataArray, line) {
@@ -227,7 +260,6 @@ function parseFurLength(dataArray, line) {
     return catFurLength
 }
 
-// for torties/watercolors, do we wanna save both colors separately? 
 function parseColor(dataArray, line) {
     let colorcheck = dataArray[line]
     let catColor = colorcheck
@@ -236,8 +268,7 @@ function parseColor(dataArray, line) {
         catColor = colorcheck.split(" ")[0]
         catColorType = colorcheck.split(" ")[1]
     }
-    // idk if u can return 2 things in this language? might need to combine them to an array and split in the main function
-    return(catColor, catColorType)
+    return([catColor, catColorType])
 }
 
 function parsePattern(dataArray, line) {
@@ -245,7 +276,6 @@ function parsePattern(dataArray, line) {
     return catPattern
 }
 
-// was thinking, do we wanna save the white type text too? but I think we could just do something similar to your pronoun dictionary thing to define those. or just a switch case or smth. that'd be a long switch case maybe not. or could just literally store it bc why not
 function parseWhiteMarks(dataArray, line) {
     let whitecheck = dataArray[line]
     let catWhiteMarks = ""
@@ -253,7 +283,7 @@ function parseWhiteMarks(dataArray, line) {
     let catWhiteType = ""
     if (whitecheck != "None") {
         catWhiteMarks = whitecheck.split(" / ")[0]
-        catWhiteLevel = whitecheck.split(" / ")[1][1]  // haven't tested if this works, might try n check a 2d array that doesn't exist instead of character 1 of the string. gotta do smth else if so. easy fix lol
+        catWhiteLevel = Number(whitecheck.split(" / ")[1][1])
         catWhiteType = whitecheck.split(" / ")[1][0]
     }
     else {
@@ -261,8 +291,7 @@ function parseWhiteMarks(dataArray, line) {
         catWhiteLevel = "-hidden-"
         catWhiteType = "-hidden-"
     }
-    // again not sure if I can return multiple variables so might need to make an array
-    return(catWhiteMarks, catWhiteType, catWhiteLevel)
+    return([catWhiteMarks, catWhiteType, catWhiteLevel])
 }
 
 function parseEyeColor(dataArray, line) {
@@ -270,67 +299,173 @@ function parseEyeColor(dataArray, line) {
     return catEyeColor
 }
 
-// for the line on this one, we search for "Personality Traits" then 1 line down it'll say X personality, so that's the line, 1 after "Personality Traits"
 function parsePersonalityType(dataArray, line) {
     let catPersonalityType = dataArray[line].split(" Personality:")[0]
     return catPersonalityType
 }
 
-// LINE in this case should be the line after "Bravery:", then every other line will be the stat name
-function parsePersonalityStats(dataArray, line) {
+function parsePersonalityStats(dataArray, lines) {
+    let persoLines = [lines[35], lines[37], lines[39], lines[41], lines[43]]
     let catPersonalityStats = []
-    for (let i = 0; i < 5; i++) {
-       catPersonalityStats[i] = Number(dataArray[line+i*2])          // again haven't tested if Number works as intended or if it does decimals or something
+    for (let i = 0; i < persoLines.length; i++) {
+        catPersonalityStats[i] = Number(dataArray[persoLines[i]])
     }
     return catPersonalityStats
 }
 
 // LINE in this case should be the line after "Held Trinket:". It will refer to the lines after that too tho for what it boosts
-function parseHeldTrinket(dataArray, line) {
-    let trinketcheck = dataArray[line]
+function parseHeldTrinket(dataArray, line1, line2) {
     let catTrinketName = ""
     let catTrinketStat = ""
-    let catTrinketStatMod = ""     // unsure if I wanna make this an int or a string ? for the sake of +2 or -2 etc. altho I think the default assumption is that 1 is +1 and -1 is -1 etc
-    if (trinketcheck != "None") {
-        catTrinketName = trinketcheck
-        catTrinketStat = dataArray[line+1].split[" "][0].replace("[", "")        /// haven't tested if this works? hopefully it does
-        catTrinketStatMod = dataArray[line+1].split[" "][1].replace("]", "")
+    let catTrinketStatMod
+    if (dataArray[line1] != "None") {
+        catTrinketName = dataArray[line1]
+        catTrinketStat = dataArray[line2].split(" ")[0].replace("[", "")
+        catTrinketStatMod = Number(dataArray[line2].split(" ")[1].replace("]", ""))
     }
     else {
         catTrinketName = "None"
         catTrinketStat = "None"
         catTrinketStatMod = "0"
     }
-    // still dunno if I can return multiple things yadda yadda
-    return (catTrinketName, catTrinketStat, catTrinketStatMod)
+    return ([catTrinketName, catTrinketStat, catTrinketStatMod])
 }
 
 function parseDayJob(dataArray, line) {
-
+    let catDayJob = dataArray[line]
+    if (catDayJob.includes("Unassigned")) {
+        catDayJob = "Unassigned"
+    }
+    else {
+        catDayJob = catDayJob.split("Day Job: ")[1].split(" (")[0]
+    }
+    return catDayJob
 }
 
-function parseJobEXP(dataArray, line) {
-
+function parseJobs(dataArray, lines) {
+    let catJobLevel = []
+    let catJobEXP = []
+    let counter = 0
+    for (let i = 50; i < 85; i = i+2) {
+        if (lines[i] != "NOT FOUND") {
+            catJobLevel[counter] = dataArray[lines[i]].split(" Level ")[1].split(" [")[0]
+            catJobEXP[counter] = dataArray[lines[i]].split("[")[1].split(" EXP]")[0]
+            if (catJobEXP[counter].includes("Maximum Level")) {
+                catJobEXP[counter] = "Maximum Level"
+            }
+        } 
+        counter++
+    }
+    console.log(catJobLevel)
+    console.log(catJobEXP)
+    return([catJobLevel, catJobEXP])
 }
 
 function parseAdvClass(dataArray, line) {
-
+    let catAdventuringClass = dataArray[line]
+    if (catAdventuringClass.includes("Unassigned")) {
+        catAdventuringClass = "Unassigned"
+    }
+    else {
+        catAdventuringClass = catAdventuringClass.split("Adventuring Class: ")[1].split(" (")[0]
+    }
+    return catAdventuringClass
 }
 
-function parseAdvEXP(dataArray, line) {
-
+function parseAdvClasses(dataArray, lines) {
+    let catClassLevel = []
+    let catClassEXP = []
+    let counter = 0
+    for (let i = 88; i < 99; i = i+2) {
+        if (lines[i] != "NOT FOUND") {
+            catClassLevel[counter] = dataArray[lines[i]].split(" Level ")[1].split(" [")[0]
+            catClassEXP[counter] = dataArray[lines[i]].split("[")[1].split(" EXP]")[0]
+            if (catClassEXP[counter].includes("Maximum Level")) {
+                catClassEXP[counter] = "Maximum Level"
+            }
+        } 
+        counter++
+    }
+    console.log(catClassLevel)
+    console.log(catClassEXP)
+    return([catClassLevel, catClassEXP])
 }
 
-function parseBaseStats(dataArray, line) {
-
+function parseBaseStats(dataArray, lines) {
+    let catBaseStats = []
+    let counter = 0
+    for (let i = 100; i < 113; i = i+2) {
+        catBaseStats[counter] = Number(dataArray[lines[i]])
+        counter++
+    }
+    return catBaseStats
 }
 
-function parsePartners(dataArray, line) {
-
+function parseMayorBonus(dataArray, line) {
+    if (dataArray[line]) { 
+        let catMayorBonuses = dataArray[line].split(", ")
+        let statNamesDictionary = ["Strength", "Agility", "Health", "Finesse", "Cleverness", "Perception", "Luck", "Bravery", "Benevolence", "Energy", "Extroversion", "Dedication"]
+        let catMayorBonusStatName = []
+        let catMayorBonusStatMod = []
+        for (let i = 0; i < catMayorBonuses.length; i++) {
+            for (let j = 0; j < statNamesDictionary.length; j++) {
+                if (catMayorBonuses[i].includes(statNamesDictionary[j])) {
+                    console.log(statNamesDictionary[j])
+                    catMayorBonusStatName[i] = statNamesDictionary[j]
+                    if (j > 6) {
+                        catMayorBonusStatMod[i] = Number(catMayorBonuses[i].split("& ")[1].split(" ")[0])
+                    }
+                    else { 
+                        catMayorBonusStatMod[i] = Number(catMayorBonuses[i].split(" ")[0])
+                    }
+                }
+            }
+        }
+        console.log(catMayorBonusStatName)
+        console.log(catMayorBonusStatMod)
+        return([catMayorBonusStatName, catMayorBonusStatMod])
+    }
 }
 
-function parseBestFriends(dataArray, line) {
-
+function modifyStats(basestats, basepersostats, trinketinfo, mayorbonusinfo) {
+    let statNamesDictionary = ["Strength", "Agility", "Health", "Finesse", "Cleverness", "Perception", "Luck", "Bravery", "Benevolence", "Energy", "Extroversion", "Dedication"]
+    console.log("Base Stats:")
+    console.log(basestats)
+    console.log(basepersostats)
+    // trinket bonus modify
+    if (!trinketinfo[0] == "None") {
+        for (let i = 0; i < statNamesDictionary.length; i++) {
+            if (trinketinfo[1] == statNamesDictionary[i]) {
+                if (i < 7) {
+                    basestats[i] -= trinketinfo[2]
+                    break
+                }
+                else {
+                    basepersostats[i-7] -= trinketinfo[2]
+                    break
+                }
+            }
+        }
+    } 
+    if (mayorbonusinfo != "None") {
+        for (let j = 0; j < mayorbonusinfo[1].length; j++) {
+            for (let k = 0; j < statNamesDictionary.length; k++) {
+                if (mayorbonusinfo[0][j] == statNamesDictionary[k]) {
+                    if (k < 7) {
+                        basestats[k] -= mayorbonusinfo[1][j]
+                        break
+                    }
+                    else {
+                        basepersostats[k-7] -= mayorbonusinfo[1][j]
+                        break
+                    }
+                }
+            }
+        }
+    }
+    console.log("New Stats:")
+    console.log(basestats)
+    console.log(basepersostats)
 }
 
 function parseFriends(dataArray, line) {
@@ -342,14 +477,5 @@ function parseFamily(dataArray, line) {
 }
 
 function parseWearing(dataArray, line) {
-
-}
-
-function makeArray(par1name, par1, par2name, par2, par3name, par3, par4name, par4, par5name, par5, par6name, par6, par7name, par7) {
-    let tempArray = [par1, par2, par3, par4, par5, par6, par7]
-    console.log(tempArray)
-}
-
-function parseArray() {
     
 }
