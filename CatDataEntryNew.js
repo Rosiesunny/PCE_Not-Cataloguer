@@ -95,7 +95,11 @@ function kibbyDirector() {
     catPersonalityStats = modifiedStats[1]
     displayInfo("Stats: ", catStats, "Stats")
     displayInfo("Personality Stats", catPersonalityStats, "PersoStats")
-
+    console.log(catColor)
+    console.log(catPattern)
+    console.log(catWhiteMarks)
+    let catGeneString = findKnownGenes(catWind, catFurLength, catColor[0], catColor[1], catPattern, catWhiteMarks[1], catWhiteMarks[2])
+    displayInfo("Known Gene String: ", catGeneString, "GeneString")
 }
 
 function displayInfo(name, data, formatter) {
@@ -111,6 +115,7 @@ function displayInfo(name, data, formatter) {
                 }
                 document.querySelector(".poopee").innerText = displayText
                 break
+
             case "Jobs":
                 console.log(data)
                 let levels = data[0]
@@ -130,6 +135,7 @@ function displayInfo(name, data, formatter) {
                 }
                 document.querySelector(".poopee").innerText = displayText2
                 break
+
             case "Classes":
                 let levels2 = data[0]
                 let exp2 = data[1]
@@ -148,6 +154,7 @@ function displayInfo(name, data, formatter) {
                     document.querySelector(".poopee").innerText = displayText3
                 }
                 break
+
             case "Stats":
                 let displayText4 = document.querySelector(".poopee").innerText
                 displayText4 += name + "\n"
@@ -157,6 +164,7 @@ function displayInfo(name, data, formatter) {
                 }
                 document.querySelector(".poopee").innerText = displayText4
                 break
+
             case "PersoStats":
                 let displayText5 = document.querySelector(".poopee").innerText
                 displayText5 += name + "\n"
@@ -165,6 +173,24 @@ function displayInfo(name, data, formatter) {
                     displayText5 += "- " + persoStatsList[i] + ": " + data[i] + "\n"
                 }
                 document.querySelector(".poopee").innerText = displayText5
+                break
+
+            case "GeneString": 
+                let displayText6 = document.querySelector(".poopee").innerText
+                displayText6 += name + "\n"
+                let geneStringText = ""
+                let sectionLengthsList = [1, 2, 2, 5, 4, 4, 2, 2]
+                let counter = 0
+                for (let i = 0; i < sectionLengthsList.length; i++) {
+                    geneStringText += "["
+                    for (let j = 0; j < sectionLengthsList[i]; j++) {
+                        geneStringText += data[counter]
+                        counter++
+                    }
+                    geneStringText += "] "
+                }
+                displayText6 += geneStringText
+                document.querySelector(".poopee").innerText = displayText6
                 break
         }
     }
@@ -384,6 +410,7 @@ function parseFurLength(dataArray, line) {
     return catFurLength
 }
 
+// Some extra variables in here I added in case I wanted to do easier gene testing variables, altho I think I might not use them so??? 
 function parseColor(dataArray, line, wind) {
     let colorcheck = dataArray[line]
     let catColor = colorcheck
@@ -394,22 +421,22 @@ function parseColor(dataArray, line, wind) {
         catColorType = colorcheck.split(" ")[1]
     }
     else {
-        catColorNorth = catColorSouth = catColorType = "Unknown"
+        catColorNorth = catColorSouth = catColorType = "-hidden-"
     }
     if (wind == "North") {
         catColorNorth = catColor
-        catColorSouth = "Unknown"
+        catColorSouth = "-hidden-"
     }
     if (wind == "South") {
         catColorSouth = catColor
-        catColorNorth = "Unknown"
+        catColorNorth = "-hidden-"
     }
     if (wind == "Trade") {
         catColorNorth = catColor.split("-")[0]
         catColorSouth = catColor.split("-")[1]
     }
     if (wind == "Null") {
-        catColorNorth = catColorSouth = "Unknown"
+        catColorNorth = catColorSouth = "-hidden-"
     }
     //decide if I wanna return the color north/south too or not, for now no just so the display of the data is easier
     return([catColor, catColorType])
@@ -427,7 +454,12 @@ function parseWhiteMarks(dataArray, line) {
     let catWhiteType = ""
     if (whitecheck != "None") {
         catWhiteMarks = whitecheck.split(" / ")[0]
-        catWhiteLevel = Number(whitecheck.split(" / ")[1][1])
+        if (catWhiteMarks != "Albino") {
+            catWhiteLevel = Number(whitecheck.split(" / ")[1][1])
+        }
+        else {
+            catWhiteLevel = 10
+        }
         catWhiteType = whitecheck.split(" / ")[1][0]
     }
     else {
@@ -642,4 +674,164 @@ function parseFamily(dataArray, line) {
 
 function parseWearing(dataArray, line) {
     
+}
+
+
+//wind, fur, color, colortype, pattern, whitetype, whitelevel
+function findKnownGenes(wind, fur, color, colortype, pattern, whitetype, whitelevel) {
+    let geneString = ["C",   "?","?",   "?","?",    "?","?","?","?","?",    "?","?","?","?",    "?","?","?","?",    "?","?",    "?","?"]
+    console.log(geneString)
+    sectionWind(geneString, wind)
+    sectionFur(geneString, fur)
+    sectionColor(geneString, color, colortype, wind)
+    sectionPattern(geneString, pattern)
+    sectionWhite(geneString, whitetype, whitelevel)
+    console.log(geneString)
+    return geneString
+}
+
+//NS
+//1 2 
+function sectionWind(geneString, wind) {
+    switch(wind) {
+        case "Trade":
+            geneString[1] = "N"
+            geneString[2] = "S"
+            break
+        case "North":
+            geneString[1] = "N"
+            break
+        case "South":
+            geneString[1] = "S"
+            break
+        case "Null":
+            geneString[1] = "O"
+            geneString[2] = "O"
+            break
+    }
+}
+
+//SL
+//3 4
+function sectionFur(geneString, fur) {
+    switch(fur) {
+        case "Shorthair":
+            geneString[3] = "S"
+            break
+        case "Longhair":
+            geneString[3] = "L"
+            geneString[4] = "L"
+            break
+    }
+}
+
+//BOFD3
+//5 6 7 8 9
+function sectionColor(geneString, color, colortype, wind) {
+    let colorList = ["Black", "Chocolate", "Brown", "Tan", "Red", "Ginger", "Orange", "Apricot", "Charcoal", "Grey", "Smoke", "Silver", "Buff", "Cream", "Almond", "Beige"]
+    let densityList = ["4", "3", "2", "1", "4", "3", "2", "1", "4", "3", "2", "1", "4", "3", "2", "1"]
+    let colorGeneList = ["B", "B", "B", "B", "O", "O", "O", "O", "B", "B", "B", "B", "O", "O", "O", "O"]
+    let invertedColorGeneList = ["O", "O", "O", "O", "B", "B", "B", "B", "O", "O", "O", "O", "B", "B", "B", "B"]
+    let colorNew = color
+    if (colortype != "Standard") {
+        colorNew = color.split("-")[0]
+    }
+    for (let i = 0; i< colorList.length; i++) {
+        if (colorNew == colorList[i]) {
+            if (i>7) {
+                geneString[7] = "D"
+                geneString[8] = "D"
+            }
+            else {
+                geneString[7] = "F"
+            }
+            geneString[9] = densityList[i]
+            switch(colortype) {
+                case "Standard":
+                    switch(wind) {
+                        case "North":
+                            geneString[5] = colorGeneList[i]
+                            break
+                        case "South":
+                            geneString[6] = colorGeneList[i]
+                            break
+                    }
+                    break
+                case "Watercolor":
+                    geneString[5] = colorGeneList[i]
+                    geneString[6] = colorGeneList[i]
+                    break
+                case "Tortoiseshell":
+                    geneString[5] = colorGeneList[i]
+                    geneString[6] = invertedColorGeneList[i]
+                    break
+            }
+        }
+    }
+}
+
+//YYTT
+//10 11 12 13
+function sectionPattern(geneString, pattern) {
+    if (pattern == "Solid") {
+        geneString[10] = "N"
+        geneString[11] = "N"
+    }
+    else {
+        if (pattern != "-hidden-") {
+            geneString[10] = "Y"
+        }
+    }
+    switch(pattern) {
+        case "Mackerel":
+            geneString[12] = "T"
+            geneString[13] = "T"
+            break
+        case "Classic":
+            geneString[12] = "T"
+            geneString[13] = "M"
+            break
+        case "Broken":
+            geneString[12] = "T"
+            geneString[13] = "S"
+            break
+        case "Clouded":
+            geneString[12] = "M"
+            geneString[13] = "M"
+            break     
+        case "Spotted":
+            geneString[12] = "S"
+            geneString[13] = "S"
+            break
+        case "Rosette":
+            geneString[12] = "M"
+            geneString[13] = "S"
+            break
+        case "Lynxpoint":
+            geneString[12] = "T"
+            geneString[13] = "P"
+            break
+        case "Mink":
+            geneString[12] = "S"
+            geneString[13] = "P"
+            break  
+        case "Cloudpoint":
+            geneString[12] = "M"
+            geneString[13] = "P"
+            break
+        case "Colorpoint":
+            geneString[12] = "P"
+            geneString[13] = "P"
+            break
+    }
+}
+
+//YN7C
+//14 15 16 17
+function sectionWhite(geneString, whitetype, whitelevel) {
+    if (whitelevel != "-hidden-") {
+        geneString[14] = "Y"
+        geneString[16] = whitelevel
+        geneString[17] = whitetype
+    }
 }

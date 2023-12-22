@@ -1,0 +1,35 @@
+div {
+    outline-style: solid;
+    padding:1%;
+}
+
+#topcontainer {
+    border-radius:5%;
+}
+
+#madeby {
+    background-color:aquamarine;
+    
+}
+
+#logo {
+    background-color:darkturquoise;
+    width: 10%;
+}
+
+#bottomcontainer {
+    text-align: center;
+    border-radius:5%;
+    margin-top: 1%;
+}
+
+.container {
+    display: inline-block;
+    vertical-align: top;
+    background-color: rgb(88, 87, 153);
+    outline-color:blueviolet;
+}
+
+.threebuttons {
+    width: 31%
+}
