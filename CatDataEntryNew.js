@@ -16,7 +16,8 @@ function kibbyDirector() {
     console.log(catPageInfo)
     let checkpointArray = getDataCheckpoints(catPageInfo)
     console.log(checkpointArray)
-    
+    textBoxEntry.value = ""
+
     let catName = parseName(catPageInfo, checkpointArray[1])
     displayInfo("Name: ", catName)
 
