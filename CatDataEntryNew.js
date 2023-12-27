@@ -143,7 +143,7 @@ function displayInfo(name, data, formatter) {
                 console.log(exp2)
                 let displayText3 = document.querySelector(".poopee").innerText
                 displayText3 += name + "\n"
-                let classesList = ["Fighter", "Thief", "Ranger", "Medic", "Scout", "Bard"]
+                let classesList = ["Fighter", "Thief", "Guardian", "Ranger", "Medic", "Scout", "Bard"]
                 for (let i=0; i<classesList.length; i++) {
                     if (levels2[i] == 0) {
                         displayText3 += "- " + classesList[i] + " ---\n"
@@ -663,6 +663,8 @@ function modifyStats(basestats, basepersostats, trinketinfo, mayorbonusinfo) {
     console.log(basepersostats)
     return([basestats, basepersostats])
 }
+
+//NEED TO DO FRIENDS/FAMILY
 
 function parseFriends(dataArray, line) {
 
