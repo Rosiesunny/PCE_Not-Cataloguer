@@ -70,7 +70,7 @@ function kibbyDirector() {
     // not logged yet bc it is later
 
     let catHeldTrinketInfo = parseHeldTrinket(catPageInfo, checkpointArray[45], checkpointArray[46])
-    displayInfo("Cat Held Trinket: ", catHeldTrinketInfo, "1D")
+    displayInfo("Cat Held Trinket: ", catHeldTrinketInfo, "Trinket")
 
     let catDayJob = parseDayJob(catPageInfo, checkpointArray[48])
     displayInfo("Day Job: ", catDayJob)
@@ -116,7 +116,24 @@ function displayInfo(name, data, formatter) {
                 }
                 document.querySelector(".poopee").innerText = displayText
                 break
-
+            case "Trinket":
+                let displayText7 = document.querySelector(".poopee").innerText
+                displayText7 += name + "\n"
+                for (let i=0; i<data.length; i++) {
+                    if (typeof data[i] === 'number') {
+                        if ((data[i]) > 0) {
+                            displayText7 += " - +" + data[i] + "\n"
+                        }
+                        else {
+                            displayText7 += " - " + data[i] + "\n"
+                        }
+                    }
+                    else {
+                        displayText7 += " - " + data[i] + "\n"
+                    }
+                }
+                document.querySelector(".poopee").innerText = displayText7
+                break
             case "Jobs":
                 console.log(data)
                 let levels = data[0]
