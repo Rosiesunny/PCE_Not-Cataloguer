@@ -87,7 +87,7 @@ function kibbyDirector() {
     let catStats = parseBaseStats(catPageInfo, checkpointArray)
     //not logged yet bc it is later
 
-    let mayorBonuses = parseMayorBonus(catPageInfo, checkpointArray[114]) ?? "None"
+    let mayorBonuses = parseMayorBonus(catPageInfo, checkpointArray[116]) ?? "None"
     // log is in function
 
     let modifiedStats = modifyStats(catStats, catPersonalityStats, catHeldTrinketInfo, mayorBonuses)
@@ -296,7 +296,7 @@ function getDataCheckpoints(dataArray) {
         "Artist", -6, "Blacksmith", -6, "Craftscat", -6, 
         "Builder", -6, "Mason", -6, "Baker", -6,
         "Adventuring Class", -6,
-        "Fighter", -6, "Thief", -6, "Ranger", -6, "Medic", -6, "Scout", -6, "Bard", -6,
+        "Fighter", -6, "Thief", -6, "Guardian", -6, "Ranger", -6, "Medic", -6, "Scout", -6, "Bard", -6,
         "Strength", -7, "Agility", -7, "Health", -7, "Finesse", -7, "Cleverness", -7, "Perception", -7, "Luck", -7, 
         "The Mayor is currently providing the following effects to this cat:", -1, 
         "Friends", -8, -8, "Family", -8, -8, 
@@ -580,7 +580,7 @@ function parseAdvClasses(dataArray, lines) {
     let catClassLevel = []
     let catClassEXP = []
     let counter = 0
-    for (let i = 88; i < 99; i = i+2) {
+    for (let i = 88; i < 101; i = i+2) {
         if (lines[i] != "NOT FOUND") {
             catClassLevel[counter] = Number(dataArray[lines[i]].split(" Level ")[1].split(" [")[0])
             catClassEXP[counter] = dataArray[lines[i]].split("[")[1].split(" EXP]")[0]
@@ -607,7 +607,7 @@ function parseAdvClasses(dataArray, lines) {
 function parseBaseStats(dataArray, lines) {
     let catBaseStats = []
     let counter = 0
-    for (let i = 100; i < 113; i = i+2) {
+    for (let i = 102; i < 115; i = i+2) {
         catBaseStats[counter] = Number(dataArray[lines[i]])
         counter++
     }
