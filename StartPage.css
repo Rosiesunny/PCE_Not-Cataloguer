@@ -1,35 +1,88 @@
 div {
-    outline-style: solid;
-    padding:1%;
+    font-family: "Courier New";
 }
 
-#topcontainer {
-    border-radius:5%;
+button {
+    font-family: "Courier New";
+    font-size: 250%
+}
+
+#container {
+    border-radius: 15% 10%;
+    margin: .5%;
+    padding: 3%;
+    background-color:rgb(46, 46, 49);
+ }
+
+
+#logo {
+    position: absolute;
+    padding-left: 8%;
+}
+
+#sidebar {
+    position:absolute;
+    right: 0px;
+    top: 0px;
+    max-width: 20%;
+    margin-top: 4%;
+    margin-right: 10%;
+}
+
+#title-sign {
+    padding-left: 10%;
+    max-width: 70%;
 }
 
 #madeby {
-    background-color:aquamarine;
+    color:rgb(123, 148, 170);
+    font-size: 115%
+}
+
+.btn-group {
+    width: 100%;
+    display: flex;
+    justify-content:center;
     
 }
 
-#logo {
-    background-color:darkturquoise;
-    width: 10%;
+.btn-group button {
+    background-color: rgb(86, 127, 139); /* Green background */
+    color: white; /* White text */
+    padding: 4% 3%; /* Some padding */
+    cursor: pointer; /* Pointer/hand icon */
+    float: left; /* Float the buttons side by side */
+    width: 30%;
+    margin: .9%;
+    border-radius: 10% 15%
 }
 
-#bottomcontainer {
-    text-align: center;
-    border-radius:5%;
-    margin-top: 1%;
+/* Clear floats (clearfix hack) */
+.btn-group:after {
+    content: "";
+    clear: both;
+    display: table;
 }
 
-.container {
-    display: inline-block;
-    vertical-align: top;
-    background-color: rgb(88, 87, 153);
-    outline-color:blueviolet;
+.btn-group button:not(:last-child) {
+    border-right: none; /* Prevent double borders */
 }
 
-.threebuttons {
-    width: 31%
+  /* Add a background color on hover */
+.btn-group button:hover {
+    background-color: #1f5d61;
+
+}
+
+#helptextbox {
+    margin-top: 4%;
+    padding: 1.5%;
+    border-radius: 10% 10%;
+    background-color: rgb(29, 31, 36);
+    color:aliceblue;
+    font-size: 150%;
+}
+
+a {
+    color: rgb(105, 171, 228);
 }

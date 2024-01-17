@@ -3,34 +3,31 @@
 <html lang="en">
     <head>
         <link rel="stylesheet" href = "StartPage.css">
-        
     </head>
     <body>
-        <div id = "mainscreenbg">
-            <div id = "topcontainer"> 
-                <div class = "container" id = "logo">
-                    <img src ="images/mainlogo_noantlers.png">
-                </div>
-                <div class = "container" id = "title">
-                    <h1>PCE <b>Not-Cataloguer</b></h1>
-                </div>
-                <div class = "container" id = "side">
-                    <div id = "madeby">
-                        Made by:<br> 
-                        Ros<br>
-                        Gou
-                    </div>
-                    <div id = "help">
-                        [?]
+        <div id = "container">
+        <div id = "topsection">
+        <a href = "StartPage.html"><img src = "images/pce_not-cataloguer_logo.png" id = "logo" alt = "Home Button"></a>
+        <img src = "images/pce_not-cataloguer_title.png" id = "title-sign">
+        <div id = "sidebar">
+            <div id = "madeby">
+                <h1>Made by: </h1>
+                <p>- Rosiesunny<br>
+                    - Gourami
+                </p>
+                <br><br><br><br>
 
-                    </div>
-                </div>
             </div>
-            <div id = "bottomcontainer">
-                <div class = "container threebuttons"></div>
-                <div class = "container threebuttons"></div>
-                <div class = "container threebuttons"></div>
+            <div id = "help"><a href ="HelpPage.html"><img src = "images/questionmark.png"></a></div>
+        </div>
+        </div>
+        <div id = "bottomsection">
+            <div class="btn-group">
+              <button onclick = "location.href='indexNew.html';">Add New Cat<br><br><img src = "images/addcat.png"></button>
+              <button>Genetic Testing<br><br><img src = "images/genetesting.png"></button>
+              <button>Village View<br><br><img src = "images/viewvillage.png"></button>
             </div>
         </div>
+    </div>
     </body>
 </html>
