@@ -1,0 +1,182 @@
+div {
+    font-family: "Courier New";
+}
+
+#container {
+    border-radius: 15% 10%;
+    margin: .5%;
+    padding: 3%;
+    background-color:rgb(46, 46, 49);
+ }
+
+
+#logo {
+    position: absolute;
+    padding-left: 0%;
+    margin-top: -2%;
+    margin-left: 8%;
+}
+
+.btn-group {
+    margin-top: 1%;
+    width: 100%;
+    display: flex;
+    justify-content:center;
+}
+
+/* Clear floats (clearfix hack) */
+.btn-group:after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+#lookingfor-container {
+    display: flex;
+    width: 85%;
+}
+
+.col2 {
+    width: 85%;
+    display: flex;
+    justify-content:center;
+}
+
+.col1 {
+    width: 15%;
+}
+
+#yourcat {
+    background-color: rgb(36, 65, 66);
+    color:aliceblue;
+    border-radius: 15% ;
+    padding: 5%;
+    font-size: 140%;
+}
+
+#testcat {
+    background-color: rgb(29, 31, 36);
+    color:aliceblue;
+    border-radius: 15% ;
+    padding: 5%;
+    width: 90%;
+    font-size: 140%;
+}
+
+#genes-container {
+    display: flex;
+    color:aliceblue;
+    width: 100%;
+}
+
+#currentlyknowngenes {
+    font-size: 50%;
+    margin-bottom: 5%;
+}
+
+.subcol {
+    background-color: rgb(58, 160, 160);
+    margin: 1%;
+    float: left;
+    border-radius: 5%;
+    padding: .7%;
+}
+
+#genecodefull {
+    font-size: 50%;
+}
+
+#subcol1 {
+    width: 20%;
+}
+#subcol2 {
+    width: 20%;
+}
+#subcol3 {
+    width: 20%;
+}
+#subcol4 {
+    width: 20%;
+}
+#subcol5 {
+    width: 12%;
+}
+
+#bottomcontainer {
+    width: 100%;
+    display: flex;
+}
+
+#examples {
+    float: right;
+    width: 100%;
+    padding: .7%;
+    margin: .7%;
+    margin-left: 0%;
+    border-radius: 0% 5% 5% 0%;
+    background-color: rgb(29, 31, 36);
+    color:aliceblue;
+    font-size: 150%;
+}
+
+
+#testquestion-and-answer-container {
+    width: 30%;
+    padding: .7%;
+    border-radius: 5% 0% 0% 5%;
+    margin: .7%;
+    margin-right: 0%;
+    background-color: rgb(58, 160, 160);
+}
+
+#testcatcontainer {
+    width: 15%;
+}
+
+button {
+    background-color: rgb(227, 238, 241); /* Green background */
+    color: rgb(15, 57, 73); /* White text */
+    padding: 3% 3%; /* Some padding */
+    cursor: pointer; /* Pointer/hand icon */
+    float: left; /* Float the buttons side by side */
+    margin: .9%;
+    border-radius: 10% 15%;
+}
+
+#testquestion-select {
+    background-color:rgb(36, 65, 66);
+    padding: 2%;
+    border-radius: 5%;
+    color:aliceblue;
+    font-size: 110%;
+    width: 100%;
+}
+
+.bgc {
+    background-color:rgb(69, 180, 180);
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-radius: 5%;
+    text-align: center;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.skip {
+    height: 30px;
+}
+
+.gene {
+    background-color: rgb(58, 219, 219);
+    color:rgb(6, 25, 32);
+    font-size: 160%;
+    font-weight: bolder;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#answer-section {
+    margin-top: 2%;
+    color:rgb(9, 17, 17);
+    font-weight: bold;
+}

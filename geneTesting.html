@@ -2,23 +2,174 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <link rel="stylesheet" href = "styleNew.css">
-        
+        <link rel="stylesheet" href = "geneTesting.css">
     </head>
     <body>
         <script src="./GeneTesting.js"></script>
-        <div id = "box">
-            <div id = "testbox">
-            Ignore how ugly this page is lol I'll make it pretty when I'm done making it functional
-            <p class ="test">
-                Gene Testing 
-            </p>
-            <p class ="poopee"></p>
-        </div>
-        <div id="entryarea">
-            <textarea class = "testTextBox" placeholder = "Ctrl A on your cat's page, and then copy and paste it here!"></textarea>
-            <button id = "uwuButton" onclick= "checkTextGeneString()">Submit</button> 
+        <div id = "container">
+            <a href = "StartPage.html"><img src = "images/pce_not-cataloguer_logo.png" id = "logo" alt = "Home Button" style = "padding-left: 0; max-width: 4%"></a>
+            <div class = "btn-group">
+                <div class = "col1" style = "margin-top: 4%">
+                    <div id = "yourcat">
+                        Name<br>
+                        <img src = "images/addcat.png"><br>
+                        ID #<br><br>
+                        <div id = "currentlyknowngenes">Currently Known Genes:</div>
+                        <div id = "genecodefull"></div>
+                    </div>
+                </div>
+                <div class = "col2"> 
+                    <div id = "genes-container">
+                        <div id = "subcol1" class = "subcol">
+                            <table>
+                                <tr>
+                                    <td class = "bgc gene" title = "Species">C</td>
+                                    <td class = "bgc">Not-Cat</td>
+                                </tr>
+                                <tr><td class = "skip"></td></tr>
+                                <tr>
+                                    <td class = "bgc gene" id = "wind-1" title = "Wind">B</td>
+                                    <td class = "bgc" id = "wind-1-desc">(B)</td>
+                                </tr>
+                                <tr>
+                                    <td class = "bgc gene" id = "wind-2" title = "Wind">C</td>
+                                    <td class = "bgc"  id = "wind-2-desc">(C)</td>
+                                </tr>
+                                <tr><td class = "skip"></td></tr>
+                                <tr>
+                                    <td class = "bgc gene" id = "fur-1" title = "Fur Length">D</td>
+                                    <td class = "bgc" id = "fur-1-desc">(D)</td>
+                                </tr>
+                                <tr>
+                                    <td class = "bgc gene" id = "fur-2" title = "Fur Length">E</td>
+                                    <td class = "bgc" id = "fur-2-desc">(E)</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div id = "subcol2" class = "subcol">
+                            <table>
+                                <tr>
+                                    <td class = "bgc gene" id = "color-1" title = "Color">F</td>
+                                    <td class = "bgc" id = "color-1-desc">(F)</td>
+                                </tr>
+                                <tr>
+                                    <td class = "bgc gene" id = "color-2" title = "Color">G</td>
+                                    <td class = "bgc" id = "color-2-desc">(G)</td>
+                                </tr>
+                                <tr>
+                                    <td class = "bgc gene" id = "dilute-1" title = "Dilute">H</td>
+                                    <td class = "bgc" id = "dilute-1-desc">(H)</td>
+                                </tr>
+                                <tr>
+                                    <td class = "bgc gene" id = "dilute-2" title = "Dilute">I</td>
+                                    <td class = "bgc" id = "dilute-2-desc">(I)</td>
+                                </tr>
+                                <tr>
+                                    <td class = "bgc gene" id = "density" title = "Color Density">J</td>
+                                    <td class = "bgc" id = "density-desc">(J)</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div id = "subcol3" class = "subcol">
+                            <table>
+                                <tr>
+                                    <td class = "bgc gene" id = "pattern-yes-no-1" title = "Pattern Display">K</td>
+                                    <td class = "bgc" id = "pattern-yes-no-1-desc">(K)</td>
+                                </tr>
+                                <tr>
+                                    <td class = "bgc gene" id = "pattern-yes-no-2" title = "Pattern Display">L</td>
+                                    <td class = "bgc" id = "pattern-yes-no-2-desc">(SDDSL)</td>
+                                </tr>
+                                <tr>
+                                    <td class = "bgc gene" id = "pattern-1" title = "Pattern">M</td>
+                                    <td class = "bgc" id = "pattern-1-desc">(MSDS)</td>
+                                </tr>
+                                <tr>
+                                    <td class = "bgc gene" id = "pattern-2" title = "Pattern">N</td>
+                                    <td class = "bgc" id = "pattern-2-desc">(SdfsdgfsdfSDN)</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div id = "subcol4" class = "subcol">
+                            <table>
+                                <tr>
+                                    <td class = "bgc gene" id = "white-yes-no-1" title = "White Display">O</td>
+                                    <td class = "bgc" id = "white-yes-no-1-desc">(O)</td>
+                                </tr>
+                                <tr>
+                                    <td class = "bgc gene" id = "white-yes-no-2" title = "White Display">P</td>
+                                    <td class = "bgc" id = "white-yes-no-2-desc">(P)</td>
+                                </tr>
+                                <tr>
+                                    <td class = "bgc gene" id = "white-level" title = "White Level">Q</td>
+                                    <td class = "bgc" id = "white-level-desc">(Q)</td>
+                                </tr>
+                                <tr>
+                                    <td class = "bgc gene" id = "white-type" title = "White Type">R</td>
+                                    <td class = "bgc" id = "white-type-desc">(R)</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div id = "subcol5" class = "subcol">
+                            <table>
+                                <tr>
+                                    <td class = "bgc gene" id = "growth-1" title = "Growth">S</td>
+                                    <td class = "bgc">(S)</td>
+                                </tr>
+                                <tr>
+                                    <td class = "bgc gene" id = "growth-1" title = "Growth">T</td>
+                                    <td class = "bgc">(T)</td>
+                                </tr>
+                                <tr><td class = "skip"></td></tr>
+                                <tr>
+                                    <td class = "bgc gene" title = "Mystery Gene">?</td>
+                                    <td class = "bgc">Unknown</td>
+                                </tr>
+                                <tr>
+                                    <td class = "bgc gene" title = "Mystery Gene">?</td>
+                                    <td class = "bgc">Unknown</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <div id = "bottomcontainer">
+                <div id = "testcatcontainer">
+                    <div id = "testcat" class = "col1">
+                        <img src = "images/addcat.png"><br>
+                        ID #
+                    </div>
+                </div>
+                <div id = "lookingfor-container" class ="col2">
+                    <div id = "testquestion-and-answer-container">
+                        <div id = "testquestion-container">
+                            <div id = "testquestion">
+                                <select id = "testquestion-select" onchange = "changeButtons()">
+                                    <option>Select Test</option>
+                                    <option value="test">Select Test</option>
+                                </select>
+
+                            </div>
+                            <div id = "answer-section">
+                                <button>uwu</button>
+                                <button>uwu</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id = "examples">Examples:</div>
+                </div>
+            </div>
+        </div>
+        <!-- TEMP STUFF HERE-->
+        <p class ="test">
+            PCE Early Alpha Not-CAT-aloguer - data entry (New/reformatting)
+        </p>
+        <p class ="poopee">temp text</p>
+    </div>
+    <div id="entryarea">
+        <textarea class = "testTextBox" placeholder = "Ctrl A on your cat's page, and then copy and paste it here!"></textarea>
+        <button id = "uwuButton" onclick= "checkTextGeneString()">Submit</button> 
         </div>
     </body>
 </html>

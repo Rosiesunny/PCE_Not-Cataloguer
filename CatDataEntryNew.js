@@ -368,7 +368,7 @@ function getDataCheckpoints(dataArray) {
 }
 
 function parseName(dataArray, line) {
-    let catName = dataArray[line].replace(" ", "")
+    let catName = dataArray[line].trim()
     return catName
 }
 

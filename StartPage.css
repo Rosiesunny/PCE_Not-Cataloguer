@@ -18,6 +18,7 @@ button {
 #logo {
     position: absolute;
     padding-left: 8%;
+    max-width: 12%;
 }
 
 #sidebar {
