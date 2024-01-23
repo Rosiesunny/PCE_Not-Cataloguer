@@ -237,9 +237,11 @@ function ensmallenCatPageInfo(catPageInfoINITIAL) {
         let correctLineFound = false
         for (let i = 0; i < catPageInfoINITIAL.length && correctLineFound == false; i++) {
             if (catPageInfoINITIAL[i].includes("[")) {
-                catNameLineStart = i
-                correctLineFound = true
-                break
+                if (catPageInfoINITIAL[i].includes("[Custom]") == false) {
+                    catNameLineStart = i
+                    correctLineFound = true
+                    break
+                }           
             }
         }
         for (let i = 0; i < catPageInfoINITIAL.length-catNameLineStart; i++) {
