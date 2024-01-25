@@ -23,13 +23,9 @@ button {
 
 #sidebar {
     position:absolute;
-    right: 0px;
-    top: 0px;
-    top: 4%;
-    right: 4%;
-    width: 15%;
-    max-width: 20%;
-    min-width: 20%;
+    top: 8%;
+    right: 8%;
+    max-height: 20%;
 }
 
 #title-sign {
@@ -40,8 +36,8 @@ button {
 #madeby {
     color:rgb(123, 148, 170);
     size: auto;
-    font-size: 100%;
     font-weight: bold;
+    font-size: 1vw;
     margin-top: 0px;
     padding-top: 0px;
 }
@@ -52,7 +48,7 @@ button {
 }
 
 #help {
-    max-width: 40%;
+    max-width: 5vw;
 }
 
 .btn-group {
@@ -70,7 +66,12 @@ button {
     float: left; /* Float the buttons side by side */
     width: 30%;
     margin: .9%;
+    font-size: 3vw;
     border-radius: 10% 15%
+}
+
+.btn-group img {
+    width: 10vw;
 }
 
 /* Clear floats (clearfix hack) */
