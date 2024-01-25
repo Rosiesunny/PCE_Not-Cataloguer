@@ -35,11 +35,11 @@ body {
 }
 #testbox {
     float: left;
-    width: 58%
+    width: 58%;
 }
 
 #box {
-    overflow: hidden
+    overflow: hidden;
 }
 
 .poopee {
