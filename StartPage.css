@@ -18,16 +18,14 @@ button {
 #logo {
     position: absolute;
     padding-left: 8%;
-    max-width: 12%;
+    max-width: 10%;
 }
 
 #sidebar {
     position:absolute;
-    right: 0px;
-    top: 0px;
-    max-width: 20%;
-    margin-top: 4%;
-    margin-right: 10%;
+    top: 8%;
+    right: 8%;
+    max-height: 20%;
 }
 
 #title-sign {
@@ -37,7 +35,20 @@ button {
 
 #madeby {
     color:rgb(123, 148, 170);
-    font-size: 115%
+    size: auto;
+    font-weight: bold;
+    font-size: 1vw;
+    margin-top: 0px;
+    padding-top: 0px;
+}
+
+#help-div {
+    text-align: end;
+    margin-top: 1%;
+}
+
+#help {
+    max-width: 5vw;
 }
 
 .btn-group {
@@ -55,7 +66,12 @@ button {
     float: left; /* Float the buttons side by side */
     width: 30%;
     margin: .9%;
-    border-radius: 10% 15%
+    font-size: 3vw;
+    border-radius: 10% 15%;
+}
+
+.btn-group img {
+    width: 10vw;
 }
 
 /* Clear floats (clearfix hack) */
