@@ -180,3 +180,15 @@ button {
     color:rgb(9, 17, 17);
     font-weight: bold;
 }
+
+.checkboxes {
+    padding: 30%;
+    background-color: darkviolet;
+    margin-right: 5%;
+}
+
+#outerdiv {
+    outline: blue solid 1pt;
+    margin-bottom: 5%;
+    padding: 2%;
+}

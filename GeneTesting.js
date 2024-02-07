@@ -35,7 +35,7 @@ function changeExisting(ID, value) {
     let idarray = ["#wind-1", "#wind-2", "#fur-1", "#fur-2", "#color-1", "#color-2", "#dilute-1", "#dilute-2", "#density", "#pattern-yes-no-1", "#pattern-yes-no-2", "#pattern-1", "#pattern-2", "#white-yes-no-1", "#white-yes-no-2", "#white-level", "#white-type"]
     let positionarray = [5, 6, 10, 11, 15, 16, 17, 18, 19, 23, 24, 25, 26, 30, 31, 32, 33]
     //gotta check for albino since it messes with the length
-    console.log(ID + " uwu " + value)
+    console.log(ID + " Change Existing: " + value)
 
 }
 
@@ -334,76 +334,133 @@ function changeSelectText(alltests) {
         }
         currentselect.innerHTML += '\n<option' + currenttest + '</option>'
     }
-
 }
-
-
-
-    const newButton = document.createElement('button');
-    const newButton2 = document.createElement('button');
-    newButton.textContent = 'Click me!';
-    newButton2.textContent = 'Click me! Uwu';
-    testquestionbox.appendChild(newButton);
-    testquestionbox.appendChild(newButton2);
-
 
 function changeButtons() {
     let testTypesArray = ["Recessive Wind Check", "Recessive Fur Length Check", "Recessive Dilute Check", "Recessive Solid Check", "Hidden Color Check", "Hidden Pattern Check", "Recessive No-White Check", "0 White Possibility Check", "Hidden White Type Check", "Hidden White Level Check", "Albino Hidden Colors Check", "Albino Hidden Dilutes Check", "Albino Hidden Densities Check"]
     let lookingForArray = ["Any Null cats", "Any Longhair cats", "Any Dilute cats", "Any Solid cats", ["Any Black cats", "Any Orange cats"], "Check cat patterns", "Any No-white cats", "No-white cat frequency", "Check white types", "Highest white level found", "(hidden albino colors)", "(hidden albino dilutes)", "(hidden albino densities)"]
-    let buttonsArray = [["Nulls Found", "No Nulls Found"], ["Longhairs Found", "No Longhairs Found"], ["Dilutes Found", "No Dilutes Found"], ["Solids Found", "No Solids Found"], ["(B/O) Found", " No (B/O) Found"], ["T", "M", "S", "P"], ["No-whites found", "No no-whites Found (all whites)"], ["No White Marks Found", "55% No White Marks Found", "9% No White Marks Found"], ["Classic Only", "Right and Classic", "Left and Classic", "Piebald and Classic", "Inverse and Classic"],["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"], ["Black and Orange", "Orange Only", "Black Only"], ["All Dilutes", "Half Dilutes", "No Dilutes"], ["1", "2", "3", "4"]] 
-    let buttonsRedirectToArray = []
+    let buttonsTextArray = [["Nulls Found", "No Nulls Found"], ["Longhairs Found", "No Longhairs Found"], ["Dilutes Found", "No Dilutes Found"], ["Solids Found", "No Solids Found"], ["Orange Cats Found", "No Orange Cats Found", "Black Cats Found", "No Black Cats Found"], ["Classic (TM)", "Mackerel (TT)", "Broken (TS)", "Lynxpoint (TP)"], ["No-whites found", "All cats have white"], ["No White Marks Found", "55% of cats have No White Marks", "9% of cats have No White Marks"], ["Classic Only", "Right and Classic", "Left and Classic", "Piebald and Classic", "Inverse and Classic"],["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"], ["Black and Orange", "Orange Only", "Black Only"], ["All Dilutes", "Half Dilutes", "No Dilutes"], ["1", "2", "3", "4"]] 
+    let idsArray = ["Skip (wind)", "#fur-2", "#dilute-2", "#pattern-yes-no-2", "Skip (hidden color check)", "Skip (HIDDEN PATTERN CHECK)", "#white-yes-no-2", "SKIP (0 WHITE POSSIBILITY CHECK)", "#white-type", "#white-level", "Skip (albino hidden colors check)", "Skip (albino hidden dilutes check)", "Skip (albino hidden densities check)"]
+    let valuesArray = ["Skip (wind)", ["L", "S"], ["D", "F"], ["N", "Y"], "Skip (hidden color)", "Skip (hidden pattern check)", ["N", "Y"], ["NN", "YN", "YY"], ["C", "R", "L", "P", "I"], ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"], "Skip", "skip", "skip"]
+
     let currentselect = document.getElementById("testquestion-select")
 
     let answersection = document.getElementById('answer-section')
     let currentselectvalue = currentselect.value
 
-    let buttonTemplate = document.createElement('button');
-    let buttonTemplate2 = document.createElement('button');
-    buttonTemplate.textContent = "Result Found" 
-    buttonTemplate2.textContent = "Result Not Found"
+    let resultFoundButton = document.createElement('button');
+    let resultNotFoundButton = document.createElement('button');
+    resultFoundButton.textContent = "Result Found" 
+    resultNotFoundButton.textContent = "Result Not Found"
     if (currentselectvalue == "Select Test") {
         answersection.innerHTML = "Select a test to start"
     }
     else {
         for (let i = 0; i < testTypesArray.length; i++) {
             if (currentselectvalue.includes(testTypesArray[i])) {
-                if (currentselectvalue.includes("Hidden Color Check")) {
-                    console.log(currentselectvalue + "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE")
-                    if (currentselectvalue.includes("(black)")) {
-                        answersection.innerHTML = "Looking for: " + lookingForArray[i][1]
-                        if (currentselectvalue.includes("(1)")) {
-                            buttonTemplate.setAttribute("onclick", "changeExisting('#color-1', 'O')")
-                            buttonTemplate2.setAttribute("onclick", "changeExisting('#color-1', 'B')")
+                console.log(currentselectvalue)
+                // checking if it's hidden color or recessive wind since they change different values depending on input
+                // hidden pattern type needs its own entry because it has buttons to checkbox and THEN confirm, not just 1 click
+                if (currentselectvalue.includes("Hidden Color Check") || currentselectvalue.includes("Recessive Wind Check") || currentselectvalue.includes("0 White Possibility Check") || currentselectvalue.includes("Hidden Pattern Check")) {
+                    if (currentselectvalue.includes("Hidden Color Check")) {
+                        if (currentselectvalue.includes("(black)")) {
+                            answersection.innerHTML = "Looking for: " + lookingForArray[i][1]
+                            resultFoundButton.textContent = buttonsTextArray[i][0]
+                            resultNotFoundButton.textContent = buttonsTextArray[i][1]
+                            if (currentselectvalue.includes("(1)")) {
+                                resultFoundButton.setAttribute("onclick", "changeExisting('#color-1', 'O')")
+                                resultNotFoundButton.setAttribute("onclick", "changeExisting('#color-1', 'B')")
+                            }
+                            else {
+                                resultFoundButton.setAttribute("onclick", "changeExisting('#color-2', 'O')")
+                                resultNotFoundButton.setAttribute("onclick", "changeExisting('#color-2', 'B')")
+                            }
+                            }
+                        if (currentselectvalue.includes("(orange)")) {
+                            answersection.innerHTML = "Looking for: " + lookingForArray[i][0] + "\n"
+                            resultFoundButton.textContent = buttonsTextArray[i][2]
+                            resultNotFoundButton.textContent = buttonsTextArray[i][3]
+                            if (currentselectvalue.includes("(1)")) {
+                                resultFoundButton.setAttribute("onclick", "changeExisting('#color-1', 'B')")
+                                resultNotFoundButton.setAttribute("onclick", "changeExisting('#color-1', 'O')")
+                            }
+                            else {
+                                resultFoundButton.setAttribute("onclick", "changeExisting('#color-2', 'B')")
+                                resultNotFoundButton.setAttribute("onclick", "changeExisting('#color-2', 'O')")
+                            }
+                            }
+                        answersection.appendChild(resultFoundButton);
+                        answersection.appendChild(resultNotFoundButton);
+                    }
+                    if (currentselectvalue.includes("Recessive Wind Check")) {
+                        answersection.innerHTML = "Looking for: " + lookingForArray[i]
+                        if (currentselectvalue.includes("(S)")) {
+                            resultFoundButton.setAttribute("onclick", "changeExisting('#wind-2', 'O')")
+                            resultNotFoundButton.setAttribute("onclick", "changeExisting('#wind-2', 'S')")
                         }
-                        else {
-                            buttonTemplate.setAttribute("onclick", "changeExisting('#color-2', 'O')")
-                            buttonTemplate2.setAttribute("onclick", "changeExisting('#color-2', 'B')")
+                        if (currentselectvalue.includes("(N)")) {
+                            resultFoundButton.setAttribute("onclick", "changeExisting('#wind-2', 'O')")
+                            resultNotFoundButton.setAttribute("onclick", "changeExisting('#wind-2', 'N')")
                         }
+                        answersection.appendChild(resultFoundButton);
+                        answersection.appendChild(resultNotFoundButton);
+                    }
+                    if (currentselectvalue.includes("0 White Possibility Check")) {
+                        answersection.innerHTML = "Looking for: " + lookingForArray[i]
+                        for (let j = 0; j < buttonsTextArray[i].length; j++) {
+                            let button = document.createElement('button');
+                            button.textContent = buttonsTextArray[i][j]
+                            let changeString = "zeroWhiteCheckChanges('" + valuesArray[i][j] + "')"
+                            button.setAttribute("onclick", changeString)
+                            answersection.appendChild(button)
                         }
-                    if (currentselectvalue.includes("(orange)")) {
-                        answersection.innerHTML = "Looking for: " + lookingForArray[i][0] + "\n"
-                        if (currentselectvalue.includes("(1)")) {
-                            buttonTemplate.setAttribute("onclick", "changeExisting('#color-1', 'B')")
-                            buttonTemplate2.setAttribute("onclick", "changeExisting('#color-1', 'O')")
+                    }
+                    if (currentselectvalue.includes("Hidden Pattern Check")) {
+                        answersection.innerHTML = "Looking for: " + lookingForArray[i]
+                        console.log("HIDDEN PATTERN CHECK KJSDHKJSDDSJK")
+                        for (let j = 0; j < buttonsTextArray[i].length; j++) {
+                            let outerdiv = document.createElement('div')
+                            outerdiv.id = "outerdiv"
+                            console.log("Piss" + j)
+                            let checkbox = document.createElement('input')
+                            checkbox.type = "checkbox"
+                            checkbox.id = "idthing"
+                            checkbox.classList.add("checkboxes")
+                            let label = document.createElement('label')
+                            label.htmlFor = "idthing"
+                            label.appendChild(document.createTextNode(buttonsTextArray[i][j]))
+                            console.log(label)
+                            outerdiv.appendChild(checkbox)
+                            outerdiv.appendChild(label)
+                            answersection.appendChild(outerdiv)
                         }
-                        else {
-                            buttonTemplate.setAttribute("onclick", "changeExisting('#color-2', 'B')")
-                            buttonTemplate2.setAttribute("onclick", "changeExisting('#color-2', 'O')")
-                        }
-                        }
-                    answersection.appendChild(buttonTemplate);
-                    answersection.appendChild(buttonTemplate2);
-                }
-                else {
-                    answersection.innerHTML = "Looking for: " + lookingForArray[i]
-                    for (let j = 0; j < buttonsArray[i].length; j++) {
-
+                        
                     }
                 }
+                else {
+                    // standard tests here (2 buttons, we know which slot is getting changed)
+                    answersection.innerHTML = "Looking for: " + lookingForArray[i]
+                    for (let j = 0; j < buttonsTextArray[i].length; j++) {
+                        let button = document.createElement('button');
+                        button.textContent = buttonsTextArray[i][j]
+                        let changeString = "changeExisting('" + idsArray[i] + "', '" + valuesArray[i][j] + "')"
+                        button.setAttribute("onclick", changeString)
+                        answersection.appendChild(button)
+                    }
+                }
+                break
             }
         }//call checkWhatTestsAreNeeded and then selectListOptions to narrow down what tests are still needed 
     }
     
+}
+
+// rn it's specific to just the 0 white check
+function zeroWhiteCheckChanges(answer) {
+    console.log(answer[0])
+    console.log(answer[1])
+    changeExisting("#white-yes-no-1", answer[0])
+    changeExisting("#white-yes-no-2", answer[1])
 }
 
 function createButton() {
