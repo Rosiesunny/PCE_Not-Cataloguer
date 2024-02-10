@@ -184,11 +184,18 @@ button {
 .checkboxes {
     padding: 30%;
     background-color: darkviolet;
+    margin: 3%;
     margin-right: 5%;
 }
 
+input.checkboxes {
+    transform: scale(2);
+}
+
 #outerdiv {
-    outline: blue solid 1pt;
-    margin-bottom: 5%;
+    border-radius: 10%;
+    color: white;
+    background-color:rgba(15, 57, 73, 0.432);
+    margin-bottom: 2%;
     padding: 2%;
 }
