@@ -12,6 +12,7 @@ function kibbyDirector() {
     let catPageInfoINITIAL = textBoxEntry.value.split("\n")
     let catVillageRole = checkForTravelingText(catPageInfoINITIAL) ?? ""          // checks for traveling text before deleting unneeded stuff
     displayInfo("Role: ", catVillageRole)
+    console.log(catPageInfoINITIAL)
     let catPageInfo = ensmallenCatPageInfo(catPageInfoINITIAL)
     console.log(catPageInfo)
     let checkpointArray = getDataCheckpoints(catPageInfo)
@@ -245,7 +246,7 @@ function ensmallenCatPageInfo(catPageInfoINITIAL) {
             }
         }
         for (let i = 0; i < catPageInfoINITIAL.length-catNameLineStart; i++) {
-            catPageInfo[i] = catPageInfoINITIAL[i+catNameLineStart-1]
+            catPageInfo[i] = catPageInfoINITIAL[i+catNameLineStart]
         }
     }
     else {
@@ -258,8 +259,11 @@ function ensmallenCatPageInfo(catPageInfoINITIAL) {
             break
         }
     }
+    console.log(catPageInfo)
     let initialLength = catPageInfo.length
+    console.log("lastline = " + lastLine)
     if (lastLine > 0) {
+        console.log("lastline > 0")
         for (let i = 0; i < initialLength-lastLine; i++) {
             catPageInfo.pop()
         }
