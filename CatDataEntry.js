@@ -138,6 +138,7 @@ function displayInfo(name, data, formatter) {
             case "Jobs":
                 console.log(data)
                 let levels = data[0]
+                let maxEXPdisplayJobs = ["/140 EXP", "/280 EXP", "/560 EXP", "/1120 EXP"]
                 let exp = data[1]
                 console.log(levels)
                 console.log(exp)
@@ -149,7 +150,11 @@ function displayInfo(name, data, formatter) {
                         displayText2 += "- " + jobsList[i] + " ---\n"
                     }
                     else {
-                        displayText2 += "- " + jobsList[i] + " Level: " + levels[i] + "   EXP: " + exp[i] + "\n"
+                        let expDisplay = exp[i]
+                        if (levels[i] < 5) {
+                            expDisplay = expDisplay+maxEXPdisplayJobs[levels[i]-1]
+                        }
+                        displayText2 += "- " + jobsList[i] + " Level: " + levels[i] + "   EXP: " + expDisplay + "\n"
                     } 
                 }
                 document.querySelector(".poopee").innerText = displayText2
@@ -157,6 +162,7 @@ function displayInfo(name, data, formatter) {
 
             case "Classes":
                 let levels2 = data[0]
+                let maxEXPdisplayClasses = ["/50 EXP", "/150 EXP", "/300 EXP"]
                 let exp2 = data[1]
                 console.log(levels2)
                 console.log(exp2)
@@ -168,7 +174,11 @@ function displayInfo(name, data, formatter) {
                         displayText3 += "- " + classesList[i] + " ---\n"
                     }
                     else {
-                        displayText3 += "- " + classesList[i] + " Level: " + levels2[i] + "   EXP: " + exp2[i] + "\n"
+                        let expDisplay = exp2[i]
+                        if (levels2[i] < 4) {
+                            expDisplay = expDisplay+maxEXPdisplayClasses[levels2[i]-1]
+                        }
+                        displayText3 += "- " + classesList[i] + " Level: " + levels2[i] + "   EXP: " + expDisplay + "\n"
                     }
                     document.querySelector(".poopee").innerText = displayText3
                 }
