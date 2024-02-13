@@ -13,8 +13,11 @@ function kibbyDirector() {
     let catVillageRole = checkForTravelingText(catPageInfoINITIAL) ?? ""          // checks for traveling text before deleting unneeded stuff
     displayInfo("Role: ", catVillageRole)
     console.log(catPageInfoINITIAL)
-    let catPageInfo = ensmallenCatPageInfo(catPageInfoINITIAL)
+    let catPageInfoFull = ensmallenCatPageInfo(catPageInfoINITIAL)
+    let catPageInfo = catPageInfoFull[0]
     console.log(catPageInfo)
+    let biographyInfo = catPageInfoFull[1]
+    console.log(biographyInfo)
     let checkpointArray = getDataCheckpoints(catPageInfo)
     console.log(checkpointArray)
     textBoxEntry.value = ""
@@ -243,6 +246,7 @@ function checkForTravelingText(catPageInfoINITIAL) {
 
 function ensmallenCatPageInfo(catPageInfoINITIAL) {
     let catPageInfo = []
+    let bioLine = -1
     if (catPageInfoINITIAL[1].includes("[") == false) {
         let catNameLineStart = -1
         let correctLineFound = false
@@ -257,6 +261,9 @@ function ensmallenCatPageInfo(catPageInfoINITIAL) {
         }
         for (let i = 0; i < catPageInfoINITIAL.length-catNameLineStart; i++) {
             catPageInfo[i] = catPageInfoINITIAL[i+catNameLineStart]
+            if (catPageInfo[i].includes("Biography")) {
+                bioLine = i
+            }
         }
     }
     else {
@@ -269,7 +276,6 @@ function ensmallenCatPageInfo(catPageInfoINITIAL) {
             break
         }
     }
-    console.log(catPageInfo)
     let initialLength = catPageInfo.length
     console.log("lastline = " + lastLine)
     if (lastLine > 0) {
@@ -278,8 +284,14 @@ function ensmallenCatPageInfo(catPageInfoINITIAL) {
             catPageInfo.pop()
         }
     }
-    return catPageInfo
+    // trim bio into its own array
+    let biographyArray = catPageInfo.splice(bioLine, catPageInfo.length)
+    console.log(catPageInfo)
+    console.log(biographyArray)
+    return [catPageInfo, biographyArray]
 }
+
+
 
 //finds what line some text is on
 function simpleLineNumberSearch(catPageInfo, textToCheck, lastCheckedLandmark) {
@@ -320,6 +332,8 @@ function getDataCheckpoints(dataArray) {
     ]  
     for (let i = 2; i < searchNums.length; i = i+2) {
         lineNum = simpleLineNumberSearch(dataArray, searchNums[i], currentLine) ?? "NOT FOUND"
+        console.log(searchNums[i])
+        console.log(lineNum)
         // console.log(searchNums[i-2]+ ":")
         // console.log("Line #: " + searchNums[i-1])
         // console.log("Line Contents: \"" + dataArray[searchNums[i-1]]+"\"")
