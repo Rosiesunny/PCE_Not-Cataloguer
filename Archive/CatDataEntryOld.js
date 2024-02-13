@@ -2,6 +2,7 @@
 /*Comments look like this if you want to
 spread them out over several lines for some
 reason*/
+// 
 
 //localStorage only stores strings
 //let testA = "eeee"
