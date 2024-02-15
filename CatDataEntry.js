@@ -67,39 +67,43 @@ function kibbyDirector() {
     let catEyeColor = parseEyeColor(catPageInfo, checkpointArray[29])
     displayInfo("Eye Color: ", catEyeColor)
 
-    let catPersonalityType = parsePersonalityType(catPageInfo, checkpointArray[33])
-    displayInfo("Personality Type: ", catPersonalityType)
+    if (catAge != "Bean") {
+        let catPersonalityType = parsePersonalityType(catPageInfo, checkpointArray[33])
+        displayInfo("Personality Type: ", catPersonalityType)
 
-    let catPersonalityStats = parsePersonalityStats(catPageInfo, checkpointArray)
-    // not logged yet bc it is later
+        let catPersonalityStats = parsePersonalityStats(catPageInfo, checkpointArray)
+        // not logged yet bc it is later
 
-    let catHeldTrinketInfo = parseHeldTrinket(catPageInfo, checkpointArray[45], checkpointArray[46])
-    displayInfo("Cat Held Trinket: ", catHeldTrinketInfo, "Trinket")
+        let catHeldTrinketInfo = parseHeldTrinket(catPageInfo, checkpointArray[45], checkpointArray[46])
+        displayInfo("Cat Held Trinket: ", catHeldTrinketInfo, "Trinket")
 
-    let catDayJob = parseDayJob(catPageInfo, checkpointArray[48])
-    displayInfo("Day Job: ", catDayJob)
+        let catDayJob = parseDayJob(catPageInfo, checkpointArray[48])
+        displayInfo("Day Job: ", catDayJob)
 
-    let catJobs = parseJobs(catPageInfo, checkpointArray)
-    displayInfo("Jobs: ", catJobs, "Jobs")
+        let catJobs = parseJobs(catPageInfo, checkpointArray)
+        displayInfo("Jobs: ", catJobs, "Jobs")
 
-    let catAdventuringClass = parseAdvClass(catPageInfo, checkpointArray[86])
-    displayInfo("Adventuring Class: ", catAdventuringClass)
+        let catAdventuringClass = parseAdvClass(catPageInfo, checkpointArray[86])
+        displayInfo("Adventuring Class: ", catAdventuringClass)
 
-    let catAdventuringClasses = parseAdvClasses(catPageInfo, checkpointArray)
-    displayInfo("Adventuring Classes: ", catAdventuringClasses, "Classes")
+        let catAdventuringClasses = parseAdvClasses(catPageInfo, checkpointArray)
+        displayInfo("Adventuring Classes: ", catAdventuringClasses, "Classes")
 
-    let catStats = parseBaseStats(catPageInfo, checkpointArray)
-    //not logged yet bc it is later
+        let catStats = parseBaseStats(catPageInfo, checkpointArray)
+        //not logged yet bc it is later
 
-    let mayorBonuses = parseMayorBonus(catPageInfo, checkpointArray[116]) ?? "None"
-    // log is in function
+        let mayorBonuses = parseMayorBonus(catPageInfo, checkpointArray[116]) ?? "None"
+        // log is in function
 
-    let modifiedStats = modifyStats(catStats, catPersonalityStats, catHeldTrinketInfo, mayorBonuses)
-    // log is in function
-    catStats = modifiedStats[0]
-    catPersonalityStats = modifiedStats[1]
-    displayInfo("Stats: ", catStats, "Stats")
-    displayInfo("Personality Stats", catPersonalityStats, "PersoStats")
+        let modifiedStats = modifyStats(catStats, catPersonalityStats, catHeldTrinketInfo, mayorBonuses)
+        // log is in function
+        catStats = modifiedStats[0]
+        catPersonalityStats = modifiedStats[1]
+        displayInfo("Stats: ", catStats, "Stats")
+        displayInfo("Personality Stats", catPersonalityStats, "PersoStats")
+    }
+
+    
     console.log(catColor)
     console.log(catPattern)
     console.log(catWhiteMarks)
