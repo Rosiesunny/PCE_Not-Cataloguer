@@ -102,8 +102,12 @@ function kibbyDirector() {
         displayInfo("Stats: ", catStats, "Stats")
         displayInfo("Personality Stats", catPersonalityStats, "PersoStats")
     }
+    let catFriends = parseFriendsFamily(catPageInfo, checkpointArray[118], checkpointArray[119]) ?? "None"
+    displayInfo("Friends: ", catFriends, "FriendsFamily")
 
-    
+    let catFamily = parseFriendsFamily(catPageInfo, checkpointArray[121], checkpointArray[122]) ?? "None"
+    displayInfo("Family: ", catFamily, "FriendsFamily")
+
     console.log(catColor)
     console.log(catPattern)
     console.log(catWhiteMarks)
@@ -115,32 +119,30 @@ function displayInfo(name, data, formatter) {
     console.log(name)
     console.log(data)
     if (formatter) {
+        let displayText = document.querySelector(".poopee").innerText
+        displayText += name + "\n"
         switch(formatter) {
             case "1D":
-                let displayText = document.querySelector(".poopee").innerText
-                displayText += name + "\n"
                 for (let i=0; i<data.length; i++) {
                     displayText += " - " + data[i] + "\n"
                 }
                 document.querySelector(".poopee").innerText = displayText
                 break
             case "Trinket":
-                let displayText7 = document.querySelector(".poopee").innerText
-                displayText7 += name + "\n"
                 for (let i=0; i<data.length; i++) {
                     if (typeof data[i] === 'number') {
                         if ((data[i]) > 0) {
-                            displayText7 += " - +" + data[i] + "\n"
+                            displayText += " - +" + data[i] + "\n"
                         }
                         else {
-                            displayText7 += " - " + data[i] + "\n"
+                            displayText += " - " + data[i] + "\n"
                         }
                     }
                     else {
-                        displayText7 += " - " + data[i] + "\n"
+                        displayText += " - " + data[i] + "\n"
                     }
                 }
-                document.querySelector(".poopee").innerText = displayText7
+                document.querySelector(".poopee").innerText = displayText
                 break
             case "Jobs":
                 console.log(data)
@@ -149,22 +151,20 @@ function displayInfo(name, data, formatter) {
                 let exp = data[1]
                 console.log(levels)
                 console.log(exp)
-                let displayText2 = document.querySelector(".poopee").innerText
-                displayText2 += name + "\n"
                 let jobsList = ["Hunter", "Gatherer", "Miner", "Fisher", "Bug Catcher", "Gardener", "Herbalist", "Farmer", "Flockherd", "Apothecary", "Clothier", "Scribe", "Artist", "Blacksmith", "Craftscat", "Builder", "Mason", "Baker",]
                 for (let i=0; i<jobsList.length; i++) {
                     if (levels[i] == 0) {
-                        displayText2 += "- " + jobsList[i] + " ---\n"
+                        displayText += "- " + jobsList[i] + " ---\n"
                     }
                     else {
                         let expDisplay = exp[i]
                         if (levels[i] < 5) {
                             expDisplay = expDisplay+maxEXPdisplayJobs[levels[i]-1]
                         }
-                        displayText2 += "- " + jobsList[i] + " Level: " + levels[i] + "   EXP: " + expDisplay + "\n"
+                        displayText += "- " + jobsList[i] + " Level: " + levels[i] + "   EXP: " + expDisplay + "\n"
                     } 
                 }
-                document.querySelector(".poopee").innerText = displayText2
+                document.querySelector(".poopee").innerText = displayText
                 break
 
             case "Classes":
@@ -173,47 +173,39 @@ function displayInfo(name, data, formatter) {
                 let exp2 = data[1]
                 console.log(levels2)
                 console.log(exp2)
-                let displayText3 = document.querySelector(".poopee").innerText
-                displayText3 += name + "\n"
                 let classesList = ["Fighter", "Thief", "Guardian", "Ranger", "Medic", "Scout", "Bard"]
                 for (let i=0; i<classesList.length; i++) {
                     if (levels2[i] == 0) {
-                        displayText3 += "- " + classesList[i] + " ---\n"
+                        displayText += "- " + classesList[i] + " ---\n"
                     }
                     else {
                         let expDisplay = exp2[i]
                         if (levels2[i] < 4) {
                             expDisplay = expDisplay+maxEXPdisplayClasses[levels2[i]-1]
                         }
-                        displayText3 += "- " + classesList[i] + " Level: " + levels2[i] + "   EXP: " + expDisplay + "\n"
+                        displayText += "- " + classesList[i] + " Level: " + levels2[i] + "   EXP: " + expDisplay + "\n"
                     }
-                    document.querySelector(".poopee").innerText = displayText3
+                    document.querySelector(".poopee").innerText = displayText
                 }
                 break
 
             case "Stats":
-                let displayText4 = document.querySelector(".poopee").innerText
-                displayText4 += name + "\n"
                 let statsList = ["Strength", "Agility", "Health", "Finesse", "Cleverness", "Perception", "Luck"]
                 for (let i=0; i<statsList.length; i++) {
-                    displayText4 += "- " + statsList[i] + ": " + data[i] + "\n"
+                    displayText += "- " + statsList[i] + ": " + data[i] + "\n"
                 }
-                document.querySelector(".poopee").innerText = displayText4
+                document.querySelector(".poopee").innerText = displayText
                 break
 
             case "PersoStats":
-                let displayText5 = document.querySelector(".poopee").innerText
-                displayText5 += name + "\n"
                 let persoStatsList = ["Bravery", "Benevolence",  "Energy", "Extroversion", "Dedication"]
                 for (let i=0; i<persoStatsList.length; i++) {
-                    displayText5 += "- " + persoStatsList[i] + ": " + data[i] + "\n"
+                    displayText += "- " + persoStatsList[i] + ": " + data[i] + "\n"
                 }
-                document.querySelector(".poopee").innerText = displayText5
+                document.querySelector(".poopee").innerText = displayText
                 break
 
             case "GeneString": 
-                let displayText6 = document.querySelector(".poopee").innerText
-                displayText6 += name + "\n"
                 let geneStringText = ""
                 let sectionLengthsList = [1, 2, 2, 5, 4, 4, 2, 2]
                 let counter = 0
@@ -225,9 +217,23 @@ function displayInfo(name, data, formatter) {
                     }
                     geneStringText += "] "
                 }
-                displayText6 += geneStringText
-                document.querySelector(".poopee").innerText = displayText6
+                displayText += geneStringText
+                document.querySelector(".poopee").innerText = displayText
                 break
+
+            case "FriendsFamily": 
+                if (Array.isArray(data)) {
+                    let friendsFamilyName = data[0]
+                    let friendsFamilyRelationship = data[1]
+                    for (let i = 0; i < friendsFamilyName.length; i++) {
+                        displayText += " - " + friendsFamilyName[i] + " - " + friendsFamilyRelationship[i] + "\n"
+                    }
+                }
+                else {
+                    displayText += " - " + data + "\n"
+                }
+                
+                document.querySelector(".poopee").innerText = displayText
         }
     }
     else {
@@ -274,9 +280,9 @@ function ensmallenCatPageInfo(catPageInfoINITIAL) {
         catPageInfo = catPageInfoINITIAL
     }
     let lastLine = -1
-    for (let i = 125; i < catPageInfo.length; i++) {
+    for (let i = 50; i < catPageInfo.length; i++) {
         if (catPageInfo[i].includes("Users Online")) {
-            lastLine = i
+            lastLine = i+1
             break
         }
     }
@@ -331,8 +337,7 @@ function getDataCheckpoints(dataArray) {
         "Fighter", -6, "Thief", -6, "Guardian", -6, "Ranger", -6, "Medic", -6, "Scout", -6, "Bard", -6,
         "Strength", -7, "Agility", -7, "Health", -7, "Finesse", -7, "Cleverness", -7, "Perception", -7, "Luck", -7, 
         "The Mayor is currently providing the following effects to this cat:", -1, 
-        "Friends", -8, -8, "Family", -8, -8, 
-        "Biography", -1
+        "Friends", -8, -8, "Family", -8, -8, "family of beans", -2
     ]  
     for (let i = 2; i < searchNums.length; i = i+2) {
         lineNum = simpleLineNumberSearch(dataArray, searchNums[i], currentLine) ?? "NOT FOUND"
@@ -381,17 +386,30 @@ function getDataCheckpoints(dataArray) {
         }
         if (searchNums[i+1] == -8) {
             if (searchNums[i] == "Friends") {
-                if (dataArray[lineNum+1] == "n/a") {
-                    currentLine = lineNum+1
+                    searchNums[i+1] = lineNum+1
+                    searchNums[i+2] = simpleLineNumberSearch(dataArray, "Family", currentLine)-1 ?? "NOT FOUND"
+
+                    i += 1
+                    
+            }
+            else {
+                console.log(lineNum + "PISS PISS PISS PIOSSS")
+                searchNums[i+1] = lineNum+1
+                let beancheck = simpleLineNumberSearch(dataArray, "recently had a family of beans and is on cooldown for", currentLine)
+                if (beancheck) {
+                    searchNums[i+2] = beancheck-1
+                    console.log("BEANCHECK YES")
                 }
                 else {
-                    currentLine = lineNum-1 // just in case buffer -1
-                    searchNums[i+1] = lineNum+1  // because it's -1/line after, we add 1 to line
-                    searchNums[i+2] = simpleLineNumberSearch(dataArray, "Family", currentLine)-1 ?? "NOT FOUND"
-                    searchNums[i+4] = searchNums[i+2]+2 ?? "NOT FOUND"
-                    searchNums[i+5] = simpleLineNumberSearch(dataArray, "Biography", currentLine)-2 ?? "NOT FOUND"
+                    searchNums[i+2] = dataArray.length
+                    console.log(dataArray[searchNums[i+2]] + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+                    if (dataArray[searchNums[i+2]] == undefined) {
+                        searchNums[i+2] = dataArray.length - 2
+                    }
                 }
+                i += 1
             }
+            console.log(i-1 + "UWUWUWUWUWUUWUWU UWUWUWUUWU WUUWUU UWUWUWU U")
         }
         //console.log(searchNums[i])
         //console.log("Current Line: " + currentLine)
@@ -717,16 +735,27 @@ function modifyStats(basestats, basepersostats, trinketinfo, mayorbonusinfo) {
 }
 
 //NEED TO DO FRIENDS/FAMILY
-
-function parseFriends(dataArray, line) {
-
+function parseFriendsFamily(dataArray, linestart, lineend) {
+    let friendName = []
+    let friendRelationship = []
+    console.log(linestart + " - " + lineend)
+    if (dataArray[linestart] != "NOT FOUND") {
+        if (linestart != lineend) {
+            for (let i = 0; i < lineend-linestart+1; i++) {
+                console.log(i)
+                console.log(i+linestart)
+                console.log("PISS")
+                console.log(dataArray[linestart+i])
+                friendName[i] = dataArray[linestart+i].split(" - ")[0]
+                friendRelationship[i] = dataArray[linestart+i].split(" - ")[1]
+            }
+            return([friendName, friendRelationship])
+        }
+    }
 }
 
-function parseFamily(dataArray, line) {
-
-}
-
-function parseWearing(dataArray, line) {
+// the data for this is in the bio array and not the regular cat info array
+function parseCurrentlyWearing(dataArray, line) {
     
 }
 
