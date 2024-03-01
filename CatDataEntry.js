@@ -108,18 +108,22 @@ function kibbyDirector() {
     let catFamily = parseFriendsFamily(catPageInfo, checkpointArray[121], checkpointArray[122]) ?? "None"
     displayInfo("Family: ", catFamily, "FriendsFamily")
 
+    let catCurrentlyWearing = parseCurrentlyWearing(biographyInfo) 
+    displayInfo("Currently Wearing: ", catCurrentlyWearing, "Wearing")
+
     console.log(catColor)
     console.log(catPattern)
     console.log(catWhiteMarks)
-    let catGeneString = findKnownGenes(catWind, catFurLength, catColor[0], catColor[1], catPattern, catWhiteMarks[1], catWhiteMarks[2])
+
+    let catGeneString = findKnownGenes(catWind, catFurLength, catColor[0], catColor[1], catPattern, catWhiteMarks[1], catWhiteMarks[2], catPageInfo, checkpointArray[31])
     displayInfo("Known Gene String: ", catGeneString, "GeneString")
 }
 
 function displayInfo(name, data, formatter) {
     console.log(name)
     console.log(data)
+    let displayText = document.querySelector(".poopee").innerText
     if (formatter) {
-        let displayText = document.querySelector(".poopee").innerText
         displayText += name + "\n"
         switch(formatter) {
             case "1D":
@@ -232,12 +236,19 @@ function displayInfo(name, data, formatter) {
                 else {
                     displayText += " - " + data + "\n"
                 }
-                
                 document.querySelector(".poopee").innerText = displayText
+                break
+            case "Wearing": 
+                if (Array.isArray(data)) {
+                    for (let i = 0; i < data.length; i++) {
+                        displayText += " - " + data[i] + "\n"
+                    }
+                }
+                document.querySelector(".poopee").innerText = displayText
+                break
         }
     }
     else {
-        let displayText = document.querySelector(".poopee").innerText
         displayText += name + data + "\n"
         document.querySelector(".poopee").innerText = displayText
     }
@@ -340,76 +351,65 @@ function getDataCheckpoints(dataArray) {
         "Friends", -8, -8, "Family", -8, -8, "family of beans", -2
     ]  
     for (let i = 2; i < searchNums.length; i = i+2) {
-        lineNum = simpleLineNumberSearch(dataArray, searchNums[i], currentLine) ?? "NOT FOUND"
-        console.log(searchNums[i])
-        console.log(lineNum)
-        // console.log(searchNums[i-2]+ ":")
-        // console.log("Line #: " + searchNums[i-1])
-        // console.log("Line Contents: \"" + dataArray[searchNums[i-1]]+"\"")
-        // console.log()
-        
-        if (searchNums[i+1] == -1) {
-            currentLine = lineNum-1 // just in case buffer -1
-            searchNums[i+1] = lineNum+1  // because it's -1/line after, we add 1 to line
-        }
-        if (searchNums[i+1] == -2) {
-            currentLine = lineNum-1 // just in case buffer -1
-            searchNums[i+1] = lineNum  // because it's -2 it's the same line, no +1
-        }
+        lineNum = simpleLineNumberSearch(dataArray, searchNums[i], currentLine) ?? "NOT FOUND"   
         if (i == 28) {
             currentLine = currentLine+5 // spacer to keep personality check on the actual personality, not "personality traits" 
             searchNums[i+3] = lineNum+2 // defines the gene sequence line
         }
-        if (searchNums[i+1] == -4) {
-            currentLine = lineNum-1  // just in case buffer -1
-            searchNums[i+1] = lineNum+1 //trinket name
-            searchNums[i+2] = lineNum+2 //trinket boost
-            i = i+1
-        }
-        if (searchNums[i+1] == -6) {
-            if (lineNum != "NOT FOUND") {
+        switch(searchNums[i+1]) {
+            case -1: 
+                currentLine = lineNum-1 // just in case buffer -1
+                searchNums[i+1] = lineNum+1  // because it's -1/line after, we add 1 to line
+                break
+            case -2: 
+                currentLine = lineNum-1 // just in case buffer -1
                 searchNums[i+1] = lineNum  // because it's -2 it's the same line, no +1
-            }
-            else {
-                searchNums[i+1] = "NOT FOUND"
-            }
-
-            if (searchNums[i] == "Day Job" || searchNums[i] == "Adventuring Class") {
+                break
+            case -4: 
+                currentLine = lineNum-1  // just in case buffer -1
+                searchNums[i+1] = lineNum+1 //trinket name
+                searchNums[i+2] = lineNum+2 //trinket boost
+                i = i+1
+                break
+            case -6: 
                 if (lineNum != "NOT FOUND") {
-                    currentLine = lineNum+1 // spacer so it doesn't repeat day job line
-                }
-            }
-        }
-        if (searchNums[i+1] == -7) {
-            currentLine = lineNum+9 // just in case buffer -1
-            searchNums[i+1] = lineNum+2  // because it's -1/line after, we add 1 to line
-        }
-        if (searchNums[i+1] == -8) {
-            if (searchNums[i] == "Friends") {
-                    searchNums[i+1] = lineNum+1
-                    searchNums[i+2] = simpleLineNumberSearch(dataArray, "Family", currentLine)-1 ?? "NOT FOUND"
-
-                    i += 1
-                    
-            }
-            else {
-                console.log(lineNum + "PISS PISS PISS PIOSSS")
-                searchNums[i+1] = lineNum+1
-                let beancheck = simpleLineNumberSearch(dataArray, "recently had a family of beans and is on cooldown for", currentLine)
-                if (beancheck) {
-                    searchNums[i+2] = beancheck-1
-                    console.log("BEANCHECK YES")
+                    searchNums[i+1] = lineNum  // because it's -2 it's the same line, no +1
                 }
                 else {
-                    searchNums[i+2] = dataArray.length
-                    console.log(dataArray[searchNums[i+2]] + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
-                    if (dataArray[searchNums[i+2]] == undefined) {
-                        searchNums[i+2] = dataArray.length - 2
+                    searchNums[i+1] = "NOT FOUND"
+                }
+                if (searchNums[i] == "Day Job" || searchNums[i] == "Adventuring Class") {
+                    if (lineNum != "NOT FOUND") {
+                        currentLine = lineNum+1 // spacer so it doesn't repeat day job line
                     }
                 }
-                i += 1
-            }
-            console.log(i-1 + "UWUWUWUWUWUUWUWU UWUWUWUUWU WUUWUU UWUWUWU U")
+                break
+            case -7: 
+                currentLine = lineNum+9 // just in case buffer -1
+                searchNums[i+1] = lineNum+2  // because it's -1/line after, we add 1 to line
+                break
+            case -8: 
+                if (searchNums[i] == "Friends") {
+                    searchNums[i+1] = lineNum+1
+                    searchNums[i+2] = simpleLineNumberSearch(dataArray, "Family", currentLine)-1 ?? "NOT FOUND"
+                    i += 1
+                }
+                else {
+                    searchNums[i+1] = lineNum+1
+                    let beancheck = simpleLineNumberSearch(dataArray, "recently had a family of beans and is on cooldown for", currentLine)
+                    //beancheck is to keep it from including "x had a family of beans" as a family member
+                    if (beancheck) {
+                        searchNums[i+2] = beancheck-1
+                    }
+                    else {
+                        searchNums[i+2] = dataArray.length
+                        if (dataArray[searchNums[i+2]] == undefined) {
+                            searchNums[i+2] = dataArray.length - 2
+                        }
+                    }
+                    i += 1
+                }
+
         }
         //console.log(searchNums[i])
         //console.log("Current Line: " + currentLine)
@@ -738,14 +738,9 @@ function modifyStats(basestats, basepersostats, trinketinfo, mayorbonusinfo) {
 function parseFriendsFamily(dataArray, linestart, lineend) {
     let friendName = []
     let friendRelationship = []
-    console.log(linestart + " - " + lineend)
     if (dataArray[linestart] != "NOT FOUND") {
         if (linestart != lineend) {
             for (let i = 0; i < lineend-linestart+1; i++) {
-                console.log(i)
-                console.log(i+linestart)
-                console.log("PISS")
-                console.log(dataArray[linestart+i])
                 friendName[i] = dataArray[linestart+i].split(" - ")[0]
                 friendRelationship[i] = dataArray[linestart+i].split(" - ")[1]
             }
@@ -755,22 +750,42 @@ function parseFriendsFamily(dataArray, linestart, lineend) {
 }
 
 // the data for this is in the bio array and not the regular cat info array
-function parseCurrentlyWearing(dataArray, line) {
-    
+function parseCurrentlyWearing(biographyArray) {
+    let line = simpleLineNumberSearch(biographyArray, "Currently Wearing: ", 0)
+    if (line) {
+        let wearing = biographyArray[line].split("Currently Wearing: ")[1]
+        let wearingList = wearing.split(", ")
+        return wearingList
+    }
+    else {
+        return "None"
+    }
 }
 
 
 //wind, fur, color, colortype, pattern, whitetype, whitelevel
-function findKnownGenes(wind, fur, color, colortype, pattern, whitetype, whitelevel) {
+function findKnownGenes(wind, fur, color, colortype, pattern, whitetype, whitelevel, dataArray, line) {
     let geneString = ["C",   "?","?",   "?","?",    "?","?","?","?","?",    "?","?","?","?",    "?","?","?","?",    "?","?",    "?","?"]
-    console.log(geneString)
-    sectionWind(geneString, wind)
-    sectionFur(geneString, fur)
-    sectionColor(geneString, color, colortype, wind)
-    sectionPattern(geneString, pattern)
-    sectionWhite(geneString, whitetype, whitelevel)
-    console.log(geneString)
-    return geneString
+    if (dataArray[line].includes("[ Unknown Genetic String ]")) {
+        console.log(geneString)
+        sectionWind(geneString, wind)
+        sectionFur(geneString, fur)
+        sectionColor(geneString, color, colortype, wind)
+        sectionPattern(geneString, pattern)
+        sectionWhite(geneString, whitetype, whitelevel)
+        console.log(geneString)
+        return geneString
+    }
+    else {
+        if (dataArray[line].includes("[ C ]")) {
+            let geneStringString = dataArray[line].replaceAll("[", "")
+            geneStringString = geneStringString.replaceAll("]", "")
+            geneStringString = geneStringString.replaceAll(" ", "")
+            geneString = geneStringString.split("")
+            return geneString
+        }
+    }
+    
 }
 
 //NS
