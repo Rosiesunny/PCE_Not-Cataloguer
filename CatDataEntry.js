@@ -16,7 +16,9 @@ function kibbyDirector() {
     let catPageInfoFull = ensmallenCatPageInfo(catPageInfoINITIAL)
     let catPageInfo = catPageInfoFull[0]
     console.log(catPageInfo)
-    let biographyInfo = catPageInfoFull[1]
+    let familyFriendsInfo = catPageInfoFull[1]
+    console.log(familyFriendsInfo)
+    let biographyInfo = catPageInfoFull[2]
     console.log(biographyInfo)
     let checkpointArray = getDataCheckpoints(catPageInfo)
     console.log(checkpointArray)
@@ -102,10 +104,10 @@ function kibbyDirector() {
         displayInfo("Stats: ", catStats, "Stats")
         displayInfo("Personality Stats", catPersonalityStats, "PersoStats")
     }
-    let catFriends = parseFriendsFamily(catPageInfo, checkpointArray[118], checkpointArray[119]) ?? "None"
+    let catFriends = parseFriendsFamily(familyFriendsInfo, "Friends") ?? "None"
     displayInfo("Friends: ", catFriends, "FriendsFamily")
 
-    let catFamily = parseFriendsFamily(catPageInfo, checkpointArray[121], checkpointArray[122]) ?? "None"
+    let catFamily = parseFriendsFamily(familyFriendsInfo, "Family") ?? "None"
     displayInfo("Family: ", catFamily, "FriendsFamily")
 
     let catCurrentlyWearing = parseCurrentlyWearing(biographyInfo) 
@@ -210,8 +212,13 @@ function displayInfo(name, data, formatter) {
                 break
 
             case "GeneString": 
+                console.log(data.length)
                 let geneStringText = ""
                 let sectionLengthsList = [1, 2, 2, 5, 4, 4, 2, 2]
+                if (data.length == 23) {
+                    sectionLengthsList = [1, 2, 2, 5, 4, 5, 2, 2]
+                }
+                
                 let counter = 0
                 for (let i = 0; i < sectionLengthsList.length; i++) {
                     geneStringText += "["
@@ -244,6 +251,9 @@ function displayInfo(name, data, formatter) {
                         displayText += " - " + data[i] + "\n"
                     }
                 }
+                else {
+                    displayText += " - " + data + "\n"
+                }
                 document.querySelector(".poopee").innerText = displayText
                 break
         }
@@ -252,8 +262,6 @@ function displayInfo(name, data, formatter) {
         displayText += name + data + "\n"
         document.querySelector(".poopee").innerText = displayText
     }
-    
-
 }
 
 function checkForTravelingText(catPageInfoINITIAL) {
@@ -268,6 +276,7 @@ function checkForTravelingText(catPageInfoINITIAL) {
 function ensmallenCatPageInfo(catPageInfoINITIAL) {
     let catPageInfo = []
     let bioLine = -1
+    let relationshipsLine = -1
     if (catPageInfoINITIAL[1].includes("[") == false) {
         let catNameLineStart = -1
         let correctLineFound = false
@@ -284,6 +293,9 @@ function ensmallenCatPageInfo(catPageInfoINITIAL) {
             catPageInfo[i] = catPageInfoINITIAL[i+catNameLineStart]
             if (catPageInfo[i].includes("Biography")) {
                 bioLine = i
+            }
+            if (catPageInfo[i].includes("Relationships")) {
+                relationshipsLine = i
             }
         }
     }
@@ -307,12 +319,9 @@ function ensmallenCatPageInfo(catPageInfoINITIAL) {
     }
     // trim bio into its own array
     let biographyArray = catPageInfo.splice(bioLine, catPageInfo.length)
-    console.log(catPageInfo)
-    console.log(biographyArray)
-    return [catPageInfo, biographyArray]
+    let friendsFamilyArray = catPageInfo.splice(relationshipsLine, catPageInfo.length)
+    return [catPageInfo, friendsFamilyArray, biographyArray]
 }
-
-
 
 //finds what line some text is on
 function simpleLineNumberSearch(catPageInfo, textToCheck, lastCheckedLandmark) {
@@ -335,7 +344,7 @@ function getDataCheckpoints(dataArray) {
     let searchNums = [
         "Name", 0, "Birthday", -1, "Age", -1, "Wind", -1, "Pronouns", -1, "Aspect", -1, "Origin", -1, "ID", -1, 
         "Species", -1, "Size", -1, "Fur", -1, "Color", -1, "Pattern", -1, "White Marks", -1, "Eye Color", -1, 
-        "Genetic String", -5, "Personality", -2, 
+        "Genetic String", -5, "Personality", -1, 
         "Bravery", -1, "Benevolence", -1,  "Energy", -1, "Extroversion", -1, "Dedication", -1, "Held Trinket", -4, -4, //name and stat effect
         "Day Job", -6, 
         "Hunter", -6, "Gatherer", -6, "Miner", -6, 
@@ -347,11 +356,10 @@ function getDataCheckpoints(dataArray) {
         "Adventuring Class", -6,
         "Fighter", -6, "Thief", -6, "Guardian", -6, "Ranger", -6, "Medic", -6, "Scout", -6, "Bard", -6,
         "Strength", -7, "Agility", -7, "Health", -7, "Finesse", -7, "Cleverness", -7, "Perception", -7, "Luck", -7, 
-        "The Mayor is currently providing the following effects to this cat:", -1, 
-        "Friends", -8, -8, "Family", -8, -8, "family of beans", -2
+        "The Mayor is currently providing the following effects to this cat:", -1
     ]  
     for (let i = 2; i < searchNums.length; i = i+2) {
-        lineNum = simpleLineNumberSearch(dataArray, searchNums[i], currentLine) ?? "NOT FOUND"   
+        lineNum = simpleLineNumberSearch(dataArray, searchNums[i], currentLine) ?? "NOT FOUND"
         if (i == 28) {
             currentLine = currentLine+5 // spacer to keep personality check on the actual personality, not "personality traits" 
             searchNums[i+3] = lineNum+2 // defines the gene sequence line
@@ -735,16 +743,52 @@ function modifyStats(basestats, basepersostats, trinketinfo, mayorbonusinfo) {
 }
 
 //NEED TO DO FRIENDS/FAMILY
-function parseFriendsFamily(dataArray, linestart, lineend) {
+function parseFriendsFamily(dataArray, friendsOrFamilyCheck) {
     let friendName = []
     let friendRelationship = []
-    if (dataArray[linestart] != "NOT FOUND") {
+    let linestart = -1
+    let lineend = -1
+    if (friendsOrFamilyCheck == "Friends") {
+        linestart = simpleLineNumberSearch(dataArray, "Friends:", 0)+1   
+        lineend = simpleLineNumberSearch(dataArray, "Family:", 1)-1        
+    }
+    else {
+        linestart = simpleLineNumberSearch(dataArray, "Family:", 0)+1
+        let familyOfBeansCheck = simpleLineNumberSearch(dataArray, "recently had a family of beans and is on cooldown for", 1)
+        if (familyOfBeansCheck) {
+            lineend = familyOfBeansCheck-1
+        } 
+        else {
+            if (dataArray[dataArray.length-1].includes(" - ") == false) {
+                lineend = dataArray.length-2
+            }
+            else {
+                lineend = dataArray.length-1
+            }
+        }
+    }
+
+    console.log(dataArray)
+    for (let i = 0; i < dataArray.length; i++) {
+        if (dataArray[i].includes(friendsOrFamilyCheck)) {
+
+        }
+    }
+    console.log(linestart + " - " + lineend)
+    if (linestart != "NOT FOUND") {
         if (linestart != lineend) {
             for (let i = 0; i < lineend-linestart+1; i++) {
                 friendName[i] = dataArray[linestart+i].split(" - ")[0]
                 friendRelationship[i] = dataArray[linestart+i].split(" - ")[1]
             }
             return([friendName, friendRelationship])
+        }
+        else {
+            if (dataArray[linestart] != "n/a") {
+                friendName[0] = dataArray[linestart].split(" - ")[0]
+                friendRelationship[0] = dataArray[linestart].split(" - ")[1]
+                return([friendName, friendRelationship])
+            }
         }
     }
 }
