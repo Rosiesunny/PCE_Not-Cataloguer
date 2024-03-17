@@ -199,3 +199,27 @@ input.checkboxes {
     margin-bottom: 2%;
     padding: 2%;
 }
+
+label {
+    padding-left: 5%;
+}
+
+#hidden {
+    display:none;
+}
+
+#examples {
+    max-height: 400px
+}
+
+#examplesbox {
+    overflow:scroll;
+    max-height: 100%;
+}
+
+.examples {
+    float: left;
+}
+#testquestion-and-answer-container {
+    max-height: 400px;
+}
