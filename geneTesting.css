@@ -119,7 +119,6 @@ div {
     font-size: 150%;
 }
 
-
 #testquestion-and-answer-container {
     width: 30%;
     padding: .7%;
@@ -223,3 +222,311 @@ label {
 #testquestion-and-answer-container {
     max-height: 400px;
 }
+
+.hidden {
+    display:none;
+}
+
+.shown {
+    display: block;
+}
+
+.theme-light {
+    --main-color: #ffffff;
+    --segment-color: #f0f0f0;
+    --segment-color-hover: #d6d8d9;
+    --borders-color-lighter: gray;
+    --text-color: black;
+    --bg-color: #222222;
+    --bg-color-hover: #333333;
+    --quote-color: #d3e0e2;
+    --quote-text: #252525;
+    --quote-accent: #3c5460;
+    --link-color: #204052;
+    --user-link-color: #206d6a;
+    --link-hover-background: #d6d9dd;
+    --error-color: #a40404;
+    --lines-color: #3c5460;
+    --notif-color: #3e4247;
+    --notif-text: #eaeaea;
+    --red: #8B0000;
+    --orange: #c33500;
+    --yellow: #926904;
+    --green: #006400;
+    --blue: #191970;
+    --purple: #4B0082;
+    --pink: #DC143C;
+    --brown: #8B4513;
+    --grey: #6c6c6c;
+    --teal: #008080;
+    --cat-watermark: 0px;
+    --item-watermark: 0px;
+    --format-button-offset: 0px;
+    --speech-bubble-offset: 0px;
+    --clickme: #66CDAA;
+    --clicked: #87CEFA;
+    --fighter: #624b50;
+    --thief: #4f545c;
+    --guardian: #6b5e5b;
+    --ranger: #5f514d;
+    --medic: #4d5a5f;
+    --scout: #4f5d52;
+    --bard: #584f5d
+   }
+
+   .theme-dark {
+    --main-color: #414243;
+    --segment-color: #393b3c;
+    --segment-color-hover: #343637;
+    --borders-color-lighter: #2a2b2c;
+    --text-color: #dfdfdf;
+    --bg-color: #222222;
+    --bg-color-hover: #333333;
+    --quote-color: #4a5059;
+    --quote-text: #eaeaea;
+    --quote-accent: #1c2328;
+    --link-color: #c3dded;
+    --user-link-color: #ace0e1;
+    --link-hover-background: #323536;
+    --error-color: #ffd042;
+    --lines-color: #1c2328;
+    --notif-color: #3e4247;
+    --notif-text: #eaeaea;
+    --red: #ff9a9a;
+    --orange: #ffaa8b;
+    --yellow: #F0E68C;
+    --green: #baea59;
+    --blue: #87CEFA;
+    --purple: #d1b0ff;
+    --pink: #fc9ad5;
+    --brown: #DEB887;
+    --grey: #AAAEB0;
+    --teal: #66CDAA;
+    --cat-watermark: -100px;
+    --item-watermark: -75px;
+    --format-button-offset: 30px;
+    --speech-bubble-offset: -50px;
+    --clickme: #7badb6;
+    --clicked: #6a779a;
+    --fighter: #d5c8c9;
+    --thief: #c8c3d5;
+    --guardian: #d9d4c4;
+    --ranger: #d9cdc6;
+    --medic: #c7cfd6;
+    --scout: #bfd1ce;
+    --bard: #d7bfd0
+   }
+   html {
+    font-size:62.5%;
+    -webkit-text-size-adjust:100%
+   }
+   * {
+    box-sizing:border-box;
+    font-size:1.4rem;
+    font-family:open sans,arial,sans-serif
+   }
+   b {
+    font-size:inherit
+   }
+   i {
+    font-size:inherit
+   }
+   body {
+    background-color:var(--bg-color);
+    color:var(--text-color);
+    margin:0
+   }
+   h3 {
+    font-size:1.6rem;
+    margin-top:10px;
+    margin-bottom:10px
+   }
+   img {
+    image-rendering:-webkit-crisp-edges;
+    image-rendering:-moz-crisp-edges;
+    image-rendering:crisp-edges;
+    image-rendering:pixelated;
+    -ms-interpolation-mode:nearest-neighbor
+   }
+   span {
+    color:inherit;
+    font-size:inherit;
+    font-family:inherit;
+    text-decoration:inherit
+   }
+   .horizontalflex {
+    display:flex;
+    flex-direction:row
+   }
+   .wrapflex {
+    flex-wrap:wrap;
+    align-content:flex-start
+   }
+   .justify {
+    justify-content:center
+   }
+   .catjail {
+    width:100px;
+    height:100px;
+    background-image:url(main_assets/watermark_cat.png);
+    background-position:var(--cat-watermark) 0;
+    overflow:hidden;
+    position:relative;
+    margin:0 auto
+   }
+   .catforum {
+    width:100px;
+    height:100px;
+    background-image:url(main_assets/watermark_cat.png);
+    background-position:var(--cat-watermark) 0;
+    overflow:hidden;
+    position:relative;
+    display:inline-block
+   }
+   .catjail-wide {
+    width:500px;
+    height:100px;
+    overflow:hidden;
+    position:relative;
+    margin:auto
+   }
+   .catjail-nobars {
+    width:100px;
+    height:100px;
+    overflow:hidden;
+    position:relative;
+    max-width:100px;
+    max-height:100px
+   }
+   .cat-base {
+    position:absolute;
+    z-index:3
+   }
+   .cat-white {
+    position:absolute;
+    z-index:4
+   }
+   .cat-eyes {
+    position:absolute;
+    z-index:5
+   }
+   .adult-shorthair-sitting {
+    left:0;
+    top:0
+   }
+   .adult-shorthair-standing {
+    left:-100px;
+    top:0
+   }
+   .adult-shorthair-playing {
+    left:-200px;
+    top:-2px
+   }
+   .adult-shorthair-sleeping {
+    left:-300px;
+    top:0
+   }
+   .adult-shorthair-upsidedown {
+    left:-400px;
+    top:0
+   }
+   .adult-longhair-sitting {
+    left:0;
+    top:-100px
+   }
+   .adult-longhair-standing {
+    left:-100px;
+    top:-100px
+   }
+   .adult-longhair-playing {
+    left:-200px;
+    top:-102px
+   }
+   .adult-longhair-sleeping {
+    left:-300px;
+    top:-100px
+   }
+   .adult-longhair-upsidedown {
+    left:-400px;
+    top:-100px
+   }
+   .kitten-shorthair-sitting {
+    left:0;
+    top:-200px
+   }
+   .kitten-shorthair-standing {
+    left:-100px;
+    top:-200px
+   }
+   .kitten-shorthair-playing {
+    left:-200px;
+    top:-202px
+   }
+   .kitten-shorthair-sleeping {
+    left:-300px;
+    top:-200px
+   }
+   .kitten-shorthair-upsidedown {
+    left:-400px;
+    top:-200px
+   }
+   .kitten-longhair-sitting {
+    left:0;
+    top:-300px
+   }
+   .kitten-longhair-standing {
+    left:-100px;
+    top:-300px
+   }
+   .kitten-longhair-playing {
+    left:-200px;
+    top:-302px
+   }
+   .kitten-longhair-sleeping {
+    left:-300px;
+    top:-300px
+   }
+   .kitten-longhair-upsidedown {
+    left:-400px;
+    top:-300px
+   }
+   .bean-shorthair-sitting {
+    left:0;
+    top:-400px
+   }
+   .bean-shorthair-standing {
+    left:-100px;
+    top:-400px
+   }
+   .bean-shorthair-playing {
+    left:-200px;
+    top:-400px
+   }
+   .bean-shorthair-sleeping {
+    left:-300px;
+    top:-400px
+   }
+   .bean-shorthair-upsidedown {
+    left:-400px;
+    top:-400px
+   }
+   .bean-longhair-sitting {
+    left:0;
+    top:-500px
+   }
+   .bean-longhair-standing {
+    left:-100px;
+    top:-500px
+   }
+   .bean-longhair-playing {
+    left:-200px;
+    top:-500px
+   }
+   .bean-longhair-sleeping {
+    left:-300px;
+    top:-500px
+   }
+   .bean-longhair-upsidedown {
+    left:-400px;
+    top:-500px
+   }

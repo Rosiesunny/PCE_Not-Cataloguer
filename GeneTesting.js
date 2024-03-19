@@ -366,23 +366,22 @@ function changeTestCatID(ID) {
 }
 
 function changeButtons() {
+    hideExamples()
     let testTypesArray = ["Recessive Wind Check", "Recessive Fur Length Check", "Recessive Dilute Check", "Recessive Solid Check", "Hidden Color Check", "Hidden Pattern Check", "Recessive No-White Check", "0 White Possibility Check", "Hidden White Type Check", "Hidden White Level Check", "Albino Hidden Colors Check", "Albino Hidden Dilutes Check", "Albino Hidden Densities Check"]
     let lookingForArray = ["Any Null cats", "Any Longhair cats", "Any Dilute cats", "Any Solid cats", ["Any Black cats", "Any Orange cats"], "Check off seen patterns", "Any No-white cats", "Select how many cats are no-white", "Select white type from reference", "Mark highest white level found", "(hidden albino colors)", "Check what percentage of offspring are dilutes", "Select the highest value density found"]
     let buttonsTextArray = [["Nulls Found", "No Nulls Found"], ["Longhairs Found", "No Longhairs Found"], ["Dilutes Found", "No Dilutes Found"], ["Solids Found", "No Solids Found"], ["Orange Cats Found", "No Orange Cats Found", "Black Cats Found", "No Black Cats Found"], ["Mackerel (TT)", "Classic (TM)", "Broken (TS)", "Lynxpoint (TP)"], ["No-whites found", "All cats have white"], ["No White Marks Found", "55% of cats have No White Marks", "9% of cats have No White Marks"], ["Classic Only", "Right and Classic", "Left and Classic", "Piebald and Classic", "Inverse and Classic"],["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"], ["Black and Orange", "Orange Only", "Black Only"], ["All Dilutes", "Half Dilutes", "No Dilutes"], ["1", "2", "3", "4"]] 
     let idsArray = ["Skip (wind)", "#fur-2", "#dilute-2", "#pattern-yes-no-2", "Skip (hidden color check)", "Skip (HIDDEN PATTERN CHECK)", "#white-yes-no-2", "SKIP (0 WHITE POSSIBILITY CHECK)", "#white-type", "#white-level", "Skip (albino hidden colors check)", "Skip (albino hidden dilutes check)", "Skip (albino hidden densities check)"]
     let valuesArray = ["Skip (wind)", ["L", "S"], ["D", "F"], ["N", "Y"], "Skip (hidden color)", "Skip (hidden pattern check)", ["N", "Y"], ["NN", "YN", "YY"], ["C", "R", "L", "P", "I"], ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"], "Skip", "skip", "skip"]
     let testCatIDArray = ["skip", "983", "983", "983", "skip", "skip", "983", "skip", "1348", "15075", "skip (albino hidden colors)", "983", "355847"]
-    let examplesArray = ["NullsReference", "LonghairReference", ["Dilutes-BlackGroupReference", "Dilutes-OrangeGroupReference"], "SolidsReference", ["BlackGroupCatsReference", "OrangeGroupCatsReference"], "PatternsReference", "No-WhiteVSWhiteReference", "No-WhiteVSWhiteReference", "WhiteLevel2Reference"]
+    let examplesArray = ["NullsReference", "LonghairReference", ["Dilutes-BlackGroupReference", "Dilutes-OrangeGroupReference"], "SolidsReference", ["BlackGroupCatsReference", "OrangeGroupCatsReference"], "PatternsReference", "No-WhiteVSWhiteReference", "No-WhiteVSWhiteReference", ["WhiteTypeQuickReference", "ClassicWhiteTypeFullReference", "PiebaldWhiteTypeFullReference", "LeftWhiteTypeFullReference", "RightWhiteTypeFullReference", "InverseWhiteTypeFullReference"], ["ClassicWhiteTypeFullReference", "PiebaldWhiteTypeFullReference", "LeftWhiteTypeFullReference", "RightWhiteTypeFullReference", "InverseWhiteTypeFullReference"], ["BlackGroupCatsReference", "OrangeGroupCatsReference"], ["Dilutes-BlackGroupReference", "Dilutes-OrangeGroupReference"], "DensityReference"]
 
     let currentselect = document.getElementById("testquestion-select")
 
     let answersection = document.getElementById('answer-section')
     let buttonsection = document.getElementById('button-section')
-    let examplesbox = document.getElementById("examplesbox")
     let currentselectvalue = currentselect.value
     buttonsection.innerHTML = ""
     answersection.innerHTML = ""
-    examplesbox.innerHTML = ""
 
     let resultFoundButton = document.createElement('button');
     let resultNotFoundButton = document.createElement('button');
@@ -399,6 +398,7 @@ function changeButtons() {
                 // hidden pattern type needs its own entry because it has buttons to checkbox and THEN confirm, not just 1 click
                 if (currentselectvalue.includes("Hidden Color Check") || currentselectvalue.includes("Recessive Wind Check") || currentselectvalue.includes("0 White Possibility Check") || currentselectvalue.includes("Hidden Pattern Check") || currentselectvalue.includes("Albino Hidden Colors Check")) {
                     if (currentselectvalue.includes("Hidden Color Check")) {
+                        changeExamples(["BlackGroupCatsReference", "OrangeGroupCatsReference"])
                         if (currentselectvalue.includes("(black)")) {
                             answersection.innerHTML = "Looking for: " + lookingForArray[i][1]
                             changeTestCatID("3038")
@@ -431,6 +431,7 @@ function changeButtons() {
                         buttonsection.appendChild(resultNotFoundButton);
                     }
                     if (currentselectvalue.includes("Recessive Wind Check")) {
+                        changeExamples("NullsReference")
                         answersection.innerHTML = "Looking for: " + lookingForArray[i]
                         resultFoundButton.textContent = "Nulls Found" 
                         resultNotFoundButton.textContent = "Nulls Not Found"
@@ -448,6 +449,7 @@ function changeButtons() {
                         buttonsection.appendChild(resultNotFoundButton);
                     }
                     if (currentselectvalue.includes("0 White Possibility Check")) {
+                        changeExamples("No-WhiteVSWhiteReference")
                         answersection.innerHTML = "Looking for: " + lookingForArray[i]
                         changeTestCatID("43107")
                         for (let j = 0; j < buttonsTextArray[i].length; j++) {
@@ -459,6 +461,7 @@ function changeButtons() {
                         }
                     }
                     if (currentselectvalue.includes("Hidden Pattern Check")) {
+                        changeExamples("PatternsReference")
                         answersection.innerHTML = "Looking for: " + lookingForArray[i]
                         changeTestCatID("2534")
                         for (let j = 0; j < buttonsTextArray[i].length; j++) {
@@ -482,6 +485,9 @@ function changeButtons() {
                         buttonsection.appendChild(button)
                         
                     }
+                    if (currentselectvalue.includes("Albino Hidden Colors Check")) {
+                        // need to make it do 2 stages of albino hidden colors check here, maybe could use the hidden class to hide part 2 while part 1 is going? 
+                    }
                 }
                 else {
                     answersection.innerHTML = "Looking for: " + lookingForArray[i]
@@ -489,33 +495,18 @@ function changeButtons() {
                         let whitereferencearray = ["P", "L", "R", "I"]
                         let whiteResultArray = ["PiebaldWhiteTypeFullReference", "LeftWhiteTypeFullReference", "RightWhiteTypeFullReference", "InverseWhiteTypeFullReference"]
                         let whitetype = document.getElementById("white-type").innerText
-                        let whitefound = false
                         if (whitetype == "?") {
                             alert("It's recommended to do the White Type test before this test!")
-                            whitefound = false
+                            whiteResultArray.unshift("ClassicWhiteTypeFullReference")
+                            changeExamples(whiteResultArray)
                         }
                         else {
                             for (let i = 0; i < whitereferencearray.length; i++) {
                                 if (whitetype == whitereferencearray[i]) {
-                                    let examplediv = document.createElement('div')
-                                    examplediv.innerHTML = whiteResultArray[i] // CHANGE THIS TO BE THE FILE ITSELF THAT THE ARRAY IS REFERENCING SO IT ACTUALLY CHANGES TO THE EXAMPLES
-                                    examplesbox.appendChild(examplediv)
-                                    whitefound = true
+                                    changeExamples(["ClassicWhiteTypeFullReference", whiteResultArray[i]])
                                 }
                             }
                         }
-                        let classicexamplediv = document.createElement("div")
-                        classicexamplediv.innerHTML = "ClassicWhiteTypeFullReference"
-                        examplesbox.appendChild(classicexamplediv)
-                        console.log(whitefound)
-                        if (whitefound == false) {
-                            for (let i = 0; i < whiteResultArray.length; i++) {
-                                let examplediv = document.createElement('div')
-                                examplediv.innerHTML = whiteResultArray[i]
-                                examplesbox.appendChild(examplediv)
-                            }
-                        }
-                        
                     }
                     else {
                         changeExamples(examplesArray[i])
@@ -587,23 +578,26 @@ function zeroWhiteCheckChanges(answer) {
 }
 
 
+function hideExamples() {
+    document.querySelectorAll(".hidden").forEach((el) => {el.classList.remove("shown")})
+}
+
 function changeExamples(example) {
-    let examplesbox = document.getElementById("examplesbox")
-    examplesbox.innerHTML = ""
     console.log(example)
-    console.log("PISS")
+    document.querySelectorAll(".hidden").forEach((el) => {el.classList.remove("shown")})
+    console.log("AAAAAA'")
     if (Array.isArray(example)) {
         for (let i = 0; i<example.length;i++) {
-            let examplesearch = document.querySelector("."+example[i])
-            examplesbox.appendChild(examplesearch)
+            console.log(example[i] + "EXAMPLE[i]")
+            let examplesearch = document.getElementById(example[i])
+            examplesearch.classList.add("shown")
         }
     } 
     else {
-        let examplesearch = document.querySelector("."+example)
-        examplesbox.appendChild(examplesearch)
+        console.log(example + "EXAMPLE")
+        let examplesearch = document.getElementById(example)
+        examplesearch.classList.add("shown")
+
     }
 }
 
-function exampleHTMLholder() {
-    let 
-}
