@@ -14,6 +14,12 @@ function kibbyDirector() {
     displayInfo("Role: ", catVillageRole)
     console.log(catPageInfoINITIAL)
     let catPageInfoFull = ensmallenCatPageInfo(catPageInfoINITIAL)
+    if (catPageInfoFull == "no name found") {
+        alert("The text you input was invalid! Make sure you're copying a full cat's page. As a note: expected beans can't be entered until they're born")
+        textBoxEntry.value = ""
+        document.querySelector(".poopee").innerText = ""
+        return
+    }
     let catPageInfo = catPageInfoFull[0]
     console.log(catPageInfo)
     let familyFriendsInfo = catPageInfoFull[1]
@@ -69,7 +75,7 @@ function kibbyDirector() {
     let catEyeColor = parseEyeColor(catPageInfo, checkpointArray[29])
     displayInfo("Eye Color: ", catEyeColor)
 
-    if (catAge != "Bean") {
+    if (catAge != "Bean" && catVillageRole != "Citied") {
         let catPersonalityType = parsePersonalityType(catPageInfo, checkpointArray[33])
         displayInfo("Personality Type: ", catPersonalityType)
 
@@ -116,7 +122,6 @@ function kibbyDirector() {
     console.log(catColor)
     console.log(catPattern)
     console.log(catWhiteMarks)
-
     let catGeneString = findKnownGenes(catWind, catFurLength, catColor[0], catColor[1], catPattern, catWhiteMarks[1], catWhiteMarks[2], catPageInfo, checkpointArray[31])
     displayInfo("Known Gene String: ", catGeneString, "GeneString")
 }
@@ -212,7 +217,6 @@ function displayInfo(name, data, formatter) {
                 break
 
             case "GeneString": 
-                console.log(data.length)
                 let geneStringText = ""
                 let sectionLengthsList = [1, 2, 2, 5, 4, 4, 2, 2]
                 if (data.length == 23) {
@@ -269,6 +273,9 @@ function checkForTravelingText(catPageInfoINITIAL) {
         if (catPageInfoINITIAL[i].includes("This not-cat is currently out traveling the world!")) {
             return "Traveler"
         }
+        if (catPageInfoINITIAL[i].includes("This not-cat is a resident of Gardenhome City.")) {
+            return "Citied"
+        }
     }
     return "Active"
 }
@@ -288,6 +295,9 @@ function ensmallenCatPageInfo(catPageInfoINITIAL) {
                     break
                 }           
             }
+        }
+        if (correctLineFound == false) {
+            return ("no name found")
         }
         for (let i = 0; i < catPageInfoINITIAL.length-catNameLineStart; i++) {
             catPageInfo[i] = catPageInfoINITIAL[i+catNameLineStart]
@@ -810,7 +820,8 @@ function parseCurrentlyWearing(biographyArray) {
 //wind, fur, color, colortype, pattern, whitetype, whitelevel
 function findKnownGenes(wind, fur, color, colortype, pattern, whitetype, whitelevel, dataArray, line) {
     let geneString = ["C",   "?","?",   "?","?",    "?","?","?","?","?",    "?","?","?","?",    "?","?","?","?",    "?","?",    "?","?"]
-    if (dataArray[line].includes("[ Unknown Genetic String ]")) {
+    console.log(dataArray[line])
+    if (dataArray[line].includes("[ Unknown Genetic String ]") || dataArray[line].includes("About")) {
         console.log(geneString)
         sectionWind(geneString, wind)
         sectionFur(geneString, fur)
