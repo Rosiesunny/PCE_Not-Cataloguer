@@ -1,16 +1,15 @@
 // w3schools for understanding objects @ https://www.w3schools.com/js/js_objects.asp
 
-const pronounsDict = {they: [they, them, their, theirs, themself],
-    he: [he, him, his, his, himself], 
-   she: [she, her, her, hers, herself],
-    ae: [ae, aer, aer, aers, aerself],
-    xe: [xe, xem, xyr, xyrs, xemself],
-    it: [it, it, its, its, itself]
+const pronounsDict = {
+    "they": ["they", "them", "their", "theirs", "themself"],
+    "he": ["he", "him", "his", "his", "himself"], 
+    "she": ["she", "her", "her", "hers", "herself"],
+    "ae": ["ae", "aer", "aer", "aers", "aerself"],
+    "xe": ["xe", "xem", "xyr", "xyrs", "xemself"],
+    "it": ["it", "it", "its", "its", "itself"]
 }
 
-
 // w3schools for understanding classes @ https://www.w3schools.com/js/js_classes.asp
-
 class Cat {
 
     constructor (textboxData) {
