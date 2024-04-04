@@ -3,7 +3,8 @@
     --backdrop: rgb(0, 0, 0);
     --helpbox: rgb(195, 195, 195);
     --text: rgb(0,0,0); 
-    --madeby-text: rgb(0,0,0); 
+    --madeby-text: rgb(0,0,0);
+    --links: rgb(0, 21, 66);
 }
 .theme-dark {
     --main-color:rgb(46, 46, 49);
@@ -11,6 +12,7 @@
     --helpbox: rgb(29, 31, 36);
     --text: aliceblue;
     --madeby-text: rgb(218, 230, 240);
+    --links: rgb(105, 171, 228);
 }
 body{
     background-color: var(--backdrop);
@@ -146,5 +148,5 @@ h2{
 }
 
 a {
-    color: rgb(105, 171, 228);
+    color: var(--links);
 }
