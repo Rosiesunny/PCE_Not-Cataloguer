@@ -1,117 +1,202 @@
 // Gou's version of CatDataEntry.js for Backend work and integration
 
-function RecieveCat() {
-    document.querySelector(".databox").innerText = ""
-    let textBoxEntry = document.querySelector(".testTextBox")
+function addCat() {
+    // Init output display
+    document.querySelector(".output").innerText = "";
+
+    // Get input and parse
+    let textBoxEntry = document.querySelector(".input")
+
+    // catPageInfoINITIAL is an array of the lines of the input
     let catPageInfoINITIAL = textBoxEntry.value.split("\n")
+
+    // Get travelling vs. active
     let catVillageRole = checkForTravelingText(catPageInfoINITIAL) ?? ""          // checks for traveling text before deleting unneeded stuff
-    displayInfo("Role: ", catVillageRole)
+
+    // Shrinks page info
     let catPageInfo = ensmallenCatPageInfo(catPageInfoINITIAL)
-    console.log(catPageInfo)
     let checkpointArray = getDataCheckpoints(catPageInfo)
-    console.log(checkpointArray)
     textBoxEntry.value = ""
 
+    // Parses catPageInfo
     let catName = parseName(catPageInfo, checkpointArray[1])
-    displayInfo("Name: ", catName)
-
     let catBirthday = parseBirthday(catPageInfo, checkpointArray[3])
-    displayInfo("Birthday: ", catBirthday)
-
     let catAge = parseAge(catPageInfo, checkpointArray[5])
-    displayInfo("Age: ", catAge)
-
     let catWind = parseWind(catPageInfo, checkpointArray[7])
-    displayInfo("Wind: ", catWind)
-
     let catPronouns = parsePronouns(catPageInfo, checkpointArray[9])
-    displayInfo("Pronouns: ", catPronouns, "1D")
-
     let catAspect = parseAspect(catPageInfo, checkpointArray[11])
-    displayInfo("Aspect: ", catAspect)
-
     let catOrigin = parseOrigin(catPageInfo, checkpointArray[13])
-    displayInfo("Origin: ", catOrigin)
-
     let catID = parseID(catPageInfo, checkpointArray[15])
-    displayInfo("ID: ", catID)
-
     let catSpecies = parseSpecies(catPageInfo, checkpointArray[17])
-    displayInfo("Species: ", catSpecies)
-
     let catSize = parseSize(catPageInfo, checkpointArray[19])
-    displayInfo("Size: ", catSize, "1D")
-
     let catFurLength = parseFurLength(catPageInfo, checkpointArray[21])
-    displayInfo("Fur Length: ", catFurLength)
-
     let catColor = parseColor(catPageInfo, checkpointArray[23], catWind)
-    displayInfo("Color: ", catColor, "1D")
-
     let catPattern = parsePattern(catPageInfo, checkpointArray[25])
-    displayInfo("Pattern: ", catPattern)
-
     let catWhiteMarks = parseWhiteMarks(catPageInfo, checkpointArray[27])
-    displayInfo("White Marks: ", catWhiteMarks, "1D")
-
     let catEyeColor = parseEyeColor(catPageInfo, checkpointArray[29])
-    displayInfo("Eye Color: ", catEyeColor)
-
     let catPersonalityType = parsePersonalityType(catPageInfo, checkpointArray[33])
-    displayInfo("Personality Type: ", catPersonalityType)
-
     let catPersonalityStats = parsePersonalityStats(catPageInfo, checkpointArray)
-    // not logged yet bc it is later
-
     let catHeldTrinketInfo = parseHeldTrinket(catPageInfo, checkpointArray[45], checkpointArray[46])
-    displayInfo("Cat Held Trinket: ", catHeldTrinketInfo, "Trinket")
-
     let catDayJob = parseDayJob(catPageInfo, checkpointArray[48])
-    displayInfo("Day Job: ", catDayJob)
-
     let catJobs = parseJobs(catPageInfo, checkpointArray)
-    displayInfo("Jobs: ", catJobs, "Jobs")
-
     let catAdventuringClass = parseAdvClass(catPageInfo, checkpointArray[86])
-    displayInfo("Adventuring Class: ", catAdventuringClass)
-
     let catAdventuringClasses = parseAdvClasses(catPageInfo, checkpointArray)
-    displayInfo("Adventuring Classes: ", catAdventuringClasses, "Classes")
-
     let catStats = parseBaseStats(catPageInfo, checkpointArray)
-    //not logged yet bc it is later
-
     let mayorBonuses = parseMayorBonus(catPageInfo, checkpointArray[116]) ?? "None"
-    // log is in function
-
     let modifiedStats = modifyStats(catStats, catPersonalityStats, catHeldTrinketInfo, mayorBonuses)
-    // log is in function
+
     catStats = modifiedStats[0]
     catPersonalityStats = modifiedStats[1]
+    let catGeneString = findKnownGenes(catWind, catFurLength, catColor[0], catColor[1], catPattern, catWhiteMarks[1], catWhiteMarks[2])
+
+    // Add Cat to Village
+    village.cats[catID] = {};
+    let thisCat = village.cats[catID];
+
+    thisCat.id = catID;
+    thisCat.name = catName;
+    thisCat.travelling = !(catVillageRole == "Active");
+
+    let parseBday = catBirthday.split(" ");
+    parseBday[1] = parseBday[1].split(",")[0];
+    let seasons = ["Spring", "Summer", "Autumn", "Winter"];
+    var i;
+    for (i = 1; i < seasons.length+1; i++) {
+        if(parseBday[0] == seasons[i-1]) {
+            break;
+        }
+    }
+    thisCat.birthday = {year: Number(parseBday[3]), season: i, day: Number(parseBday[1])};
+    thisCat.age = catAge;    
+    
+    thisCat.pronouns = {primary: catPronouns[0], secondary: catPronouns[1]};
+    
+    thisCat.wind = catWind;
+    thisCat.aspect = catAspect;
+    thisCat.origin = catOrigin;
+    thisCat.species = catSpecies;
+    thisCat.size = catSize;
+
+    thisCat.furLength = catFurLength;
+    thisCat.furColor = catColor;
+    thisCat.pattern = catPattern;
+    thisCat.white = {
+        markings: catWhiteMarks[0],
+        type: catWhiteMarks[1],
+        level: catWhiteMarks[2]
+    };
+    thisCat.eyeColor = catEyeColor;
+
+    thisCat.personality = {
+        type: catPersonalityType,
+        Bravery: catPersonalityStats[0],
+        Benevolence: catPersonalityStats[1],
+        Energy: catPersonalityStats[2],
+        Extroversion: catPersonalityStats[3],
+        Dedication: catPersonalityStats[4]
+    };
+
+    thisCat.trinket = {
+        name: catHeldTrinketInfo[0],
+        stat: catHeldTrinketInfo[1],
+        mod: catHeldTrinketInfo[2]
+    };
+
+    thisCat.job = catDayJob;
+    thisCat.jobs = {
+        Hunter: {level: catJobs[0][0], exp: catJobs[1][0]},
+        Gatherer: {level: catJobs[0][1], exp: catJobs[1][1]},
+        Miner: {level: catJobs[0][2], exp: catJobs[1][2]},
+        Fisher: {level: catJobs[0][3], exp: catJobs[1][3]},
+        Bugcatcher: {level: catJobs[0][4], exp: catJobs[1][4]},
+        Gardener: {level: catJobs[0][5], exp: catJobs[1][5]},
+        Herbalist: {level: catJobs[0][6], exp: catJobs[1][6]},
+        Farmer: {level: catJobs[0][7], exp: catJobs[1][7]},
+        Flockherd: {level: catJobs[0][8], exp: catJobs[1][8]},
+        Apothecary: {level: catJobs[0][9], exp: catJobs[1][9]},
+        Clothier: {level: catJobs[0][10], exp: catJobs[1][10]},
+        Scribe: {level: catJobs[0][11], exp: catJobs[1][11]},
+        Artist: {level: catJobs[0][12], exp: catJobs[1][12]},
+        Blacksmith: {level: catJobs[0][13], exp: catJobs[1][13]},
+        Craftscat: {level: catJobs[0][14], exp: catJobs[1][14]},
+        Builder: {level: catJobs[0][15], exp: catJobs[1][15]},
+        Mason: {level: catJobs[0][16], exp: catJobs[1][16]},
+        Baker: {level: catJobs[0][17], exp: catJobs[1][17]}
+    };
+
+    thisCat.class = catAdventuringClass;
+    thisCat.classes = {
+        Fighter: {level: catAdventuringClasses[0][0], exp: catAdventuringClasses[1][0]},
+        Thief: {level: catAdventuringClasses[0][1], exp: catAdventuringClasses[1][1]},
+        Guardian: {level: catAdventuringClasses[0][2], exp: catAdventuringClasses[1][2]},
+        Ranger: {level: catAdventuringClasses[0][3], exp: catAdventuringClasses[1][3]},
+        Medic: {level: catAdventuringClasses[0][4], exp: catAdventuringClasses[1][4]},
+        Scout: {level: catAdventuringClasses[0][5], exp: catAdventuringClasses[1][5]},
+        Bard: {level: catAdventuringClasses[0][6], exp: catAdventuringClasses[1][6]}
+    };
+
+    thisCat.stats = {
+        Strength: catStats[0],
+        Agility: catStats[1],
+        Health: catStats[2],
+        Finesse: catStats[3],
+        Cleverness: catStats[4],
+        Perception: catStats[5],
+        Luck: catStats[6]
+    };
+
+    // TODO: Relationships
+
+    // TODO: Clothing
+
+    thisCat.genes = catGeneString;
+    thisCat.lastUpdated = Date();
+
+    console.log(thisCat);
+    
+    // Display
+    displayInfo("Role: ", catVillageRole)
+    displayInfo("Name: ", catName)
+    displayInfo("Birthday: ", catBirthday)
+    displayInfo("Age: ", catAge)
+    displayInfo("Wind: ", catWind)
+    displayInfo("Pronouns: ", catPronouns, "1D")
+    displayInfo("Aspect: ", catAspect)
+    displayInfo("Origin: ", catOrigin)
+    displayInfo("ID: ", catID)
+    displayInfo("Species: ", catSpecies)
+    displayInfo("Size: ", catSize, "1D")
+    displayInfo("Fur Length: ", catFurLength)
+    displayInfo("Color: ", catColor, "1D")
+    displayInfo("Pattern: ", catPattern)
+    displayInfo("White Marks: ", catWhiteMarks, "1D")
+    displayInfo("Eye Color: ", catEyeColor)
+    displayInfo("Personality Type: ", catPersonalityType)
+    displayInfo("Cat Held Trinket: ", catHeldTrinketInfo, "Trinket")
+    displayInfo("Day Job: ", catDayJob)
+    displayInfo("Jobs: ", catJobs, "Jobs")
+    displayInfo("Adventuring Class: ", catAdventuringClass)
+    displayInfo("Adventuring Classes: ", catAdventuringClasses, "Classes")
     displayInfo("Stats: ", catStats, "Stats")
     displayInfo("Personality Stats", catPersonalityStats, "PersoStats")
-    console.log(catColor)
-    console.log(catPattern)
-    console.log(catWhiteMarks)
-    let catGeneString = findKnownGenes(catWind, catFurLength, catColor[0], catColor[1], catPattern, catWhiteMarks[1], catWhiteMarks[2])
     displayInfo("Known Gene String: ", catGeneString, "GeneString")
 }
 
 function displayInfo(name, data, formatter) {
-    console.log(name)
-    console.log(data)
+    // console.log(name)
+    // console.log(data)
     if (formatter) {
         switch(formatter) {
             case "1D":
-                let displayText = document.querySelector(".databox").innerText
+                let displayText = document.querySelector(".output").innerText
                 displayText += name + "\n"
                 for (let i=0; i<data.length; i++) {
                     displayText += " - " + data[i] + "\n"
                 }
-                document.querySelector(".databox").innerText = displayText
+                document.querySelector(".output").innerText = displayText
                 break
             case "Trinket":
-                let displayText7 = document.querySelector(".databox").innerText
+                let displayText7 = document.querySelector(".output").innerText
                 displayText7 += name + "\n"
                 for (let i=0; i<data.length; i++) {
                     if (typeof data[i] === 'number') {
@@ -126,15 +211,15 @@ function displayInfo(name, data, formatter) {
                         displayText7 += " - " + data[i] + "\n"
                     }
                 }
-                document.querySelector(".databox").innerText = displayText7
+                document.querySelector(".output").innerText = displayText7
                 break
             case "Jobs":
-                console.log(data)
+                // console.log(data)
                 let levels = data[0]
                 let exp = data[1]
-                console.log(levels)
-                console.log(exp)
-                let displayText2 = document.querySelector(".databox").innerText
+                // console.log(levels)
+                // console.log(exp)
+                let displayText2 = document.querySelector(".output").innerText
                 displayText2 += name + "\n"
                 let jobsList = ["Hunter", "Gatherer", "Miner", "Fisher", "Bug Catcher", "Gardener", "Herbalist", "Farmer", "Flockherd", "Apothecary", "Clothier", "Scribe", "Artist", "Blacksmith", "Craftscat", "Builder", "Mason", "Baker",]
                 for (let i=0; i<jobsList.length; i++) {
@@ -145,15 +230,15 @@ function displayInfo(name, data, formatter) {
                         displayText2 += "- " + jobsList[i] + " Level: " + levels[i] + "   EXP: " + exp[i] + "\n"
                     } 
                 }
-                document.querySelector(".databox").innerText = displayText2
+                document.querySelector(".output").innerText = displayText2
                 break
 
             case "Classes":
                 let levels2 = data[0]
                 let exp2 = data[1]
-                console.log(levels2)
-                console.log(exp2)
-                let displayText3 = document.querySelector(".databox").innerText
+                // console.log(levels2)
+                // console.log(exp2)
+                let displayText3 = document.querySelector(".output").innerText
                 displayText3 += name + "\n"
                 let classesList = ["Fighter", "Thief", "Guardian", "Ranger", "Medic", "Scout", "Bard"]
                 for (let i=0; i<classesList.length; i++) {
@@ -163,32 +248,32 @@ function displayInfo(name, data, formatter) {
                     else {
                         displayText3 += "- " + classesList[i] + " Level: " + levels2[i] + "   EXP: " + exp2[i] + "\n"
                     }
-                    document.querySelector(".databox").innerText = displayText3
+                    document.querySelector(".output").innerText = displayText3
                 }
                 break
 
             case "Stats":
-                let displayText4 = document.querySelector(".databox").innerText
+                let displayText4 = document.querySelector(".output").innerText
                 displayText4 += name + "\n"
                 let statsList = ["Strength", "Agility", "Health", "Finesse", "Cleverness", "Perception", "Luck"]
                 for (let i=0; i<statsList.length; i++) {
                     displayText4 += "- " + statsList[i] + ": " + data[i] + "\n"
                 }
-                document.querySelector(".databox").innerText = displayText4
+                document.querySelector(".output").innerText = displayText4
                 break
 
             case "PersoStats":
-                let displayText5 = document.querySelector(".databox").innerText
+                let displayText5 = document.querySelector(".output").innerText
                 displayText5 += name + "\n"
                 let persoStatsList = ["Bravery", "Benevolence",  "Energy", "Extroversion", "Dedication"]
                 for (let i=0; i<persoStatsList.length; i++) {
                     displayText5 += "- " + persoStatsList[i] + ": " + data[i] + "\n"
                 }
-                document.querySelector(".databox").innerText = displayText5
+                document.querySelector(".output").innerText = displayText5
                 break
 
             case "GeneString": 
-                let displayText6 = document.querySelector(".databox").innerText
+                let displayText6 = document.querySelector(".output").innerText
                 displayText6 += name + "\n"
                 let geneStringText = ""
                 let sectionLengthsList = [1, 2, 2, 5, 4, 4, 2, 2]
@@ -202,14 +287,14 @@ function displayInfo(name, data, formatter) {
                     geneStringText += "] "
                 }
                 displayText6 += geneStringText
-                document.querySelector(".databox").innerText = displayText6
+                document.querySelector(".output").innerText = displayText6
                 break
         }
     }
     else {
-        let displayText = document.querySelector(".databox").innerText
+        let displayText = document.querySelector(".output").innerText
         displayText += name + data + "\n"
-        document.querySelector(".databox").innerText = displayText
+        document.querySelector(".output").innerText = displayText
     }
     
 
@@ -272,7 +357,7 @@ function getDataCheckpoints(dataArray) {
     let initialLine = simpleLineNumberSearch(dataArray, "Basic Data:", 0)
     let currentLine = initialLine
     let lineNum = initialLine
-    console.log(initialLine)
+    // console.log(initialLine)
     //while determining lines w text patterns, -1 means line after // -2 means same line
     // the final line number should always be the line the actual data is on, not the title declaring what the data is
     // -5 is genetic string, for this one it's gonna be same line and then we need to increment currentLine +2 so it doesn't get stuck on "Personality Traits" instead of "X personality" line after that
@@ -551,15 +636,15 @@ function parseJobs(dataArray, lines) {
         }
         counter++
     }
-    console.log("Job Levels: ")
-    console.log(catJobLevel)
-    console.log("Job Experiences: ")
-    console.log(catJobEXP)
+    // console.log("Job Levels: ")
+    // console.log(catJobLevel)
+    // console.log("Job Experiences: ")
+    // console.log(catJobEXP)
     return([catJobLevel, catJobEXP])
 }
 
 function parseAdvClass(dataArray, line) {
-    console.log(dataArray[line])
+    // console.log(dataArray[line])
     let catAdventuringClass = dataArray[line]
     if (catAdventuringClass.includes("Unassigned")) {
         catAdventuringClass = "Unassigned"
@@ -591,10 +676,10 @@ function parseAdvClasses(dataArray, lines) {
         } 
         counter++
     }
-    console.log("Class Levels: ")
-    console.log(catClassLevel)
-    console.log("Class Experiences: ")
-    console.log(catClassEXP)
+    // console.log("Class Levels: ")
+    // console.log(catClassLevel)
+    // console.log("Class Experiences: ")
+    // console.log(catClassEXP)
     return([catClassLevel, catClassEXP])
 }
 
@@ -609,7 +694,7 @@ function parseBaseStats(dataArray, lines) {
 }
 
 function parseMayorBonus(dataArray, line) {
-    console.log("Mayor Bonuses:")
+    // console.log("Mayor Bonuses:")
     if (dataArray[line]) { 
         let catMayorBonuses = dataArray[line].split(", ")
         let statNamesDictionary = ["Strength", "Agility", "Health", "Finesse", "Cleverness", "Perception", "Luck", "Bravery", "Benevolence", "Energy", "Extroversion", "Dedication"]
@@ -628,17 +713,17 @@ function parseMayorBonus(dataArray, line) {
                 }
             }
         }
-        console.log(catMayorBonusStatName)
-        console.log(catMayorBonusStatMod)
+        // console.log(catMayorBonusStatName)
+        // console.log(catMayorBonusStatMod)
         return([catMayorBonusStatName, catMayorBonusStatMod])
     }
 }
 
 function modifyStats(basestats, basepersostats, trinketinfo, mayorbonusinfo) {
     let statNamesDictionary = ["Strength", "Agility", "Health", "Finesse", "Cleverness", "Perception", "Luck", "Bravery", "Benevolence", "Energy", "Extroversion", "Dedication"]
-    console.log("Base Stats:")
-    console.log(basestats)
-    console.log(basepersostats)
+    // console.log("Base Stats:")
+    // console.log(basestats)
+    // console.log(basepersostats)
     // trinket bonus modify
     if (trinketinfo[0] != "None") {
         for (let i = 0; i < statNamesDictionary.length; i++) {
@@ -670,9 +755,9 @@ function modifyStats(basestats, basepersostats, trinketinfo, mayorbonusinfo) {
             }
         }
     }
-    console.log("New Stats:")
-    console.log(basestats)
-    console.log(basepersostats)
+    // console.log("New Stats:")
+    // console.log(basestats)
+    // console.log(basepersostats)
     return([basestats, basepersostats])
 }
 
@@ -694,13 +779,13 @@ function parseWearing(dataArray, line) {
 //wind, fur, color, colortype, pattern, whitetype, whitelevel
 function findKnownGenes(wind, fur, color, colortype, pattern, whitetype, whitelevel) {
     let geneString = ["C",   "?","?",   "?","?",    "?","?","?","?","?",    "?","?","?","?",    "?","?","?","?",    "?","?",    "?","?"]
-    console.log(geneString)
+    // console.log(geneString)
     sectionWind(geneString, wind)
     sectionFur(geneString, fur)
     sectionColor(geneString, color, colortype, wind)
     sectionPattern(geneString, pattern)
     sectionWhite(geneString, whitetype, whitelevel)
-    console.log(geneString)
+    // console.log(geneString)
     return geneString
 }
 

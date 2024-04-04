@@ -1,3 +1,22 @@
+:root {
+    --main-color: rgb(221, 221, 221);
+    --backdrop: rgb(0, 0, 0);
+    --helpbox: rgb(195, 195, 195);
+    --text: rgb(0,0,0); 
+    --madeby-text: rgb(0,0,0);
+    --links: rgb(0, 21, 66);
+}
+.theme-dark {
+    --main-color:rgb(46, 46, 49);
+    --backdrop: #ffffff;
+    --helpbox: rgb(29, 31, 36);
+    --text: aliceblue;
+    --madeby-text: rgb(218, 230, 240);
+    --links: rgb(105, 171, 228);
+}
+body{
+    background-color: var(--backdrop);
+}
 div {
     font-family: "Courier New";
 }
@@ -6,12 +25,14 @@ button {
     font-family: "Courier New";
     font-size: 250%
 }
-
+h2{
+    color: var(--text);
+}
 #container {
     border-radius: 15% 10%;
     margin: .5%;
     padding: 3%;
-    background-color:rgb(46, 46, 49);
+    background-color: var(--main-color);
  }
 
 
@@ -34,10 +55,10 @@ button {
 }
 
 #madeby {
-    color:rgb(123, 148, 170);
+    color:var(--madeby-text);
     size: auto;
     font-weight: bold;
-    font-size: 1vw;
+    font-size: 1.2vw;
     margin-top: 0px;
     padding-top: 0px;
 }
@@ -46,18 +67,44 @@ button {
     text-align: end;
     margin-top: 1%;
 }
+#help-text {
+    overflow: auto; 
+    max-height: 180px; 
+    background-color: rgba(79, 138, 161, 0.329); 
+    padding: 2%; 
+    border-radius: 5%;
+    color: var(--madeby-text);
+}
 
 #help {
     max-width: 5vw;
 }
-
+.colorswitch {
+    background-color:var(--bg-color);
+    padding:1px 1px 0;
+    border:1px solid #000;
+    z-index:1;
+    cursor:pointer;
+    margin:4px;
+    width:50px;
+    color:#fff;
+    display:block
+  }
+.colorswitch-text {
+    font-size:1.2rem;
+    padding:6px;
+    margin:0;
+    text-align:right;
+    color:#fff;
+    margin-left:auto;
+    max-width:200px
+}
 .btn-group {
     width: 100%;
     display: flex;
     justify-content:center;
     
 }
-
 .btn-group button {
     background-color: rgb(86, 127, 139); /* Green background */
     color: white; /* White text */
@@ -66,7 +113,7 @@ button {
     float: left; /* Float the buttons side by side */
     width: 30%;
     margin: .9%;
-    font-size: 3vw;
+    font-size: 1.3rem;
     border-radius: 10% 15%;
 }
 
@@ -95,11 +142,11 @@ button {
     margin-top: 4%;
     padding: 1.5%;
     border-radius: 10% 10%;
-    background-color: rgb(29, 31, 36);
-    color:aliceblue;
-    font-size: 150%;
+    background-color: var(--helpbox);
+    color:var(--text);
+    font-size: 1.2rem;
 }
 
 a {
-    color: rgb(105, 171, 228);
+    color: var(--links);
 }
