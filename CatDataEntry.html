@@ -6,6 +6,7 @@
         
     </head>
     <body>
+        <script src="./init_village.js"></script>
         <script src="./CatDataEntry.js"></script>
         <div id = "box">
             <div id = "testbox">
@@ -14,11 +15,11 @@
             <p class ="test">
                 PCE Early Alpha Not-CAT-aloguer - data entry (New/reformatting)
             </p>
-            <p class ="poopee"></p>
+            <p class ="display"></p>
         </div>
         <div id="entryarea">
-            <textarea class = "testTextBox" placeholder = "In PCE, <Ctrl+A> on your cat's page to select the whole page, then <Ctrl+C> to copy it. Then, navigate to this website, click this text box, and <Ctrl+V> to paste everything!"></textarea>
-            <button id = "uwuButton" onclick= "kibbyDirector()">Submit</button> 
+            <textarea class = "input" placeholder = "In PCE, <Ctrl+A> on your cat's page to select the whole page, then <Ctrl+C> to copy it. Then, navigate to this website, click this text box, and <Ctrl+V> to paste everything!"></textarea>
+            <button id = "submit" onclick= "addCat()">Submit</button> 
             </div>
         </div>
     </body>
