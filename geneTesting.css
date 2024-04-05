@@ -151,6 +151,38 @@ button {
     width: 100%;
 }
 
+#testCatID {
+    font-size: 100%;
+    font-weight: bold;
+    background-color:rgb(36, 65, 66);
+    padding-top: 10%;
+    padding-bottom: 10%;
+    text-align: center;
+    border-radius: 10% 15%;
+}
+
+#yourCatID {
+    font-size: 100%;
+    font-weight: bold;
+    background-color:rgb(29, 31, 36);
+    padding-top: 10%;
+    padding-bottom: 10%;
+    text-align: center;
+    border-radius: 10% 15%;
+    margin-bottom: 2%;
+}
+
+#currentlyknowngenes {
+    font-size: 80%;
+}
+
+#genecodefull {
+    font-size: 80%;
+    background-color: rgb(58, 160, 160);
+    border-radius: 10% 15%;
+    padding: 5%;
+}
+
 .bgc {
     background-color:rgb(69, 180, 180);
     padding-top: 15px;
@@ -178,6 +210,11 @@ button {
     margin-top: 2%;
     color:rgb(9, 17, 17);
     font-weight: bold;
+    font-size: 110%;
+    background-color:rgba(227, 238, 241, .6);
+    padding: 5%;
+    border-radius: 10% 15%;
+
 }
 
 .checkboxes {
@@ -230,6 +267,42 @@ label {
 .shown {
     display: block;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .theme-light {
     --main-color: #ffffff;

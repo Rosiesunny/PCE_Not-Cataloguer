@@ -937,7 +937,6 @@ function modifyStats(basestats, basepersostats, trinketinfo, mayorbonusinfo) {
     return([basestats, basepersostats])
 }
 
-//NEED TO DO FRIENDS/FAMILY
 function parseFriendsFamily(dataArray, friendsOrFamilyCheck) {
     let friendName = []
     let friendRelationship = []
@@ -1001,8 +1000,6 @@ function parseCurrentlyWearing(biographyArray) {
     }
 }
 
-
-//wind, fur, color, colortype, pattern, whitetype, whitelevel
 function findKnownGenes(wind, fur, color, colortype, pattern, whitetype, whitelevel, dataArray, line) {
     let geneString = ["C",   "?","?",   "?","?",    "?","?","?","?","?",    "?","?","?","?",    "?","?","?","?",    "?","?",    "?","?"]
     // DEBUG: console.log(dataArray[line])

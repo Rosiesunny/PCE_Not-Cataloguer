@@ -36,7 +36,6 @@ function changeExisting(ID, value) {
     let positionarray = [5, 6, 10, 11, 15, 16, 17, 18, 19, 23, 24, 25, 26, 30, 31, 32, 33]
     let genecodefull = document.getElementById("genecodefull")
     let genecodetext = genecodefull.innerText
-    let changeid = document.getElementById(ID)
     changeGenes(ID, value)
     for (let i = 0; i<idarray.length; i++) {
         if (idarray[i] == ID) {
@@ -121,21 +120,6 @@ function checkWhatTestsAreNeeded(array) {
         // Fur length test needed
         testsneededstring += "Recessive Fur Length Check|" 
     }
-
-    // albino check we moving on from
-    if (array[5][2] == "10") {
-        // cat is albino
-        //SEPARATE THESE GUYS OUT INTO INDIVIDUAL CHECKS FOR THEIR RESPECTIVE GENE CODE SLOT LATER! WHEN I ACTUALLY HAVE THE THINGS WORKING
-        testsneededstring += "Albino Hidden Colors Check|Albino Hidden Dilutes Check|Albino Hidden Densities Check|"
-    }
-    // albino unknown pattern
-    if (array[4][2] == "?") {
-        testsneededstring += "Hidden Pattern Check|"
-    }
-    if (array[3][3] == "?") {
-        // Dilute test needed
-        testsneededstring += "Recessive Dilute Check|"
-    }
     if (array[3][0] == "?") {
         // color gene 1 missing
         let othercolor = array[3][1]
@@ -144,6 +128,9 @@ function checkWhatTestsAreNeeded(array) {
         }
         if (othercolor == "B") {
             testsneededstring += "Hidden Color Check(black)(1)|"
+        }
+        if (othercolor == "?") {
+            testsneededstring += "Albino Hidden Colors Check|"
         }
     } 
     if (array[3][1] == "?") {
@@ -155,6 +142,30 @@ function checkWhatTestsAreNeeded(array) {
         if (othercolor == "B") {
             testsneededstring += "Hidden Color Check(black)(2)|"
         }
+    }
+    if (array[3][3] == "?") {
+        // Dilute test needed
+        let othercolor = array[3][2]
+        if (othercolor == "?") {
+            testsneededstring += "Albino Hidden Dilutes Check|"
+        }
+        else {
+            testsneededstring += "Recessive Dilute Check|"
+        }
+        
+    }
+    if (array[3][4] == "?") {
+        testsneededstring += "Albino Hidden Densities Check|"
+    }
+    if (array[4][0] == "?") {
+        testsneededstring += "Albino Pattern Display Check|"
+    }
+    if (array[4][1] == "?") {
+        testsneededstring += "Recessive Solid Check|"
+    } 
+    // albino or solid unknown pattern
+    if (array[4][2] == "?") {
+        testsneededstring += "Hidden Pattern Check|"
     }
     if (array[5][0] == "?") {
         //cat displays no white 
@@ -358,6 +369,12 @@ function changeSelectText(alltests) {
         }
         currentselect.innerHTML += '\n<option' + currenttest + '</option>'
     }
+    let answersection = document.getElementById('answer-section')
+    let buttonsection = document.getElementById('button-section')
+    buttonsection.innerHTML = ""
+    answersection.innerHTML = ""
+    hideExamples()
+    changeTestCatID("???")
 }
 
 function changeTestCatID(ID) {
@@ -367,13 +384,13 @@ function changeTestCatID(ID) {
 
 function changeButtons() {
     hideExamples()
-    let testTypesArray = ["Recessive Wind Check", "Recessive Fur Length Check", "Recessive Dilute Check", "Recessive Solid Check", "Hidden Color Check", "Hidden Pattern Check", "Recessive No-White Check", "0 White Possibility Check", "Hidden White Type Check", "Hidden White Level Check", "Albino Hidden Colors Check", "Albino Hidden Dilutes Check", "Albino Hidden Densities Check"]
-    let lookingForArray = ["Any Null cats", "Any Longhair cats", "Any Dilute cats", "Any Solid cats", ["Any Black cats", "Any Orange cats"], "Check off seen patterns", "Any No-white cats", "Select how many cats are no-white", "Select white type from reference", "Mark highest white level found", "(hidden albino colors)", "Check what percentage of offspring are dilutes", "Select the highest value density found"]
-    let buttonsTextArray = [["Nulls Found", "No Nulls Found"], ["Longhairs Found", "No Longhairs Found"], ["Dilutes Found", "No Dilutes Found"], ["Solids Found", "No Solids Found"], ["Orange Cats Found", "No Orange Cats Found", "Black Cats Found", "No Black Cats Found"], ["Mackerel (TT)", "Classic (TM)", "Broken (TS)", "Lynxpoint (TP)"], ["No-whites found", "All cats have white"], ["No White Marks Found", "55% of cats have No White Marks", "9% of cats have No White Marks"], ["Classic Only", "Right and Classic", "Left and Classic", "Piebald and Classic", "Inverse and Classic"],["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"], ["Black and Orange", "Orange Only", "Black Only"], ["All Dilutes", "Half Dilutes", "No Dilutes"], ["1", "2", "3", "4"]] 
-    let idsArray = ["Skip (wind)", "#fur-2", "#dilute-2", "#pattern-yes-no-2", "Skip (hidden color check)", "Skip (HIDDEN PATTERN CHECK)", "#white-yes-no-2", "SKIP (0 WHITE POSSIBILITY CHECK)", "#white-type", "#white-level", "Skip (albino hidden colors check)", "Skip (albino hidden dilutes check)", "Skip (albino hidden densities check)"]
-    let valuesArray = ["Skip (wind)", ["L", "S"], ["D", "F"], ["N", "Y"], "Skip (hidden color)", "Skip (hidden pattern check)", ["N", "Y"], ["NN", "YN", "YY"], ["C", "R", "L", "P", "I"], ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"], "Skip", "skip", "skip"]
-    let testCatIDArray = ["skip", "983", "983", "983", "skip", "skip", "983", "skip", "1348", "15075", "skip (albino hidden colors)", "983", "355847"]
-    let examplesArray = ["NullsReference", "LonghairReference", ["Dilutes-BlackGroupReference", "Dilutes-OrangeGroupReference"], "SolidsReference", ["BlackGroupCatsReference", "OrangeGroupCatsReference"], "PatternsReference", "No-WhiteVSWhiteReference", "No-WhiteVSWhiteReference", ["WhiteTypeQuickReference", "ClassicWhiteTypeFullReference", "PiebaldWhiteTypeFullReference", "LeftWhiteTypeFullReference", "RightWhiteTypeFullReference", "InverseWhiteTypeFullReference"], ["ClassicWhiteTypeFullReference", "PiebaldWhiteTypeFullReference", "LeftWhiteTypeFullReference", "RightWhiteTypeFullReference", "InverseWhiteTypeFullReference"], ["BlackGroupCatsReference", "OrangeGroupCatsReference"], ["Dilutes-BlackGroupReference", "Dilutes-OrangeGroupReference"], "DensityReference"]
+    let testTypesArray = ["Recessive Wind Check", "Recessive Fur Length Check", "Recessive Dilute Check", "Recessive Solid Check", "Hidden Color Check", "Hidden Pattern Check", "Recessive No-White Check", "0 White Possibility Check", "Hidden White Type Check", "Hidden White Level Check", "Albino Hidden Colors Check", "Albino Hidden Dilutes Check", "Albino Hidden Densities Check", "Albino Pattern Display Check"]
+    let lookingForArray = ["Any Null cats", "Any Longhair cats", "Any Dilute cats", "Any Solid cats", ["Any Black cats", "Any Orange cats"], "Check off seen patterns", "Any No-white cats", "Select how many cats are no-white", "Select white type from reference", "Mark highest white level found", "(hidden albino colors)", "Check what percentage of offspring are dilutes", "Select the lowest value density found", "Check what percentage of offspring are solid"]
+    let buttonsTextArray = [["Nulls Found", "No Nulls Found"], ["Longhairs Found", "No Longhairs Found"], ["Dilutes Found", "No Dilutes Found"], ["Solids Found", "No Solids Found"], ["Orange Cats Found", "No Orange Cats Found", "Black Cats Found", "No Black Cats Found"], ["Mackerel (TT)", "Classic (TM)", "Broken (TS)", "Lynxpoint (TP)"], ["No-whites found", "All cats have white"], ["No White Marks Found", "55% of cats have No White Marks", "9% of cats have No White Marks"], ["Classic Only", "Right and Classic", "Left and Classic", "Piebald and Classic", "Inverse and Classic"],["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"], ["Black and Orange", "Orange Only", "Black Only"], ["All Dilutes", "Half Dilutes", "No Dilutes"], ["1", "2", "3", "4"], ["All Solids", "Half Solids", "No Solids"]] 
+    let idsArray = ["Skip (wind)", "#fur-2", "#dilute-2", "#pattern-yes-no-2", "Skip (hidden color check)", "Skip (HIDDEN PATTERN CHECK)", "#white-yes-no-2", "SKIP (0 WHITE POSSIBILITY CHECK)", "#white-type", "#white-level", "Skip (albino hidden colors check)", "Skip (albino hidden dilutes check)", "#density", "skip (albino pattern display check)" ]
+    let valuesArray = ["Skip (wind)", ["L", "S"], ["D", "F"], ["N", "Y"], "Skip (hidden color)", "Skip (hidden pattern check)", ["N", "Y"], ["NN", "YN", "YY"], ["C", "R", "L", "P", "I"], ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"], "Skip (albino hidden colors)", ["DD", "FD", "FF"], ["1", "2", "3", "4"], ["NN", "YN", "YY"]]
+    let testCatIDArray = ["skip (wind)", "983", "983", "983", "skip (hidden color checK)", "skip (hidden pattern check)", "983", "skip (0 white possibility check)", "4666", "15075", "skip (albino hidden colors)", "319584", "219202", "219202"]
+    let examplesArray = ["NullsReference", "LonghairReference", ["Dilutes-BlackGroupReference", "Dilutes-OrangeGroupReference"], "SolidsReference", ["BlackGroupCatsReference", "OrangeGroupCatsReference"], "PatternsReference", "No-WhiteVSWhiteReference", "No-WhiteVSWhiteReference", ["WhiteTypeQuickReference", "ClassicWhiteTypeFullReference", "PiebaldWhiteTypeFullReference", "LeftWhiteTypeFullReference", "RightWhiteTypeFullReference", "InverseWhiteTypeFullReference"], ["ClassicWhiteTypeFullReference", "PiebaldWhiteTypeFullReference", "LeftWhiteTypeFullReference", "RightWhiteTypeFullReference", "InverseWhiteTypeFullReference"], ["BlackGroupCatsReference", "OrangeGroupCatsReference"], ["Dilutes-BlackGroupReference", "Dilutes-OrangeGroupReference"], "DensityReference", "SolidsReference"]
 
     let currentselect = document.getElementById("testquestion-select")
 
@@ -389,6 +406,7 @@ function changeButtons() {
     resultNotFoundButton.textContent = "Result Not Found"
     if (currentselectvalue == "Select Test") {
         buttonsection.innerHTML = "Select a test to start"
+        changeTestCatID("???")
     }
     else {
         for (let i = 0; i < testTypesArray.length; i++) {
@@ -396,7 +414,7 @@ function changeButtons() {
                 console.log(currentselectvalue)
                 // checking if it's hidden color or recessive wind since they change different values depending on input
                 // hidden pattern type needs its own entry because it has buttons to checkbox and THEN confirm, not just 1 click
-                if (currentselectvalue.includes("Hidden Color Check") || currentselectvalue.includes("Recessive Wind Check") || currentselectvalue.includes("0 White Possibility Check") || currentselectvalue.includes("Hidden Pattern Check") || currentselectvalue.includes("Albino Hidden Colors Check")) {
+                if (currentselectvalue.includes("Hidden Color Check") || currentselectvalue.includes("Recessive Wind Check") || currentselectvalue.includes("0 White Possibility Check") || currentselectvalue.includes("Hidden Pattern Check") || currentselectvalue.includes("Albino Hidden Colors Check") || currentselectvalue.includes("Albino Hidden Dilutes Check") || currentselectvalue.includes("Albino Pattern Display Check")) {
                     if (currentselectvalue.includes("Hidden Color Check")) {
                         changeExamples(["BlackGroupCatsReference", "OrangeGroupCatsReference"])
                         if (currentselectvalue.includes("(black)")) {
@@ -461,9 +479,9 @@ function changeButtons() {
                         }
                     }
                     if (currentselectvalue.includes("Hidden Pattern Check")) {
-                        changeExamples("PatternsReference")
                         answersection.innerHTML = "Looking for: " + lookingForArray[i]
-                        changeTestCatID("2534")
+                        changeTestCatID("268864")
+                        changeExamples("PatternsReference")
                         for (let j = 0; j < buttonsTextArray[i].length; j++) {
                             let outerdiv = document.createElement('div')
                             outerdiv.id = "outerdiv"
@@ -486,7 +504,43 @@ function changeButtons() {
                         
                     }
                     if (currentselectvalue.includes("Albino Hidden Colors Check")) {
-                        // need to make it do 2 stages of albino hidden colors check here, maybe could use the hidden class to hide part 2 while part 1 is going? 
+                        changeTestCatID("268864")
+                        changeExamples(["BlackGroupCatsReference", "OrangeGroupCatsReference"])
+                        answersection.innerHTML = "[Part 1] Looking for: black cats"
+                        resultFoundButton.textContent = "Black cats found"
+                        resultNotFoundButton.textContent = "ONLY Orange cats found"
+                        resultFoundButton.setAttribute("onclick", "albinoColorSubmitPart1('B')")
+                        resultNotFoundButton.setAttribute("onclick", "albinoColorSubmitPart1('O')")
+                        buttonsection.appendChild(resultFoundButton)
+                        buttonsection.appendChild(resultNotFoundButton)
+                    }
+
+                    if (currentselectvalue.includes("Albino Hidden Dilutes Check")) {
+                        changeExamples(["Dilutes-BlackGroupReference", "Dilutes-OrangeGroupReference"])
+                        answersection.innerHTML = "Looking for: " + lookingForArray[i]
+                        changeTestCatID("319584")
+                        for (let j = 0; j < buttonsTextArray[i].length; j++) {
+                            let button = document.createElement('button');
+                            button.textContent = buttonsTextArray[i][j]
+                            console.log(valuesArray)
+                            let changeString = "albinoHiddenDilutesChanges('" + valuesArray[i][j] + "')"
+                            button.setAttribute("onclick", changeString)
+                            buttonsection.appendChild(button)
+                        }
+                    }
+                    if (currentselectvalue.includes("Albino Pattern Display Check")) {
+                        changeExamples(examplesArray[i])
+                        answersection.innerHTML = "Looking for: " + lookingForArray[i]
+                        changeTestCatID(testCatIDArray[i])
+                        for (let j = 0; j < buttonsTextArray[i].length; j++) {
+                            let button = document.createElement('button');
+                            button.textContent = buttonsTextArray[i][j]
+                            console.log(valuesArray)
+                            //FIX THIS
+                            let changeString = "albinoPatternDisplayChanges('" + valuesArray[i][j] + "')"
+                            button.setAttribute("onclick", changeString)
+                            buttonsection.appendChild(button)
+                        }
                     }
                 }
                 else {
@@ -525,32 +579,56 @@ function changeButtons() {
         }
     }
 }
+
+
+function albinoColorSubmitPart1(answer) {
+    if (answer == "O") {
+        changeExisting("#color-1", "O")
+        changeExisting("#color-2", "O")
+    }
+    else {
+        let answersection = document.getElementById('answer-section')
+        let buttonsection = document.getElementById('button-section')
+        let resultFoundButton = document.createElement('button');
+        let resultNotFoundButton = document.createElement('button');
+        buttonsection.innerHTML = ""
+        answersection.innerHTML = ""
+        changeTestCatID("227123")
+        answersection.innerHTML = "[Part 2] Looking for: orange cats"
+        resultFoundButton.textContent = "Orange cats found"
+        resultNotFoundButton.textContent = "ONLY Black cats found"
+        resultFoundButton.setAttribute("onclick", "albinoColorSubmitPart2('O')")
+        resultNotFoundButton.setAttribute("onclick", "albinoColorSubmitPart2('B')")
+        buttonsection.appendChild(resultFoundButton)
+        buttonsection.appendChild(resultNotFoundButton)
+    }
+}
+
+function albinoColorSubmitPart2(answer) {
+    if (answer == "O") {
+        changeExisting("#color-1", "B")
+        changeExisting("#color-2", "O")
+    }
+    if (answer == "B") {
+        changeExisting("#color-1", "B")
+        changeExisting("#color-2", "B")
+    }
+}
     
 function patternSubmit() {
-    let buttonsection = document.getElementById('button-section')
-    let answersection = document.getElementById('answer-section')
     let checkboxes = document.querySelectorAll(".checkboxes")
     let count = 0;
-    let oopsdivcheck = document.getElementById("oopsdiv")
     let hiddenPatternTypeArray = ["T", "M", "S", "P"]
     let twogenes = ""
     for (let i = 0; i<checkboxes.length; i++) {
         if (checkboxes[i].checked == true) {
-            console.log("TRUE")
             count = count+1
             twogenes += hiddenPatternTypeArray[i]
         }
     }
     console.log(twogenes)
     if (count > 2) {
-        if (!oopsdivcheck) {
-            let oopsdiv = document.createElement('div')
-            oopsdiv.id = "oopsdiv"
-            oopsdiv.innerText = "You should have a maximum of 2 boxes selected! Double check your answers and submit again"
-            let submitbutton = document.getElementById('submitHiddenPattern')
-            buttonsection.insertBefore(oopsdiv, submitbutton)
-
-        }
+        alert("You should have a maximum of 2 boxes selected! Double check your answers and submit again")
     }
     else {
         if (count == 1) {
@@ -566,15 +644,27 @@ function patternSubmit() {
         }
     }
     console.log(count)
-
 }
 
-// rn it's specific to just the 0 white check
 function zeroWhiteCheckChanges(answer) {
     console.log(answer[0])
     console.log(answer[1])
     changeExisting("#white-yes-no-1", answer[0])
     changeExisting("#white-yes-no-2", answer[1])
+}
+
+function albinoHiddenDilutesChanges(answer) {
+    console.log(answer[0])
+    console.log(answer[1])
+    changeExisting("#dilute-1", answer[0])
+    changeExisting("#dilute-2", answer[1])
+}
+
+function albinoPatternDisplayChanges(answer) {
+    console.log(answer[0])
+    console.log(answer[1])
+    changeExisting("#pattern-yes-no-1", answer[0])
+    changeExisting("#pattern-yes-no-2", answer[1])
 }
 
 
@@ -585,7 +675,6 @@ function hideExamples() {
 function changeExamples(example) {
     console.log(example)
     document.querySelectorAll(".hidden").forEach((el) => {el.classList.remove("shown")})
-    console.log("AAAAAA'")
     if (Array.isArray(example)) {
         for (let i = 0; i<example.length;i++) {
             console.log(example[i] + "EXAMPLE[i]")
