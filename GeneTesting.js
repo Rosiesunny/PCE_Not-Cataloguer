@@ -419,7 +419,7 @@ function changeButtons() {
                         changeExamples(["BlackGroupCatsReference", "OrangeGroupCatsReference"])
                         if (currentselectvalue.includes("(black)")) {
                             answersection.innerHTML = "Looking for: " + lookingForArray[i][1]
-                            changeTestCatID("3038")
+                            changeTestCatID("983")
                             resultFoundButton.textContent = buttonsTextArray[i][0]
                             resultNotFoundButton.textContent = buttonsTextArray[i][1]
                             if (currentselectvalue.includes("(1)")) {
@@ -432,7 +432,7 @@ function changeButtons() {
                             }
                             }
                         if (currentselectvalue.includes("(orange)")) {
-                            changeTestCatID("983")
+                            changeTestCatID("3038")
                             answersection.innerHTML = "Looking for: " + lookingForArray[i][0] + "\n"
                             resultFoundButton.textContent = buttonsTextArray[i][2]
                             resultNotFoundButton.textContent = buttonsTextArray[i][3]
