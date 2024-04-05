@@ -481,6 +481,7 @@ function changeButtons() {
                     if (currentselectvalue.includes("Hidden Pattern Check")) {
                         answersection.innerHTML = "Looking for: " + lookingForArray[i]
                         changeTestCatID("268864")
+                        changeExamples("PatternsReference")
                         for (let j = 0; j < buttonsTextArray[i].length; j++) {
                             let outerdiv = document.createElement('div')
                             outerdiv.id = "outerdiv"
