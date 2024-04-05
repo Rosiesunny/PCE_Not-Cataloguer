@@ -13,4 +13,4 @@ function switchTheme(){
     else{
         setTheme('theme-light');
     }
-})();
+})(); //ily squid ty for the theme change code
