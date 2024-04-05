@@ -6,7 +6,7 @@ function parseText() {
 
     // beansSandboxPageInfoINITIAL is an array of the lines of the input
     let beansSandboxPageInfoINITIAL = textBoxEntry.value.split("\n");
-    textBoxEntry.value = ""
+    //textBoxEntry.value = ""
     console.log(beansSandboxPageInfoINITIAL)
     let beansSandboxArray = ensmallenData(beansSandboxPageInfoINITIAL)
     console.log(beansSandboxArray)
@@ -108,6 +108,7 @@ function ensmallenData(beansArray) {
             correctLine[1] = i
         }
     }
+    console.log(beansArrayNew)
     if (correctLineFound == true) {
         for (let i = 0; i < beansArray.length-correctLine[0]; i++) {
             beansArrayNew[i] = beansArray[i+correctLine[0]]
@@ -134,6 +135,19 @@ function ensmallenData(beansArray) {
             }
         }
         beansArrayNew = tempArray
+        console.log(tempArray)
+        if (tempArray.length > 7) {
+            let j = 0
+            let tempArray2 = []
+            for (let i = 0; i < tempArray.length; i++) {
+                if (tempArray[i].includes("hair")) {
+                    tempArray2[j] = tempArray[i]
+                    j++
+                }
+            }
+            beansArrayNew = tempArray2
+        }
+        
     }
     
     return beansArrayNew
