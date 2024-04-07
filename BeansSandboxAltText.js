@@ -6,13 +6,14 @@ function parseText() {
 
     // beansSandboxPageInfoINITIAL is an array of the lines of the input
     let beansSandboxPageInfoINITIAL = textBoxEntry.value.split("\n");
-    //textBoxEntry.value = ""
+    
     console.log(beansSandboxPageInfoINITIAL)
     let beansSandboxArray = ensmallenData(beansSandboxPageInfoINITIAL)
     console.log(beansSandboxArray)
     let dataArray = parseCats(beansSandboxArray)
     let htmlArray = generateInnerHTML(dataArray)
     displayFindings(htmlArray)
+    textBoxEntry.value = ""
 }
 
 
