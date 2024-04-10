@@ -13,6 +13,11 @@ console.log("Not-Cataloguer V 1.0 Alpha");
 // All cats in the village - accessed by village.cats[catID]
 village.cats = {};
 
+let cachedVillage = JSON.parse(window.localStorage.getItem("myVillage"));
+if (!(cachedVillage === null)) {
+    village = cachedVillage;
+}
+
 if (!(typeof(load_village) == 'undefined')) {
     if (load_village == 0) {
         // Do nothing
