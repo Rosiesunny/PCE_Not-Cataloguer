@@ -1,6 +1,4 @@
 function parseText() {
-    let displayTextBox = document.querySelector(".display")
-    
     // Get input and parse
     let textBoxEntry = document.querySelector(".input");
 
