@@ -1705,6 +1705,194 @@ if (!(typeof(load_village) == 'undefined')) {
                     "?"
                 ],
                 "lastUpdated": "Tue Apr 09 2024 22:22:55 GMT-0500 (Central Daylight Time)"
+            },
+            "262755": {
+                "id": 262755,
+                "name": "Grim",
+                "travelling": false,
+                "birthday": {
+                    "year": 8,
+                    "season": 2,
+                    "day": 15
+                },
+                "age": "Adult",
+                "pronouns": {
+                    "primary": "they",
+                    "secondary": "them"
+                },
+                "wind": "North",
+                "aspect": "Undiscovered",
+                "origin": "Born in Nestor's Wood",
+                "species": "Not-Cat",
+                "size": [
+                    17,
+                    7.71
+                ],
+                "furLength": "Longhair",
+                "furColor": [
+                    "-hidden-",
+                    "-hidden-"
+                ],
+                "pattern": "-hidden-",
+                "white": {
+                    "markings": "Albino",
+                    "type": "C",
+                    "level": 10
+                },
+                "eyeColor": "Pale Red",
+                "trinket": {
+                    "name": "None",
+                    "stat": "None",
+                    "mod": "0"
+                },
+                "job": "Baker",
+                "jobs": {
+                    "Hunter": {
+                        "level": 0,
+                        "exp": 0
+                    },
+                    "Gatherer": {
+                        "level": 1,
+                        "exp": 20
+                    },
+                    "Miner": {
+                        "level": 0,
+                        "exp": 0
+                    },
+                    "Fisher": {
+                        "level": 0,
+                        "exp": 0
+                    },
+                    "Bugcatcher": {
+                        "level": 0,
+                        "exp": 0
+                    },
+                    "Gardener": {
+                        "level": 0,
+                        "exp": 0
+                    },
+                    "Herbalist": {
+                        "level": 0,
+                        "exp": 0
+                    },
+                    "Farmer": {
+                        "level": 0,
+                        "exp": 0
+                    },
+                    "Flockherd": {
+                        "level": 1,
+                        "exp": 10
+                    },
+                    "Apothecary": {
+                        "level": 0,
+                        "exp": 0
+                    },
+                    "Clothier": {
+                        "level": 0,
+                        "exp": 0
+                    },
+                    "Scribe": {
+                        "level": 0,
+                        "exp": 0
+                    },
+                    "Artist": {
+                        "level": 0,
+                        "exp": 0
+                    },
+                    "Blacksmith": {
+                        "level": 0,
+                        "exp": 0
+                    },
+                    "Craftscat": {
+                        "level": 0,
+                        "exp": 0
+                    },
+                    "Builder": {
+                        "level": 0,
+                        "exp": 0
+                    },
+                    "Mason": {
+                        "level": 0,
+                        "exp": 0
+                    },
+                    "Baker": {
+                        "level": 3,
+                        "exp": 140
+                    }
+                },
+                "class": "Unassigned",
+                "classes": {
+                    "Fighter": {
+                        "level": 0,
+                        "exp": 0
+                    },
+                    "Thief": {
+                        "level": 0,
+                        "exp": 0
+                    },
+                    "Guardian": {
+                        "level": 0,
+                        "exp": 0
+                    },
+                    "Ranger": {
+                        "level": 0,
+                        "exp": 0
+                    },
+                    "Medic": {
+                        "level": 0,
+                        "exp": 0
+                    },
+                    "Scout": {
+                        "level": 0,
+                        "exp": 0
+                    },
+                    "Bard": {
+                        "level": 0,
+                        "exp": 0
+                    }
+                },
+                "personality": {
+                    "type": "Gentle",
+                    "Bravery": 6,
+                    "Benevolence": 10,
+                    "Energy": 4,
+                    "Extroversion": 8,
+                    "Dedication": 5
+                },
+                "stats": {
+                    "Strength": 12,
+                    "Agility": 13,
+                    "Health": 17,
+                    "Finesse": 20,
+                    "Cleverness": 14,
+                    "Perception": 17,
+                    "Luck": 17
+                },
+                "genes": [
+                    "C",
+                    "N",
+                    "?",
+                    "L",
+                    "L",
+                    "?",
+                    "?",
+                    "?",
+                    "?",
+                    "?",
+                    "?",
+                    "?",
+                    "?",
+                    "?",
+                    "Y",
+                    "?",
+                    10,
+                    "C",
+                    "?",
+                    "?",
+                    "?",
+                    "?"
+                ],
+                "lastUpdated": "Wed Apr 10 2024 00:16:27 GMT-0500 (Central Daylight Time)"
             }
         }
     } else {
