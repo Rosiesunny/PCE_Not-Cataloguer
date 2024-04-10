@@ -8,4 +8,7 @@ function saveVillage() {
 
 function clearVillage() {
     window.localStorage.removeItem("myVillage");
+    
+    village = {};
+    village.cats = {};
 }
