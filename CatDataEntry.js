@@ -121,9 +121,15 @@ function addCat() {
     thisCat.aspect = catAspect;
     thisCat.origin = catOrigin;
     thisCat.species = catSpecies;
-    thisCat.size = catSize;
-    thisCat.furLength = catFurLength;
-    thisCat.furColor = catColor;
+    thisCat.size = {
+        lbs: catSize[0],
+        kg: catSize[1]
+    };
+    thisCat.fur = {
+        length: catFurLength,
+        color: catColor[0],
+        type: catColor[1]
+    };
     thisCat.pattern = catPattern;
 
     // will get white info with cat.white.type or cat.white.level

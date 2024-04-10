@@ -7,6 +7,26 @@ const pronounsDict = {
     "it": ["it", "it", "its", "its", "itself"]
 }
 
+const seasonsDict = {
+    1: "Spring",
+    2: "Summer",
+    3: "Fall",
+    4: "Winter"
+}
+
+const jobEXPDict = {
+    1: 140,
+    2: 280,
+    3: 560,
+    4: 1120,
+}
+
+const classEXPDict = {
+    1: 50,
+    2: 150,
+    3: 300,
+}
+
 village = {};
 console.log("Not-Cataloguer V 1.0 Alpha");
 
@@ -42,15 +62,15 @@ if (!(typeof(load_village) == 'undefined')) {
                 "aspect": "Undiscovered",
                 "origin": "Custom Cat",
                 "species": "Not-Cat",
-                "size": [
-                    13,
-                    5.9
-                ],
-                "furLength": "Longhair",
-                "furColor": [
-                    "Snow",
-                    "Standard"
-                ],
+                "size": {
+                    lbs: 13,
+                    kg: 5.9
+                },
+                "fur": {
+                    "length": "Longhair",
+                    "color": "Snow",
+                    "type": "Standard"
+                },
                 "pattern": "Cloudpoint",
                 "white": {
                     "markings": "Bib, Boots, & Belly",
@@ -210,7 +230,7 @@ if (!(typeof(load_village) == 'undefined')) {
                     "R",
                     "Y"
                 ],
-                "lastUpdated": "Tue Apr 09 2024 22:12:09 GMT-0500 (Central Daylight Time)"
+                "lastUpdated": "Wed Apr 10 2024 14:59:40 GMT-0500 (Central Daylight Time)"
             },
             "196292": {
                 "id": 196292,
@@ -230,15 +250,15 @@ if (!(typeof(load_village) == 'undefined')) {
                 "aspect": "Undiscovered",
                 "origin": "Migrated from Earth",
                 "species": "Not-Cat",
-                "size": [
-                    21,
-                    9.53
-                ],
-                "furLength": "Longhair",
-                "furColor": [
-                    "Chocolate-Ginger",
-                    "Tortoiseshell"
-                ],
+                "size": {
+                    lbs: 21,
+                    kg: 9.53
+                },
+                "fur": {
+                    "length": "Longhair",
+                    "color": "Chocolate-Ginger",
+                    "type": "Tortoiseshell"
+                },
                 "pattern": "Lynxpoint",
                 "white": {
                     "markings": "None",
@@ -275,7 +295,7 @@ if (!(typeof(load_village) == 'undefined')) {
                     },
                     "Gardener": {
                         "level": 4,
-                        "exp": 280
+                        "exp": 290
                     },
                     "Herbalist": {
                         "level": 0,
@@ -398,7 +418,195 @@ if (!(typeof(load_village) == 'undefined')) {
                     "?",
                     "?"
                 ],
-                "lastUpdated": "Tue Apr 09 2024 22:18:32 GMT-0500 (Central Daylight Time)"
+                "lastUpdated": "Wed Apr 10 2024 15:00:26 GMT-0500 (Central Daylight Time)"
+            },
+            "262755": {
+                "id": 262755,
+                "name": "Grim",
+                "travelling": false,
+                "birthday": {
+                    "year": 8,
+                    "season": 2,
+                    "day": 15
+                },
+                "age": "Adult",
+                "pronouns": {
+                    "primary": "they",
+                    "secondary": "them"
+                },
+                "wind": "North",
+                "aspect": "Undiscovered",
+                "origin": "Born in Nestor's Wood",
+                "species": "Not-Cat",
+                "size": {
+                    lbs: 17,
+                    kg: 7.71
+                },
+                "fur": {
+                    "length": "Longhair",
+                    "color": "-hidden-",
+                    "type": "-hidden-"
+                },
+                "pattern": "-hidden-",
+                "white": {
+                    "markings": "Albino",
+                    "type": "C",
+                    "level": 10
+                },
+                "eyeColor": "Pale Red",
+                "trinket": {
+                    "name": "None",
+                    "stat": "None",
+                    "mod": "0"
+                },
+                "job": "Baker",
+                "jobs": {
+                    "Hunter": {
+                        "level": 0,
+                        "exp": 0
+                    },
+                    "Gatherer": {
+                        "level": 1,
+                        "exp": 20
+                    },
+                    "Miner": {
+                        "level": 0,
+                        "exp": 0
+                    },
+                    "Fisher": {
+                        "level": 0,
+                        "exp": 0
+                    },
+                    "Bugcatcher": {
+                        "level": 0,
+                        "exp": 0
+                    },
+                    "Gardener": {
+                        "level": 0,
+                        "exp": 0
+                    },
+                    "Herbalist": {
+                        "level": 0,
+                        "exp": 0
+                    },
+                    "Farmer": {
+                        "level": 0,
+                        "exp": 0
+                    },
+                    "Flockherd": {
+                        "level": 1,
+                        "exp": 10
+                    },
+                    "Apothecary": {
+                        "level": 0,
+                        "exp": 0
+                    },
+                    "Clothier": {
+                        "level": 0,
+                        "exp": 0
+                    },
+                    "Scribe": {
+                        "level": 0,
+                        "exp": 0
+                    },
+                    "Artist": {
+                        "level": 0,
+                        "exp": 0
+                    },
+                    "Blacksmith": {
+                        "level": 0,
+                        "exp": 0
+                    },
+                    "Craftscat": {
+                        "level": 0,
+                        "exp": 0
+                    },
+                    "Builder": {
+                        "level": 0,
+                        "exp": 0
+                    },
+                    "Mason": {
+                        "level": 0,
+                        "exp": 0
+                    },
+                    "Baker": {
+                        "level": 3,
+                        "exp": 150
+                    }
+                },
+                "class": "Unassigned",
+                "classes": {
+                    "Fighter": {
+                        "level": 0,
+                        "exp": 0
+                    },
+                    "Thief": {
+                        "level": 0,
+                        "exp": 0
+                    },
+                    "Guardian": {
+                        "level": 0,
+                        "exp": 0
+                    },
+                    "Ranger": {
+                        "level": 0,
+                        "exp": 0
+                    },
+                    "Medic": {
+                        "level": 0,
+                        "exp": 0
+                    },
+                    "Scout": {
+                        "level": 0,
+                        "exp": 0
+                    },
+                    "Bard": {
+                        "level": 0,
+                        "exp": 0
+                    }
+                },
+                "personality": {
+                    "type": "Gentle",
+                    "Bravery": 6,
+                    "Benevolence": 10,
+                    "Energy": 4,
+                    "Extroversion": 8,
+                    "Dedication": 5
+                },
+                "stats": {
+                    "Strength": 12,
+                    "Agility": 13,
+                    "Health": 17,
+                    "Finesse": 20,
+                    "Cleverness": 14,
+                    "Perception": 17,
+                    "Luck": 17
+                },
+                "genes": [
+                    "C",
+                    "N",
+                    "?",
+                    "L",
+                    "L",
+                    "?",
+                    "?",
+                    "?",
+                    "?",
+                    "?",
+                    "?",
+                    "?",
+                    "?",
+                    "?",
+                    "Y",
+                    "?",
+                    10,
+                    "C",
+                    "?",
+                    "?",
+                    "?",
+                    "?"
+                ],
+                "lastUpdated": "Wed Apr 10 2024 15:01:53 GMT-0500 (Central Daylight Time)"
             },
             "286346": {
                 "id": 286346,
@@ -418,15 +626,15 @@ if (!(typeof(load_village) == 'undefined')) {
                 "aspect": "Undiscovered",
                 "origin": "Born in Nestor's Wood",
                 "species": "Not-Cat",
-                "size": [
-                    11,
-                    4.99
-                ],
-                "furLength": "Longhair",
-                "furColor": [
-                    "Chocolate",
-                    "Standard"
-                ],
+                "size": {
+                    lbs: 11,
+                    kg: 4.99
+                },
+                "fur": {
+                    "length": "Longhair",
+                    "color": "Chocolate",
+                    "type": "Standard"
+                },
                 "pattern": "Solid",
                 "white": {
                     "markings": "Ears, Tail, & Toes",
@@ -491,7 +699,7 @@ if (!(typeof(load_village) == 'undefined')) {
                     },
                     "Artist": {
                         "level": 4,
-                        "exp": 80
+                        "exp": 90
                     },
                     "Blacksmith": {
                         "level": 0,
@@ -586,7 +794,7 @@ if (!(typeof(load_village) == 'undefined')) {
                     "?",
                     "?"
                 ],
-                "lastUpdated": "Tue Apr 09 2024 22:15:19 GMT-0500 (Central Daylight Time)"
+                "lastUpdated": "Wed Apr 10 2024 14:59:55 GMT-0500 (Central Daylight Time)"
             },
             "374449": {
                 "id": 374449,
@@ -606,15 +814,15 @@ if (!(typeof(load_village) == 'undefined')) {
                 "aspect": "Undiscovered",
                 "origin": "Born in Nestor's Wood",
                 "species": "Not-Cat",
-                "size": [
-                    11,
-                    4.99
-                ],
-                "furLength": "Longhair",
-                "furColor": [
-                    "Apricot-Snow",
-                    "Watercolor"
-                ],
+                "size": {
+                    lbs: 11,
+                    kg: 4.99
+                },
+                "fur": {
+                    "length": "Longhair",
+                    "color": "Apricot-Snow",
+                    "type": "Watercolor"
+                },
                 "pattern": "Lynxpoint",
                 "white": {
                     "markings": "Bib & Boots",
@@ -679,7 +887,7 @@ if (!(typeof(load_village) == 'undefined')) {
                     },
                     "Artist": {
                         "level": 2,
-                        "exp": 80
+                        "exp": 90
                     },
                     "Blacksmith": {
                         "level": 0,
@@ -774,7 +982,7 @@ if (!(typeof(load_village) == 'undefined')) {
                     "?",
                     "?"
                 ],
-                "lastUpdated": "Tue Apr 09 2024 22:27:43 GMT-0500 (Central Daylight Time)"
+                "lastUpdated": "Wed Apr 10 2024 15:01:45 GMT-0500 (Central Daylight Time)"
             },
             "391737": {
                 "id": 391737,
@@ -794,15 +1002,15 @@ if (!(typeof(load_village) == 'undefined')) {
                 "aspect": "Undiscovered",
                 "origin": "Born in Nestor's Wood",
                 "species": "Not-Cat",
-                "size": [
-                    6,
-                    2.72
-                ],
-                "furLength": "Shorthair",
-                "furColor": [
-                    "Chocolate",
-                    "Standard"
-                ],
+                "size": {
+                    lbs: 6,
+                    kg: 2.72
+                },
+                "fur": {
+                    "length": "Shorthair",
+                    "color": "Chocolate",
+                    "type": "Standard"
+                },
                 "pattern": "Lynxpoint",
                 "white": {
                     "markings": "Locket & Toes",
@@ -962,7 +1170,7 @@ if (!(typeof(load_village) == 'undefined')) {
                     "?",
                     "?"
                 ],
-                "lastUpdated": "Tue Apr 09 2024 22:21:27 GMT-0500 (Central Daylight Time)"
+                "lastUpdated": "Wed Apr 10 2024 15:00:38 GMT-0500 (Central Daylight Time)"
             },
             "414108": {
                 "id": 414108,
@@ -982,15 +1190,15 @@ if (!(typeof(load_village) == 'undefined')) {
                 "aspect": "Undiscovered",
                 "origin": "Born in Gardenhome City",
                 "species": "Not-Cat",
-                "size": [
-                    14,
-                    6.35
-                ],
-                "furLength": "Longhair",
-                "furColor": [
-                    "Brown",
-                    "Standard"
-                ],
+                "size": {
+                    lbs: 14,
+                    kg: 6.35
+                },
+                "fur": {
+                    "length": "Longhair",
+                    "color": "Brown",
+                    "type": "Standard"
+                },
                 "pattern": "Mink",
                 "white": {
                     "markings": "Bib & Boots",
@@ -1031,7 +1239,7 @@ if (!(typeof(load_village) == 'undefined')) {
                     },
                     "Herbalist": {
                         "level": 3,
-                        "exp": 150
+                        "exp": 160
                     },
                     "Farmer": {
                         "level": 0,
@@ -1150,7 +1358,7 @@ if (!(typeof(load_village) == 'undefined')) {
                     "?",
                     "?"
                 ],
-                "lastUpdated": "Tue Apr 09 2024 22:17:07 GMT-0500 (Central Daylight Time)"
+                "lastUpdated": "Wed Apr 10 2024 15:00:13 GMT-0500 (Central Daylight Time)"
             },
             "452010": {
                 "id": 452010,
@@ -1170,15 +1378,15 @@ if (!(typeof(load_village) == 'undefined')) {
                 "aspect": "Undiscovered",
                 "origin": "Born in Nestor's Wood",
                 "species": "Not-Cat",
-                "size": [
-                    4.25,
-                    1.93
-                ],
-                "furLength": "Longhair",
-                "furColor": [
-                    "Chocolate",
-                    "Standard"
-                ],
+                "size": {
+                    lbs: 4.25,
+                    kg: 1.93
+                },
+                "fur": {
+                    "length": "Longhair",
+                    "color": "Chocolate",
+                    "type": "Standard"
+                },
                 "pattern": "Colorpoint",
                 "white": {
                     "markings": "Left Piebald",
@@ -1338,7 +1546,7 @@ if (!(typeof(load_village) == 'undefined')) {
                     "?",
                     "?"
                 ],
-                "lastUpdated": "Tue Apr 09 2024 22:20:18 GMT-0500 (Central Daylight Time)"
+                "lastUpdated": "Wed Apr 10 2024 15:01:23 GMT-0500 (Central Daylight Time)"
             },
             "454500": {
                 "id": 454500,
@@ -1358,15 +1566,15 @@ if (!(typeof(load_village) == 'undefined')) {
                 "aspect": "Undiscovered",
                 "origin": "Migrated from Earth",
                 "species": "Not-Cat",
-                "size": [
-                    5.5,
-                    2.49
-                ],
-                "furLength": "Shorthair",
-                "furColor": [
-                    "Ginger-Chocolate",
-                    "Tortoiseshell"
-                ],
+                "size": {
+                    lbs: 5.5,
+                    kg: 2.49
+                },
+                "fur": {
+                    "length": "Shorthair",
+                    "color": "Ginger-Chocolate",
+                    "type": "Tortoiseshell"
+                },
                 "pattern": "Spotted",
                 "white": {
                     "markings": "Nose & Toes",
@@ -1526,7 +1734,7 @@ if (!(typeof(load_village) == 'undefined')) {
                     "?",
                     "?"
                 ],
-                "lastUpdated": "Tue Apr 09 2024 22:22:31 GMT-0500 (Central Daylight Time)"
+                "lastUpdated": "Wed Apr 10 2024 15:00:58 GMT-0500 (Central Daylight Time)"
             },
             "474528": {
                 "id": 474528,
@@ -1546,15 +1754,15 @@ if (!(typeof(load_village) == 'undefined')) {
                 "aspect": "Undiscovered",
                 "origin": "Born in Nestor's Wood",
                 "species": "Not-Cat",
-                "size": [
-                    0.66,
-                    0.3
-                ],
-                "furLength": "Longhair",
-                "furColor": [
-                    "Black-Red",
-                    "Tortoiseshell"
-                ],
+                "size": {
+                    lbs: 0.66,
+                    kg: 0.3
+                },
+                "fur": {
+                    "length": "Longhair",
+                    "color": "Black-Red",
+                    "type": "Tortoiseshell"
+                },
                 "pattern": "Colorpoint",
                 "white": {
                     "markings": "Chin, Boots, & Belly",
@@ -1709,198 +1917,23 @@ if (!(typeof(load_village) == 'undefined')) {
                     "?",
                     "?"
                 ],
-                "lastUpdated": "Tue Apr 09 2024 22:22:55 GMT-0500 (Central Daylight Time)"
-            },
-            "262755": {
-                "id": 262755,
-                "name": "Grim",
-                "travelling": false,
-                "birthday": {
-                    "year": 8,
-                    "season": 2,
-                    "day": 15
-                },
-                "age": "Adult",
-                "pronouns": {
-                    "primary": "they",
-                    "secondary": "them"
-                },
-                "wind": "North",
-                "aspect": "Undiscovered",
-                "origin": "Born in Nestor's Wood",
-                "species": "Not-Cat",
-                "size": [
-                    17,
-                    7.71
-                ],
-                "furLength": "Longhair",
-                "furColor": [
-                    "-hidden-",
-                    "-hidden-"
-                ],
-                "pattern": "-hidden-",
-                "white": {
-                    "markings": "Albino",
-                    "type": "C",
-                    "level": 10
-                },
-                "eyeColor": "Pale Red",
-                "trinket": {
-                    "name": "None",
-                    "stat": "None",
-                    "mod": "0"
-                },
-                "job": "Baker",
-                "jobs": {
-                    "Hunter": {
-                        "level": 0,
-                        "exp": 0
-                    },
-                    "Gatherer": {
-                        "level": 1,
-                        "exp": 20
-                    },
-                    "Miner": {
-                        "level": 0,
-                        "exp": 0
-                    },
-                    "Fisher": {
-                        "level": 0,
-                        "exp": 0
-                    },
-                    "Bugcatcher": {
-                        "level": 0,
-                        "exp": 0
-                    },
-                    "Gardener": {
-                        "level": 0,
-                        "exp": 0
-                    },
-                    "Herbalist": {
-                        "level": 0,
-                        "exp": 0
-                    },
-                    "Farmer": {
-                        "level": 0,
-                        "exp": 0
-                    },
-                    "Flockherd": {
-                        "level": 1,
-                        "exp": 10
-                    },
-                    "Apothecary": {
-                        "level": 0,
-                        "exp": 0
-                    },
-                    "Clothier": {
-                        "level": 0,
-                        "exp": 0
-                    },
-                    "Scribe": {
-                        "level": 0,
-                        "exp": 0
-                    },
-                    "Artist": {
-                        "level": 0,
-                        "exp": 0
-                    },
-                    "Blacksmith": {
-                        "level": 0,
-                        "exp": 0
-                    },
-                    "Craftscat": {
-                        "level": 0,
-                        "exp": 0
-                    },
-                    "Builder": {
-                        "level": 0,
-                        "exp": 0
-                    },
-                    "Mason": {
-                        "level": 0,
-                        "exp": 0
-                    },
-                    "Baker": {
-                        "level": 3,
-                        "exp": 140
-                    }
-                },
-                "class": "Unassigned",
-                "classes": {
-                    "Fighter": {
-                        "level": 0,
-                        "exp": 0
-                    },
-                    "Thief": {
-                        "level": 0,
-                        "exp": 0
-                    },
-                    "Guardian": {
-                        "level": 0,
-                        "exp": 0
-                    },
-                    "Ranger": {
-                        "level": 0,
-                        "exp": 0
-                    },
-                    "Medic": {
-                        "level": 0,
-                        "exp": 0
-                    },
-                    "Scout": {
-                        "level": 0,
-                        "exp": 0
-                    },
-                    "Bard": {
-                        "level": 0,
-                        "exp": 0
-                    }
-                },
-                "personality": {
-                    "type": "Gentle",
-                    "Bravery": 6,
-                    "Benevolence": 10,
-                    "Energy": 4,
-                    "Extroversion": 8,
-                    "Dedication": 5
-                },
-                "stats": {
-                    "Strength": 12,
-                    "Agility": 13,
-                    "Health": 17,
-                    "Finesse": 20,
-                    "Cleverness": 14,
-                    "Perception": 17,
-                    "Luck": 17
-                },
-                "genes": [
-                    "C",
-                    "N",
-                    "?",
-                    "L",
-                    "L",
-                    "?",
-                    "?",
-                    "?",
-                    "?",
-                    "?",
-                    "?",
-                    "?",
-                    "?",
-                    "?",
-                    "Y",
-                    "?",
-                    10,
-                    "C",
-                    "?",
-                    "?",
-                    "?",
-                    "?"
-                ],
-                "lastUpdated": "Wed Apr 10 2024 00:16:27 GMT-0500 (Central Daylight Time)"
+                "lastUpdated": "Wed Apr 10 2024 15:01:36 GMT-0500 (Central Daylight Time)"
             }
         }
     } else {
         console.log("Invalid test village - Failed to load.");
     }
+}
+
+function getGeneString(cat) {
+    var geneString = "";
+    geneString += "[" + cat.genes[0] + "]";
+    geneString += " [" + cat.genes[1] + cat.genes[2] + "]";
+    geneString += " [" + cat.genes[3] + cat.genes[4] + "]";
+    geneString += " [" + cat.genes[5] + cat.genes[6] + cat.genes[7] + cat.genes[8] + cat.genes[9] + "]";
+    geneString += " [" + cat.genes[10] + cat.genes[11] + cat.genes[12] + cat.genes[13] + "]";
+    geneString += " [" + cat.genes[14] + cat.genes[15] + cat.genes[16] + cat.genes[17] + "]";
+    geneString += " [" + cat.genes[18] + cat.genes[19] + "]";
+    geneString += " [" + cat.genes[20] + cat.genes[21] + "]";
+    return geneString;
 }
