@@ -1925,6 +1925,13 @@ if (!(typeof(load_village) == 'undefined')) {
     }
 }
 
+function clearVillage() {
+    window.localStorage.removeItem("myVillage");
+    
+    village = {};
+    village.cats = {};
+}
+
 function getGeneString(cat) {
     var geneString = "";
     geneString += "[" + cat.genes[0] + "]";

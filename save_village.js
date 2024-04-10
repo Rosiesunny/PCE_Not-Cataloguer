@@ -5,10 +5,3 @@ document.addEventListener("visibilitychange", () => {
 function saveVillage() {
     window.localStorage.setItem("myVillage", JSON.stringify(village));
 }
-
-function clearVillage() {
-    window.localStorage.removeItem("myVillage");
-    
-    village = {};
-    village.cats = {};
-}
