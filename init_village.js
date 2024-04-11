@@ -36,6 +36,19 @@ village.cats = {};
 let cachedVillage = JSON.parse(window.localStorage.getItem("myVillage"));
 if (!(cachedVillage === null)) {
     village = cachedVillage;
+
+    // Check initialization - currently only for backwards compatibility
+    cats_list = Object.keys(village.cats);
+    for(var i = 0; i < cats_list.length; i++) {
+        if (village.cats[cats_list[i]].clothes === undefined) {
+            village.cats[cats_list[i]].clothes = {};
+            village.cats[cats_list[i]].clothes.wearing = {};
+            village.cats[cats_list[i]].clothes.wearing.numslots = 0;
+            for (var j = 1; j <= 12; j++) {
+                village.cats[cats_list[i]].clothes.wearing[j] = {};
+            }
+        }
+    }
 }
 
 if (!(typeof(load_village) == 'undefined')) {

@@ -49,8 +49,12 @@ for (var i = 1; i < traits_list.length; i++) {
 }
 document.querySelector(".personality-data").innerText = personalityData;
 
-var trinketData = "Held Trinket: \n";
-trinketData += thisCat.trinket.name + " [" + thisCat.trinket.stat + " +" + thisCat.trinket.mod + "]\n";
+var trinketData = "Held Trinket: ";
+if (thisCat.trinket.mod == 0) {
+    trinketData += "None\n";
+} else {
+    trinketData += thisCat.trinket.name + " [" + thisCat.trinket.stat + " +" + thisCat.trinket.mod + "]\n";
+}
 document.querySelector(".trinket-data").innerText = trinketData;
 
 var jobData = "";
@@ -104,6 +108,20 @@ for (var i = 0; i < stats_list.length; i++) {
     attributeData += "+ " + stats_list[i] + ": " + thisCat.stats[stats_list[i]] + "\n";
 }
 document.querySelector(".attribute-data").innerText = attributeData;
+
+var clothesData = "";
+clothesData += "Currently Wearing: ";
+if (thisCat.clothes.wearing.numslots == 0) {
+    clothesData += "None";
+} else {
+    for (var i = 1; i <= thisCat.clothes.wearing.numslots; i++) {
+        clothesData += thisCat.clothes.wearing[i].name + " #" + thisCat.clothes.wearing[i].id;
+        if (!(i == (thisCat.clothes.wearing.numslots))) {
+            clothesData += ", ";
+        }
+    }
+}
+document.querySelector(".clothes-data").innerText = clothesData;
 
 var travellingData = "";
 if (thisCat.travelling) {

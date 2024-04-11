@@ -302,7 +302,22 @@ function addCat() {
     let catCurrentlyWearing = parseCurrentlyWearing(biographyInfo) 
     displayInfo("Currently Wearing: ", catCurrentlyWearing, "Wearing")
 
-    // TODO: Clothing - Gou
+    thisCat.clothes = {};
+    thisCat.clothes.wearing = {};
+
+    for (var i = 1; i <= 12; i++) {
+        if (catCurrentlyWearing[0][i-1] === undefined) {
+            if (thisCat.clothes.wearing.numslots === undefined) {
+                thisCat.clothes.wearing.numslots = i - 1;
+            }
+            thisCat.clothes.wearing[i] = {};
+        } else {
+            thisCat.clothes.wearing[i] = {
+                name: catCurrentlyWearing[0][i-1],
+                id: Number(catCurrentlyWearing[1][i-1])
+            };
+        }
+    }
 
     // DEBUG: console.log(catColor)
     // DEBUG: console.log(catPattern)
@@ -413,6 +428,7 @@ function displayInfo(name, data, formatter) {
                 if (data.length == 23) {
                     sectionLengthsList = [1, 2, 2, 5, 4, 5, 2, 2]
                 }
+                
                 let counter = 0
                 for (let i = 0; i < sectionLengthsList.length; i++) {
                     geneStringText += "["
