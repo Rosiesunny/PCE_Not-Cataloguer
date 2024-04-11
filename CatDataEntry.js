@@ -456,7 +456,6 @@ function displayInfo(name, data, formatter) {
                 document.querySelector(".display").innerText = displayText
                 break
             case "Wearing": 
-                console.log(data)
                 if (Array.isArray(data)) {
                     for (let i = 0; i < data[0].length; i++) {
                         displayText += " - " + data[0][i] + " #" + data[1][i] + "\n"
@@ -511,7 +510,7 @@ function ensmallenCatPageInfo(catPageInfoINITIAL) {
             if (catPageInfo[i].includes("Biography")) {
                 bioLine = i
             }
-            if (catPageInfo[i].includes("Relationships")) {
+            if (catPageInfo[i].includes("Relationships") || catPageInfo[i].includes("Pre-City Contacts")) {
                 relationshipsLine = i
             }
         }
