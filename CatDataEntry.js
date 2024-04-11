@@ -413,7 +413,6 @@ function displayInfo(name, data, formatter) {
                 if (data.length == 23) {
                     sectionLengthsList = [1, 2, 2, 5, 4, 5, 2, 2]
                 }
-                
                 let counter = 0
                 for (let i = 0; i < sectionLengthsList.length; i++) {
                     geneStringText += "["
