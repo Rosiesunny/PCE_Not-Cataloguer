@@ -441,9 +441,10 @@ function displayInfo(name, data, formatter) {
                 document.querySelector(".display").innerText = displayText
                 break
             case "Wearing": 
+                console.log(data)
                 if (Array.isArray(data)) {
-                    for (let i = 0; i < data.length; i++) {
-                        displayText += " - " + data[i] + "\n"
+                    for (let i = 0; i < data[0].length; i++) {
+                        displayText += " - " + data[0][i] + " #" + data[1][i] + "\n"
                     }
                 }
                 else {
@@ -999,7 +1000,13 @@ function parseCurrentlyWearing(biographyArray) {
     if (line) {
         let wearing = biographyArray[line].split("Currently Wearing: ")[1]
         let wearingList = wearing.split(", ")
-        return wearingList
+        let wearingNameList = []
+        let wearingIDList = []
+        for (let i = 0; i < wearingList.length; i++) {
+            wearingNameList[i] = wearingList[i].split(" #")[0]
+            wearingIDList[i] = wearingList[i].split(" #")[1]
+        }
+        return [wearingNameList, wearingIDList]
     }
     else {
         return "None"
