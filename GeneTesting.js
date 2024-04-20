@@ -23,26 +23,25 @@ function checkTextGeneString() {
     initialGenesSetup(newsections)
     let testList = checkWhatTestsAreNeeded(newsections)
     changeSelectText(testList)
-    
-    // do a function that changes the "select test" options to all of those
-    // then figure out how to get the page to react when they select a test and add in the info needed
-    // 3 arrays (testtypes (already done), testlookingfor (what the looking for text should display), and testexamples (image links))
-    // when a test type is selected, use those 3 arrays to fill in the data with whatever test type matches the currently selected one
 }
 
 
 function changeExisting(ID, value) {
     let idarray = ["#wind-1", "#wind-2", "#fur-1", "#fur-2", "#color-1", "#color-2", "#dilute-1", "#dilute-2", "#density", "#pattern-yes-no-1", "#pattern-yes-no-2", "#pattern-1", "#pattern-2", "#white-yes-no-1", "#white-yes-no-2", "#white-level", "#white-type"]
     let positionarray = [5, 6, 10, 11, 15, 16, 17, 18, 19, 23, 24, 25, 26, 30, 31, 32, 33]
+    // matching up positions with the official gene code array in cat storage data
+    let plainpositionarray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
+    let catID = document.getElementById("yourCatID").innerText
+
     let genecodefull = document.getElementById("genecodefull")
     let genecodetext = genecodefull.innerText
     changeGenes(ID, value)
     for (let i = 0; i<idarray.length; i++) {
         if (idarray[i] == ID) {
-            console.log(genecodetext)
             genecodetext = replaceAt(genecodetext, positionarray[i], value)
-            console.log(genecodetext)
             genecodefull.innerText = genecodetext
+            // MAKE IT SAVE OVER THE GENE CODE HERE AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+            village.cats[catID].genes[plainpositionarray[i]] = value
             break
         }
     }
@@ -100,14 +99,11 @@ function arrayensmallen(gene, check) {
         arraything[2] = "10"
         arraything.splice(3, 1)
     }
-    console.log(arraything)
     return arraything
 }
 
 function checkWhatTestsAreNeeded(array) {
     let testsneededstring = ""
-    console.log(array)
-    console.log("\n\n\n\n\n")
     if (array[1][0] == "O") {
         alert("This cat is null and cannot be gene tested! If you want to know its hidden genes, you have to use a Family Tree on the cat")
         return // don't run tests, the cat is null it cannot breed
@@ -185,7 +181,6 @@ function checkWhatTestsAreNeeded(array) {
         testsneededstring += "Hidden White Level Check|"
     }
     
-    console.log(testsneededstring)
     let testsNeeded = testsneededstring.split("|")
     testsNeeded.pop()
     return testsNeeded
@@ -322,7 +317,6 @@ function changeDescText(ID, value) {
 }
 
 function initialGenesSetup(genes) {
-    console.log(genes)
     //skipping species for now bc it's always not-cat
     changeGenes("#wind-1", genes[1][0])
     changeGenes("#wind-2", genes[1][1])
@@ -380,6 +374,13 @@ function changeSelectText(alltests) {
 function changeTestCatID(ID) {
     let testcatdiv = document.getElementById("testCatID")
     testcatdiv.innerText = ID
+    let testcatimagediv = document.getElementById("testcatimage")
+    if (ID == "???") {
+        testcatimagediv.innerHTML = "<img src = 'assets/addcat.png'>"
+    }
+    else {
+        testcatimagediv.innerHTML = "<img src = 'assets/Test_Cats/" + ID + ".png' id = 'testcatimg'>"
+    }
 }
 
 function changeButtons() {
@@ -390,7 +391,7 @@ function changeButtons() {
     let idsArray = ["Skip (wind)", "#fur-2", "#dilute-2", "#pattern-yes-no-2", "Skip (hidden color check)", "Skip (HIDDEN PATTERN CHECK)", "#white-yes-no-2", "SKIP (0 WHITE POSSIBILITY CHECK)", "#white-type", "#white-level", "Skip (albino hidden colors check)", "Skip (albino hidden dilutes check)", "#density", "skip (albino pattern display check)" ]
     let valuesArray = ["Skip (wind)", ["L", "S"], ["D", "F"], ["N", "Y"], "Skip (hidden color)", "Skip (hidden pattern check)", ["N", "Y"], ["NN", "YN", "YY"], ["C", "R", "L", "P", "I"], ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"], "Skip (albino hidden colors)", ["DD", "FD", "FF"], ["1", "2", "3", "4"], ["NN", "YN", "YY"]]
     let testCatIDArray = ["skip (wind)", "983", "983", "983", "skip (hidden color checK)", "skip (hidden pattern check)", "983", "skip (0 white possibility check)", "4666", "15075", "skip (albino hidden colors)", "319584", "219202", "219202"]
-    let examplesArray = ["NullsReference", "LonghairReference", ["Dilutes-BlackGroupReference", "Dilutes-OrangeGroupReference"], "SolidsReference", ["BlackGroupCatsReference", "OrangeGroupCatsReference"], "PatternsReference", "No-WhiteVSWhiteReference", "No-WhiteVSWhiteReference", ["WhiteTypeQuickReference", "ClassicWhiteTypeFullReference", "PiebaldWhiteTypeFullReference", "LeftWhiteTypeFullReference", "RightWhiteTypeFullReference", "InverseWhiteTypeFullReference"], ["ClassicWhiteTypeFullReference", "PiebaldWhiteTypeFullReference", "LeftWhiteTypeFullReference", "RightWhiteTypeFullReference", "InverseWhiteTypeFullReference"], ["BlackGroupCatsReference", "OrangeGroupCatsReference"], ["Dilutes-BlackGroupReference", "Dilutes-OrangeGroupReference"], "DensityReference", "SolidsReference"]
+    let examplesArray = ["NullsReference", "LonghairReference", ["Dilutes-BlackGroupReference", "Dilutes-OrangeGroupReference"], "SolidsReference", ["BlackGroupCatsReference", "OrangeGroupCatsReference"], "PatternsReference", "No-WhiteVSWhiteReference", "No-WhiteVSWhiteReference", ["ClassicWhiteTypeFullReference", "PiebaldWhiteTypeFullReference", "LeftWhiteTypeFullReference", "RightWhiteTypeFullReference", "InverseWhiteTypeFullReference"], ["ClassicWhiteTypeFullReference", "PiebaldWhiteTypeFullReference", "LeftWhiteTypeFullReference", "RightWhiteTypeFullReference", "InverseWhiteTypeFullReference"], ["BlackGroupCatsReference", "OrangeGroupCatsReference"], ["Dilutes-BlackGroupReference", "Dilutes-OrangeGroupReference"], "DensityReference", "SolidsReference"]
 
     let currentselect = document.getElementById("testquestion-select")
 
@@ -411,7 +412,6 @@ function changeButtons() {
     else {
         for (let i = 0; i < testTypesArray.length; i++) {
             if (currentselectvalue.includes(testTypesArray[i])) {
-                console.log(currentselectvalue)
                 // checking if it's hidden color or recessive wind since they change different values depending on input
                 // hidden pattern type needs its own entry because it has buttons to checkbox and THEN confirm, not just 1 click
                 if (currentselectvalue.includes("Hidden Color Check") || currentselectvalue.includes("Recessive Wind Check") || currentselectvalue.includes("0 White Possibility Check") || currentselectvalue.includes("Hidden Pattern Check") || currentselectvalue.includes("Albino Hidden Colors Check") || currentselectvalue.includes("Albino Hidden Dilutes Check") || currentselectvalue.includes("Albino Pattern Display Check")) {
@@ -522,7 +522,6 @@ function changeButtons() {
                         for (let j = 0; j < buttonsTextArray[i].length; j++) {
                             let button = document.createElement('button');
                             button.textContent = buttonsTextArray[i][j]
-                            console.log(valuesArray)
                             let changeString = "albinoHiddenDilutesChanges('" + valuesArray[i][j] + "')"
                             button.setAttribute("onclick", changeString)
                             buttonsection.appendChild(button)
@@ -535,7 +534,6 @@ function changeButtons() {
                         for (let j = 0; j < buttonsTextArray[i].length; j++) {
                             let button = document.createElement('button');
                             button.textContent = buttonsTextArray[i][j]
-                            console.log(valuesArray)
                             //FIX THIS
                             let changeString = "albinoPatternDisplayChanges('" + valuesArray[i][j] + "')"
                             button.setAttribute("onclick", changeString)
@@ -626,7 +624,6 @@ function patternSubmit() {
             twogenes += hiddenPatternTypeArray[i]
         }
     }
-    console.log(twogenes)
     if (count > 2) {
         alert("You should have a maximum of 2 boxes selected! Double check your answers and submit again")
     }
@@ -643,26 +640,19 @@ function patternSubmit() {
 
         }
     }
-    console.log(count)
 }
 
 function zeroWhiteCheckChanges(answer) {
-    console.log(answer[0])
-    console.log(answer[1])
     changeExisting("#white-yes-no-1", answer[0])
     changeExisting("#white-yes-no-2", answer[1])
 }
 
 function albinoHiddenDilutesChanges(answer) {
-    console.log(answer[0])
-    console.log(answer[1])
     changeExisting("#dilute-1", answer[0])
     changeExisting("#dilute-2", answer[1])
 }
 
 function albinoPatternDisplayChanges(answer) {
-    console.log(answer[0])
-    console.log(answer[1])
     changeExisting("#pattern-yes-no-1", answer[0])
     changeExisting("#pattern-yes-no-2", answer[1])
 }
@@ -673,20 +663,50 @@ function hideExamples() {
 }
 
 function changeExamples(example) {
-    console.log(example)
     document.querySelectorAll(".hidden").forEach((el) => {el.classList.remove("shown")})
     if (Array.isArray(example)) {
         for (let i = 0; i<example.length;i++) {
-            console.log(example[i] + "EXAMPLE[i]")
             let examplesearch = document.getElementById(example[i])
             examplesearch.classList.add("shown")
         }
     } 
     else {
-        console.log(example + "EXAMPLE")
         let examplesearch = document.getElementById(example)
         examplesearch.classList.add("shown")
 
     }
 }
 
+function loadStoredCatGene() {
+    let localstorageSetup = localStorage.getItem('geneTesterCatData')
+    localStorage.setItem('geneTesterCatData', "")
+    let localstorageArray = localstorageSetup.split("|")
+
+    let genecodestring = localstorageArray[2]
+    let catgenecodesection = document.querySelector("#genecodefull")
+    catgenecodesection.textContent = genecodestring
+
+
+    let genecode1darray = make1darray(genecodestring)
+    let genecode2darray = make2darray(genecode1darray)
+    
+    initialGenesSetup(genecode2darray)
+    
+    let testList = checkWhatTestsAreNeeded(genecode2darray)
+    changeSelectText(testList)
+
+    changeYourCatName(localstorageArray[0])
+    changeYourCatID(localstorageArray[1])
+
+    
+}
+
+function changeYourCatName(name) {
+    let catnamesection = document.getElementById("yourCatName")
+    catnamesection.innerText = name
+}
+
+function changeYourCatID(ID) {
+    let catIDsection = document.getElementById("yourCatID")
+    catIDsection.innerText = ID
+}

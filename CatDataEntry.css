@@ -51,3 +51,7 @@ body {
     background-color:rgb(90, 33, 87);
     border-color: rgb(17, 17, 17);
 }
+
+#continuetogenetester {
+    padding: 5%;
+}

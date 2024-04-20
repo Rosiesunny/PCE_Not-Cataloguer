@@ -268,12 +268,21 @@ label {
     display: block;
 }
 
+#testcatimage {
+    margin-bottom: 2%;
+    align-items: center;
+}
 
+#testcatimg {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
 
-
-
-
-
+#yourCatName {
+    color:aliceblue;
+    font-size: 140%;
+}
 
 
 
@@ -441,7 +450,6 @@ label {
    .catjail {
     width:100px;
     height:100px;
-    background-image:url(main_assets/watermark_cat.png);
     background-position:var(--cat-watermark) 0;
     overflow:hidden;
     position:relative;
@@ -450,7 +458,6 @@ label {
    .catforum {
     width:100px;
     height:100px;
-    background-image:url(main_assets/watermark_cat.png);
     background-position:var(--cat-watermark) 0;
     overflow:hidden;
     position:relative;
