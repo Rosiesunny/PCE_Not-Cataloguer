@@ -390,7 +390,7 @@ function changeButtons() {
     let buttonsTextArray = [["Nulls Found", "No Nulls Found"], ["Longhairs Found", "No Longhairs Found"], ["Dilutes Found", "No Dilutes Found"], ["Solids Found", "No Solids Found"], ["Orange Cats Found", "No Orange Cats Found", "Black Cats Found", "No Black Cats Found"], ["Mackerel (TT)", "Classic (TM)", "Broken (TS)", "Lynxpoint (TP)"], ["No-whites found", "All cats have white"], ["No White Marks Found", "55% of cats have No White Marks", "9% of cats have No White Marks"], ["Classic Only", "Right and Classic", "Left and Classic", "Piebald and Classic", "Inverse and Classic"],["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"], ["Black and Orange", "Orange Only", "Black Only"], ["All Dilutes", "Half Dilutes", "No Dilutes"], ["1", "2", "3", "4"], ["All Solids", "Half Solids", "No Solids"]] 
     let idsArray = ["Skip (wind)", "#fur-2", "#dilute-2", "#pattern-yes-no-2", "Skip (hidden color check)", "Skip (HIDDEN PATTERN CHECK)", "#white-yes-no-2", "SKIP (0 WHITE POSSIBILITY CHECK)", "#white-type", "#white-level", "Skip (albino hidden colors check)", "Skip (albino hidden dilutes check)", "#density", "skip (albino pattern display check)" ]
     let valuesArray = ["Skip (wind)", ["L", "S"], ["D", "F"], ["N", "Y"], "Skip (hidden color)", "Skip (hidden pattern check)", ["N", "Y"], ["NN", "YN", "YY"], ["C", "R", "L", "P", "I"], ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"], "Skip (albino hidden colors)", ["DD", "FD", "FF"], ["1", "2", "3", "4"], ["NN", "YN", "YY"]]
-    let testCatIDArray = ["skip (wind)", "983", "983", "983", "skip (hidden color checK)", "skip (hidden pattern check)", "983", "skip (0 white possibility check)", "4666", "15075", "skip (albino hidden colors)", "319584", "219202", "219202"]
+    let testCatIDArray = ["skip (wind)", "983", "983", "983", "skip (hidden color checK)", "skip (hidden pattern check)", "983", "skip (0 white possibility check)", "2014", "15075", "skip (albino hidden colors)", "319584", "663", "219202"]
     let examplesArray = ["NullsReference", "LonghairReference", ["Dilutes-BlackGroupReference", "Dilutes-OrangeGroupReference"], "SolidsReference", ["BlackGroupCatsReference", "OrangeGroupCatsReference"], "PatternsReference", "No-WhiteVSWhiteReference", "No-WhiteVSWhiteReference", ["ClassicWhiteTypeFullReference", "PiebaldWhiteTypeFullReference", "LeftWhiteTypeFullReference", "RightWhiteTypeFullReference", "InverseWhiteTypeFullReference"], ["ClassicWhiteTypeFullReference", "PiebaldWhiteTypeFullReference", "LeftWhiteTypeFullReference", "RightWhiteTypeFullReference", "InverseWhiteTypeFullReference"], ["BlackGroupCatsReference", "OrangeGroupCatsReference"], ["Dilutes-BlackGroupReference", "Dilutes-OrangeGroupReference"], "DensityReference", "SolidsReference"]
 
     let currentselect = document.getElementById("testquestion-select")
@@ -504,7 +504,7 @@ function changeButtons() {
                         
                     }
                     if (currentselectvalue.includes("Albino Hidden Colors Check")) {
-                        changeTestCatID("268864")
+                        changeTestCatID("663")
                         changeExamples(["BlackGroupCatsReference", "OrangeGroupCatsReference"])
                         answersection.innerHTML = "[Part 1] Looking for: black cats"
                         resultFoundButton.textContent = "Black cats found"
@@ -697,9 +697,56 @@ function loadStoredCatGene() {
 
     changeYourCatName(localstorageArray[0])
     changeYourCatID(localstorageArray[1])
+    generateYourCatImage(localstorageArray)
+    console.log(localstorageArray)
+
 
     
 }
+
+function generateYourCatImage(localstorageArray) {
+    let imagearea = document.getElementById("yourCatImage")
+    console.log(imagearea)
+    let furlength = localstorageArray[3].toLowerCase()
+    let age = localstorageArray[4].toLowerCase()
+    if (age.includes("kitten")) {
+        age = "kitten"
+    }
+    if (age.includes("adolescent")) {
+        age = "adult"
+    }
+    let baseclass = age + "-" + furlength + "-standing"
+    // main
+    for (let i = 5; i < localstorageArray.length; i++) {
+        // handles main and trade
+        console.log(localstorageArray[i])
+        if (localstorageArray[i].includes("_main_") || localstorageArray[i].includes("_trade_")) {
+            let base = document.createElement("img")
+            if (localstorageArray[i].includes("_main_")) {
+                base.src = "/assets/PCE_Assets/Cat/BaseColors/" + localstorageArray[i]
+            }
+            if (localstorageArray[i].includes("_trade_")) {
+                base.src = "/assets/PCE_Assets/Cat/TradeColors/" + localstorageArray[i]
+            }
+            base.classList.add(baseclass, "cat-base")
+            imagearea.appendChild(base)
+        }
+        if (localstorageArray[i].includes("white_")) {
+            let white = document.createElement("img")
+            white.src = "/assets/PCE_Assets/Cat/WhiteMarkings/" + localstorageArray[i]
+            white.classList.add(baseclass, "cat-white")
+            imagearea.appendChild(white)
+        }
+        if (localstorageArray[i].includes("eyes_")) {
+            let eyes = document.createElement("img")
+            eyes.src = "/assets/PCE_Assets/Cat/Eyes/" + localstorageArray[i]
+            eyes.classList.add(baseclass, "cat-eyes")
+            imagearea.appendChild(eyes)
+        }
+    }
+}
+
+
 
 function changeYourCatName(name) {
     let catnamesection = document.getElementById("yourCatName")

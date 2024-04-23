@@ -327,7 +327,7 @@ function addCat() {
     displayInfo("Known Gene String: ", catGeneString, "GeneString")
 
     // Adding Continue to Gene Testing button
-    geneTestingButton(catGeneString, catWind, catID, catName, catFurLength, catColor[0], catColor[1], catWhiteMarks[2], catWhiteMarks[1], catPattern)
+    geneTestingButton(catGeneString, catWind, catID, catName, catFurLength, catColor[0], catColor[1], catWhiteMarks[2], catWhiteMarks[1], catPattern, catAge)
 
     thisCat.genes = catGeneString;
     thisCat.lastUpdated = Date();
@@ -335,10 +335,10 @@ function addCat() {
     console.log(thisCat);
 }
 
-function geneTestingButton(catGeneString, wind, id, name, furlength, color, colortype, whitelevel, whitetype, pattern) {
+function geneTestingButton(catGeneString, wind, id, name, furlength, color, colortype, whitelevel, whitetype, pattern, age) {
     if (catGeneString) {
         let geneString = geneStringifier(catGeneString)
-        let functionName = "redirectToGeneTesting('" + geneString + "', '" + wind + "', " + id + ", '" + name + "', '" + furlength  + "', '" + color + "', '" + colortype  + "', '" + whitelevel  + "', '" + whitetype + "', '"  + pattern + "')"
+        let functionName = "redirectToGeneTesting('" + geneString + "', '" + wind + "', " + id + ", '" + name + "', '" + furlength  + "', '" + color + "', '" + colortype  + "', '" + whitelevel  + "', '" + whitetype + "', '"  + pattern + "', '" + age + "')"
         if (document.getElementById("continuetogenetester")) {
             let geneTestButton = document.getElementById("continuetogenetester")
             geneTestButton.setAttribute("onclick", functionName)
@@ -376,14 +376,26 @@ function geneStringifier(data) {
     return geneStringText
 }
 
-function redirectToGeneTesting(genestring, wind, id, name, furlength, color, colortype, whitelevel, whitetype, pattern) {
+function redirectToGeneTesting(genestring, wind, id, name, furlength, color, colortype, whitelevel, whitetype, pattern, age) {
+    let colorList = ["Black", "Chocolate", "Brown", "Tan", "Red", "Ginger", "Orange", "Apricot", "Charcoal", "Grey", "Smoke", "Silver", "Buff", "Cream", "Almond", "Beige", "-hidden-"]
+    let colorListFiles = ["black", "choco", "brown", "tan", "red", "ginger", "orange", "aprico", "charc", "grey", "smoke", "silver", "buff", "cream", "almond", "beige", "-hidden-"]
     if (wind == "Null") {
         alert("This cat is Null and can't be bred to be gene tested! Cancelling redirect")
+        return
     }
     else {
-        let geneTesterInfo = name + "|" + id + "|" + genestring + "|" + furlength + "|" + color.split("-")[0].toLowerCase() + "_main_" + pattern.toLowerCase() + ".png|" 
+        let geneTesterInfo = name + "|" + id + "|" + genestring + "|" + furlength + "|" + age + "|"
+        for (let i = 0; i < colorList.length; i++) {
+            if (color.split("-")[0] == colorList[i]) {
+                geneTesterInfo += colorListFiles[i] + "_main_" + pattern.toLowerCase() + ".png|"
+            }
+        }
         if (colortype != "Standard") {
-            geneTesterInfo += color.split("-")[1].toLowerCase() + "_trade_" + pattern.toLowerCase() + ".png|"
+            for (let i = 0; i < colorList.length; i++) {
+                if (color.split("-")[1] == colorList[i]) {
+                    geneTesterInfo += colorListFiles[i] + "_trade_" + pattern.toLowerCase() + ".png|"
+                }
+            }
         }
         let whitetypeletters = ["C", "P", "R", "L", "I"]
         let whitetypenames = ["classic", "piebald", "right", "left", "inverse"]
