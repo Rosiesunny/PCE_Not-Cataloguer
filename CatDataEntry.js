@@ -414,8 +414,6 @@ function redirectToGeneTesting(genestring, wind, id, name, furlength, color, col
         console.log(geneTesterInfo)
         window.open("geneTesting.html", "_self")
     }
-   
-
 }
 
 function displayInfo(name, data, formatter) {

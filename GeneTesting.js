@@ -686,7 +686,6 @@ function loadStoredCatGene() {
     let catgenecodesection = document.querySelector("#genecodefull")
     catgenecodesection.textContent = genecodestring
 
-
     let genecode1darray = make1darray(genecodestring)
     let genecode2darray = make2darray(genecode1darray)
     
@@ -698,15 +697,10 @@ function loadStoredCatGene() {
     changeYourCatName(localstorageArray[0])
     changeYourCatID(localstorageArray[1])
     generateYourCatImage(localstorageArray)
-    console.log(localstorageArray)
-
-
-    
 }
 
 function generateYourCatImage(localstorageArray) {
     let imagearea = document.getElementById("yourCatImage")
-    console.log(imagearea)
     let furlength = localstorageArray[3].toLowerCase()
     let age = localstorageArray[4].toLowerCase()
     if (age.includes("kitten")) {
@@ -745,8 +739,6 @@ function generateYourCatImage(localstorageArray) {
         }
     }
 }
-
-
 
 function changeYourCatName(name) {
     let catnamesection = document.getElementById("yourCatName")
