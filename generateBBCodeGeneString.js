@@ -1,14 +1,5 @@
-function generateBBCodeGeneString(genestring) {
-
-
-    // currently this grabs the gene string from the gene testing page's dedicated box to hold the gene code, if used on other pages we have to alter how the gene code is obtained
-    let genestring = document.getElementById("genecodefull").innerText
-
+function generateBBCodeGeneString(genestring, locationID) {
     // https://www.geeksforgeeks.org/how-to-create-popup-box-using-html-and-css/#
-
-
-
-
     let genestringArray = genestring.split("]")
     for (let i = 0; i < genestringArray.length; i++) {
         genestringArray[i] = genestringArray[i].split("[")[1]
@@ -29,8 +20,55 @@ function generateBBCodeGeneString(genestring) {
     genestringText += "[" + genestringArray[6] + "] [" + genestringArray[7] + "][/font]"
     console.log(genestringText)
 
-    return genestringText
+    popupWindow(genestringText, locationID)
 }
+
+function popupWindow(genestringText, locationID) {
+    let location = document.getElementById(locationID)
+    location.innerHTML = ""
+    location.classList.add("showbbcodebox")
+    location.classList.remove("hidebbcodebox")
+
+    let popupContainer = document.createElement("div")
+    popupContainer.classList.add("popupcontainer")
+
+    let popupGenes = document.createElement("textarea")
+    popupGenes.classList.add("popupGenes")
+    popupGenes.innerText = genestringText
+
+    let popupX = document.createElement("button")
+    popupX.classList.add("xbutton")
+    popupX.innerText = "x"
+    popupX.setAttribute("onclick", "exitBBCodeBox('bbcodebox')")
+
+    let copyButton = document.createElement("button")
+    copyButton.classList.add("copybutton")
+    copyButton.innerText = "Copy to Clipboard"
+
+    copyButton.setAttribute("onclick", "copyClipboard('.popupGenes')")
+
+
+    popupContainer.appendChild(popupX)
+    popupContainer.appendChild(popupGenes)
+    popupContainer.appendChild(copyButton)
+    location.appendChild(popupContainer)
+    
+
+}
+
+function exitBBCodeBox(locationID) {
+    let location = document.getElementById(locationID)
+    location.classList.remove("showbbcodebox")
+    location.classList.add("hidebbcodebox")
+    location.innerHTML = ""
+}
+
+function copyClipboard(locationID) {
+    let copyArea = document.querySelector(locationID)
+    navigator.clipboard.writeText(copyArea.value)
+    alert("Copied text: " + copyArea.value)
+}
+
 
 function switchWindBBCode(gene) {
     switch(gene) {

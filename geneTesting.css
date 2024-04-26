@@ -132,7 +132,7 @@ div {
     width: 15%;
 }
 
-button {
+.answerbutton {
     background-color: rgb(227, 238, 241); /* Green background */
     color: rgb(15, 57, 73); /* White text */
     padding: 3% 3%; /* Some padding */

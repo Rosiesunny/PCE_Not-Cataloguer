@@ -1,0 +1,59 @@
+.popupcontainer {
+    background-color:rgb(80, 223, 228);
+    width: 100%;
+    border-radius: 5%;
+}
+
+.copybutton {
+    padding: 5%;
+    font-size: 150%;
+    margin-left: 5%;
+    border-radius: 5%;
+}
+
+
+.popupGenes {
+    background-color:rgba(195, 255, 255, 0.651);
+    font-size: 120%;
+    word-wrap:break-word;
+    width: 90%;
+    height: 300px;
+    margin: 5%;
+    resize: none;
+}
+
+.xbutton {
+    background-color: rgb(236, 58, 73);
+    float: right;
+    font-size: 200%;
+    padding: 2%;
+    padding-left: 6%;
+    padding-right: 6%;
+    border-radius: 20%;
+    
+}
+
+#bbcodebox {
+    background-color: rgba(3, 10, 12, 0.925);
+    height: 60%;
+    width: 60%;
+    margin-left: 17%;
+    margin-top: 10%;
+    align-items: center;
+    justify-content: center;
+    inset: 0;
+    position: fixed;
+    z-index: 1;
+    left: 0%;
+    border-radius: 5%;
+}
+
+
+
+.showbbcodebox {
+    display: flex;
+}
+
+.hidebbcodebox {
+    display: none;
+}

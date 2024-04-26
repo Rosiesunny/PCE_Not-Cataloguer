@@ -3,12 +3,14 @@
 <html lang="en">
     <head>
         <link rel="stylesheet" href = "geneTesting.css">
+        <link rel="stylesheet" href = "generateBBCodeGeneString.css">
         <link rel="icon" href ="favicon.ico">
     </head>
     <body onload = "loadStoredCatGene()">
         <script src="./init_village.js"></script>
         <script src="./GeneTesting.js"></script>
         <script src="./save_village.js"></script>
+        <script src="./generateBBCodeGeneString.js"></script>
         <div id = "container">
             <a href = "index.html"><img src = "assets/pce_not-cataloguer_logo.png" id = "logo" alt = "Home Button" style = "padding-left: 0; max-width: 4%"></a>
             <div class = "btn-group">
@@ -20,6 +22,8 @@
                         Your Cat's ID # <div id = "yourCatID">???</div>
                         <div id = "currentlyknowngenes">Currently Known Genes:</div>
                         <div id = "genecodefull">???</div>
+                        <button id = "bbcodebutton" onclick="generateBBCodeGeneString(document.getElementById('genecodefull').innerText, 'bbcodebox')">Generate BBCode</button>
+                        <div id = "bbcodebox" class = "hidebbcodebox"></div>
                     </div>
                 </div>
                 <div class = "col2"> 

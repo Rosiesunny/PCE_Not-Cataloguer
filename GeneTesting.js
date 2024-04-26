@@ -405,6 +405,8 @@ function changeButtons() {
     let resultNotFoundButton = document.createElement('button');
     resultFoundButton.textContent = "Result Found" 
     resultNotFoundButton.textContent = "Result Not Found"
+    resultFoundButton.classList.add("answerbutton")
+    resultNotFoundButton.classList.add("answerbutton")
     if (currentselectvalue == "Select Test") {
         buttonsection.innerHTML = "Select a test to start"
         changeTestCatID("???")
@@ -473,6 +475,7 @@ function changeButtons() {
                         for (let j = 0; j < buttonsTextArray[i].length; j++) {
                             let button = document.createElement('button');
                             button.textContent = buttonsTextArray[i][j]
+                            button.classList.add("answerbutton")
                             let changeString = "zeroWhiteCheckChanges('" + valuesArray[i][j] + "')"
                             button.setAttribute("onclick", changeString)
                             buttonsection.appendChild(button)
@@ -498,6 +501,7 @@ function changeButtons() {
                         }
                         let button = document.createElement('button');
                         button.textContent = "Submit"
+                        button.classList.add("answerbutton")
                         button.setAttribute("onclick", "patternSubmit()")
                         button.id = "submitHiddenPattern"
                         buttonsection.appendChild(button)
@@ -522,6 +526,7 @@ function changeButtons() {
                         for (let j = 0; j < buttonsTextArray[i].length; j++) {
                             let button = document.createElement('button');
                             button.textContent = buttonsTextArray[i][j]
+                            button.classList.add("answerbutton")
                             let changeString = "albinoHiddenDilutesChanges('" + valuesArray[i][j] + "')"
                             button.setAttribute("onclick", changeString)
                             buttonsection.appendChild(button)
@@ -534,7 +539,7 @@ function changeButtons() {
                         for (let j = 0; j < buttonsTextArray[i].length; j++) {
                             let button = document.createElement('button');
                             button.textContent = buttonsTextArray[i][j]
-                            //FIX THIS
+                            button.classList.add("answerbutton")
                             let changeString = "albinoPatternDisplayChanges('" + valuesArray[i][j] + "')"
                             button.setAttribute("onclick", changeString)
                             buttonsection.appendChild(button)
@@ -567,6 +572,7 @@ function changeButtons() {
                     for (let j = 0; j < buttonsTextArray[i].length; j++) {
                         let button = document.createElement('button');
                         button.textContent = buttonsTextArray[i][j]
+                        button.classList.add("answerbutton")
                         let changeString = "changeExisting('" + idsArray[i] + "', '" + valuesArray[i][j] + "')"
                         button.setAttribute("onclick", changeString)
                         buttonsection.appendChild(button)
@@ -589,6 +595,8 @@ function albinoColorSubmitPart1(answer) {
         let buttonsection = document.getElementById('button-section')
         let resultFoundButton = document.createElement('button');
         let resultNotFoundButton = document.createElement('button');
+        resultFoundButton.classList.add("answerbutton")
+        resultNotFoundButton.classList.add("answerbutton")
         buttonsection.innerHTML = ""
         answersection.innerHTML = ""
         changeTestCatID("227123")
