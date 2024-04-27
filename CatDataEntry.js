@@ -410,6 +410,9 @@ function redirectToGeneTesting(genestring, wind, id, name, furlength, color, col
                 }
             }
         }
+        if (whitelevel == "-hidden-") {
+            geneTesterInfo += "eyes_neutral.png"
+        }
         localStorage.setItem('geneTesterCatData', geneTesterInfo)
         console.log(geneTesterInfo)
         window.open("geneTesting.html", "_self")
