@@ -38,6 +38,15 @@ function changeExisting(ID, value) {
     changeGenes(ID, value)
     for (let i = 0; i<idarray.length; i++) {
         if (idarray[i] == ID) {
+            if (value == "10") { // fixing the 10 white error where it cuts out the white type
+               value = value + genecodetext[33]
+               let stringtemp1 = genecodetext.slice(0, 33)
+               let stringtemp2 = genecodetext.split(stringtemp1)[1]
+               genecodetext = stringtemp1 + "]" + stringtemp2
+            }
+            if (genecodetext.includes("10") && (ID.includes("#white-type"))) {
+                positionarray[i] = positionarray[i]+1
+            }
             genecodetext = replaceAt(genecodetext, positionarray[i], value)
             genecodefull.innerText = genecodetext
             // MAKE IT SAVE OVER THE GENE CODE HERE AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
