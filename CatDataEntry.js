@@ -15,6 +15,9 @@ function addCat() {
 
     // catPageInfoINITIAL is an array of the lines of the input
     let catPageInfoINITIAL = textBoxEntry.value.split("\n");
+    
+    
+    console.log(catPageInfoINITIAL)
 
     // Get travelling vs. active before we chop off the rest of the unneeded text
     let catVillageRole = checkForTravelingText(catPageInfoINITIAL) ?? "";
@@ -23,6 +26,8 @@ function addCat() {
     // DEBUG: console.log(catPageInfoINITIAL)
     // Crops page info to the section we're concerned with
     let catPageInfoFull = ensmallenCatPageInfo(catPageInfoINITIAL);
+
+    console.log(catPageInfoFull)
 
     // Checks input validity - exits if invalid input
     if (catPageInfoFull == "no name found") {
@@ -34,9 +39,14 @@ function addCat() {
 
     // Grab sections
     let catPageInfo = catPageInfoFull[0];
+
+    console.log(catPageInfo)
+
     let familyFriendsInfo = catPageInfoFull[1];
     let biographyInfo = catPageInfoFull[2];
     let checkpointArray = getDataCheckpoints(catPageInfo);
+
+    console.log(checkpointArray)
 
     // DEBUG: console.log(catPageInfo)
     // DEBUG: console.log(familyFriendsInfo)
@@ -698,6 +708,11 @@ function getDataCheckpoints(dataArray) {
             case -7: 
                 currentLine = lineNum+9 // just in case buffer -1
                 searchNums[i+1] = lineNum+2  // because it's -1/line after, we add 1 to line
+                // firefox mobile fix
+                if (dataArray[searchNums[i+1]].includes("d")) {
+                    searchNums[i+1] = lineNum+1
+                    currentLine = lineNum+4
+                }
                 break
             case -8: 
                 if (searchNums[i] == "Friends") {
