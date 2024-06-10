@@ -218,8 +218,8 @@ div {
 }
 
 .checkboxes {
-    padding: 0px;
-    height:0.7vw;
+    padding: 10px;
+    height:0.9vw;
     background-color: darkviolet;
     margin: 3%;
     margin-right: 5%;
@@ -230,17 +230,16 @@ input.checkboxes {
 }
 
 #outerdiv {
-    border-radius: 5%;
+    border-radius: 10%;
     color: white;
     background-color:rgba(15, 57, 73, 0.432);
     margin-bottom: 2%;
-    padding: 0px;
-    height:fit-content;
+    padding: 2px;
 }
 
 label {
     padding-left: 0px;
-    font-size: 2rem;
+    font-size: 1.3rem;
 }
 
 #hidden {
