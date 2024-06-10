@@ -219,6 +219,8 @@ div {
 
 .checkboxes {
     padding: 30%;
+    height:15px;
+    width:15px;
     background-color: darkviolet;
     margin: 3%;
     margin-right: 5%;
