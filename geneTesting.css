@@ -219,7 +219,7 @@ div {
 
 .checkboxes {
     padding: 10px;
-    height:0.9vw;
+    height:0.9em;
     background-color: darkviolet;
     margin: 3%;
     margin-right: 5%;
@@ -235,11 +235,12 @@ input.checkboxes {
     background-color:rgba(15, 57, 73, 0.432);
     margin-bottom: 2%;
     padding: 2px;
+    max-height: 25%;
 }
 
 label {
     padding-left: 0px;
-    font-size: 1.3rem;
+    font-size: 0.9em;
 }
 
 #hidden {
