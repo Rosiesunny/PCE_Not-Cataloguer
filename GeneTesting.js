@@ -739,17 +739,17 @@ function generateYourCatImage(localstorageArray) {
         if (localstorageArray[i].includes("_main_") || localstorageArray[i].includes("_trade_")) {
             let base = document.createElement("img")
             if (localstorageArray[i].includes("_main_")) {
-                base.src = "assets/PCE_Assets/Cat/BaseColors/" + localstorageArray[i]
+                base.src = "assets/PCE_Assets/Cat/Not-Cat/BaseColors/" + localstorageArray[i]
             }
             if (localstorageArray[i].includes("_trade_")) {
-                base.src = "assets/PCE_Assets/Cat/TradeColors/" + localstorageArray[i]
+                base.src = "assets/PCE_Assets/Cat/Not-Cat/TradeColors/" + localstorageArray[i]
             }
             base.classList.add(baseclass, "cat-base")
             imagearea.appendChild(base)
         }
         if (localstorageArray[i].includes("white_")) {
             let white = document.createElement("img")
-            white.src = "assets/PCE_Assets/Cat/WhiteMarkings/" + localstorageArray[i]
+            white.src = "assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/" + localstorageArray[i]
             white.classList.add(baseclass, "cat-white")
             imagearea.appendChild(white)
         }

@@ -40,10 +40,10 @@ function imageUpdate(){
             eyesUpdate(catWhitemarks,"eyes")
         }
     }
-    var blankLink="assets/PCE_Assets/Cat/blank.png";
+    var blankLink="assets/PCE_Assets/Cat/Not-Cat/blank.png";
     
-    var colorLink="assets/PCE_Assets/Cat/BaseColors/"+catColor+"_main_"+catPattern+".png";
-    var whiteLink="assets/PCE_Assets/Cat/WhiteMarkings/white_"+catWhitetype+"_"+catWhitemarks+".png";
+    var colorLink="assets/PCE_Assets/Cat/Not-Cat/BaseColors/"+catColor+"_main_"+catPattern+".png";
+    var whiteLink="assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_"+catWhitetype+"_"+catWhitemarks+".png";
     if(catColortype=='pat'){
         switch(catColor){
             case "black":
@@ -97,7 +97,7 @@ function imageUpdate(){
             default:
                 break;
             }
-        var tradeLink="assets/PCE_Assets/Cat/TradeColors/"+catTradeColor+"_trade_"+catPattern+".png";
+        var tradeLink="assets/PCE_Assets/Cat/Not-Cat/TradeColors/"+catTradeColor+"_trade_"+catPattern+".png";
         }
     else if(catColortype=='tor'){
         switch(catColor){
@@ -152,7 +152,7 @@ function imageUpdate(){
             default:
                 break;
         }
-        var tradeLink="assets/PCE_Assets/Cat/TradeColors/"+catTradeColor+"_trade_"+catPattern+".png";
+        var tradeLink="assets/PCE_Assets/Cat/Not-Cat/TradeColors/"+catTradeColor+"_trade_"+catPattern+".png";
     }
 
     var oldClothesClass="cat-clothes";
