@@ -708,11 +708,16 @@ function getDataCheckpoints(dataArray) {
             case -7: 
                 currentLine = lineNum+9 // just in case buffer -1
                 searchNums[i+1] = lineNum+2  // because it's -1/line after, we add 1 to line
+                let temp = dataArray[searchNums[i+1]]
                 // firefox mobile fix
-                if (dataArray[searchNums[i+1]].includes("d")) {
-                    searchNums[i+1] = lineNum+1
-                    currentLine = lineNum+4
+                if (temp) {
+                    if (temp.includes("d")) {
+                        searchNums[i+1] = lineNum+1
+                        console.log("ran firefox ipad fix")
+                        currentLine = lineNum+4
+                    }
                 }
+                
                 break
             case -8: 
                 if (searchNums[i] == "Friends") {

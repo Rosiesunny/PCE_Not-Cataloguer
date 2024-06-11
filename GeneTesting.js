@@ -567,10 +567,15 @@ function changeButtons() {
                             changeExamples(whiteResultArray)
                         }
                         else {
+                            let whitefound = false
                             for (let i = 0; i < whitereferencearray.length; i++) {
                                 if (whitetype == whitereferencearray[i]) {
                                     changeExamples(["ClassicWhiteTypeFullReference", whiteResultArray[i]])
+                                    whitefound = true
                                 }
+                            }
+                            if (whitefound == false) {
+                                changeExamples("ClassicWhiteTypeFullReference")
                             }
                         }
                     }
