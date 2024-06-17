@@ -17,7 +17,7 @@ function generateBBCodeGeneString(genestring, locationID) {
     else {
         genestringText += genestringArray[5][2] + switchWhiteTypeBBCode(genestringArray[5][3]) + "] "
     }
-    genestringText += "[" + genestringArray[6] + "] [" + genestringArray[7] + "][/font]"
+    genestringText += "[" + genestringArray[6] + "] [" + switchAccentColorBBCode(genestringArray[7][0]) + switchAccentColorBBCode(genestringArray[7][1]) + "][/font]"
     console.log(genestringText)
 
     popupWindow(genestringText, locationID)
@@ -141,5 +141,18 @@ function switchWhiteTypeBBCode(gene) {
             return "[color=yellow]I[/color]"
         case "?":
             return "?"
+    }
+}
+
+function switchAccentColorBBCode(gene) {
+    switch(gene) {
+        case "B":
+            return "[color=blue]B[/color]"
+        case "R":
+            return "[color=red]R[/color]"
+        case "Y":
+            return "[color=yellow]Y[/color]"
+        case "L":
+            return "[color=grey]L[/color]"
     }
 }
