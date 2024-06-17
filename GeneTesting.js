@@ -27,10 +27,10 @@ function checkTextGeneString() {
 
 
 function changeExisting(ID, value) {
-    let idarray = ["#wind-1", "#wind-2", "#fur-1", "#fur-2", "#color-1", "#color-2", "#dilute-1", "#dilute-2", "#density", "#pattern-yes-no-1", "#pattern-yes-no-2", "#pattern-1", "#pattern-2", "#white-yes-no-1", "#white-yes-no-2", "#white-level", "#white-type"]
-    let positionarray = [5, 6, 10, 11, 15, 16, 17, 18, 19, 23, 24, 25, 26, 30, 31, 32, 33]
+    let idarray = ["#species", "#wind-1", "#wind-2", "#fur-1", "#fur-2", "#color-1", "#color-2", "#dilute-1", "#dilute-2", "#density", "#pattern-yes-no-1", "#pattern-yes-no-2", "#pattern-1", "#pattern-2", "#white-yes-no-1", "#white-yes-no-2", "#white-level", "#white-type", "#accent-color-1", "#accent-color-2"]
+    let positionarray = [1, 5, 6, 10, 11, 15, 16, 17, 18, 19, 23, 24, 25, 26, 30, 31, 32, 33, 42, 43]
     // matching up positions with the official gene code array in cat storage data
-    let plainpositionarray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
+    let plainpositionarray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 20, 21]
     let catID = document.getElementById("yourCatID").innerText
 
     let genecodefull = document.getElementById("genecodefull")
@@ -83,13 +83,15 @@ function make1darray(textgenes) {
 }
 
 function make2darray(sections) {
-    let newsectionsstart = ["C"]
+    let newsectionsstart = arrayensmallen(sections[0])
     let array1 = arrayensmallen(sections[1])
     let array2 = arrayensmallen(sections[2])
     let array3 = arrayensmallen(sections[3])
     let array4 = arrayensmallen(sections[4])
     let array5 = arrayensmallen(sections[5], true)
-    let newsections = [newsectionsstart, array1, array2, array3, array4, array5]
+    let array6 = arrayensmallen(sections[6])
+    let array7 = arrayensmallen(sections[7])
+    let newsections = [newsectionsstart, array1, array2, array3, array4, array5, array6, array7]
     return newsections
 }
 
@@ -113,7 +115,7 @@ function arrayensmallen(gene, check) {
 
 function checkWhatTestsAreNeeded(array) {
     let testsneededstring = ""
-    if (array[1][0] == "O") {
+    if (array[1][0] == "O" && array[1][1] == "O") {
         alert("This cat is null and cannot be gene tested! If you want to know its hidden genes, you have to use a Family Tree on the cat")
         return // don't run tests, the cat is null it cannot breed
     }
@@ -189,6 +191,9 @@ function checkWhatTestsAreNeeded(array) {
     if (array[5][2] == "?") {
         testsneededstring += "Hidden White Level Check|"
     }
+    if (array[7][0] == "?") {
+        testsneededstring += "Hidden Accent Color Check|"
+    }
     
     let testsNeeded = testsneededstring.split("|")
     testsNeeded.pop()
@@ -203,6 +208,15 @@ function changeGenes(ID, value) {
         changeDescText(ID, "Unknown")
     }
     switch(ID) {
+        case "#species":
+            switch(value) {
+                case "C":
+                    changeDescText(ID, "Not-Cat")
+                    break;
+                case "M":
+                    changeDescText(ID, "Mercat")
+                    break;
+            }
         case "#wind-1":
         case "#wind-2":
             switch(value) {
@@ -251,7 +265,6 @@ function changeGenes(ID, value) {
             }
             break
         case "#density":
-            // for some reason trying to simplify this to just value + "/4 Color Density" completely breaks the rest of the program and it thinks the rest of the IDs are all density?? so manual way Ig
             changeDescText(ID, value+ "/4 Color Density")
             break
         case "#pattern-yes-no-1":
@@ -315,6 +328,22 @@ function changeGenes(ID, value) {
                     break; 
             }
             break
+        case "#accent-color-1":
+        case "#accent-color-2":
+            switch(value) {
+                case "R":
+                    changeDescText(ID, "Red")
+                    break;
+                case "B":
+                    changeDescText(ID, "Blue")
+                    break;
+                case "Y":
+                    changeDescText(ID, "Yellow")
+                    break;
+                case "L":
+                    changeDescText(ID, "Black")
+                    break;
+            }
     }
 }
 
@@ -326,7 +355,7 @@ function changeDescText(ID, value) {
 }
 
 function initialGenesSetup(genes) {
-    //skipping species for now bc it's always not-cat
+    changeGenes("#species", genes[0][0])
     changeGenes("#wind-1", genes[1][0])
     changeGenes("#wind-2", genes[1][1])
     changeGenes("#fur-1", genes[2][0])
@@ -344,6 +373,8 @@ function initialGenesSetup(genes) {
     changeGenes("#white-yes-no-2", genes[5][1])
     changeGenes("#white-level", genes[5][2])
     changeGenes("#white-type", genes[5][3])
+    changeGenes("#accent-color-1", genes[7][0])
+    changeGenes("#accent-color-2", genes[7][1])
 }
 
 function changeSelectText(alltests) {
@@ -394,19 +425,24 @@ function changeTestCatID(ID) {
 
 function changeButtons() {
     hideExamples()
-    let testTypesArray = ["Recessive Wind Check", "Recessive Fur Length Check", "Recessive Dilute Check", "Recessive Solid Check", "Hidden Color Check", "Hidden Pattern Check", "Recessive No-White Check", "0 White Possibility Check", "Hidden White Type Check", "Hidden White Level Check", "Albino Hidden Colors Check", "Albino Hidden Dilutes Check", "Albino Hidden Densities Check", "Albino Pattern Display Check"]
-    let lookingForArray = ["Any Null cats", "Any Longhair cats", "Any Dilute cats", "Any Solid cats", ["Any Black cats", "Any Orange cats"], "Check off seen patterns", "Any No-white cats", "Select how many cats are no-white", "Select white type from reference", "Mark highest white level found", "(hidden albino colors)", "Check what percentage of offspring are dilutes", "Select the lowest value density found", "Check what percentage of offspring are solid"]
-    let buttonsTextArray = [["Nulls Found", "No Nulls Found"], ["Longhairs Found", "No Longhairs Found"], ["Dilutes Found", "No Dilutes Found"], ["Solids Found", "No Solids Found"], ["Orange Cats Found", "No Orange Cats Found", "Black Cats Found", "No Black Cats Found"], ["Mackerel (TT)", "Classic (TM)", "Broken (TS)", "Lynxpoint (TP)"], ["No-whites found", "All cats have white"], ["No White Marks Found", "55% of cats have No White Marks", "9% of cats have No White Marks"], ["Classic Only", "Right and Classic", "Left and Classic", "Piebald and Classic", "Inverse and Classic"],["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"], ["Black and Orange", "Orange Only", "Black Only"], ["All Dilutes", "Half Dilutes", "No Dilutes"], ["1", "2", "3", "4"], ["All Solids", "Half Solids", "No Solids"]] 
-    let idsArray = ["Skip (wind)", "#fur-2", "#dilute-2", "#pattern-yes-no-2", "Skip (hidden color check)", "Skip (HIDDEN PATTERN CHECK)", "#white-yes-no-2", "SKIP (0 WHITE POSSIBILITY CHECK)", "#white-type", "#white-level", "Skip (albino hidden colors check)", "Skip (albino hidden dilutes check)", "#density", "skip (albino pattern display check)" ]
-    let valuesArray = ["Skip (wind)", ["L", "S"], ["D", "F"], ["N", "Y"], "Skip (hidden color)", "Skip (hidden pattern check)", ["N", "Y"], ["NN", "YN", "YY"], ["C", "R", "L", "P", "I"], ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"], "Skip (albino hidden colors)", ["DD", "FD", "FF"], ["1", "2", "3", "4"], ["NN", "YN", "YY"]]
-    let testCatIDArray = ["skip (wind)", "983", "983", "983", "skip (hidden color checK)", "skip (hidden pattern check)", "983", "skip (0 white possibility check)", "2014", "15075", "skip (albino hidden colors)", "319584", "663", "219202"]
+    let testTypesArray = ["Recessive Wind Check", "Recessive Fur Length Check", "Recessive Dilute Check", "Recessive Solid Check", "Hidden Color Check", "Hidden Pattern Check", "Recessive No-White Check", "0 White Possibility Check", "Hidden White Type Check", "Hidden White Level Check", "Albino Hidden Colors Check", "Albino Hidden Dilutes Check", "Albino Hidden Densities Check", "Albino Pattern Display Check", "Hidden Accent Color Check"]
+    let lookingForArray = ["Any Null cats", "Any Longhair cats", "Any Dilute cats", "Any Solid cats", ["Any Black cats", "Any Orange cats"], "Check off seen patterns", "Any No-white cats", "Select how many cats are no-white", "Select white type from reference", "Mark highest white level found", "(hidden albino colors)", "Check what percentage of offspring are dilutes", "Select the lowest value density found", "Check what percentage of offspring are solid", "Check off seen accent colors"]
+    let buttonsTextArray = [["Nulls Found", "No Nulls Found"], ["Longhairs Found", "No Longhairs Found"], ["Dilutes Found", "No Dilutes Found"], ["Solids Found", "No Solids Found"], ["Orange Cats Found", "No Orange Cats Found", "Black Cats Found", "No Black Cats Found"], ["Mackerel (TT)", "Classic (TM)", "Broken (TS)", "Lynxpoint (TP)"], ["No-whites found", "All cats have white"], ["No cats have White Marks", "55% of cats don't have White Marks", "9% of cats don't have White Marks"], ["Classic Only", "Right and Classic", "Left and Classic", "Piebald and Classic", "Inverse and Classic"],["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"], ["Black and Orange", "Orange Only", "Black Only"], ["All Dilutes", "Half Dilutes", "No Dilutes"], ["1", "2", "3", "4"], ["All Solids", "Half Solids", "No Solids"], ["Blue (BB))", "Violet (BR)", "Green (BY)", "Indigo (BL)"]] 
+    let idsArray = ["Skip (wind)", "#fur-2", "#dilute-2", "#pattern-yes-no-2", "Skip (hidden color check)", "Skip (HIDDEN PATTERN CHECK)", "#white-yes-no-2", "SKIP (0 WHITE POSSIBILITY CHECK)", "#white-type", "#white-level", "Skip (albino hidden colors check)", "Skip (albino hidden dilutes check)", "#density", "skip (albino pattern display check)", "skip (hidden accent color check)"]
+    let valuesArray = ["Skip (wind)", ["L", "S"], ["D", "F"], ["N", "Y"], "Skip (hidden color)", "Skip (hidden pattern check)", ["N", "Y"], ["NN", "YN", "YY"], ["C", "R", "L", "P", "I"], ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"], "Skip (albino hidden colors)", ["DD", "FD", "FF"], ["1", "2", "3", "4"], ["NN", "YN", "YY"], "skip (hidden accent color check)"]
+    let testCatIDArray = ["skip (wind)", "983", "983", "983", "skip (hidden color checK)", "skip (hidden pattern check)", "983", "skip (0 white possibility check)", "2014", "15075", "skip (albino hidden colors)", "319584", "663", "219202", "skip (accent color)but it's 572"]
     let examplesArray = ["NullsReference", "LonghairReference", ["Dilutes-BlackGroupReference", "Dilutes-OrangeGroupReference"], "SolidsReference", ["BlackGroupCatsReference", "OrangeGroupCatsReference"], "PatternsReference", "No-WhiteVSWhiteReference", "No-WhiteVSWhiteReference", ["ClassicWhiteTypeFullReference", "PiebaldWhiteTypeFullReference", "LeftWhiteTypeFullReference", "RightWhiteTypeFullReference", "InverseWhiteTypeFullReference"], ["ClassicWhiteTypeFullReference", "PiebaldWhiteTypeFullReference", "LeftWhiteTypeFullReference", "RightWhiteTypeFullReference", "InverseWhiteTypeFullReference"], ["BlackGroupCatsReference", "OrangeGroupCatsReference"], ["Dilutes-BlackGroupReference", "Dilutes-OrangeGroupReference"], "DensityReference", "SolidsReference"]
 
     let currentselect = document.getElementById("testquestion-select")
+    console.log("changeButtons() ran")
+    console.log(currentselect)
+
 
     let answersection = document.getElementById('answer-section')
     let buttonsection = document.getElementById('button-section')
     let currentselectvalue = currentselect.value
+
+    console.log(currentselectvalue)
     buttonsection.innerHTML = ""
     answersection.innerHTML = ""
 
@@ -425,7 +461,7 @@ function changeButtons() {
             if (currentselectvalue.includes(testTypesArray[i])) {
                 // checking if it's hidden color or recessive wind since they change different values depending on input
                 // hidden pattern type needs its own entry because it has buttons to checkbox and THEN confirm, not just 1 click
-                if (currentselectvalue.includes("Hidden Color Check") || currentselectvalue.includes("Recessive Wind Check") || currentselectvalue.includes("0 White Possibility Check") || currentselectvalue.includes("Hidden Pattern Check") || currentselectvalue.includes("Albino Hidden Colors Check") || currentselectvalue.includes("Albino Hidden Dilutes Check") || currentselectvalue.includes("Albino Pattern Display Check")) {
+                if (currentselectvalue.includes("Hidden Color Check") || currentselectvalue.includes("Recessive Wind Check") || currentselectvalue.includes("0 White Possibility Check") || currentselectvalue.includes("Hidden Pattern Check") || currentselectvalue.includes("Albino Hidden Colors Check") || currentselectvalue.includes("Albino Hidden Dilutes Check") || currentselectvalue.includes("Albino Pattern Display Check") || currentselectvalue.includes("Hidden Accent Color Check") ) {
                     if (currentselectvalue.includes("Hidden Color Check")) {
                         changeExamples(["BlackGroupCatsReference", "OrangeGroupCatsReference"])
                         if (currentselectvalue.includes("(black)")) {
@@ -513,6 +549,32 @@ function changeButtons() {
                         button.classList.add("answerbutton")
                         button.setAttribute("onclick", "patternSubmit()")
                         button.id = "submitHiddenPattern"
+                        buttonsection.appendChild(button)
+                    }
+                    if (currentselectvalue.includes("Hidden Accent Color Check")) {
+                        answersection.innerHTML = "Looking for: " + lookingForArray[i]
+                        changeTestCatID("572")
+                        //ADD IN EXAMPLES HERE WHEN THEY ARE DONE
+                        changeExamples("AccentsReference")
+                        for (let j = 0; j < buttonsTextArray[i].length; j++) {
+                            let outerdiv = document.createElement('div')
+                            outerdiv.id = "outerdiv"
+                            let checkbox = document.createElement('input')
+                            checkbox.type = "checkbox"
+                            checkbox.id = "idthing"
+                            checkbox.classList.add("checkboxes")
+                            let label = document.createElement('label')
+                            labelFor = "idthing"
+                            label.appendChild(document.createTextNode(buttonsTextArray[i][j]))
+                            outerdiv.appendChild(checkbox)
+                            outerdiv.appendChild(label)
+                            buttonsection.appendChild(outerdiv)
+                        }
+                        let button = document.createElement('button');
+                        button.textContent = "Submit"
+                        button.classList.add("answerbutton")
+                        button.setAttribute("onclick", "accentSubmit()")
+                        button.id = "submitHiddenAccent"
                         buttonsection.appendChild(button)
                         
                     }
@@ -659,7 +721,34 @@ function patternSubmit() {
             //twogenes[0] is pattern 1, twogenes[1] is pattern 2
             changeExisting("#pattern-1", twogenes[0])
             changeExisting("#pattern-2", twogenes[1])
+        }
+    }
+}
 
+function accentSubmit() {
+    let checkboxes = document.querySelectorAll(".checkboxes")
+    let count = 0;
+    let hiddenPatternTypeArray = ["B", "R", "Y", "L"]
+    let twogenes = ""
+    for (let i = 0; i<checkboxes.length; i++) {
+        if (checkboxes[i].checked == true) {
+            count = count+1
+            twogenes += hiddenPatternTypeArray[i]
+        }
+    }
+    if (count > 2) {
+        alert("You should have a maximum of 2 boxes selected! Double check your answers and submit again")
+    }
+    else {
+        if (count == 1) {
+            //twogenes is applied for both pattern 1 and 2
+            changeExisting("#accent-color-1", twogenes)
+            changeExisting("#accent-color-2", twogenes)
+        }
+        if (count == 2) {
+            //twogenes[0] is pattern 1, twogenes[1] is pattern 2
+            changeExisting("#accent-color-1", twogenes[0])
+            changeExisting("#accent-color-2", twogenes[1])
         }
     }
 }
@@ -705,11 +794,14 @@ function loadStoredCatGene() {
     let localstorageArray = localstorageSetup.split("|")
 
     let genecodestring = localstorageArray[2]
+    console.log(genecodestring)
     let catgenecodesection = document.querySelector("#genecodefull")
     catgenecodesection.textContent = genecodestring
 
     let genecode1darray = make1darray(genecodestring)
     let genecode2darray = make2darray(genecode1darray)
+
+    console.log(genecode2darray)
     
     initialGenesSetup(genecode2darray)
     
@@ -725,31 +817,45 @@ function generateYourCatImage(localstorageArray) {
     let imagearea = document.getElementById("yourCatImage")
     let furlength = localstorageArray[3].toLowerCase()
     let age = localstorageArray[4].toLowerCase()
+    let species = localstorageArray[5]
+    let speciesAbbreviation = species.toLowerCase()[0]
+    if (species == "Not-cat") {
+        species = "Not-Cat"
+        speciesAbbreviation = "c"
+    }
+    
+    // not sure why I have this here but I assume something was breaking in the past to cause me to do something this redundant
     if (age.includes("kitten")) {
         age = "kitten"
     }
     if (age.includes("adolescent")) {
         age = "adult"
     }
-    let baseclass = age + "-" + furlength + "-standing"
+    let baseclass = speciesAbbreviation + "-" + age + "-" + furlength + "-standing"
     // main
-    for (let i = 5; i < localstorageArray.length; i++) {
+    for (let i = 6; i < localstorageArray.length; i++) {
         // handles main and trade
         console.log(localstorageArray[i])
         if (localstorageArray[i].includes("_main_") || localstorageArray[i].includes("_trade_")) {
             let base = document.createElement("img")
             if (localstorageArray[i].includes("_main_")) {
-                base.src = "assets/PCE_Assets/Cat/Not-Cat/BaseColors/" + localstorageArray[i]
+                base.src = "assets/PCE_Assets/Cat/" + species + "/BaseColors/" + localstorageArray[i]
             }
             if (localstorageArray[i].includes("_trade_")) {
-                base.src = "assets/PCE_Assets/Cat/Not-Cat/TradeColors/" + localstorageArray[i]
+                base.src = "assets/PCE_Assets/Cat/" + species + "/TradeColors/" + localstorageArray[i]
             }
             base.classList.add(baseclass, "cat-base")
             imagearea.appendChild(base)
         }
+        if (localstorageArray[i].includes("accent_")) {
+            let accent = document.createElement("img")
+            accent.src = "assets/PCE_Assets/Cat/" + species + "/AccentColors/" + localstorageArray[i]
+            accent.classList.add(baseclass, "cat-base")
+            imagearea.appendChild(accent)
+        }
         if (localstorageArray[i].includes("white_")) {
             let white = document.createElement("img")
-            white.src = "assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/" + localstorageArray[i]
+            white.src = "assets/PCE_Assets/Cat/" + species + "/WhiteMarkings/" + localstorageArray[i]
             white.classList.add(baseclass, "cat-white")
             imagearea.appendChild(white)
         }

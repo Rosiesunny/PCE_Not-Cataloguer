@@ -481,135 +481,269 @@ label {
     max-width:100px;
     max-height:100px
    }
-   .cat-base {
+   .cat-base{
     position:absolute;
     z-index:3
-   }
-   .cat-white {
+    }
+    .cat-white{
     position:absolute;
     z-index:4
-   }
-   .cat-eyes {
+    }
+    .cat-eyes{
     position:absolute;
     z-index:5
-   }
-   .adult-shorthair-sitting {
+    }
+    .cat-clothes{
+    position:absolute;
+    z-index:6
+    }
+    .avatar-cat-clothes{
+    position:absolute;
+    z-index:6
+    }
+    .cat-link-topper{
+    z-index:7;
+    position:absolute;
+    left:0;
+    right:0
+    }
+    .c-adult-shorthair-sitting{
     left:0;
     top:0
-   }
-   .adult-shorthair-standing {
+    }
+    .c-adult-shorthair-standing{
     left:-100px;
     top:0
-   }
-   .adult-shorthair-playing {
+    }
+    .c-adult-shorthair-playing{
     left:-200px;
     top:-2px
-   }
-   .adult-shorthair-sleeping {
+    }
+    .c-adult-shorthair-sleeping{
     left:-300px;
     top:0
-   }
-   .adult-shorthair-upsidedown {
+    }
+    .c-adult-shorthair-upsidedown{
     left:-400px;
     top:0
-   }
-   .adult-longhair-sitting {
+    }
+    .c-adult-longhair-sitting{
     left:0;
     top:-100px
-   }
-   .adult-longhair-standing {
+    }
+    .c-adult-longhair-standing{
     left:-100px;
     top:-100px
-   }
-   .adult-longhair-playing {
+    }
+    .c-adult-longhair-playing{
     left:-200px;
     top:-102px
-   }
-   .adult-longhair-sleeping {
+    }
+    .c-adult-longhair-sleeping{
     left:-300px;
     top:-100px
-   }
-   .adult-longhair-upsidedown {
+    }
+    .c-adult-longhair-upsidedown{
     left:-400px;
     top:-100px
-   }
-   .kitten-shorthair-sitting {
+    }
+    .c-kitten-shorthair-sitting{
     left:0;
     top:-200px
-   }
-   .kitten-shorthair-standing {
+    }
+    .c-kitten-shorthair-standing{
     left:-100px;
     top:-200px
-   }
-   .kitten-shorthair-playing {
+    }
+    .c-kitten-shorthair-playing{
     left:-200px;
     top:-202px
-   }
-   .kitten-shorthair-sleeping {
+    }
+    .c-kitten-shorthair-sleeping{
     left:-300px;
     top:-200px
-   }
-   .kitten-shorthair-upsidedown {
+    }
+    .c-kitten-shorthair-upsidedown{
     left:-400px;
     top:-200px
-   }
-   .kitten-longhair-sitting {
+    }
+    .c-kitten-longhair-sitting{
     left:0;
     top:-300px
-   }
-   .kitten-longhair-standing {
+    }
+    .c-kitten-longhair-standing{
     left:-100px;
     top:-300px
-   }
-   .kitten-longhair-playing {
+    }
+    .c-kitten-longhair-playing{
     left:-200px;
     top:-302px
-   }
-   .kitten-longhair-sleeping {
+    }
+    .c-kitten-longhair-sleeping{
     left:-300px;
     top:-300px
-   }
-   .kitten-longhair-upsidedown {
+    }
+    .c-kitten-longhair-upsidedown{
     left:-400px;
     top:-300px
-   }
-   .bean-shorthair-sitting {
+    }
+    .c-bean-shorthair-sitting{
     left:0;
     top:-400px
-   }
-   .bean-shorthair-standing {
+    }
+    .c-bean-shorthair-standing{
     left:-100px;
     top:-400px
-   }
-   .bean-shorthair-playing {
+    }
+    .c-bean-shorthair-playing{
     left:-200px;
     top:-400px
-   }
-   .bean-shorthair-sleeping {
+    }
+    .c-bean-shorthair-sleeping{
     left:-300px;
     top:-400px
-   }
-   .bean-shorthair-upsidedown {
+    }
+    .c-bean-shorthair-upsidedown{
     left:-400px;
     top:-400px
-   }
-   .bean-longhair-sitting {
+    }
+    .c-bean-longhair-sitting{
     left:0;
     top:-500px
-   }
-   .bean-longhair-standing {
+    }
+    .c-bean-longhair-standing{
     left:-100px;
     top:-500px
-   }
-   .bean-longhair-playing {
+    }
+    .c-bean-longhair-playing{
     left:-200px;
     top:-500px
-   }
-   .bean-longhair-sleeping {
+    }
+    .c-bean-longhair-sleeping{
     left:-300px;
     top:-500px
-   }
-   .bean-longhair-upsidedown {
+    }
+    .c-bean-longhair-upsidedown{
     left:-400px;
     top:-500px
-   }
+    }
+    .m-adult-shorthair-sitting{
+    left:0;
+    top:-11px
+    }
+    .m-adult-shorthair-standing{
+    left:-100px;
+    top:-8px
+    }
+    .m-adult-shorthair-playing{
+    left:-200px;
+    top:-2px
+    }
+    .m-adult-shorthair-sleeping{
+    left:-300px;
+    top:0
+    }
+    .m-adult-shorthair-upsidedown{
+    left:-400px;
+    top:0
+    }
+    .m-adult-longhair-sitting{
+    left:0;
+    top:-111px
+    }
+    .m-adult-longhair-standing{
+    left:-100px;
+    top:-108px
+    }
+    .m-adult-longhair-playing{
+    left:-200px;
+    top:-102px
+    }
+    .m-adult-longhair-sleeping{
+    left:-300px;
+    top:-100px
+    }
+    .m-adult-longhair-upsidedown{
+    left:-400px;
+    top:-100px
+    }
+    .m-kitten-shorthair-sitting{
+    left:0;
+    top:-211px
+    }
+    .m-kitten-shorthair-standing{
+    left:-100px;
+    top:-208px
+    }
+    .m-kitten-shorthair-playing{
+    left:-200px;
+    top:-202px
+    }
+    .m-kitten-shorthair-sleeping{
+    left:-300px;
+    top:-200px
+    }
+    .m-kitten-shorthair-upsidedown{
+    left:-400px;
+    top:-200px
+    }
+    .m-kitten-longhair-sitting{
+    left:0;
+    top:-311px
+    }
+    .m-kitten-longhair-standing{
+    left:-100px;
+    top:-308px
+    }
+    .m-kitten-longhair-playing{
+    left:-200px;
+    top:-302px
+    }
+    .m-kitten-longhair-sleeping{
+    left:-300px;
+    top:-300px
+    }
+    .m-kitten-longhair-upsidedown{
+    left:-400px;
+    top:-300px
+    }
+    .m-bean-shorthair-sitting{
+    left:0;
+    top:-411px
+    }
+    .m-bean-shorthair-standing{
+    left:-100px;
+    top:-400px
+    }
+    .m-bean-shorthair-playing{
+    left:-200px;
+    top:-400px
+    }
+    .m-bean-shorthair-sleeping{
+    left:-300px;
+    top:-400px
+    }
+    .m-bean-shorthair-upsidedown{
+    left:-400px;
+    top:-400px
+    }
+    .m-bean-longhair-sitting{
+    left:0;
+    top:-511px
+    }
+    .m-bean-longhair-standing{
+    left:-100px;
+    top:-500px
+    }
+    .m-bean-longhair-playing{
+    left:-200px;
+    top:-500px
+    }
+    .m-bean-longhair-sleeping{
+    left:-300px;
+    top:-500px
+    }
+    .m-bean-longhair-upsidedown{
+    left:-400px;
+    top:-500px
+    }

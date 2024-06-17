@@ -15,9 +15,6 @@ function addCat() {
 
     // catPageInfoINITIAL is an array of the lines of the input
     let catPageInfoINITIAL = textBoxEntry.value.split("\n");
-    
-    
-    console.log(catPageInfoINITIAL)
 
     // Get travelling vs. active before we chop off the rest of the unneeded text
     let catVillageRole = checkForTravelingText(catPageInfoINITIAL) ?? "";
@@ -26,8 +23,6 @@ function addCat() {
     // DEBUG: console.log(catPageInfoINITIAL)
     // Crops page info to the section we're concerned with
     let catPageInfoFull = ensmallenCatPageInfo(catPageInfoINITIAL);
-
-    console.log(catPageInfoFull)
 
     // Checks input validity - exits if invalid input
     if (catPageInfoFull == "no name found") {
@@ -40,13 +35,9 @@ function addCat() {
     // Grab sections
     let catPageInfo = catPageInfoFull[0];
 
-    console.log(catPageInfo)
-
     let familyFriendsInfo = catPageInfoFull[1];
     let biographyInfo = catPageInfoFull[2];
     let checkpointArray = getDataCheckpoints(catPageInfo);
-
-    console.log(checkpointArray)
 
     // DEBUG: console.log(catPageInfo)
     // DEBUG: console.log(familyFriendsInfo)
@@ -95,11 +86,17 @@ function addCat() {
     let catPattern = parsePattern(catPageInfo, checkpointArray[25])
     displayInfo("Pattern: ", catPattern)
 
-    let catWhiteMarks = parseWhiteMarks(catPageInfo, checkpointArray[27])
+    let catAccentColor = parseAccentColor(catPageInfo, checkpointArray[27])
+    displayInfo("Accent Color: ", catAccentColor)
+
+    let catWhiteMarks = parseWhiteMarks(catPageInfo, checkpointArray[29])
     displayInfo("White Marks: ", catWhiteMarks, "1D")
 
-    let catEyeColor = parseEyeColor(catPageInfo, checkpointArray[29])
+    let catEyeColor = parseEyeColor(catPageInfo, checkpointArray[31])
     displayInfo("Eye Color: ", catEyeColor)
+
+    console.log(checkpointArray)
+    
 
     // Initialize cat in village
     village.cats[catID] = {};
@@ -141,6 +138,7 @@ function addCat() {
         type: catColor[1]
     };
     thisCat.pattern = catPattern;
+    thisCat.accentColor = catAccentColor;
 
     // will get white info with cat.white.type or cat.white.level
     thisCat.white = {
@@ -152,13 +150,13 @@ function addCat() {
     thisCat.eyeColor = catEyeColor;
 
     if (catAge != "Bean" && catVillageRole != "Citied") {
-        let catPersonalityType = parsePersonalityType(catPageInfo, checkpointArray[33])
+        let catPersonalityType = parsePersonalityType(catPageInfo, checkpointArray[35])
         displayInfo("Personality Type: ", catPersonalityType)
 
         let catPersonalityStats = parsePersonalityStats(catPageInfo, checkpointArray)
         // Logged later
 
-        let catHeldTrinketInfo = parseHeldTrinket(catPageInfo, checkpointArray[45], checkpointArray[46])
+        let catHeldTrinketInfo = parseHeldTrinket(catPageInfo, checkpointArray[47], checkpointArray[48])
         displayInfo("Cat Held Trinket: ", catHeldTrinketInfo, "Trinket")
 
         thisCat.trinket = {
@@ -167,7 +165,7 @@ function addCat() {
             mod: catHeldTrinketInfo[2]
         };
 
-        let catDayJob = parseDayJob(catPageInfo, checkpointArray[48])
+        let catDayJob = parseDayJob(catPageInfo, checkpointArray[50])
         displayInfo("Day Job: ", catDayJob)
 
         let catJobs = parseJobs(catPageInfo, checkpointArray)
@@ -195,7 +193,7 @@ function addCat() {
             Baker: {level: catJobs[0][17], exp: catJobs[1][17]}
         };
 
-        let catAdventuringClass = parseAdvClass(catPageInfo, checkpointArray[86])
+        let catAdventuringClass = parseAdvClass(catPageInfo, checkpointArray[88])
         displayInfo("Adventuring Class: ", catAdventuringClass)
 
         let catAdventuringClasses = parseAdvClasses(catPageInfo, checkpointArray)
@@ -215,7 +213,7 @@ function addCat() {
         let catStats = parseBaseStats(catPageInfo, checkpointArray)
         // Logged later
 
-        let mayorBonuses = parseMayorBonus(catPageInfo, checkpointArray[116]) ?? "None"
+        let mayorBonuses = parseMayorBonus(catPageInfo, checkpointArray[118]) ?? "None"
         // Logged in function
 
         let modifiedStats = modifyStats(catStats, catPersonalityStats, catHeldTrinketInfo, mayorBonuses)
@@ -333,11 +331,11 @@ function addCat() {
     // DEBUG: console.log(catPattern)
     // DEBUG: console.log(catWhiteMarks)
 
-    let catGeneString = findKnownGenes(catWind, catFurLength, catColor[0], catColor[1], catPattern, catWhiteMarks[1], catWhiteMarks[2], catPageInfo, checkpointArray[31])
+    let catGeneString = findKnownGenes(catSpecies, catWind, catFurLength, catColor[0], catColor[1], catPattern, catAccentColor, catWhiteMarks[1], catWhiteMarks[2], catPageInfo, checkpointArray[33])
     displayInfo("Known Gene String: ", catGeneString, "GeneString")
 
     // Adding Continue to Gene Testing button
-    geneTestingButton(catGeneString, catWind, catID, catName, catFurLength, catColor[0], catColor[1], catWhiteMarks[2], catWhiteMarks[1], catPattern, catAge)
+    geneTestingButton(catGeneString, catWind, catID, catName, catFurLength, catColor[0], catColor[1], catWhiteMarks[2], catWhiteMarks[1], catPattern, catAge, catSpecies, catAccentColor)
 
     thisCat.genes = catGeneString;
     thisCat.lastUpdated = Date();
@@ -345,10 +343,11 @@ function addCat() {
     console.log(thisCat);
 }
 
-function geneTestingButton(catGeneString, wind, id, name, furlength, color, colortype, whitelevel, whitetype, pattern, age) {
+function geneTestingButton(catGeneString, wind, id, name, furlength, color, colortype, whitelevel, whitetype, pattern, age, species, accentcolor) {
     if (catGeneString) {
         let geneString = geneStringifier(catGeneString)
-        let functionName = "redirectToGeneTesting('" + geneString + "', '" + wind + "', " + id + ", '" + name + "', '" + furlength  + "', '" + color + "', '" + colortype  + "', '" + whitelevel  + "', '" + whitetype + "', '"  + pattern + "', '" + age + "')"
+        
+        let functionName = "redirectToGeneTesting('" + geneString + "', '" + wind + "', " + id + ", '" + name + "', '" + furlength  + "', '" + color + "', '" + colortype  + "', '" + whitelevel  + "', '" + whitetype + "', '"  + pattern + "', '" + age + "', '" + species + "', '" + accentcolor + "')"
         if (document.getElementById("continuetogenetester")) {
             let geneTestButton = document.getElementById("continuetogenetester")
             geneTestButton.setAttribute("onclick", functionName)
@@ -386,7 +385,7 @@ function geneStringifier(data) {
     return geneStringText
 }
 
-function redirectToGeneTesting(genestring, wind, id, name, furlength, color, colortype, whitelevel, whitetype, pattern, age) {
+function redirectToGeneTesting(genestring, wind, id, name, furlength, color, colortype, whitelevel, whitetype, pattern, age, species, accentcolor) {
     let colorList = ["Black", "Chocolate", "Brown", "Tan", "Red", "Ginger", "Orange", "Apricot", "Charcoal", "Grey", "Smoke", "Silver", "Buff", "Cream", "Almond", "Beige", "-hidden-"]
     let colorListFiles = ["black", "choco", "brown", "tan", "red", "ginger", "orange", "aprico", "charc", "grey", "smoke", "silver", "buff", "cream", "almond", "beige", "-hidden-"]
     if (wind == "Null") {
@@ -394,7 +393,7 @@ function redirectToGeneTesting(genestring, wind, id, name, furlength, color, col
         return
     }
     else {
-        let geneTesterInfo = name + "|" + id + "|" + genestring + "|" + furlength + "|" + age + "|"
+        let geneTesterInfo = name + "|" + id + "|" + genestring + "|" + furlength + "|" + age + "|" + species + "|"
         for (let i = 0; i < colorList.length; i++) {
             if (color.split("-")[0] == colorList[i]) {
                 geneTesterInfo += colorListFiles[i] + "_main_" + pattern.toLowerCase() + ".png|"
@@ -406,6 +405,9 @@ function redirectToGeneTesting(genestring, wind, id, name, furlength, color, col
                     geneTesterInfo += colorListFiles[i] + "_trade_" + pattern.toLowerCase() + ".png|"
                 }
             }
+        }
+        if (accentcolor != "-hidden-") {
+            geneTesterInfo += accentcolor.toLowerCase() + "_accent_" + pattern.toLowerCase() + ".png|" 
         }
         let whitetypeletters = ["C", "P", "R", "L", "I"]
         let whitetypenames = ["classic", "piebald", "right", "left", "inverse"]
@@ -656,7 +658,7 @@ function getDataCheckpoints(dataArray) {
     // -4 is the held trinket. in the list it has name line, effect line, name line again. idk make that work
     let searchNums = [
         "Name", 0, "Birthday", -1, "Age", -1, "Wind", -1, "Pronouns", -1, "Aspect", -1, "Origin", -1, "ID", -1, 
-        "Species", -1, "Size", -1, "Fur", -1, "Color", -1, "Pattern", -1, "White Marks", -1, "Eye Color", -1, 
+        "Species", -1, "Size", -1, "Fur", -1, "Color", -1, "Pattern", -1, "Accent Color", -1, "White Marks", -1, "Eye Color", -1, 
         "Genetic String", -5, "Personality", -1, 
         "Bravery", -1, "Benevolence", -1,  "Energy", -1, "Extroversion", -1, "Dedication", -1, "Held Trinket", -4, -4, //name and stat effect
         "Day Job", -6, 
@@ -672,26 +674,38 @@ function getDataCheckpoints(dataArray) {
         "The Mayor is currently providing the following effects to this cat:", -1
     ]  
     for (let i = 2; i < searchNums.length; i = i+2) {
+        //DEBUG: console.log(">> ["+searchNums[i]+"]")
         lineNum = simpleLineNumberSearch(dataArray, searchNums[i], currentLine) ?? "NOT FOUND"
-        if (i == 28) {
+        if (i == 30) {
             currentLine = currentLine+5 // spacer to keep personality check on the actual personality, not "personality traits" 
             searchNums[i+3] = lineNum+2 // defines the gene sequence line
         }
         switch(searchNums[i+1]) {
             case -1: 
-                currentLine = lineNum-1 // just in case buffer -1
+                if (typeof lineNum === 'number') {
+                    currentLine = lineNum-1 // just in case buffer -1
+                }
                 searchNums[i+1] = lineNum+1  // because it's -1/line after, we add 1 to line
                 break
             case -2: 
-                currentLine = lineNum-1 // just in case buffer -1
+                if (typeof lineNum === 'number') {
+                    currentLine = lineNum-1 // just in case buffer -1
+                }
                 searchNums[i+1] = lineNum  // because it's -2 it's the same line, no +1
                 break
             case -4: 
-                currentLine = lineNum-1  // just in case buffer -1
+                if (typeof lineNum === 'number') {
+                    currentLine = lineNum-1 // just in case buffer -1
+                }
                 searchNums[i+1] = lineNum+1 //trinket name
                 searchNums[i+2] = lineNum+2 //trinket boost
                 i = i+1
                 break
+            case -5: 
+                if (lineNum == "NOT FOUND") {
+                    searchNums[33] = searchNums[31] + 1
+                    break
+                }    
             case -6: 
                 if (lineNum != "NOT FOUND") {
                     searchNums[i+1] = lineNum  // because it's -2 it's the same line, no +1
@@ -706,14 +720,15 @@ function getDataCheckpoints(dataArray) {
                 }
                 break
             case -7: 
-                currentLine = lineNum+9 // just in case buffer -1
+                if (typeof lineNum === 'number') {
+                    currentLine = lineNum+9 // just in case buffer +9
+                }
                 searchNums[i+1] = lineNum+2  // because it's -1/line after, we add 1 to line
                 let temp = dataArray[searchNums[i+1]]
                 // firefox mobile fix
                 if (temp) {
                     if (temp.includes("d")) {
                         searchNums[i+1] = lineNum+1
-                        console.log("ran firefox ipad fix")
                         currentLine = lineNum+4
                     }
                 }
@@ -848,6 +863,14 @@ function parsePattern(dataArray, line) {
     return catPattern
 }
 
+function parseAccentColor(dataArray, line) {
+    let catAccentColor = "-hidden-" 
+    if (typeof line === 'number') {
+        catAccentColor = dataArray[line]
+    }
+    return catAccentColor
+}
+
 function parseWhiteMarks(dataArray, line) {
     let whitecheck = dataArray[line]
     let catWhiteMarks = ""
@@ -882,7 +905,7 @@ function parsePersonalityType(dataArray, line) {
 }
 
 function parsePersonalityStats(dataArray, lines) {
-    let persoLines = [lines[35], lines[37], lines[39], lines[41], lines[43]]
+    let persoLines = [lines[37], lines[39], lines[41], lines[43], lines[45]]
     let catPersonalityStats = []
     for (let i = 0; i < persoLines.length; i++) {
         catPersonalityStats[i] = Number(dataArray[persoLines[i]])
@@ -923,7 +946,7 @@ function parseJobs(dataArray, lines) {
     let catJobLevel = []
     let catJobEXP = []
     let counter = 0
-    for (let i = 50; i < 85; i = i+2) {
+    for (let i = 52; i < 87; i = i+2) {
         if (lines[i] != "NOT FOUND") {
             catJobLevel[counter] = Number(dataArray[lines[i]].split(" Level ")[1].split(" [")[0]) 
             catJobEXP[counter] = dataArray[lines[i]].split("[")[1].split(" EXP]")[0]
@@ -963,7 +986,7 @@ function parseAdvClasses(dataArray, lines) {
     let catClassLevel = []
     let catClassEXP = []
     let counter = 0
-    for (let i = 88; i < 101; i = i+2) {
+    for (let i = 90; i < 103; i = i+2) {
         if (lines[i] != "NOT FOUND") {
             catClassLevel[counter] = Number(dataArray[lines[i]].split(" Level ")[1].split(" [")[0])
             catClassEXP[counter] = dataArray[lines[i]].split("[")[1].split(" EXP]")[0]
@@ -990,7 +1013,7 @@ function parseAdvClasses(dataArray, lines) {
 function parseBaseStats(dataArray, lines) {
     let catBaseStats = []
     let counter = 0
-    for (let i = 102; i < 115; i = i+2) {
+    for (let i = 104; i < 117; i = i+2) {
         catBaseStats[counter] = Number(dataArray[lines[i]])
         counter++
     }
@@ -1134,21 +1157,23 @@ function parseCurrentlyWearing(biographyArray) {
     }
 }
 
-function findKnownGenes(wind, fur, color, colortype, pattern, whitetype, whitelevel, dataArray, line) {
-    let geneString = ["C",   "?","?",   "?","?",    "?","?","?","?","?",    "?","?","?","?",    "?","?","?","?",    "?","?",    "?","?"]
+function findKnownGenes(species, wind, fur, color, colortype, pattern, accentcolor, whitetype, whitelevel, dataArray, line) {
+    let geneString = ["?",   "?","?",   "?","?",    "?","?","?","?","?",    "?","?","?","?",    "?","?","?","?",    "?","?",    "?","?"]
     // DEBUG: console.log(dataArray[line])
     if (dataArray[line].includes("[ Unknown Genetic String ]") || dataArray[line].includes("About")) {
         // DEBUG: console.log(geneString)
+        sectionSpecies(geneString, species)
         sectionWind(geneString, wind)
         sectionFur(geneString, fur)
         sectionColor(geneString, color, colortype, wind)
         sectionPattern(geneString, pattern)
+        sectionAccentColor(geneString, accentcolor)
         sectionWhite(geneString, whitetype, whitelevel)
         // DEBUG: console.log(geneString)
         return geneString
     }
     else {
-        if (dataArray[line].includes("[ C ]")) {
+        if ((dataArray[line]).split("[ ").length > 2) {
             let geneStringString = dataArray[line].replaceAll("[", "")
             geneStringString = geneStringString.replaceAll("]", "")
             geneStringString = geneStringString.replaceAll(" ", "")
@@ -1156,8 +1181,19 @@ function findKnownGenes(wind, fur, color, colortype, pattern, whitetype, whitele
             return geneString
         }
     }
-    
 }
+
+function sectionSpecies(geneString, species) {
+    switch(species) {
+        case "Not-cat": 
+            geneString[0] = "C"
+            break
+        case "Mercat":
+            geneString[0] = "M"
+            break
+    }
+}
+
 
 //NS
 //1 2 
@@ -1291,6 +1327,51 @@ function sectionPattern(geneString, pattern) {
         case "Colorpoint":
             geneString[12] = "P"
             geneString[13] = "P"
+            break
+    }
+}
+
+function sectionAccentColor(geneString, accentcolor) {
+    switch(accentcolor) {
+        case "Ruby":
+            geneString[20] = "R"
+            geneString[21] = "R"
+            break
+        case "Violet":
+            geneString[20] = "R"
+            geneString[21] = "B"
+            break
+        case "Amber":
+            geneString[20] = "R"
+            geneString[21] = "Y"
+            break
+        case "Pink":
+            geneString[20] = "R"
+            geneString[21] = "L"
+            break
+        case "Blue":
+            geneString[20] = "B"
+            geneString[21] = "B"
+            break
+        case "Green":
+            geneString[20] = "B"
+            geneString[21] = "Y"
+            break
+        case "Indigo":
+            geneString[20] = "B"
+            geneString[21] = "L"
+            break
+        case "Gold":
+            geneString[20] = "Y"
+            geneString[21] = "Y"
+            break
+        case "Teal":
+            geneString[20] = "Y"
+            geneString[21] = "L"
+            break
+        case "Black":
+            geneString[20] = "L"
+            geneString[21] = "L"
             break
     }
 }
