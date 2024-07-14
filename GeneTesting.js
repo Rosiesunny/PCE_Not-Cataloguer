@@ -44,13 +44,15 @@ function changeExisting(ID, value) {
                let stringtemp2 = genecodetext.split(stringtemp1)[1]
                genecodetext = stringtemp1 + "]" + stringtemp2
             }
-            if (genecodetext.includes("10") && (ID.includes("#white-type"))) {
+            if (genecodetext.includes("10") && ((ID.includes("#white-type")) || ID.includes("#accent-color"))) {
                 positionarray[i] = positionarray[i]+1
             }
             genecodetext = replaceAt(genecodetext, positionarray[i], value)
             genecodefull.innerText = genecodetext
             // MAKE IT SAVE OVER THE GENE CODE HERE AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-            village.cats[catID].genes[plainpositionarray[i]] = value
+            if (catID != "???") {
+                village.cats[catID].genes[plainpositionarray[i]] = value
+            }
             break
         }
     }
