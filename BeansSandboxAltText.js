@@ -4,10 +4,7 @@ function parseText() {
 
     // beansSandboxPageInfoINITIAL is an array of the lines of the input
     let beansSandboxPageInfoINITIAL = textBoxEntry.value.split("\n");
-    
-    console.log(beansSandboxPageInfoINITIAL)
     let beansSandboxArray = ensmallenData(beansSandboxPageInfoINITIAL)
-    console.log(beansSandboxArray)
     let dataArray = parseCats(beansSandboxArray)
     let htmlArray = generateInnerHTML(dataArray)
     displayFindings(htmlArray)
@@ -19,18 +16,90 @@ function parseText() {
 function parseCats(beansArray) {
     let dataArray = []
     for (let i = 0; i < beansArray.length; i++) {
-        let fur = beansArray[i].split("hair")[0]+"hair" // shorthair or longhair
-        let color = beansArray[i].split("hair ")[1].split(" ")[0] //
-        let colortype = beansArray[i].split(color+ " ")[1].split(" ")[0] // st = standard, tor = tortie, pat = watercolor
-        let pattern = ""
-        if (beansArray[i].includes("with trade markings:")) {
-            pattern = beansArray[i].split(colortype+ " ")[1].split("with trade markings: ")[0]
+        let fur
+        if (beansArray[i].includes("longhair")) {
+            fur = "longhair"
+        }
+        if (beansArray[i].includes("shorthair")) {
+            fur = "shorthair"
+        }
+
+        let color = beansArray[i].split("with a ")[1].split(" ")[0] //
+
+        let colortype
+        if (beansArray[i].includes("trade markings")) {
+            let color2 = beansArray[i].split("coat")[1].split(" ")[0]
+            let colorList = ["black", "choco", "brown", "tan", "red", "ginger", "orange", "aprico", "charc", "grey", "smoke", "silver", "buff", "cream", "almond", "beige"]
+            let color2WatercolorList = ["choco", "brown", "tan", "snow", "ginger", "orange", "aprico", "snow", "grey", "smoke", "silver", "snow", "cream", "almond", "beige", "snow"]
+            let color2TortieList = ["red", "ginger", "orange", "aprico", "black", "choco", "brown", "tan", "buff", "cream", "almond", "beige", "charc", "grey", "smoke", "silver"]
+            // st = standard, tor = tortie, pat = watercolor
+            for (let i = 0; i< colorList.length; i++) {
+                if (color == colorList[i]) {
+                    if (color2 == color2WatercolorList[i]) {
+                        colortype = "pat"
+                    }
+                    if (color2 == color2TortieList[i]) {
+                        colortype = "tor"
+                    }
+                }
+            }
         }
         else {
-            pattern = beansArray[i].split(colortype+" ")[1].split("whiteness")[0]
+            colortype = "st"
         }
-        let whitelevel = beansArray[i].split("whiteness: ")[1][0]
-        dataArray[i] = [fur, color, colortype, pattern, whitelevel]
+        let pattern = beansArray[i].split(" " + fur)[0].split(color+" ")[1]
+
+        let whitemarkings = beansArray[i].split(" white markings")[0]
+        if (whitemarkings.includes("coat")) {
+            whitemarkings = whitemarkings.split("coat")[1]
+        }
+        if (whitemarkings.includes("trade markings")) {
+            whitemarkings = whitemarkings.split("trade markings")[1]
+        }
+        if (whitemarkings.includes(" / ")) {
+            whitemarkings = whitemarkings.split(" / ")[0]
+        }
+        console.log(whitemarkings)
+        let markingslist = [
+            ["locket", "locket & toes", "bib & boots", "bib, boots, & belly", "classic bicolor", "piebald", "spotted piebald", "freckled piebald", "van"],
+            ["nose", "nose & toes", "nose, bib & boots", "bib, ears, & belly", "true piebald", "scattered piebald", "painted spots", "confetti", "speckled van"],
+            ["toes", "tie & toes", "tie, toes & chin", "chin, boots, & belly", "left bicolor", "left piebald", "left patches", "left spots", "left van"],
+            ["tail tip", "tail tip & toes", "tail, toes, & tie", "tail, boots, & belly", "right bicolor", "right piebald", "right patches", "right spots", "right van"],
+            ["ear tips", "ear & tail tips", "ear, tail, & toes", "snowspots", "snowmelt", "ghost", "owl mantle", "heart mantle", "heart"]
+        ]
+        let whitetypelist = ["classic", "piebald", "left", "right", "inverse"]
+
+        let whitelevel 
+        let whitetype
+        // if cat is albino, we gotta redo our whitemarkings check via the eye color
+        if (whitemarkings.includes("albino")) {
+            let eyecolors = ["red", "violet", "blue", "green", "gold"]
+            let eyecolor = beansArray[i].split(" eyes")[0].split("white markings")[1].split(" ")
+            for (let i = 0; i < eyecolors.length; i++) {
+                if (eyecolor.includes(eyecolors[i])) {
+                    whitetype = whitetypelist[i]
+                    whitelevel = 10
+                    whitemarkings = "albino"
+                    pattern = "hidden"
+                    color = "hidden"
+                    colortype = "hidden"
+                    break
+                }
+            }
+        }
+        else {
+            for (let i = 0; i < markingslist.length; i++) {
+                for (let j = 0; j < markingslist[i].length; j++) {
+                    if (whitemarkings.includes(markingslist[i][j])) {
+                        whitelevel = j
+                        whitetype = whitetypelist[i]
+                        break
+                    }
+                }
+            }
+        }
+
+        dataArray[i] = [fur, color, colortype, pattern, whitemarkings, whitelevel, whitetype]
         
     }
     console.log(dataArray)
@@ -53,13 +122,13 @@ function generateInnerHTML(dataArray) {
     let innerHTMLArray = ["<ul>", "<ul>", "<ul>", "<ul>", "<ul>", "<ul>", "<ul>"]
     
     for (let i = 0; i < dataArray.length; i++) {
-        innerHTMLArray[i] += "<li>" + dataArray[i][0] + "</li>"
+        innerHTMLArray[i] += "<li><b>fur:</b> " + dataArray[i][0] + "</li>"
         //color parsing info
         for (let j = 0; j < colorslist.length; j++) {
             if (dataArray[i][1] == colorslist[j]) {
-                innerHTMLArray[i] += "<li>" + colorList[j] + "</li>"
-                innerHTMLArray[i] += "<li>is: " + dilutesList[j] + "</li>"
-                innerHTMLArray[i] += "<li>density: " + densityList[j] + "</li>"
+                innerHTMLArray[i] += "<li><b>color:</b> " + colorList[j] + "</li>"
+                innerHTMLArray[i] += "<li><b>is:</b> " + dilutesList[j] + "</li>"
+                innerHTMLArray[i] += "<li><b>density:</b> " + densityList[j] + "</li>"
                 innerHTMLArray[i] += "<li>" + colorGeneList[j] + "</li>"
                 if (dataArray[i][2] == "tor") {
                     innerHTMLArray[i] += "<li>" + invertedColorGeneList[j] + "</li>"
@@ -67,14 +136,15 @@ function generateInnerHTML(dataArray) {
                 break
             }
         }
-        innerHTMLArray[i] += "<li>" + dataArray[i][3] + "</li>"
+        innerHTMLArray[i] += "<li><b>pattern:</b> " + dataArray[i][3] + "</li>"
         //pattern parsing info
         for (let j = 0; j < patternList.length; j++) {
             if (dataArray[i][3] == patternList[j]) {
-                innerHTMLArray[i] += "<li>pattern genes: " + patternGeneList[j] + "</li>"
+                innerHTMLArray[i] += "<li><b>pattern genes:</b> " + patternGeneList[j] + "</li>"
             }
         }
-        innerHTMLArray[i] += "<li>white level: " + dataArray[i][4] + "</li>"
+        innerHTMLArray[i] += "<li><b>white:</b> " + dataArray[i][4] + "</li>"
+        innerHTMLArray[i] += "<li><b>level:</b> " + dataArray[i][5] + "</li><li><b>type:</b> " + dataArray[i][6] + "</li>"
     }
     return innerHTMLArray
 }
@@ -84,12 +154,7 @@ function displayFindings(htmlArray) {
         let number = i+1
         let id = "cat"+number
         let tableentry = document.getElementById(id)
-        if (htmlArray[i].includes(" eyes")) {
-            tableentry.innerHTML = "<li>Albinos break the parser!</li><li>White level is 10</li><li>that's all we know</li>"
-        }
-        else {
-            tableentry.innerHTML = htmlArray[i]
-        }
+        tableentry.innerHTML = htmlArray[i]
     }
 }
 
@@ -107,7 +172,6 @@ function ensmallenData(beansArray) {
             correctLine[1] = i
         }
     }
-    console.log(beansArrayNew)
     if (correctLineFound == true) {
         for (let i = 0; i < beansArray.length-correctLine[0]; i++) {
             beansArrayNew[i] = beansArray[i+correctLine[0]]
@@ -134,7 +198,6 @@ function ensmallenData(beansArray) {
             }
         }
         beansArrayNew = tempArray
-        console.log(tempArray)
         if (tempArray.length > 7) {
             let j = 0
             let tempArray2 = []
@@ -148,7 +211,7 @@ function ensmallenData(beansArray) {
         }
         
     }
-    
+    console.log(beansArrayNew)
     return beansArrayNew
     
 }
