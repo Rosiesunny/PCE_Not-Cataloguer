@@ -386,8 +386,9 @@ function geneStringifier(data) {
 }
 
 function redirectToGeneTesting(genestring, wind, id, name, furlength, color, colortype, whitelevel, whitetype, pattern, age, species, accentcolor) {
-    let colorList = ["Black", "Chocolate", "Brown", "Tan", "Red", "Ginger", "Orange", "Apricot", "Charcoal", "Grey", "Smoke", "Silver", "Buff", "Cream", "Almond", "Beige", "-hidden-"]
-    let colorListFiles = ["black", "choco", "brown", "tan", "red", "ginger", "orange", "aprico", "charc", "grey", "smoke", "silver", "buff", "cream", "almond", "beige", "-hidden-"]
+    console.log(colortype)
+    let colorList = ["Black", "Chocolate", "Brown", "Tan", "Red", "Ginger", "Orange", "Apricot", "Charcoal", "Grey", "Smoke", "Silver", "Buff", "Cream", "Almond", "Beige", "Snow", "-hidden-"]
+    let colorListFiles = ["black", "choco", "brown", "tan", "red", "ginger", "orange", "aprico", "charc", "grey", "smoke", "silver", "buff", "cream", "almond", "beige", "snow", "-hidden-"]
     if (wind == "Null") {
         alert("This cat is Null and can't be bred to be gene tested! Cancelling redirect")
         return
