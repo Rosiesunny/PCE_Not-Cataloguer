@@ -1,0 +1,436 @@
+<head>
+    <style>
+        .collapsible {
+          background-color: #777;
+          color: white;
+          cursor: pointer;
+          padding: 18px;
+          width: 100%;
+          border: none;
+          text-align: left;
+          outline: none;
+          font-size: 15px;
+          margin: 0px;
+          width: fit-content;
+        }
+        
+        .collapsible:hover {
+          background-color: #555;
+        }
+        
+        .content {
+          background-color: #fddddd;
+          padding: 1.5%;
+          outline: 1px rgb(95, 6, 21) solid;
+          width: fit-content;
+
+        }
+
+        .closedcontent {
+            display: none;
+        }
+
+        .openedcontent {
+            display: block;
+        }
+
+        .categories {
+            background-color: rgb(175, 109, 109);
+            padding: .3%;
+            max-width: 20%;
+            padding-left: 1%;
+            margin-bottom: 0;
+        }
+
+        .subcategories {
+            background-color: rgb(204, 129, 129);
+            padding: .3%;
+            max-width: 15%;
+            padding-left: 2%;
+            margin: 0;
+        }
+
+        .dominant {
+            color: red;
+        }
+
+        .recessive {
+            color: blue;
+        }
+
+        .spaceafter {
+            margin-bottom: 1%;
+        }
+
+        #example-gene-code {
+            background-color:rgb(113, 219, 214);
+            width: fit-content;
+            padding: 1%;
+        }
+
+        .examplespacer {
+            padding: 1%;
+            outline: cyan 1px solid;
+        }
+
+        #sunnypic {
+            background-color:aqua;
+        }
+        </style>
+        <link rel="stylesheet" href = "geneTesting.css">
+</head>
+<body>
+    <script src="./tutorial-temp.js"></script>
+
+
+
+    <div id = "main-help" style = "padding: 1%;">
+        <h1>Gene Testing Guide</h1>
+
+        <h2>Overview</h2>
+        Every cat has a hidden gene code.<br>
+        This gene code holds information on a cat, between how it looks, what growth pattern it has, and what genes it carries but does not show, and can pass onto offspring.<br>
+        A cat's gene code can be revealed by using a Family Tree specialty item on the cat. Using a Family Tree on every cat in a village quickly grows expensive, though, which is where gene testing comes into play.<br>
+        Using the Beans Sandbox, you can input two cats' IDs and preview what their potential offspring would look like.<br>
+        With the right combination of cats with known gene strings, we can deduce most of a cat's gene string without spending a single Family Tree. <br>
+
+        <h2>The Gene String Explained</h2>
+        An example of a cat's gene string looks like:<br>
+        <h2 id = "example-gene-code">[C] [NN] [SS] [BBFF4] [YYTS] [YY3C] [AA] [RR]</h2>
+        Each bracket [] is one category. The pattern always has the following categories, with different contents depending on the cat. For the previous example, the categories are:
+        <ul><li>[C] - Species</li>
+            <li>[NN] - Wind</li>
+            <li>[SS] - Fur Length</li>
+            <li>[BBFF4] - Colors</li>
+            <li>[YYTS] - Pattern</li>
+            <li>[YY3C] - White Markings</li>
+            <li>[AA] - Growth</li>
+            <li>[RR] - Accent Color</li></ul>
+
+        For each category, there are individual alleles. Some alleles stand on their own and whatever gene is there is the one that the cat displays, like the species allele [C]. <br>
+        Others have chromosome subcategories, where dominant and recessive genes pair together and display depending on the combination, like the wind alleles [NN].<br>
+        In some of the more complicated subcategories, there are multiple chromosomal subcategories, like in the colors category [BBFF4], where you could separate it further into [(BB)(FF)(4)]<br>
+        <button class = "collapsible" onclick = "openCollapsible('id-main')">All Options for each Category</button>
+        <div class = "content closedcontent" id = "id-main">
+            *All genes listed are dominant unless they specify that they are recessive<br>
+        <br>
+        <h3 class = "categories">[Species]</h3>
+        <ul><li class = "dominant">C - Not-Cat</li>
+            <li class = "dominant">M - Mercat</li>
+        </ul>
+
+        <h3 class = "categories">[Wind]</h3>
+        <ul><li class = "dominant">N - North</li>
+        <li class = "dominant">S - South</li>
+        <li class = "recessive">O - Null (recessive)</li></ul>
+        *Trade wind cats happen when a cat inherits both a North and a South gene [NS]<br>
+
+        <h3 class = "categories">[Fur Length]</h3>
+        <ul><li class = "dominant">S - Shorthair</li>
+        <li class = "recessive">L - Longhair (recessive)</li></ul>
+
+        <h3 class = "categories">[Colors]</h3>
+        <h4 class = "subcategories">(Color Group)</h4>
+        <ul><li class = "dominant">O - Orange Group</li>
+            <li class = "dominant">B - Black Group</li></ul>
+        <h4 class = "subcategories">(Color Diluteness)</h4>
+        <ul><li class = "dominant">F - Full</li>
+            <li class = "recessive">D - Dilute (recessive)</li></ul>
+        <h4 class = "subcategories">(Color Density)</h4>
+        <ul><li class = "dominant">1-4 Color Density</li></ul>
+        *For North wind cats, only the first color gene is displayed on the cat<br>
+        *For South wind cats, only the second color gene is displayed on the cat<br>
+        *For Trade wind cats, if the two color genes are the same ([OO] or [BB]), the cat is a Watercolor coat. If the color genes are different ([OB] or [BO]), the cat is a Tortoiseshell coat<br>
+        *For Null wind cats, all color information is disregarded, and the coat color is replaced with the Snow color.<br>
+        <button class = "collapsible" onclick = "openCollapsible('id-colors')">Click here for a list of all single-color combinations</button> 
+        <div class = "content closedcontent" id = "id-colors">
+        For the sake of simplicity, all cats here are assumed to be north wind<br>
+        The ? allele is a placeholder to indicate that we don't know or need to know the allele- any valid allele can apply there<br>
+
+        <ul><li>[B?F?4] - Black</li>
+            <li>[B?F?3] - Chocolate</li>
+            <li>[B?F?2] - Brown</li>
+            <li class = "spaceafter">[B?F?1] - Tan</li>
+
+            <li>[B?DD4] - Charcoal</li>
+            <li>[B?DD3] - Grey</li>
+            <li>[B?DD2] - Smoke</li>
+            <li class = "spaceafter">[B?DD1] - Silver</li>
+
+            <li>[O?F?4] - Red</li>
+            <li>[O?F?3] - Ginger</li>
+            <li>[O?F?2] - Orange</li>
+            <li class = "spaceafter">[O?F?1] - Apricot</li>
+
+            <li>[O?DD4] - Buff</li>
+            <li>[O?DD3] - Cream</li>
+            <li>[O?DD2] - Almond</li>
+            <li class = "spaceafter">[O?DD1] - Beige</ul>
+
+        *When a cat is null, Snow color disregards all color genes, which makes up the final color possibility<br>
+    </div>
+
+        <h3 class = "categories">[Pattern]</h3>
+        <h4 class = "subcategories">(Pattern Visibility)</h4>
+        <ul><li class = "dominant">Y - Yes, Has Pattern</li>
+            <li class = "recessive">N - No, Does Not Have Pattern (recessive)</li></ul>
+        <h4 class = "subcategories">(Pattern Genes)</h4>
+        <ul><li class = "dominant">T - Stripe Gene</li>
+            <li class = "dominant">S - Spot Gene</li>
+            <li class = "dominant">M - Marble Gene</li>
+            <li class = "dominant">P - Pointed Gene</li></ul>
+        *Each cat has two Pattern Genes that combine to make their coat pattern<br>
+        <button class = "collapsible" onclick = "openCollapsible('id-patterns')">Click here for a list of all pattern combinations</button>
+        <div class = "content closedcontent" id = "id-patterns">
+        <ul><li>[TT] - Stripe + Stripe = Mackerel Pattern</li>
+            <li>[TM] or [MT] - Stripe + Marble = Classic Pattern</li>
+            <li>[TS] or [ST] - Stripe + Spot = Broken Pattern</li>
+            <li class = "spaceafter">[TP] or [PT] - Stripe + Point = Lynxpoint Pattern</li>
+
+            <li>[MM] - Marble + Marble = Clouded Pattern</li>
+            <li>[MS] or [SM] - Marble + Spot = Rosette Pattern</li>
+            <li class = "spaceafter">[MP] or [PM] - Marble + Point = Cloudpoint Pattern</li>
+
+            <li>[SS] - Spot + Spot = Spotted Pattern</li>
+            <li class = "spaceafter">[SP] or [PS] - Spot + Point = Mink Pattern</li>
+
+            <li class = "spaceafter">[PP] - Point + Point = Colorpoint Pattern</li></ul>
+        </div>
+
+        <h3 class = "categories">[White Markings]</h3>
+        <h4 class = "subcategories">(White Visibility)</h4>
+        <ul><li class = "dominant">Y - Yes, Has White Markings</li>
+            <li class = "recessive">N - No, Does Not Have White Markings (recessive)</li></ul>
+        <h4 class = "subcategories">(White Level)</h4>
+        <ul><li class = "dominant">0-10 White Level</li></ul>
+        <h4 class = "subcategories">(White Type)</h4>
+        <ul><li class = "dominant">C - Classic</li>
+            <li class = "dominant">P - Piebald</li>
+            <li class = "dominant">L - Left</li>
+            <li class = "dominant">R - Right</li>
+            <li class = "dominant">I - Inverse</li></ul>
+        *White Level determines roughly what percentage of the cat is covered in white<br>
+        *White Level 10 makes Albino cats, covering the whole cat in white. Albinos have different eye colors from regular cats, and the color depends on their white type<br>
+        <button class = "collapsible" onclick = "openCollapsible('id-whitemarkings')">Click here to see all White Marking combinations</button>
+        <div class = "content closedcontent" id = "id-whitemarkings">
+            <button class = "collapsible" onclick = "openCollapsible('id-classic-whitemarkings')">Classic White Type</button><br>
+            <div class = "content closedcontent" id = "id-classic-whitemarkings">
+                <ul><li>[C1] - Locket</li>
+                <li>[C2] - Locket & Toes</li>
+                <li>[C3] - Bib & Boots</li>
+                <li>[C4] - Bib, Boots, & Belly</li>
+                <li>[C5] - Classic Bicolor</li>
+                <li>[C6] - Piebald</li>
+                <li>[C7] - Spotted Piebald</li>
+                <li>[C8] - Freckled Piebald</li>
+                <li>[C9] - Van</li>
+                <li>[C10] - Albino (red eyes)</li></ul>
+                </div>
+        <button class = "collapsible" onclick = "openCollapsible('id-piebald-whitemarkings')">Piebald White Type</button><br>
+        <div class = "content closedcontent" id = "id-piebald-whitemarkings">
+            <ul><li>[P1] - Nose</li>
+            <li>[P2] - Nose & Toes</li>
+            <li>[P3] - Nose, Bib & Boots</li>
+            <li>[P4] - Bib, Ears, & Belly</li>
+            <li>[P5] - True Piebald</li>
+            <li>[P6] - Scattered Piebald</li>
+            <li>[P7] - Painted Spots</li>
+            <li>[P8] - Confetti</li>
+            <li>[P9] - Speckled Van</li>
+            <li>[P10] - Albino (purple eyes)</li></ul>
+        </div>
+
+        <button class = "collapsible" onclick = "openCollapsible('id-left-whitemarkings')">Left White Type</button><br>
+        <div class = "content closedcontent" id = "id-left-whitemarkings">
+            <ul><li>[L1] - Toes</li>
+            <li>[L2] - Tie & Toes</li>
+            <li>[L3] - Tie, Toes & Chin</li>
+            <li>[L4] - Chin, Boots, & Belly</li>
+            <li>[L5] - Left Bicolor</li>
+            <li>[L6] - Left Piebald</li>
+            <li>[L7] - Left Patches</li>
+            <li>[L8] - Left Spots</li>
+            <li>[L9] - Left Van</li>
+            <li>[L10] - Albino (blue eyes)</li></ul>
+        </div>
+
+        <button class = "collapsible" onclick = "openCollapsible('id-right-whitemarkings')">Right White Type</button><br>
+        <div class = "content closedcontent" id = "id-right-whitemarkings">
+            <ul><li>[R1] - Tail Tip</li>
+            <li>[R2] - Tail Tip & Toes</li>
+            <li>[R3] - Tail Tip, Toes, & Tie</li>
+            <li>[R4] - Tail, Boots, & Belly</li>
+            <li>[R5] - Right Bicolor</li>
+            <li>[R6] - Right Piebald</li>
+            <li>[R7] - Right Patches</li>
+            <li>[R8] - Right Spots</li>
+            <li>[R9] - Right Van</li>
+            <li>[R10] - Albino (green eyes)</li></ul>
+        </div>
+
+        <button class = "collapsible" onclick = "openCollapsible('id-inverse-whitemarkings')">Inverse White Type</button><br>
+        <div class = "content closedcontent" id = "id-inverse-whitemarkings">
+            <ul><li>[I1] - Ear Tips</li>
+            <li>[I2] - Ear & Tail Tips</li>
+            <li>[I3] - Ears, Tail, & Toes</li>
+            <li>[I4] - Snowspots</li>
+            <li>[I5] - Snowmelt</li>
+            <li>[I6] - Ghost</li>
+            <li>[I7] - Owl Mantle</li>
+            <li>[I8] - Heart Mantle</li>
+            <li>[I9] - Heart</li>
+            <li>[I10] - Albino (gold eyes)</li></ul>
+        </div>
+        </div>
+
+        <h3 class = "categories">[Growth Pattern]</h3>
+        <ul><li class = "dominant">A - Fastest</li>
+            <li class = "dominant">B - Moderate</li>
+            <li class = "dominant">C - Slowest</li></ul>
+        *With Growth genes, the order of the alleles <i>does</i> matter for the output<br>
+        *Growth genes cannot be gene tested through the Beans Sandbox. There are ways to test cats for their Growth gene, but sometimes you can't know without actually breeding the cat or revealing its genes. 
+        <button class = "collapsible" onclick = "openCollapsible('id-growth')">Click here for a list of all Growth Pattern combinations</button>
+        <div class = "content closedcontent" id = "id-growth">
+        <ul><li>[AA] Very Early</li>
+            <li>[AB] Early</li>
+            <li class = "spaceafter">[AC] Decreasing</li>
+
+            <li>[BA] Arch</li>
+            <li>[BB] Steady</li>
+            <li class = "spaceafter">[BC] Dip</li>
+
+            <li>[CA] Very Late</li>
+            <li>[CB] Late</li>
+            <li class = "spaceafter">[CC] Increasing</li></ul>
+        </div>
+
+        <h3 class = "categories">[Accent Color]</h3>
+        <ul><li class = "dominant">R - Red</li>
+            <li class = "dominant">B - Blue</li>
+            <li class = "dominant">Y - Yellow</li>
+            <li class = "dominant">L - Black</li></ul>
+            <button class = "collapsible" onclick = "openCollapsible('id-accentcolor')">Click here for a list of all Accent Color combinations</button>
+            <div class = "content closedcontent" id = "id-accentcolor">
+        <ul><li>[RR] Red + Red = Ruby</li>
+            <li>[RB] Red + Blue = Violet</li>
+            <li>[RY] Red + Yellow = Amber</li>
+            <li class = "spaceafter">[RL] Red + Black = Pink</li>
+
+            <li>[BB] Blue + Blue = Blue</li>
+            <li>[BY] Blue + Yellow = Green</li>
+            <li class = "spaceafter">[BL] Blue + Black = Indigo</li>
+
+            <li>[YY] Yellow + Yellow = Gold</li>
+            <li class = "spaceafter">[YL] Yellow + Black = Teal</li>
+        
+            <li class = "spaceafter">[LL] Black + Black = Black</li></ul>
+            </div>
+    
+    </div>
+    <br>
+
+        When dealing with dominant and recessive genes, dominant genes will always dominate the result. For example, if a cat had [SO] for its wind genes, the cat would be a South cat, as the dominant S (South) takes priority over the recessive O (Null).<br>
+        In order for a recessive gene to display on a cat, the cat needs to only have copies of the recessive gene. For wind genes, for example, the cat needs to have [OO] for its wind to be Null. Any N (North) or S (South) would take over if it was present.<br>
+        In most cases, the order of the genes does not matter. Main exceptions of this rule are Color Group allele order in north and south cats, and Growth allele order.<br>
+        
+        <h2>What the Not-Cataloguer does for you</h2>
+        When you paste a cat's page into the Not-Cataloguer, it catalogues all publicly available data on your cat, including its appearance information.<br>
+        The Not-Cataloguer then will then give you an incomplete gene code based on what information was publicly available.<br>
+        How does it do that? You could do it too! Let's explain how to do it manually so every step of geneing cats is transparent<br>
+        We'll use an example cat for this practice. Here's Sunny's profile: 
+        <div class="horizontalflex wrapflex justify" style = "justify-content: left; outline:cyan 1px solid; margin: 1%;">
+            <div class="cat-title-loop examplespacer">
+                <img src = "assets/Test_Cats/Sunny.png" id = "sunnypic"><br>
+                <b>Sunny</b>
+            </div>
+            
+            <div class="cat-title-loop examplespacer">
+                <b>Basic Data:</b>
+                <div class="bio-group-column">
+                <div class="bio-group-label">Birthday: </div>
+                <div class="bio-group-end pop">Summer 37, Year 7</div>
+                </div>
+                <div class="bio-group-column">
+                <div class="bio-group-label">Age: </div>
+                <div class="bio-group-end">Adult (2 Years)</div>
+                </div>
+                <div class="bio-group-column">
+                <div class="bio-group-label">Wind: </div>
+                <div class="bio-group-end">Trade</div>
+                </div>
+                <div class="bio-group-column">
+                <div class="bio-group-label">Pronouns: </div>
+                <div class="bio-group-end">she/her</div>
+                </div>
+                <div class="bio-group-column">
+                <div class="bio-group-label">Aspect: </div>
+                <div class="bio-group-end">Undiscovered</div>
+                </div>
+                <div class="bio-group-column">
+                <div class="bio-group-label">Origin: </div>
+                <div class="bio-group-end">Migrated from Earth</div>
+                </div>
+                <div class="bio-group-column">
+                <div class="bio-group-label">ID Code: </div>
+                <div class="bio-group-end">[cat=416273]</div>
+                </div>
+            </div>
+            
+            <div class="cat-title-loop examplespacer">
+                <b>Appearance:</b>
+                <div class="bio-group-column">
+                <div class="bio-group-label">Species: </div>
+                <div class="bio-group-end">Not-cat</div>
+                </div><div class="bio-group-column">
+                <div class="bio-group-label">Size: </div>
+                <div class="bio-group-end">10 lbs. / 4.54 kg</div>
+                </div><div class="bio-group-column">
+                <div class="bio-group-label">Fur: </div>
+                <div class="bio-group-end">Longhair</div>
+                </div>
+                <div class="bio-group-column">
+                <div class="bio-group-label">Color: </div>
+                <div class="bio-group-end">Black-Chocolate Watercolor</div>
+                </div>
+                <div class="bio-group-column">
+                <div class="bio-group-label">Pattern: </div>
+                <div class="bio-group-end">Cloudpoint</div>
+                </div><div class="bio-group-column">
+                <div class="bio-group-label">White Marks: </div>
+                <div class="bio-group-end">Nose &amp; Toes / P2</div>
+                </div>
+                <div class="bio-group-column">
+                <div class="bio-group-label">Eye Color: </div>
+                <div class="bio-group-end">Dark Brown</div>
+                </div>
+            </div>
+        </div>
+        <ol><li>Starting off with the species - under Appearance, we see that her species is listed as Not-cat. For our Species section, we mark sunny as <b>[C]</b></li>
+        <li>Then we move onto wind. Sunny's wind is listed under Basic Data, and she is a trade wind. Since we know trade winds always have both North and South wind genes, we know her wind gene is [NS] (or [SN], it doesn't matter what order it's in, but for convenience I usually list them in order of dominance where possible. In this case there is no dominant gene as they both present, so I'll just say arbitrarily her wind gene is <b>[NS]</b>)</li>
+        <li>For fur length, Sunny's fur is listed as Longhair. Since we know Longhair is recessive, Sunny has to have 2 longhair genes for it to show. Her Fur Length gene is <b>[LL]</b></li>
+        <li>Onto colors- probably the most tricky category. We note that Sunny is a Black-Chocolate Watercolor. In watercolors and tortoiseshells, the first color listed before the dash (-) is their first fur color, so Sunny has Black fur. Black fur is caused by a black gene, not orange, and we know watercolors have the same color gene twice, so the beginning of the color gene is [BB]. Since black is a full color, we know that Sunny has at least 1 copy of the dominant Full gene. She could have a recessive Dilute gene that isn't showing. We can't find that out without revealing her genes or gene testing her, so for now, we mark her color genes down as [BBF?]. Black is color density 4, so the final color gene code we get is <b>[BBF?4]</b> </li>
+        <li>For pattern, we note that Sunny's pattern is Cloudpoint. Since she's not solid, we know that she has at least 1 dominant "yes" display gene, so we start the gene code off with [Y?]. She could carry a no, we don't know, hence the ?. If we go and reference what genes Cloudpoint needs to display, we find it needs Marble and Point genes, so her pattern genes come out to <b>[Y?MP]</b></li>
+        <li>Sunny's white markings are listed as "Nose & Toes / P2". First off, we know that she is showing white marks at all, which means she has at least 1 "yes" gene to show white marks, so we start off with [Y?] for her white marks gene. Then, it's easy to determine the rest, as it lists it right there in the "P2". She has level 2 white, and her white is piebald type, so her full white markings gene is <b>[Y?2P]</b></li>
+        <li>We don't know Sunny's Growth genes since that isn't publicly available, so we write that her growth genes are <b>[??]</b></li>
+        <li>We don't know Sunny's accent genes either, since she isn't a Mercat, so her accent genes are <b>[??]</b> as well</li>
+        <li>Finally, we put all the information we got together. Sunny's incomplete gene code, exactly as the website would have found it on the Add Cat page, is <b>[C] [NS] [LL] [BBF?4] [Y?MP] [Y?2P] [??] [??]</b></li>
+
+
+        </ol>
+
+
+
+
+
+
+
+
+    </div>
+
+    <script>
+        
+        </script>
+
+
+
+</body>
