@@ -76,6 +76,16 @@
         #sunnypic {
             background-color:aqua;
         }
+
+        .outlinetable {
+            background-color:rgb(247, 180, 126);
+            padding: .5%
+        }
+
+        .tableresult {
+            background-color:rgb(255, 224, 198);
+            padding: 15px;
+        }
         </style>
         <link rel="stylesheet" href = "geneTesting.css">
 </head>
@@ -97,7 +107,7 @@
         <h2>The Gene String Explained</h2>
         An example of a cat's gene string looks like:<br>
         <h2 id = "example-gene-code">[C] [NN] [SS] [BBFF4] [YYTS] [YY3C] [AA] [RR]</h2>
-        Each bracket [] is one category. The pattern always has the following categories, with different contents depending on the cat. For the previous example, the categories are:
+        Each bracket [] is one category of genes. The pattern always has the following categories, with different contents depending on the cat. For the previous example, the categories are:
         <ul><li>[C] - Species</li>
             <li>[NN] - Wind</li>
             <li>[SS] - Fur Length</li>
@@ -107,7 +117,7 @@
             <li>[AA] - Growth</li>
             <li>[RR] - Accent Color</li></ul>
 
-        For each category, there are individual alleles. Some alleles stand on their own and whatever gene is there is the one that the cat displays, like the species allele [C]. <br>
+        For each category, there are individual alleles, represented by a single letter. Some alleles stand on their own and whatever gene is there is the one that the cat displays, like the species allele [C]. <br>
         Others have chromosome subcategories, where dominant and recessive genes pair together and display depending on the combination, like the wind alleles [NN].<br>
         In some of the more complicated subcategories, there are multiple chromosomal subcategories, like in the colors category [BBFF4], where you could separate it further into [(BB)(FF)(4)]<br>
         <button class = "collapsible" onclick = "openCollapsible('id-main')">All Options for each Category</button>
@@ -291,17 +301,17 @@
         *Growth genes cannot be gene tested through the Beans Sandbox. There are ways to test cats for their Growth gene, but sometimes you can't know without actually breeding the cat or revealing its genes. 
         <button class = "collapsible" onclick = "openCollapsible('id-growth')">Click here for a list of all Growth Pattern combinations</button>
         <div class = "content closedcontent" id = "id-growth">
-        <ul><li>[AA] Very Early</li>
-            <li>[AB] Early</li>
-            <li class = "spaceafter">[AC] Decreasing</li>
+        <ul><li>[AA] - Very Early</li>
+            <li>[AB] - Early</li>
+            <li class = "spaceafter">[AC] - Decreasing</li>
 
-            <li>[BA] Arch</li>
-            <li>[BB] Steady</li>
-            <li class = "spaceafter">[BC] Dip</li>
+            <li>[BA] - Arch</li>
+            <li>[BB] - Steady</li>
+            <li class = "spaceafter">[BC] - Dip</li>
 
-            <li>[CA] Very Late</li>
-            <li>[CB] Late</li>
-            <li class = "spaceafter">[CC] Increasing</li></ul>
+            <li>[CA] - Very Late</li>
+            <li>[CB] - Late</li>
+            <li class = "spaceafter">[CC] - Increasing</li></ul>
         </div>
 
         <h3 class = "categories">[Accent Color]</h3>
@@ -312,16 +322,16 @@
             <button class = "collapsible" onclick = "openCollapsible('id-accentcolor')">Click here for a list of all Accent Color combinations</button>
             <div class = "content closedcontent" id = "id-accentcolor">
         <ul><li>[RR] Red + Red = Ruby</li>
-            <li>[RB] Red + Blue = Violet</li>
-            <li>[RY] Red + Yellow = Amber</li>
-            <li class = "spaceafter">[RL] Red + Black = Pink</li>
+            <li>[RB] or [BR] Red + Blue = Violet</li>
+            <li>[RY] or [YR] Red + Yellow = Amber</li>
+            <li class = "spaceafter">[RL] or [LR] Red + Black = Pink</li>
 
             <li>[BB] Blue + Blue = Blue</li>
-            <li>[BY] Blue + Yellow = Green</li>
-            <li class = "spaceafter">[BL] Blue + Black = Indigo</li>
+            <li>[BY] or [YB] Blue + Yellow = Green</li>
+            <li class = "spaceafter">[BL] or [LB] Blue + Black = Indigo</li>
 
             <li>[YY] Yellow + Yellow = Gold</li>
-            <li class = "spaceafter">[YL] Yellow + Black = Teal</li>
+            <li class = "spaceafter">[YL] or [LY] Yellow + Black = Teal</li>
         
             <li class = "spaceafter">[LL] Black + Black = Black</li></ul>
             </div>
@@ -406,20 +416,86 @@
             </div>
         </div>
         <ol><li>Starting off with the species - under Appearance, we see that her species is listed as Not-cat. For our Species section, we mark sunny as <b>[C]</b></li>
-        <li>Then we move onto wind. Sunny's wind is listed under Basic Data, and she is a trade wind. Since we know trade winds always have both North and South wind genes, we know her wind gene is [NS] (or [SN], it doesn't matter what order it's in, but for convenience I usually list them in order of dominance where possible. In this case there is no dominant gene as they both present, so I'll just say arbitrarily her wind gene is <b>[NS]</b>)</li>
+        <li>Then we move onto wind. Sunny's wind is listed under Basic Data, and she is a trade wind. Since we know trade winds always have both North and South wind genes, we know her wind gene is [NS] (or [SN], it doesn't matter what order it's in, but for convenience I usually list them in order of dominance where possible. In this case both genes are dominant, so I'll just say arbitrarily her wind gene is <b>[NS]</b>)</li>
         <li>For fur length, Sunny's fur is listed as Longhair. Since we know Longhair is recessive, Sunny has to have 2 longhair genes for it to show. Her Fur Length gene is <b>[LL]</b></li>
         <li>Onto colors- probably the most tricky category. We note that Sunny is a Black-Chocolate Watercolor. In watercolors and tortoiseshells, the first color listed before the dash (-) is their first fur color, so Sunny has Black fur. Black fur is caused by a black gene, not orange, and we know watercolors have the same color gene twice, so the beginning of the color gene is [BB]. Since black is a full color, we know that Sunny has at least 1 copy of the dominant Full gene. She could have a recessive Dilute gene that isn't showing. We can't find that out without revealing her genes or gene testing her, so for now, we mark her color genes down as [BBF?]. Black is color density 4, so the final color gene code we get is <b>[BBF?4]</b> </li>
         <li>For pattern, we note that Sunny's pattern is Cloudpoint. Since she's not solid, we know that she has at least 1 dominant "yes" display gene, so we start the gene code off with [Y?]. She could carry a no, we don't know, hence the ?. If we go and reference what genes Cloudpoint needs to display, we find it needs Marble and Point genes, so her pattern genes come out to <b>[Y?MP]</b></li>
         <li>Sunny's white markings are listed as "Nose & Toes / P2". First off, we know that she is showing white marks at all, which means she has at least 1 "yes" gene to show white marks, so we start off with [Y?] for her white marks gene. Then, it's easy to determine the rest, as it lists it right there in the "P2". She has level 2 white, and her white is piebald type, so her full white markings gene is <b>[Y?2P]</b></li>
         <li>We don't know Sunny's Growth genes since that isn't publicly available, so we write that her growth genes are <b>[??]</b></li>
         <li>We don't know Sunny's accent genes either, since she isn't a Mercat, so her accent genes are <b>[??]</b> as well</li>
-        <li>Finally, we put all the information we got together. Sunny's incomplete gene code, exactly as the website would have found it on the Add Cat page, is <b>[C] [NS] [LL] [BBF?4] [Y?MP] [Y?2P] [??] [??]</b></li>
+        <li>Finally, we put all the information we got together. Sunny's incomplete gene code, exactly as the website would have found it on the Add Cat page, is <b>[C] [NS] [LL] [BBF?4] [Y?MP] [Y?2P] [??] [??]</b></li></ol>
 
+        <h2>Using the Beans Sandbox to Gene Test Cats</h2>
 
-        </ol>
+        Once we have an incomplete gene code, like Sunny's from the example ([C] [NS] [LL] [BBF?4] [Y?MP] [Y?2P] [??] [??]), we want to fill in as many of those question marks (?) as possible<br>
+        The Not-Cataloguer makes this process fairly simple. It gives you a list of tests to take, you select one, and it tells you the ID of a cat that will help you gene test your cat, and tells you what you're supposed to be looking for in the bean results.<br>
+        In Sunny's gene code, the first missing gene we have is a Dilute gene. To test if Sunny carries Dilute, we want to put her in the Beans Sandbox with a cat that is Dilute, and if any of her beans are dilute, she must be carrying dilute.<br>
+        In the Not-Cataloguer, you would just press a button here to say if there are dilutes. In a manual geneing example though, we would manually adjust her Color gene section to [BBFD4] if she carries dilute, and [BBFF4] if she doesn't.<br>
+        When geneing manually, it's important to understand the logic behind what you're checking for. With that in mind, we'll explain how exactly beans inherit genes from their parents.
 
+        
+        <h2>Punnet Squares and What That Means For Your Cats</h2>
+        You might remember Punnet Squares from your biology class if you had one. Basically, when genes are being passed down, each parent will pass down one copy of an allele they have.<br>
+        Which allele the parent passes down is randomly selected from their available alleles. For example, a cat with [SL] alleles in their Fur Length category would have a 50% chance of passing down S, and 50% chance of passing down L.<br>
+        To illustrate all possible combinations that can be passed down, we draw a Punnet Square. You can draw one pretty easily with the shape of a plus, a window, or a cross.<br>
+        Here's an example of one below:
+        <table class = "outlinetable">
+            <tr>
+                <td></td>
+                <td class = "outlinebottom outlinetable" style = "text-align: center;">S</td>
+                <td class = "outlinebottom outlinetable" style = "text-align: center;">L</td>
+            </tr>
+            <tr>
+                <td class = "outlineright outlinetable">L</td>
+                <td class = "tableresult">??</td>
+                <td class = "tableresult">??</td>
+            </tr>
+            <tr>
+                <td class = "outlineright outlinetable">L</td>
+                <td class = "tableresult">??</td>
+                <td class = "tableresult">??</td>
+            </tr>
+        </table>
+        Parent genes go on the outside of the "windows" of the punnet square. One parent, the one on the top of the Punnet Square, has the Fur Length genes [SL]. The parent on the side of the Punnet Square has the Fur Length genes [LL]<br>
+        Each inner box represents one possible offspring result. The quadrants are split in a way where we can see all possible offspring<br>
+        
+        <table class = "outlinetable">
+            <tr>
+                <td></td>
+                <td class = "outlinebottom outlinetable" style = "text-align: center;">S</td>
+                <td class = "outlinebottom outlinetable"  style = "text-align: center;">L</td>
+            </tr>
+            <tr>
+                <td class = "outlineright outlinetable">L</td>
+                <td class = "tableresult">S</td>
+                <td class = "tableresult">L</td>
+            </tr>
+            <tr>
+                <td class = "outlineright outlinetable">L</td>
+                <td class = "tableresult">S</td>
+                <td class = "tableresult">L</td>
+            </tr>
+        </table>
+        
+        WIP
 
-
+        <table class = "outlinetable">
+            <tr>
+                <td></td>
+                <td class = "outlinebottom outlinetable" style = "text-align: center;">S</td>
+                <td class = "outlinebottom outlinetable" style = "text-align: center;">L</td>
+            </tr>
+            <tr>
+                <td class = "outlineright outlinetable">L</td>
+                <td class = "tableresult">SL</td>
+                <td class = "tableresult">LL</td>
+            </tr>
+            <tr>
+                <td class = "outlineright outlinetable">L</td>
+                <td class = "tableresult">SL</td>
+                <td class = "tableresult">LL</td>
+            </tr>
+        </table>
 
 
 

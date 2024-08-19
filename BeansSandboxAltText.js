@@ -88,15 +88,23 @@ function parseCats(beansArray) {
             }
         }
         else {
-            for (let i = 0; i < markingslist.length; i++) {
-                for (let j = 0; j < markingslist[i].length; j++) {
-                    if (whitemarkings.includes(markingslist[i][j])) {
-                        whitelevel = j
-                        whitetype = whitetypelist[i]
-                        break
+            if (whitemarkings === "no") {
+                whitemarkings = "none"
+                whitelevel = "unknown"
+                whitetype = "unknown"
+            }
+            else {
+                for (let i = 0; i < markingslist.length; i++) {
+                    for (let j = 0; j < markingslist[i].length; j++) {
+                        if (whitemarkings.includes(markingslist[i][j])) {
+                            whitelevel = j+1
+                            whitetype = whitetypelist[i]
+                            break
+                        }
                     }
                 }
             }
+            
         }
 
         dataArray[i] = [fur, color, colortype, pattern, whitemarkings, whitelevel, whitetype]
