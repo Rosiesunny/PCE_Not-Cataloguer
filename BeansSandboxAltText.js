@@ -94,11 +94,14 @@ function parseCats(beansArray) {
                 whitetype = "unknown"
             }
             else {
-                for (let i = 0; i < markingslist.length; i++) {
+                let found = false;
+                
+                for (let i = 0; i < markingslist.length && found != true; i++) {
                     for (let j = 0; j < markingslist[i].length; j++) {
-                        if (whitemarkings.includes(markingslist[i][j])) {
+                        if (whitemarkings === markingslist[i][j]) {
                             whitelevel = j+1
                             whitetype = whitetypelist[i]
+                            found=true
                             break
                         }
                     }
