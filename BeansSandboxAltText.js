@@ -65,7 +65,7 @@ function parseCats(beansArray) {
             ["nose", "nose & toes", "nose, bib & boots", "bib, ears, & belly", "true piebald", "scattered piebald", "painted spots", "confetti", "speckled van"],
             ["toes", "tie & toes", "tie, toes & chin", "chin, boots, & belly", "left bicolor", "left piebald", "left patches", "left spots", "left van"],
             ["tail tip", "tail tip & toes", "tail, toes, & tie", "tail, boots, & belly", "right bicolor", "right piebald", "right patches", "right spots", "right van"],
-            ["ear tips", "ear & tail tips", "ear, tail, & toes", "snowspots", "snowmelt", "ghost", "owl mantle", "heart mantle", "heart"]
+            ["ear tips", "ear & tail tips", "ears, tail, & toes", "snowspots", "snowmelt", "ghost", "owl mantle", "heart mantle", "heart"]
         ]
         let whitetypelist = ["classic", "piebald", "left", "right", "inverse"]
 
@@ -90,8 +90,8 @@ function parseCats(beansArray) {
         else {
             if (whitemarkings === "no") {
                 whitemarkings = "none"
-                whitelevel = "unknown"
-                whitetype = "unknown"
+                whitelevel = "hidden"
+                whitetype = "hidden"
             }
             else {
                 let found = false;
@@ -220,7 +220,7 @@ function ensmallenData(beansArray) {
             }
             beansArrayNew = tempArray2
         }
-        
+
     }
     console.log(beansArrayNew)
     return beansArrayNew
