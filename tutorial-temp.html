@@ -79,12 +79,17 @@
 
         .outlinetable {
             background-color:rgb(247, 180, 126);
-            padding: .5%
+            padding: .5%;
+            font-size: 180%
         }
 
         .tableresult {
             background-color:rgb(255, 224, 198);
             padding: 15px;
+        }
+
+        .test {
+            color: red;
         }
         </style>
         <link rel="stylesheet" href = "geneTesting.css">
@@ -339,8 +344,8 @@
     </div>
     <br>
 
-        When dealing with dominant and recessive genes, dominant genes will always dominate the result. For example, if a cat had [SO] for its wind genes, the cat would be a South cat, as the dominant S (South) takes priority over the recessive O (Null).<br>
-        In order for a recessive gene to display on a cat, the cat needs to only have copies of the recessive gene. For wind genes, for example, the cat needs to have [OO] for its wind to be Null. Any N (North) or S (South) would take over if it was present.<br>
+        When dealing with dominant and recessive genes, dominant genes will always dominate the result. For example, if a cat had [<span class = "dominant">S</span><span class = "recessive">O</span>] for its wind genes, the cat would be a South cat, as the dominant <span class = "dominant">S</span> (South) takes priority over the recessive <span class = "recessive">O</span> (Null).<br>
+        In order for a recessive gene to display on a cat, the cat needs to only have copies of the recessive gene. For wind genes, for example, the cat needs to have [<span class = "recessive">OO</span>] for its wind to be Null. Any <span class = "dominant">N</span> (North) or <span class = "dominant">S</span> (South) would take over if it was present.<br>
         In most cases, the order of the genes does not matter. Main exceptions of this rule are Color Group allele order in north and south cats, and Growth allele order.<br>
         
         <h2>What the Not-Cataloguer does for you</h2>
@@ -415,88 +420,94 @@
                 </div>
             </div>
         </div>
-        <ol><li>Starting off with the species - under Appearance, we see that her species is listed as Not-cat. For our Species section, we mark sunny as <b>[C]</b></li>
-        <li>Then we move onto wind. Sunny's wind is listed under Basic Data, and she is a trade wind. Since we know trade winds always have both North and South wind genes, we know her wind gene is [NS] (or [SN], it doesn't matter what order it's in, but for convenience I usually list them in order of dominance where possible. In this case both genes are dominant, so I'll just say arbitrarily her wind gene is <b>[NS]</b>)</li>
-        <li>For fur length, Sunny's fur is listed as Longhair. Since we know Longhair is recessive, Sunny has to have 2 longhair genes for it to show. Her Fur Length gene is <b>[LL]</b></li>
-        <li>Onto colors- probably the most tricky category. We note that Sunny is a Black-Chocolate Watercolor. In watercolors and tortoiseshells, the first color listed before the dash (-) is their first fur color, so Sunny has Black fur. Black fur is caused by a black gene, not orange, and we know watercolors have the same color gene twice, so the beginning of the color gene is [BB]. Since black is a full color, we know that Sunny has at least 1 copy of the dominant Full gene. She could have a recessive Dilute gene that isn't showing. We can't find that out without revealing her genes or gene testing her, so for now, we mark her color genes down as [BBF?]. Black is color density 4, so the final color gene code we get is <b>[BBF?4]</b> </li>
-        <li>For pattern, we note that Sunny's pattern is Cloudpoint. Since she's not solid, we know that she has at least 1 dominant "yes" display gene, so we start the gene code off with [Y?]. She could carry a no, we don't know, hence the ?. If we go and reference what genes Cloudpoint needs to display, we find it needs Marble and Point genes, so her pattern genes come out to <b>[Y?MP]</b></li>
-        <li>Sunny's white markings are listed as "Nose & Toes / P2". First off, we know that she is showing white marks at all, which means she has at least 1 "yes" gene to show white marks, so we start off with [Y?] for her white marks gene. Then, it's easy to determine the rest, as it lists it right there in the "P2". She has level 2 white, and her white is piebald type, so her full white markings gene is <b>[Y?2P]</b></li>
+        <ol><li>Starting off with the species - under Appearance, we see that her species is listed as Not-cat. For our Species section, we mark sunny as <b>[<span class = "dominant">C</span>]</b></li>
+        <li>Then we move onto wind. Sunny's wind is listed under Basic Data, and she is a trade wind. Since we know trade winds always have both North and South wind genes, we know her wind gene is [<span class = "dominant">NS</span>] (or [<span class = "dominant">SN</span>], it doesn't matter what order it's in, but for convenience I usually list them in order of dominance where possible. In this case both genes are dominant, so I'll just say arbitrarily her wind gene is <b>[<span class = "dominant">NS</span>]</b>)</li>
+        <li>For fur length, Sunny's fur is listed as Longhair. Since we know Longhair is recessive, Sunny has to have 2 longhair genes for it to show. Her Fur Length gene is <b>[<span class = "recessive">LL</span>]</b></li>
+        <li>Onto colors- probably the most tricky category. We note that Sunny is a Black-Chocolate Watercolor. In watercolors and tortoiseshells, the first color listed before the dash (-) is their first fur color, so Sunny has Black fur. Black fur is caused by a black gene, not orange, and we know watercolors have the same color gene twice, so the beginning of the color gene is [<span class = "dominant">BB</span>]. Since black is a full color, we know that Sunny has at least 1 copy of the dominant Full gene. She could have a recessive Dilute gene that isn't showing. We can't find that out without revealing her genes or gene testing her, so for now, we mark her color genes down as [<span class = "dominant">BBF</span>?]. Black is color density 4, so the final color gene code we get is <b>[<span class = "dominant">BBF</span>?<span class = "dominant">4</span>]</b> </li>
+        <li>For pattern, we note that Sunny's pattern is Cloudpoint. Since she's not solid, we know that she has at least 1 dominant "yes" display gene, so we start the gene code off with [<span class = "dominant">Y</span>?]. She could carry a no, we don't know, hence the ?. If we go and reference what genes Cloudpoint needs to display, we find it needs Marble and Point genes, so her pattern genes come out to <b>[<span class = "dominant">Y</span>?<span class = "dominant">MP</span>]</b></li>
+        <li>Sunny's white markings are listed as "Nose & Toes / P2". First off, we know that she is showing white marks at all, which means she has at least 1 "yes" gene to show white marks, so we start off with [<span class = "dominant">Y</span>?] for her white marks gene. Then, it's easy to determine the rest, as it lists it right there in the "P2". She has level 2 white, and her white is piebald type, so her full white markings gene is <b>[<span class = "dominant">Y</span>?<span class = "dominant">2P</span>]</b></li>
         <li>We don't know Sunny's Growth genes since that isn't publicly available, so we write that her growth genes are <b>[??]</b></li>
         <li>We don't know Sunny's accent genes either, since she isn't a Mercat, so her accent genes are <b>[??]</b> as well</li>
-        <li>Finally, we put all the information we got together. Sunny's incomplete gene code, exactly as the website would have found it on the Add Cat page, is <b>[C] [NS] [LL] [BBF?4] [Y?MP] [Y?2P] [??] [??]</b></li></ol>
+        <li>Finally, we put all the information we got together. Sunny's incomplete gene code, exactly as the website would have found it on the Add Cat page, is <b>[<span class = "dominant">C</span>] [<span class = "dominant">NS</span>] [<span class = "recessive">LL</span>] [<span class = "dominant">BBF</span>?<span class = "dominant">4</span>] [<span class = "dominant">Y</span>?<span class = "dominant">MP</span>] [<span class = "dominant">Y</span>?<span class = "dominant">2P</span>] [??] [??]</b></li></ol>
 
         <h2>Using the Beans Sandbox to Gene Test Cats</h2>
 
-        Once we have an incomplete gene code, like Sunny's from the example ([C] [NS] [LL] [BBF?4] [Y?MP] [Y?2P] [??] [??]), we want to fill in as many of those question marks (?) as possible<br>
+        Once we have an incomplete gene code, like Sunny's from the example ([<span class = "dominant">C</span>] [<span class = "dominant">NS</span>] [<span class = "recessive">LL</span>] [<span class = "dominant">BBF</span>?<span class = "dominant">4</span>] [<span class = "dominant">Y</span>?<span class = "dominant">MP</span>] [<span class = "dominant">Y</span>?<span class = "dominant">2P</span>] [??] [??]), we want to fill in as many of those question marks (?) as possible<br>
         The Not-Cataloguer makes this process fairly simple. It gives you a list of tests to take, you select one, and it tells you the ID of a cat that will help you gene test your cat, and tells you what you're supposed to be looking for in the bean results.<br>
         In Sunny's gene code, the first missing gene we have is a Dilute gene. To test if Sunny carries Dilute, we want to put her in the Beans Sandbox with a cat that is Dilute, and if any of her beans are dilute, she must be carrying dilute.<br>
-        In the Not-Cataloguer, you would just press a button here to say if there are dilutes. In a manual geneing example though, we would manually adjust her Color gene section to [BBFD4] if she carries dilute, and [BBFF4] if she doesn't.<br>
+        In the Not-Cataloguer, you would just press a button here to say if there are dilutes. In a manual geneing example though, we would manually adjust her Color gene section to [<span class = "dominant">BBF</span><span class = "recessive">D</span><span class = "dominant">4</span>] if she carries dilute, and [<span class = "dominant">BBFF4</span>] if she doesn't.<br>
         When geneing manually, it's important to understand the logic behind what you're checking for. With that in mind, we'll explain how exactly beans inherit genes from their parents.
 
         
-        <h2>Punnet Squares and What That Means For Your Cats</h2>
-        You might remember Punnet Squares from your biology class if you had one. Basically, when genes are being passed down, each parent will pass down one copy of an allele they have.<br>
-        Which allele the parent passes down is randomly selected from their available alleles. For example, a cat with [SL] alleles in their Fur Length category would have a 50% chance of passing down S, and 50% chance of passing down L.<br>
-        To illustrate all possible combinations that can be passed down, we draw a Punnet Square. You can draw one pretty easily with the shape of a plus, a window, or a cross.<br>
+        <h2>Punnett Squares and What That Means For Your Cats</h2>
+        You might remember Punnett Squares from your biology class if you had one. Basically, when genes are being passed down, each parent will pass down one copy of an allele they have.<br>
+        Which allele the parent passes down is randomly selected from their available alleles. For example, a cat with [<span class = "dominant">S</span><span class = "recessive">L</span>] alleles in their Fur Length category would have a 50% chance of passing down S, and 50% chance of passing down L.<br>
+        There are 2 types of alleles - dominant alleles and recessive alleles. A dominant allele dominates the result when it is inherited, so whenever that allele is present in a subcategory, it takes precedence over recessive alleles also in that category.<br>
+        <span class = "dominant">S</span> is a dominant allele, where <span class = "recessive">L</span> is a recessive allele. With two parent cats, if we know their genes are [<span class = "dominant">S</span><span class = "recessive">L</span>] for one parent, and [<span class = "recessive">LL</span>] for the other parent, we can make a Punnett Square to show all their possible offspring.<br>
+        You can draw a Punnett Square pretty easily with the shape of a plus, a window, or a cross.<br>
         Here's an example of one below:
         <table class = "outlinetable">
             <tr>
                 <td></td>
-                <td class = "outlinebottom outlinetable" style = "text-align: center;">S</td>
-                <td class = "outlinebottom outlinetable" style = "text-align: center;">L</td>
+                <td class = "outlinebottom outlinetable" style = "text-align: center;"><span class = "dominant">S</span></td>
+                <td class = "outlinebottom outlinetable" style = "text-align: center;"><span class = "recessive">L</span></td>
             </tr>
             <tr>
-                <td class = "outlineright outlinetable">L</td>
+                <td class = "outlineright outlinetable"><span class = "recessive">L</span></td>
                 <td class = "tableresult">??</td>
                 <td class = "tableresult">??</td>
             </tr>
             <tr>
-                <td class = "outlineright outlinetable">L</td>
+                <td class = "outlineright outlinetable"><span class = "recessive">L</span></td>
                 <td class = "tableresult">??</td>
                 <td class = "tableresult">??</td>
             </tr>
         </table>
-        Parent genes go on the outside of the "windows" of the punnet square. One parent, the one on the top of the Punnet Square, has the Fur Length genes [SL]. The parent on the side of the Punnet Square has the Fur Length genes [LL]<br>
+        We've put the parent cats genes on the outside of the crossed boxes. The parent on top of the Punnett Square has [<span class = "dominant">S</span><span class = "recessive">L</span>] Fur Length genes. The parent on the side of the Punnet Square has [<span class = "recessive">LL</span>] Fur Length genes.<br>
         Each inner box represents one possible offspring result. The quadrants are split in a way where we can see all possible offspring<br>
-        
+        Since each parent has 2 possible alleles to pass down, there are 4 (2x2) different results for each allele pair. Punnett Squares are a shortcut of showing each of those 4 results all in one figure<br>
+        With this example, we know both parents genes, so we start off by passing down the top parent's genes. The top parent passes genes down by column. The S gene is passed down to both cats in the first column, while the L is passed down to both cats in the second column. See the in-progress Punnett Square below:<br>
         <table class = "outlinetable">
             <tr>
                 <td></td>
-                <td class = "outlinebottom outlinetable" style = "text-align: center;">S</td>
-                <td class = "outlinebottom outlinetable"  style = "text-align: center;">L</td>
+                <td class = "outlinebottom outlinetable" style = "text-align: center;"><span class = "dominant">S</span></td>
+                <td class = "outlinebottom outlinetable"  style = "text-align: center;"><span class = "recessive">L</span></td>
             </tr>
             <tr>
-                <td class = "outlineright outlinetable">L</td>
-                <td class = "tableresult">S</td>
-                <td class = "tableresult">L</td>
+                <td class = "outlineright outlinetable"><span class = "recessive">L</span></td>
+                <td class = "tableresult"><span class = "dominant">S</span></td>
+                <td class = "tableresult"><span class = "recessive">L</span></td>
             </tr>
             <tr>
-                <td class = "outlineright outlinetable">L</td>
-                <td class = "tableresult">S</td>
-                <td class = "tableresult">L</td>
+                <td class = "outlineright outlinetable"><span class = "recessive">L</span></td>
+                <td class = "tableresult"><span class = "dominant">S</span></td>
+                <td class = "tableresult"><span class = "recessive">L</span></td>
             </tr>
         </table>
-        
-        WIP
-
+        After the top cat's genes have been passed down, we pass down the side cat's genes. The side cat passes genes down by row. The top row passes on the <span class = "recessive">L</span> allele to both offspring in the top row, and the second row also passes on the <span class = "recessive">L</span> allele to both offspring in the bottom row.<br>
         <table class = "outlinetable">
             <tr>
                 <td></td>
-                <td class = "outlinebottom outlinetable" style = "text-align: center;">S</td>
-                <td class = "outlinebottom outlinetable" style = "text-align: center;">L</td>
+                <td class = "outlinebottom outlinetable" style = "text-align: center;"><span class = "dominant">S</span></td>
+                <td class = "outlinebottom outlinetable" style = "text-align: center;"><span class = "recessive">L</span></td>
             </tr>
             <tr>
-                <td class = "outlineright outlinetable">L</td>
-                <td class = "tableresult">SL</td>
-                <td class = "tableresult">LL</td>
+                <td class = "outlineright outlinetable"><span class = "recessive">L</span></td>
+                <td class = "tableresult"><span class = "dominant">S</span><span class = "recessive">L</span></td>
+                <td class = "tableresult"><span class = "recessive">LL</span></td>
             </tr>
             <tr>
-                <td class = "outlineright outlinetable">L</td>
-                <td class = "tableresult">SL</td>
-                <td class = "tableresult">LL</td>
+                <td class = "outlineright outlinetable"><span class = "recessive">L</span></td>
+                <td class = "tableresult"><span class = "dominant">S</span><span class = "recessive">L</span></td>
+                <td class = "tableresult"><span class = "recessive">LL</span></td>
             </tr>
         </table>
-
+        The offspring section is now completely filled out, and we can see that two of the beans inherited [<span class = "dominant">S</span><span class = "recessive">L</span>], and two of them inherited [<span class = "recessive">LL</span>].<br>
+        The two beans who inherited [<span class = "dominant">S</span><span class = "recessive">L</span>] would display as shorthairs, since the shorthair gene is dominant and the longhair gene is recessive. Both offspring who inherited [<span class = "dominant">S</span><span class = "recessive">L</span>] carry longhair though, and have a chance of passing it off to their offspring.<br>
+        The two beans who inherited [<span class = "recessive">LL</span>] would display as longhairs, since there's no shorthair gene to stop the recessive longhair gene from displaying. All of these bean's offspring would inherit a recessive longhair gene, as it's all they have to pass down. <br>
+        In terms of percentages, half of the offspring are shorthairs that carry longhair, and half of them are longhairs. <br>
+        
+        <h2>Reverse Engineering the Punnet Square Logic in the Beans Sandbox</h2>
 
 
 

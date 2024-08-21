@@ -581,7 +581,7 @@ function changeButtons() {
                         
                     }
                     if (currentselectvalue.includes("Albino Hidden Colors Check")) {
-                        changeTestCatID("663")
+                        changeTestCatID("227123") 
                         changeExamples(["BlackGroupCatsReference", "OrangeGroupCatsReference"])
                         answersection.innerHTML = "[Part 1] Looking for: black cats"
                         resultFoundButton.textContent = "Black cats found"
@@ -677,7 +677,7 @@ function albinoColorSubmitPart1(answer) {
         resultNotFoundButton.classList.add("answerbutton")
         buttonsection.innerHTML = ""
         answersection.innerHTML = ""
-        changeTestCatID("227123")
+        changeTestCatID("663")
         answersection.innerHTML = "[Part 2] Looking for: orange cats"
         resultFoundButton.textContent = "Orange cats found"
         resultNotFoundButton.textContent = "ONLY Black cats found"
