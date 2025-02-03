@@ -1119,7 +1119,6 @@ function parseFriendsFamily(dataArray, friendsOrFamilyCheck) {
         if (linestart != lineend) {
             let j = 0
             for (let i = 0; i < lineend-linestart+1; i++) {
-                console.log("j: " + j + " i: " + i)
                 if (dataArray[linestart+i] != "") {
                     friendName[j] = dataArray[linestart+i].split(" - ")[0]
                     friendRelationship[j] = dataArray[linestart+i].split(" - ")[1]
