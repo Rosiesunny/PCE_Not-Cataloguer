@@ -12,7 +12,7 @@ div {
  }
 
 #col1 {
-    width: 35%;
+    width: 30%;
     outline: red 1px solid;
     display: inline-block
 }
@@ -75,11 +75,37 @@ div {
 
 .symbols {
     padding-right: 3%;
+    display: inline-block;
+    align-self: center;
+}
+
+.data-point {
+    display: inline-block;
+}
+
+.sub-data-container {
+    display: flex;
 }
 
 #birthday-age-origin {
     outline: 1px solid rgb(102, 75, 75);
     padding: 2%;
+}
+
+.data-container {
+    outline: 1px solid rgb(58, 14, 14)
+}
+
+.demographics-label {
+    display: inline-block;
+}
+
+.info-right {
+    float: right;
+}
+
+.physical-traits-label {
+    display: inline-block;
 }
 
 #physicaltraits {
@@ -90,7 +116,13 @@ div {
 #col2 {
     outline: 1px solid aqua;
     width: 20%;
-    display: inline-block
+    display: inline-block;
+    vertical-align: top;
+}
+
+#held-trinket-section {
+    outline: 1px solid rgb(204, 95, 207);
+    min-height: 75px;
 }
 
 #trinket-image {
@@ -107,10 +139,17 @@ div {
 }
 
 .personality-bars {
-    background-color: red;
-    width: 50%;
-    text-align: center;
+    background-color: rgba(255, 36, 36, 0.205);
+    width: 100%;
     margin-left: 5%;
+    position: relative;
+}
+
+.bar-value {
+    height:100%;
+    display: inline-block;
+    background-color:rgb(33, 23, 170);
+    text-align: center;
 }
 
 .personality-label {
@@ -119,9 +158,62 @@ div {
 
 }
 
+#attribute-stats {
+    outline: 1px solid rgb(253, 210, 255);
+}
 
+.attribute-box-container {
+    background-color: rgb(143, 121, 206);
+    display: flex;
+    flex-direction: row;
+}
 
+.attribute-box {
+    height:0;
+    width:23%;
+    padding-bottom:30%;
+    background-color:rgb(156, 78, 78);
+    margin-bottom: 3%;
+    text-align: center;
+    display: inline-block;
+}
 
+.attribute-title {
+    background-color:rgb(85, 85, 117);
+    margin: 0px;
+    padding: 3%;
+}
+
+.attribute-values {
+    font-size: 220%;
+    background-color: rgb(62, 62, 128);
+}
+
+.attribute-smaller-numbers {
+    font-size: 130%;
+    padding: 5%;
+    outline: 1px solid black
+}
+
+.attribute-desc {
+    margin-top: 5%;
+    font-size: 80%;
+    background-color:rgb(89, 114, 78);
+    padding: 2%;
+}
+
+#col3 {
+    width: 22%;
+    display: inline-block;
+} 
+
+.job-class-label {
+    display: inline-block;
+}
+
+.listbox {
+    background-color:rgb(72, 179, 72)
+}
 
 
 

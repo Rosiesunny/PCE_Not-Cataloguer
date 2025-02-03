@@ -1114,18 +1114,17 @@ function parseFriendsFamily(dataArray, friendsOrFamilyCheck) {
         }
     }
 
-    // DEBUG: console.log(dataArray)
-    for (let i = 0; i < dataArray.length; i++) {
-        if (dataArray[i].includes(friendsOrFamilyCheck)) {
-
-        }
-    }
     // DEBUG: console.log(linestart + " - " + lineend)
     if (linestart != "NOT FOUND") {
         if (linestart != lineend) {
+            let j = 0
             for (let i = 0; i < lineend-linestart+1; i++) {
-                friendName[i] = dataArray[linestart+i].split(" - ")[0]
-                friendRelationship[i] = dataArray[linestart+i].split(" - ")[1]
+                console.log("j: " + j + " i: " + i)
+                if (dataArray[linestart+i] != "") {
+                    friendName[j] = dataArray[linestart+i].split(" - ")[0]
+                    friendRelationship[j] = dataArray[linestart+i].split(" - ")[1]
+                    j++
+                } 
             }
             return([friendName, friendRelationship])
         }

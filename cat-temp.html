@@ -24,26 +24,60 @@
                             <p id = "cat-pronouns">Pronouns</p>
                         </div>
                         <div id = "wind-personality-aspect-travelling">
-                            <p id = "cat-wind"><img src = "assets/PCE_Assets/Symbols/Wind/wind_north.png" class = "symbols">Wind</p>
-                            <p id = "cat-personality"><img src = "assets/PCE_Assets/Symbols/Personality/person_adventurous.png" class = "symbols">Personality</p>
-                            <p id = "cat-aspect"><img src = "assets/PCE_Assets/Symbols/Aspect/aspect_none.png" class = "symbols">Aspect</p>
-                            <p id = "cat-active-travelling">Active/Travelling</p>
+                            <div class = "data-container" style = "display: flex; justify-content: space-between;"><p class = "demographics-label">Wind: </p>
+                                <div class = "sub-data-container">
+                                    <img src = "assets/PCE_Assets/Symbols/Wind/wind_north.png" id = "cat-wind-symbol" class = "symbols"><p id = "cat-wind" class = "data-point">North</p>
+                                </div>
+                            </div>
+                            <div class = "data-container" style = "display: flex; justify-content: space-between;"><p class = "demographics-label">Personality: </p>
+                                <div class = "sub-data-container">
+                                    <img src = "assets/PCE_Assets/Symbols/Personality/person_adventurous.png" id = "cat-personality-symbol" class = "symbols"><p id = "cat-personality" class = "data-point">Adventurous</p>
+                                </div>
+                            </div>
+                            <div class = "data-container" style = "display: flex; justify-content: space-between;"><p class = "demographics-label">Aspect: </p>
+                                <div class = "sub-data-container">
+                                    <img src = "assets/PCE_Assets/Symbols/Aspect/aspect_none.png" id = "cat-aspect-symbol" class = "symbols"><p id = "cat-aspect" class = "data-point">Undiscovered</p>
+                                </div>
+                            </div>
+                            <div class = "data-container"><p class = "demographics-label">Status: </p>
+                                <p id = "cat-active-travelling" class = "info-right">Travelling</p>
+                            </div>
                         </div>
                     </div>
                     <div id = "col1-subcol2">
                         <div id = "birthday-age-origin">
-                            <p id = "cat-birthday">Birthday</p>
-                            <p id = "cat-age">Age</p>
-                            <p id = "cat-origin">Origin</p>
+                            <div class = "data-container"><p class = "demographics-label">Birthday: </p>
+                                <p id = "cat-birthday" class = "info-right">Spring 1, Year 1</p>
+                            </div>
+                            <div class = "data-container"><p class = "demographics-label">Age: </p>
+                                <p id = "cat-age" class = "info-right">7 years</p>
+                            </div>
+                            <div class = "data-container"><p class = "demographics-label">Origin: </p>
+                                <p id = "cat-origin" class = "info-right">Born in Nestor's Wood</p>
+                            </div>
                         </div>
                         <div id = "physicaltraits">
-                            <p id = "cat-species">Species</p>
-                            <p id = "cat-size">Size</p>
-                            <p id = "cat-fur">Fur Length</p>
-                            <p id = "cat-color">Color</p>
-                            <p id = "cat-pattern">Pattern</p>
-                            <p id = "cat-white-markings">White Markings</p>
-                            <p id = "cat-eye-color">Eye Color</p>
+                            <div class = "data-container"><p class = "physical-traits-label">Species: </p>
+                                <p id = "cat-species" class = "info-right">Not-Cat</p>
+                            </div>
+                            <div class = "data-container"><p class = "physical-traits-label">Size: </p>
+                                <p id = "cat-size" class = "info-right">14lbs</p>
+                            </div>
+                            <div class = "data-container"><p class = "physical-traits-label">Fur Length: </p>
+                                <p id = "cat-fur-length" class = "info-right">Longhair</p>
+                            </div>
+                            <div class = "data-container"><p class = "physical-traits-label">Color: </p>
+                                <p id = "cat-color" class = "info-right">Ginger</p>
+                            </div>
+                            <div class = "data-container"><p class = "physical-traits-label">Pattern: </p>
+                                <p id = "cat-pattern" class = "info-right">Mink</p>
+                            </div>
+                            <div class = "data-container"><p class = "physical-traits-label">White Markings: </p>
+                                <p id = "cat-white-markings" class = "info-right">Snowspots</p>
+                            </div>
+                            <div class = "data-container"><p class = "physical-traits-label">Eye Color: </p>
+                                <p id = "cat-eye-color" class = "info-right">Dark Brown</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -53,27 +87,157 @@
                     <img src = "assets/PCE_Assets/Trinkets/acorn.png" id = "trinket-image"><p id = "cat-trinket-name">Acorn</p><p id = "cat-trinket-stats">Dedication +1</p>
                 </div>
                 <div id = "personality-stats">
-                    <p>Personality Stats: </p>
+                    <p>Personality Stats: </p> <!--To set bar lengths, in code set "cat-X-bar" width to whatever percentage-->
                     <div class = "cat-personality-stats"><p class = "personality-label">Bravery: </p>
-                        <div id = "cat-bravery" class = "personality-bars">#/10</div>
+                        <div id = "cat-bravery" class = "personality-bars" data-label="#/10">
+                            <div id = "cat-bravery-bar" class = "bar-value">#/10</div>
+                        </div>
                     </div>
                     <div class = "cat-personality-stats"><p class = "personality-label">Benevolence: </p>
-                        <div id = "cat-benevolence" class = "personality-bars">#/10</div>
+                        <div id = "cat-benevolence" class = "personality-bars" data-label="#/10">
+                            <div id = "cat-benevolence-bar" class = "bar-value">#/10</div>
+                        </div>
                     </div>
                     <div class = "cat-personality-stats"><p class = "personality-label">Energy: </p>
-                        <div id = "cat-energy" class = "personality-bars">#/10</div>
+                        <div id = "cat-energy" class = "personality-bars" data-label="#/10">
+                            <div id = "cat-energy-bar" class = "bar-value">#/10</div>
+                        </div>
                     </div>
                     <div class = "cat-personality-stats"><p class = "personality-label">Extroversion: </p>
-                        <div id = "cat-extroversion" class = "personality-bars">#/10</div>
+                        <div id = "cat-extroversion" class = "personality-bars" data-label="#/10">
+                            <div id = "cat-extroversion-bar" class = "bar-value">#/10</div>
+                        </div>
                     </div>
                     <div class = "cat-personality-stats"><p class = "personality-label">Dedication: </p>
-                        <div id = "cat-dedication" class = "personality-bars">#/10</div>
+                        <div id = "cat-dedication" class = "personality-bars" data-label="#/10">
+                            <div id = "cat-dedication-bar" class = "bar-value">#/10</div>
+                        </div>
+                    </div>
+                </div>
+                <div id = "attribute-stats">
+                    <p>Attribute Stats: </p>
+
+
+                    <div class = "attribute-box"><!--Strength-->
+                        <div>
+                            <p class = "attribute-title">Strength:</p>
+                            <div id = "cat-strength-value" class = "attribute-values">20</div>
+                            <div style = "display: flex; justify-content: space-between">
+                                <div id = "cat-strength-die" class = "attribute-smaller-numbers">4d</div>
+                                <div id = "cat-strength-modifier" class="info-right attribute-smaller-numbers">+2</div>
+                            </div>
+                            <div id = "cat-strength-desc" class = "attribute-desc">Very Good</div>
+                        </div>
+                    </div>
+                    <div class = "attribute-box"><!--agility-->
+                        <div>
+                            <p class = "attribute-title">Agility:</p>
+                            <div id = "cat-agility-value" class = "attribute-values">20</div>
+                            <div style = "display: flex; justify-content: space-between">
+                                <div id = "cat-agility-die" class = "attribute-smaller-numbers">4d</div>
+                                <div id = "cat-agility-modifier" class="info-right attribute-smaller-numbers">+2</div>
+                            </div>
+                            <div id = "cat-agility-desc" class = "attribute-desc">Very Good</div>
+                        </div>
+                    </div>
+                    <div class = "attribute-box"><!--health-->
+                        <div>
+                            <p class = "attribute-title">Health:</p>
+                            <div id = "cat-health-value" class = "attribute-values">20</div>
+                            <div style = "display: flex; justify-content: space-between">
+                                <div id = "cat-health-die" class = "attribute-smaller-numbers">4d</div>
+                                <div id = "cat-health-modifier" class="info-right attribute-smaller-numbers">+2</div>
+                            </div>
+                            <div id = "cat-health-desc" class = "attribute-desc">Very Good</div>
+                        </div>
+                    </div>
+                    <div class = "attribute-box"><!--finesse-->
+                        <div>
+                            <p class = "attribute-title">Finesse:</p>
+                            <div id = "cat-finesse-value" class = "attribute-values">20</div>
+                            <div style = "display: flex; justify-content: space-between">
+                                <div id = "cat-finesse-die" class = "attribute-smaller-numbers">4d</div>
+                                <div id = "cat-finesse-modifier" class="info-right attribute-smaller-numbers">+2</div>
+                            </div>
+                            <div id = "cat-finesse-desc" class = "attribute-desc">Very Good</div>
+                        </div>
+                    </div>
+                    <div class = "attribute-box"><!--cleverness-->
+                        <div>
+                            <p class = "attribute-title">Cleverness:</p>
+                            <div id = "cat-cleverness-value" class = "attribute-values">20</div>
+                            <div style = "display: flex; justify-content: space-between">
+                                <div id = "cat-cleverness-die" class = "attribute-smaller-numbers">4d</div>
+                                <div id = "cat-cleverness-modifier" class="info-right attribute-smaller-numbers">+2</div>
+                            </div>
+                            <div id = "cat-cleverness-desc" class = "attribute-desc">Very Good</div>
+                        </div>
+                    </div>
+                    <div class = "attribute-box"><!--perception-->
+                        <div>
+                            <p class = "attribute-title">Perception:</p>
+                            <div id = "cat-perception-value" class = "attribute-values">20</div>
+                            <div style = "display: flex; justify-content: space-between">
+                                <div id = "cat-perception-die" class = "attribute-smaller-numbers">4d</div>
+                                <div id = "cat-perception-modifier" class="info-right attribute-smaller-numbers">+2</div>
+                            </div>
+                            <div id = "cat-perception-desc" class = "attribute-desc">Very Good</div>
+                        </div>
+                    </div>
+                    <div class = "attribute-box"><!--luck-->
+                        <div>
+                            <p class = "attribute-title">Luck:</p>
+                            <div id = "cat-luck-value" class = "attribute-values">20</div>
+                            <div style = "display: flex; justify-content: space-between">
+                                <div id = "cat-luck-die" class = "attribute-smaller-numbers">4d</div>
+                                <div id = "cat-luck-modifier" class="info-right attribute-smaller-numbers">+2</div>
+                            </div>
+                            <div id = "cat-luck-desc" class = "attribute-desc">Very Good</div>
+                        </div>
                     </div>
                 </div>
             </div>
+            <div id = "col3">
+                <div class = "data-container"><p class = "job-class-label">Day Job: </p>
+                    <p id = "cat-day-job" class = "info-right">Farmer</p>
+                </div>
+                <p>Job List: </p>
+                <div class = "listbox" id = "cat-job-list">
+                    Hunter Level 1 [10/140 EXP]<br>
+                    Gatherer Level 1 [10/140 EXP]<br>
+                    Miner Level 1 [40/140 EXP]<br>
+                    Fisher Level 1 [20/140 EXP]<br>
+                    Gardener Level 1 [10/140 EXP]<br>
+                    Herbalist Level 5 [Maximum Level]<br>
+                    Farmer Level 1 [10/140 EXP]<br>
+                    Flockherd Level 2 [210/280 EXP]<br>
+                    Scribe Level 5 [Maximum Level]<br>
+                    Artist Level 1 [60/140 EXP]<br>
+                    Builder Level 1 [10/140 EXP]
+                </div>
+                <div class = "data-container"><p class = "job-class-label">Adventuring Class: </p>
+                    <p id = "cat-adventuring-class" class = "info-right">Fighter</p>
+                </div>
+                <div class = "listbox" id = "cat-job-list">
+                    Fighter Level 3 [30/300 EXP]<br>
+                    Ranger Level 4 [Maximum Level]<br>
+                    Medic Level 2 [19/150 EXP]<br>
+                    Scout Level 4 [Maximum Level]<br>
+                    Bard Level 4 [Maximum Level]
+                </div>
+
+
+                <div style = "background-color: red">change main columns to flexboxes instead of inlines, it's causing the first column to display lower when I add too many br tags to the third</div>
+
+
+
+            </div>
+
 
             
             <a href = "catalogue.html"><img src = "assets/backarrow.png" alt = "Back Button" style = "padding-left: 0; max-width: 4%"></a>
+            
+            <!-- old stuff I'll probably delete soon-->
             <div class = "contents">
                 <p class = "cat-name"></p>
                 <p class = "cat-id"></p>
