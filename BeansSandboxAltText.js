@@ -50,6 +50,10 @@ function parseCats(beansArray) {
         let pattern = beansArray[i].split(" " + fur)[0].split(color+" ")[1]
 
         let whitemarkings = beansArray[i].split(" white markings")[0]
+
+        if (whitemarkings.includes(pattern + " tail")) {
+            whitemarkings = whitemarkings.split(pattern + " tail")[1]
+        }
         if (whitemarkings.includes("coat")) {
             whitemarkings = whitemarkings.split("coat")[1]
         }
@@ -59,7 +63,7 @@ function parseCats(beansArray) {
         if (whitemarkings.includes(" / ")) {
             whitemarkings = whitemarkings.split(" / ")[0]
         }
-        console.log(whitemarkings)
+        
         let markingslist = [
             ["locket", "locket & toes", "bib & boots", "bib, boots, & belly", "classic bicolor", "piebald", "spotted piebald", "freckled piebald", "van"],
             ["nose", "nose & toes", "nose, bib & boots", "bib, ears, & belly", "true piebald", "scattered piebald", "painted spots", "confetti", "speckled van"],
@@ -109,10 +113,22 @@ function parseCats(beansArray) {
             }
             
         }
-
-        dataArray[i] = [fur, color, colortype, pattern, whitemarkings, whitelevel, whitetype]
+        let accentcolor
+        if (beansArray[i].includes("Mercat")) {
+            accentcolor = beansArray[i].split("tail")[0]
+            accentcolor = accentcolor.split("coat")[1]
+            if (accentcolor.includes("trade markings")) {
+                accentcolor = accentcolor.split("trade markings")[1]
+            }
+            accentcolor = accentcolor.split(" " + pattern)[0]
+        }
+        else {
+            accentcolor = "hidden"
+        }
+        dataArray[i] = [fur, color, colortype, pattern, whitemarkings, whitelevel, whitetype, accentcolor]
         
     }
+
     console.log(dataArray)
     return dataArray
 }
@@ -129,8 +145,11 @@ function generateInnerHTML(dataArray) {
     let invertedColorGeneList = ["has orange", "has orange", "has orange", "has orange", "has black", "has black", "has black", "has black", "has orange", "has orange", "has orange", "has orange", "has black", "has black", "has black", "has black", "?"]
     let patternList = ["mackerel", "classic", "broken", "lynxpoint", "clouded", "rosette", "cloudpoint", "spotted", "mink", "colorpoint", "solid"]
     let patternGeneList = ["TT", "TM", "TS", "TP", "MM", "MS", "MP", "SS", "SP", "PP", "hidden"]
+    let accentList = ["ruby", "violet", "amber", "pink", "blue", "green", "indigo", "gold", "teal", "black"]
+    let accentGeneList = ["RR", "RB", "RY", "RL", "BB", "BY", "BL", "YY", "YL", "LL"]
+
     
-    let innerHTMLArray = ["<ul>", "<ul>", "<ul>", "<ul>", "<ul>", "<ul>", "<ul>"]
+    let innerHTMLArray = ["<ul>", "<ul>", "<ul>", "<ul>", "<ul>", "<ul>", "<ul>", "<ul>"]
     
     for (let i = 0; i < dataArray.length; i++) {
         innerHTMLArray[i] += "<li><b>fur:</b> " + dataArray[i][0] + "</li>"
@@ -156,6 +175,14 @@ function generateInnerHTML(dataArray) {
         }
         innerHTMLArray[i] += "<li><b>white:</b> " + dataArray[i][4] + "</li>"
         innerHTMLArray[i] += "<li><b>level:</b> " + dataArray[i][5] + "</li><li><b>type:</b> " + dataArray[i][6] + "</li>"
+
+        for (let j = 0; j < accentList.length; j++) {
+            if (dataArray[i][7] == accentList[j]) {
+                innerHTMLArray[i] += "<li><b>accent:</b> " + dataArray[i][7] + "</li><li><b>accent genes:</b> " + accentGeneList[j] + "</li>"
+            }
+        }
+
+        
     }
     return innerHTMLArray
 }

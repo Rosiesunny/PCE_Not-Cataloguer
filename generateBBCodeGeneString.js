@@ -5,7 +5,8 @@ function generateBBCodeGeneString(genestring, locationID) {
         genestringArray[i] = genestringArray[i].split("[")[1]
     }
     console.log(genestringArray)
-    let genestringText = "[font=Verdana][C] "
+    let genestringText = "[font=Verdana]"
+    genestringText += "[" + switchSpeciesBBCode(genestringArray[0]) + "] " 
     genestringText += "[" + switchWindBBCode(genestringArray[1][0]) + switchWindBBCode(genestringArray[1][1]) + "] " 
     genestringText += "[" + switchFurBBCode(genestringArray[2][0]) + switchFurBBCode(genestringArray[2][1]) + "] "
     genestringText += "[" + switchColorBBCode(genestringArray[3][0]) + switchColorBBCode(genestringArray[3][1]) + switchDiluteBBCode(genestringArray[3][2]) + switchDiluteBBCode(genestringArray[3][3]) + genestringArray[3][4] + "] "
@@ -154,5 +155,16 @@ function switchAccentColorBBCode(gene) {
             return "[color=yellow]Y[/color]"
         case "L":
             return "[color=grey]L[/color]"
+    }
+}
+
+function switchSpeciesBBCode(gene) {
+    switch (gene) {
+        case "C":
+            return "[color=grey]C[/color]"
+        case "M":
+            return "[color=purple]M[/color]"
+        case "?":
+            return "?"
     }
 }
