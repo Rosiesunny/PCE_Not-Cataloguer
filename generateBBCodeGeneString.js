@@ -163,7 +163,7 @@ function switchSpeciesBBCode(gene) {
         case "C":
             return "[color=grey]C[/color]"
         case "M":
-            return "[color=purple]M[/color]"
+            return "[color=blue]M[/color]"
         case "?":
             return "?"
     }
