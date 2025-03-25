@@ -336,6 +336,8 @@ function addCat() {
 
     // Adding Continue to Gene Testing button
     geneTestingButton(catGeneString, catWind, catID, catName, catFurLength, catColor[0], catColor[1], catWhiteMarks[2], catWhiteMarks[1], catPattern, catAge, catSpecies, catAccentColor)
+    bbcodeButton(catGeneString)
+
 
     thisCat.genes = catGeneString;
     thisCat.lastUpdated = Date();
@@ -363,6 +365,30 @@ function geneTestingButton(catGeneString, wind, id, name, furlength, color, colo
         }
         localStorage.setItem('geneTesterCatData',"")
     }
+}
+
+function bbcodeButton(catGeneString) {
+    if (catGeneString) {
+        let geneString = geneStringifier(catGeneString)
+        console.log(geneStringifier)
+        let functionName = "generateBBCodeGeneString('" + geneString + "', 'bbcodebox')"
+        if (document.getElementById("generatebbcode")) {
+            let geneTestButton = document.getElementById("generatebbcode")
+            geneTestButton.setAttribute("onclick", functionName)
+        }
+        else {
+            let buttonsection = document.getElementById("entryarea")
+            let generateBBCodeButton = document.createElement('button')
+            generateBBCodeButton.setAttribute("id", "generatebbcode")
+            generateBBCodeButton.textContent = "Generate BBCode"
+            
+            generateBBCodeButton.setAttribute("onclick", functionName)
+            buttonsection.appendChild(generateBBCodeButton)
+        }
+    }
+
+    
+
 }
 
 // converts genestring array to genestring text, reuses code from displayInfo gene section. Could prob replace the displayinfo section with a call to this later but lazy for now

@@ -54,4 +54,12 @@ body {
 
 #continuetogenetester {
     padding: 5%;
+    font-size: 150%;
+    font-weight: bold;
+}
+
+#generatebbcode {
+    padding: 5%;
+    margin-left: 10%;
+    background-color:rgb(72, 204, 197)
 }
