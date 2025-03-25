@@ -4,7 +4,6 @@ function generateBBCodeGeneString(genestring, locationID) {
     for (let i = 0; i < genestringArray.length; i++) {
         genestringArray[i] = genestringArray[i].split("[")[1]
     }
-    console.log(genestringArray)
     let genestringText = "[font=Verdana]"
     genestringText += "[" + switchSpeciesBBCode(genestringArray[0]) + "] " 
     genestringText += "[" + switchWindBBCode(genestringArray[1][0]) + switchWindBBCode(genestringArray[1][1]) + "] " 
@@ -21,7 +20,21 @@ function generateBBCodeGeneString(genestring, locationID) {
     genestringText += "[" + genestringArray[6] + "] [" + switchAccentColorBBCode(genestringArray[7][0]) + switchAccentColorBBCode(genestringArray[7][1]) + "][/font]"
     console.log(genestringText)
 
-    popupWindow(genestringText, locationID)
+    console.log("TESTING AREA:")
+    console.log(localStorage.getItem("bbcodePrefix"))
+    console.log(localStorage.getItem("bbcodeSuffix"))
+
+    let bbcodePrefix = localStorage.getItem("bbcodePrefix")
+    let bbcodeSuffix = localStorage.getItem("bbcodeSuffix")
+    let userStyleGeneStringText = ""
+    if (bbcodePrefix) {
+        userStyleGeneStringText += JSON.parse(bbcodePrefix)
+    }
+    userStyleGeneStringText += genestringText
+    if (bbcodeSuffix) {
+        userStyleGeneStringText += JSON.parse(bbcodeSuffix)
+    }
+    popupWindow(userStyleGeneStringText, locationID)
 }
 
 function popupWindow(genestringText, locationID) {
@@ -35,7 +48,7 @@ function popupWindow(genestringText, locationID) {
 
     let popupGenes = document.createElement("textarea")
     popupGenes.classList.add("popupGenes")
-    popupGenes.innerText = genestringText
+    popupGenes.value = genestringText
 
     let popupX = document.createElement("button")
     popupX.classList.add("xbutton")
@@ -155,6 +168,8 @@ function switchAccentColorBBCode(gene) {
             return "[color=yellow]Y[/color]"
         case "L":
             return "[color=grey]L[/color]"
+        case "?":
+            return "?"
     }
 }
 
@@ -168,3 +183,17 @@ function switchSpeciesBBCode(gene) {
             return "?"
     }
 }
+
+// Only accessed from the Settings page
+function savePrefixOrSuffix(prefixOrSuffix, id) {
+    let key = "bbcode" + prefixOrSuffix
+    let text = document.getElementById(id).value
+    localStorage.setItem(key, JSON.stringify(text))
+}
+
+
+// https://stackoverflow.com/questions/17772260/textarea-auto-height
+function auto_grow(element) {
+    element.style.height = "5px";
+    element.style.height = (element.scrollHeight) + "px";
+  }

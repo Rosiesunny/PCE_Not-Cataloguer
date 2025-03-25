@@ -1,0 +1,45 @@
+<!-- Comments look like this -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href = "StartPage.css">
+        <link rel="icon" href ="favicon.ico">
+    </head>
+    <body>
+        <div id = "container">
+            <a href = "index.html"><img src = "assets/pce_not-cataloguer_logo.png" id = "logo" alt = "Home Button" style = "padding-left: 0; max-width: 4%"></a>
+            <div id = "settings-container">
+                <div id = "theme-setting" class = "textbox">
+                    <div class = "menu-text">
+                        <h2>Theme: </h2>
+                    </div>
+                    <div class="modetoggle">
+                        <button onclick = "switchTheme()"><div class = "textbox" id = "theme-setting-text">Dark Theme</div><img src="assets/PCE_Assets/Symbols/sunmoon.png" alt="change color theme"></button>
+                    </div>
+                </div>
+                <div id = "bbcode-styling-setting" class = "textbox">
+                    <div class = "menu-text">
+                        <h2>BBCode Styling: </h2>
+                    </div>
+                    <h4>Prefix:</h4>
+                    <textarea id = "bbcode-prefix" oninput = "auto_grow(this)"></textarea><button onclick = "savePrefixOrSuffix('Prefix', 'bbcode-prefix')">Submit</button>
+                    <h4>Suffix:</h4>
+                    <textarea id = "bbcode-suffix" oninput = "auto_grow(this)"></textarea><button onclick = "savePrefixOrSuffix('Suffix', 'bbcode-suffix')">Submit</button>
+                </div>
+            </div>
+        </div>
+    <script src="./switch_theme.js"></script>
+    <script src="./generateBBCodeGeneString.js"></script>
+    <!-- BBCode Styling Autofill from Local Storage Script so we don't have to have another js file cluttering stuff up for something used only on one page -->
+    <script>
+        let prefixBox = document.getElementById("bbcode-prefix")
+        let suffixBox = document.getElementById("bbcode-suffix")
+        let prefix = localStorage.getItem('bbcodePrefix')
+        let suffix = localStorage.getItem('bbcodeSuffix')
+        prefixBox.value = JSON.parse(prefix)
+        suffixBox.value = JSON.parse(suffix)
+        auto_grow(prefixBox)
+        auto_grow(suffixBox)
+    </script>
+    </body>
+</html>

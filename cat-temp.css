@@ -9,12 +9,13 @@ div {
     padding: 3%;
     background-color:rgb(46, 46, 49);
     outline: rgb(51, 40, 216) 1px solid;
+    display: flex;
  }
 
 #col1 {
     width: 30%;
     outline: red 1px solid;
-    display: inline-block
+    display: flexbox;
 }
 
 
@@ -116,7 +117,7 @@ div {
 #col2 {
     outline: 1px solid aqua;
     width: 20%;
-    display: inline-block;
+    display: flexbox;
     vertical-align: top;
 }
 
@@ -204,7 +205,7 @@ div {
 
 #col3 {
     width: 22%;
-    display: inline-block;
+    display: flexbox;
 } 
 
 .job-class-label {

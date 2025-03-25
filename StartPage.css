@@ -54,13 +54,17 @@ h2{
     max-width: 70%;
 }
 
-#madeby {
+.menu-text {
     color:var(--madeby-text);
     size: auto;
     font-weight: bold;
     font-size: 1.2vw;
     margin-top: 0px;
     padding-top: 0px;
+}
+
+#settings {
+    margin-left: 40%;
 }
 
 #help-div {
@@ -79,6 +83,12 @@ h2{
 #help {
     max-width: 5vw;
 }
+
+#settings-div {
+    text-align: end;
+    margin-top: 1%;
+}
+
 .colorswitch {
     background-color:var(--bg-color);
     padding:1px 1px 0;
@@ -138,7 +148,7 @@ h2{
 
 }
 
-#helptextbox {
+.textbox {
     margin-top: 4%;
     padding: 1.5%;
     border-radius: 10% 10%;
@@ -149,4 +159,10 @@ h2{
 
 a {
     color: var(--links);
+}
+
+#settings-container {
+    margin-left: 8%;
+    display: flex;
+    justify-content: space-around;
 }
