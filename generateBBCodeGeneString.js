@@ -4,7 +4,7 @@ function generateBBCodeGeneString(genestring, locationID) {
     for (let i = 0; i < genestringArray.length; i++) {
         genestringArray[i] = genestringArray[i].split("[")[1]
     }
-    let genestringText = "[font=Verdana]"
+    let genestringText = ""
     genestringText += "[" + switchSpeciesBBCode(genestringArray[0]) + "] " 
     genestringText += "[" + switchWindBBCode(genestringArray[1][0]) + switchWindBBCode(genestringArray[1][1]) + "] " 
     genestringText += "[" + switchFurBBCode(genestringArray[2][0]) + switchFurBBCode(genestringArray[2][1]) + "] "
@@ -17,12 +17,8 @@ function generateBBCodeGeneString(genestring, locationID) {
     else {
         genestringText += genestringArray[5][2] + switchWhiteTypeBBCode(genestringArray[5][3]) + "] "
     }
-    genestringText += "[" + genestringArray[6] + "] [" + switchAccentColorBBCode(genestringArray[7][0]) + switchAccentColorBBCode(genestringArray[7][1]) + "][/font]"
+    genestringText += "[" + genestringArray[6] + "] [" + switchAccentColorBBCode(genestringArray[7][0]) + switchAccentColorBBCode(genestringArray[7][1]) + "]"
     console.log(genestringText)
-
-    console.log("TESTING AREA:")
-    console.log(localStorage.getItem("bbcodePrefix"))
-    console.log(localStorage.getItem("bbcodeSuffix"))
 
     let bbcodePrefix = localStorage.getItem("bbcodePrefix")
     let bbcodeSuffix = localStorage.getItem("bbcodeSuffix")
