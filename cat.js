@@ -12,10 +12,10 @@ if (thisCat === undefined) {
     window.location.href = prefix + "index.html";
 }
 
-document.querySelector(".cat-name").innerText = thisCat.name;
-document.querySelector(".cat-id").innerText = "#" + thisCat.id;
-document.querySelector(".cat-wind").innerText = thisCat.wind + " Wind";
-document.querySelector(".cat-personality").innerText = thisCat.personality.type + " Personality";
+document.getElementById("cat-name").innerText = thisCat.name;
+document.getElementById("cat-id").innerText = "#" + thisCat.id;
+document.getElementById("cat-wind").innerText = thisCat.wind + " Wind";
+document.getElementById("cat-personality").innerText = thisCat.personality.type + " Personality";
 
 var basicData = "";
 basicData += "Birthday: " + seasonsDict[thisCat.birthday.season] + " " + thisCat.birthday.day + ", Year " + thisCat.birthday.year + "\n";
@@ -25,7 +25,7 @@ basicData += "Aspect: " + thisCat.aspect + "\n";
 basicData += "Origin: " + thisCat.origin + "\n";
 basicData += "ID Code: [cat=" + thisCat.id + "]\n";
 
-document.querySelector(".basic-data").innerText = basicData;
+document.getElementById("basic-data").innerText = basicData;
 
 var appearanceData = "";
 appearanceData += "Species: " + thisCat.species + "\n";
@@ -35,10 +35,10 @@ appearanceData += "Color: " + thisCat.fur.color + " " + thisCat.fur.type + "\n";
 appearanceData += "Pattern: " + thisCat.pattern + "\n";
 appearanceData += "White Marks: " + thisCat.white.markings + " / " + thisCat.white.type + thisCat.white.level + "\n";
 appearanceData += "Eye Color: " + thisCat.eyeColor + "\n";
-document.querySelector(".appearance-data").innerText = appearanceData;
+document.getElementById("appearance-data").innerText = appearanceData;
 
 var geneData = getGeneString(thisCat);
-document.querySelector(".gene-data").innerText = geneData;
+document.getElementById("gene-data").innerText = geneData;
 
 var personalityData = "";
 personalityData += thisCat.personality.type + " Personality: \n";
@@ -47,7 +47,7 @@ var traits_vals = Object.values(thisCat.personality);
 for (var i = 1; i < traits_list.length; i++) {
     personalityData += "+ " + traits_list[i] + ": " + traits_vals[i] + "\n";
 }
-document.querySelector(".personality-data").innerText = personalityData;
+document.getElementById("personality-data").innerText = personalityData;
 
 var trinketData = "Held Trinket: ";
 if (thisCat.trinket.mod == 0) {
@@ -55,7 +55,7 @@ if (thisCat.trinket.mod == 0) {
 } else {
     trinketData += thisCat.trinket.name + " [" + thisCat.trinket.stat + " +" + thisCat.trinket.mod + "]\n";
 }
-document.querySelector(".trinket-data").innerText = trinketData;
+document.getElementById("trinket-data").innerText = trinketData;
 
 var jobData = "";
 jobData += "Day Job: " + thisCat.job + "\n";
@@ -77,7 +77,7 @@ for (var i = 0; i < jobs_list.length; i++) {
         }
     }
 }
-document.querySelector(".job-data").innerText = jobData;
+document.getElementById("job-data").innerText = jobData;
 
 var classData = "";
 classData += "Adventuring Class: " + thisCat.class + "\n";
@@ -99,7 +99,7 @@ for (var i = 0; i < classes_list.length; i++) {
         }
     }
 }
-document.querySelector(".class-data").innerText = classData;
+document.getElementById("class-data").innerText = classData;
 
 var attributeData = "";
 attributeData += "Attributes: \n";
@@ -107,7 +107,7 @@ var stats_list = Object.keys(thisCat.stats);
 for (var i = 0; i < stats_list.length; i++) {
     attributeData += "+ " + stats_list[i] + ": " + thisCat.stats[stats_list[i]] + "\n";
 }
-document.querySelector(".attribute-data").innerText = attributeData;
+document.getElementById("attribute-data").innerText = attributeData;
 
 var clothesData = "";
 clothesData += "Currently Wearing: ";
@@ -121,7 +121,7 @@ if (thisCat.clothes.wearing.numslots == 0) {
         }
     }
 }
-document.querySelector(".clothes-data").innerText = clothesData;
+document.getElementById("clothes-data").innerText = clothesData;
 
 var travellingData = "";
 if (thisCat.travelling) {
@@ -129,9 +129,9 @@ if (thisCat.travelling) {
 } else {
     travellingData = "This not-cat is currently home in your active village!";
 }
-document.querySelector(".travelling-data").innerText = travellingData;
+document.getElementById("travelling-data").innerText = travellingData;
 
 var updateData = "";
 var timestamp = new Date(thisCat.lastUpdated);
 updateData += "Entry Last Updated: " + timestamp.toLocaleDateString();
-document.querySelector(".update-data").innerText = updateData;
+document.getElementById("update-data").innerText = updateData;
