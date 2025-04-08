@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<head>
+    <link rel="icon" href ="/favicon.ico">
+</head>
+<script src="CatPreviewer.js"></script>
+<button id="colorswitch" class="colorswitch" onclick="switchTheme()"><img src="/assets/PCE_Assets/Symbols/sunmoon.png" alt="change color theme"></button>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="CatPreviewer.css">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Klee+One&amp;display=swap" rel="stylesheet">
+    <div class="formlike-content-area">
+        <div class="center">
+            <h3>Cat Sandbox</h3>
+            <p>Here you can preview a variety of colors and patterns on a cat. You can also add clothing items to see what they look like and to design outfits.
+            Item input accepts both IDs alone as well as Full Name with #ID.</p>
+        </div>
+        <div class="catjail" style="margin: auto;">
+            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_solid.png" class="adult-shorthair-sitting cat-base" alt="cat base" id="cat-base">
+            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-shorthair-sitting cat-base" alt="cat trade" id="cat-trade">
+            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-shorthair-sitting cat-white" alt="cat white" id="cat-white">
+            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-shorthair-sitting cat-eyes" alt="cat eyes" id="cat-eyes">
+        </div>
+        <form action="https://www.pixelcatsend.com/sandbox/cats" method="post">
+        <br><div class="form-group">
+        <label class="thinlabel">Age:</label>
+        <select id="age" name="age" onchange="imageUpdate()">
+        <option value="bean">Bean</option>
+        <option value="kitten">Kitten</option>
+        <option value="adult" selected="">Adult</option>
+        </select>
+        </div>
+        <div class="form-group">
+        <label class="thinlabel">Pose:</label>
+        <select id="pose" name="pose" onchange="imageUpdate()">
+        <option value="sitting" selected="">Sitting</option>
+        <option value="standing">Standing</option>
+        <option value="sleeping">Sleeping</option>
+        <option value="playing">Playing</option>
+        <option value="upsidedown">Upside Down</option>
+        </select>
+        </div>
+        <div class="form-group">
+        <label class="thinlabel">Eyes:</label>
+        <select id="eyes" name="eyes" onchange="imageUpdate()">
+        <option value="neutral" selected="">Neutral</option>
+        <option value="squint">Squint</option>
+        <option value="sleepy">Sleepy</option>
+        <option value="uwu">UwU</option>
+        <option value="content">Content</option>
+        <option value="danger">Danger</option>
+        <option value="sad">Sad</option>
+        <option value="stern">Stern</option>
+        <option value="right">Right</option>
+        <option value="left">Left</option>
+        </select>
+        </div>
+        <div class="form-group">
+        <label class="thinlabel">Fur Length:</label>
+        <select id="fur" name="fur" onchange="imageUpdate()">
+        <option value="shorthair" selected="">Shorthair</option>
+        <option value="longhair">Longhair</option>
+        </select>
+        </div>
+        <div class="form-group">
+        <label class="thinlabel">Color:</label>
+        <select id="color" name="color" onchange="imageUpdate()">
+        <option value="snow">Snow</option>
+        <option value="black" selected="">Black</option>
+        <option value="choco">Chocolate</option>
+        <option value="brown">Brown</option>
+        <option value="tan">Tan</option>
+        <option value="charc">Charcoal</option>
+        <option value="grey">Grey</option>
+        <option value="smoke">Smoke</option>
+        <option value="silver">Silver</option>
+        <option value="red">Red</option>
+        <option value="ginger">Ginger</option>
+        <option value="orange">Orange</option>
+        <option value="aprico">Apricot</option>
+        <option value="buff">Buff</option>
+        <option value="cream">Cream</option>
+        <option value="almond">Almond</option>
+        <option value="beige">Beige</option>
+        </select>
+        </div>
+        <div class="form-group">
+        <label class="thinlabel">Color Type:</label>
+        <select id="colortype" name="colortype" onchange="imageUpdate()">
+        <option value="pat">Watercolor</option>
+        <option value="tor">Tortoiseshell</option>
+        <option value="st" selected="">Standard</option>
+        </select>
+        </div>
+        <div class="form-group">
+        <label class="thinlabel">Pattern:</label>
+        <select id="pattern" name="pattern" onchange="imageUpdate()">
+        <option value="solid" selected="">Solid</option>
+        <option value="mackerel">Mackerel</option>
+        <option value="classic">Classic</option>
+        <option value="broken">Broken</option>
+        <option value="lynxpoint">Lynxpoint</option>
+        <option value="clouded">Clouded</option>
+        <option value="rosette">Rosette</option>
+        <option value="cloudpoint">Cloudpoint</option>
+        <option value="spotted">Spotted</option>
+        <option value="mink">Mink</option>
+        <option value="colorpoint">Colorpoint</option>
+        </select>
+        </div>
+        <div class="form-group" style = "margin-bottom: 50%">
+            <label class="thinlabel">White Markings:</label>
+            <select id="whitecombo" name="whitecombo" onchange="imageUpdate()">
+                <option value="classic-0">[0] None</option>
+                <option value="classic-1">[C1] Locket</option>
+                <option value="classic-2">[C2] Locket &amp; Toes</option>
+                <option value="classic-3">[C3] Bib &amp; Boots</option>
+                <option value="classic-4">[C4] Bib, Boots, &amp; Belly</option>
+                <option value="classic-5">[C5] Classic Bicolor</option>
+                <option value="classic-6">[C6] Piebald</option>
+                <option value="classic-7">[C7] Spotted Piebald</option>
+                <option value="classic-8">[C8] Freckled Piebald</option>
+                <option value="classic-9">[C9] Van</option>
+                <option value="classic-10">[C10] Albino</option>
+                <option value="piebald-1">[P1] Nose</option>
+                <option value="piebald-2">[P2] Nose &amp; Toes</option>
+                <option value="piebald-3">[P3] Nose, Bib &amp; Boots</option>
+                <option value="piebald-4">[P4] Bib, Ears, &amp; Belly</option>
+                <option value="piebald-5">[P5] True Piebald</option>
+                <option value="piebald-6">[P6] Scattered Piebald</option>
+                <option value="piebald-7">[P7] Painted Spots</option>
+                <option value="piebald-8">[P8] Confetti</option>
+                <option value="piebald-9">[P9] Speckled Van</option>
+                <option value="piebald-10">[P10] Albino</option>
+                <option value="left-1">[L1] Toes</option>
+                <option value="left-2">[L2] Tie &amp; Toes</option>
+                <option value="left-3">[L3] Tie, Toes &amp; Chin</option>
+                <option value="left-4">[L4] Chin, Boots, &amp; Belly</option>
+                <option value="left-5">[L5] Left Bicolor</option>
+                <option value="left-6">[L6] Left Piebald</option>
+                <option value="left-7">[L7] Left Patches</option>
+                <option value="left-8">[L8] Left Spots</option>
+                <option value="left-9">[L9] Left Van</option>
+                <option value="left-10">[L10] Albino</option>
+                <option value="right-1">[R1] Tail Tip</option>
+                <option value="right-2">[R2] Tail Tip &amp; Toes</option>
+                <option value="right-3">[R3] Tail Tip, Toes, &amp; Tie</option>
+                <option value="right-4">[R4] Tail, Boots, &amp; Belly</option>
+                <option value="right-5">[R5] Right Bicolor</option>
+                <option value="right-6">[R6] Right Piebald</option>
+                <option value="right-7">[R7] Right Patches</option>
+                <option value="right-8">[R8] Right Spots</option>
+                <option value="right-9">[R9] Right Van</option>
+                <option value="right-10">[R10] Albino</option>
+                <option value="inverse-1">[I1] Ear Tips</option>
+                <option value="inverse-2">[I2] Ear &amp; Tail Tips</option>
+                <option value="inverse-3">[I3] Ears, Tail, &amp; Toes</option>
+                <option value="inverse-4">[I4] Snowspots</option>
+                <option value="inverse-5">[I5] Snowmelt</option>
+                <option value="inverse-6">[I6] Ghost</option>
+                <option value="inverse-7">[I7] Owl Mantle</option>
+                <option value="inverse-8">[I8] Heart Mantle</option>
+                <option value="inverse-9">[I9] Heart</option>
+                <option value="inverse-10">[I10] Albino</option>
+            </select>
+            <br><br>
+
+            <h1>Density Reference</h1>
+            <table>
+                <tr>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/choco_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/brown_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/tan_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>4</th>
+                    <th>3</th>
+                    <th>2</th>
+                    <th>1</th>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/red_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/ginger_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/orange_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/aprico_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+            <br><br>
+            <h1>Classic White Type Full Reference</h1>
+            <table>
+                <tr>
+                    <th>1</th>
+                    <th>2</th>
+                    <th>3</th>
+                    <th>4</th>
+                    <th>5</th>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_classic_1.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_classic_2.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_classic_3.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_classic_4.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_classic_5.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_classic_6.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_classic_7.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_classic_8.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_classic_9.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_classic_10.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral_a_classic.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>6</th>
+                    <th>7</th>
+                    <th>8</th>
+                    <th>9</th>
+                    <th>10</th>
+                </tr>
+            </table>
+            <br><br>
+            <h1>Piebald White Type Full Reference</h1>
+            <table>
+                <tr>
+                    <th>1</th>
+                    <th>2</th>
+                    <th>3</th>
+                    <th>4</th>
+                    <th>5</th>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_piebald_1.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_piebald_2.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_piebald_3.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_piebald_4.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_piebald_5.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_piebald_6.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_piebald_7.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_piebald_8.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_piebald_9.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_piebald_10.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral_a_piebald.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>6</th>
+                    <th>7</th>
+                    <th>8</th>
+                    <th>9</th>
+                    <th>10</th>
+                </tr>
+            </table>
+            <br><br>
+            <h1>Left White Type Full Reference</h1>
+            <table>
+                <tr>
+                    <th>1</th>
+                    <th>2</th>
+                    <th>3</th>
+                    <th>4</th>
+                    <th>5</th>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_left_1.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_left_2.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_left_3.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_left_4.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_left_5.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_left_6.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_left_7.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_left_8.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_left_9.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_left_10.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral_a_left.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>6</th>
+                    <th>7</th>
+                    <th>8</th>
+                    <th>9</th>
+                    <th>10</th>
+                </tr>
+            </table>
+            <br><br>
+            <h1>Right White Type Full Reference</h1>
+            <table>
+                <tr>
+                    <th>1</th>
+                    <th>2</th>
+                    <th>3</th>
+                    <th>4</th>
+                    <th>5</th>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_right_1.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_right_2.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_right_3.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_right_4.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_right_5.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_right_6.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_right_7.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_right_8.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_right_9.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_right_10.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral_a_right.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>6</th>
+                    <th>7</th>
+                    <th>8</th>
+                    <th>9</th>
+                    <th>10</th>
+                </tr>
+            </table>
+            <br><br>
+            <h1>Inverse White Type Full Reference</h1>
+            <table>
+                <tr>
+                    <th>1</th>
+                    <th>2</th>
+                    <th>3</th>
+                    <th>4</th>
+                    <th>5</th>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_inverse_1.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_inverse_2.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_inverse_3.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_inverse_4.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_inverse_5.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_inverse_6.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_inverse_7.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_inverse_8.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_inverse_9.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_inverse_10.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral_a_inverse.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>6</th>
+                    <th>7</th>
+                    <th>8</th>
+                    <th>9</th>
+                    <th>10</th>
+                </tr>
+            </table>
+            <br><br>
+
+            <h1>Nulls Reference</h1>
+            <table>
+                <tr>
+                    <th>Null</th>
+                    <th>Null</th>
+                    <th>Null</th>
+                    <th>Null</th>
+                    <th>Null</th>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/snow_main_classic.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_classic_2.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/snow_main_cloudpoint.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_left_3.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/snow_main_mink.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_piebald_3.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/snow_main_rosette.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_piebald_6.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/snow_main_colorpoint.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_piebald_3.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/silver_main_clouded.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/TradeColors/snow_trade_clouded.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_classic_7.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/beige_main_colorpoint.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_classic_7.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/aprico_main_rosette.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_piebald_5.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/smoke_main_clouded.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_classic_9.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/beige_main_classic.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/TradeColors/silver_trade_classic.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_piebald_3.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Not Null</th>
+                    <th>Not Null</th>
+                    <th>Not Null</th>
+                    <th>Not Null</th>
+                    <th>Not Null</th>
+                </tr>
+            </table>
+            <br><br>
+
+            <h1>Longhair Reference</h1>
+            <table>
+                <tr>
+                    <th>Shorthair</th>
+                    <th>Longhair</th>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/red_main_classic.png" class="adult-shorthair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-shorthair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-shorthair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-shorthair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/red_main_classic.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <br><br>
+
+            <h1>Dilutes - Black Group Reference</h1>
+            <table>
+                <tr>
+                    <th>Full</th>
+                    <th>Full</th>
+                    <th>Full</th>
+                    <th>Full</th>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/choco_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/brown_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/tan_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/charc_main_classic.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/grey_main_classic.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/smoke_main_classic.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/silver_main_classic.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Dilute</th>
+                    <th>Dilute</th>
+                    <th>Dilute</th>
+                    <th>Dilute</th>
+                </tr>
+            </table>
+
+            <br><br>
+
+            <h1>Dilutes - Orange Group Reference</h1>
+            <table>
+                <tr>
+                    <th>Full</th>
+                    <th>Full</th>
+                    <th>Full</th>
+                    <th>Full</th>
+                </tr>
+                <tr>
+                    <tr>
+                        <td>
+                            <div class="catjail" style="margin: auto;">
+                                <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/red_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                                <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                                <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                                <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="catjail" style="margin: auto;">
+                                <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/ginger_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                                <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                                <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                                <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="catjail" style="margin: auto;">
+                                <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/orange_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                                <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                                <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                                <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="catjail" style="margin: auto;">
+                                <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/aprico_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                                <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                                <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                                <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                            </div>
+                        </td>
+                    </tr>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/buff_main_classic.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/cream_main_classic.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/almond_main_classic.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/beige_main_classic.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Dilute</th>
+                    <th>Dilute</th>
+                    <th>Dilute</th>
+                    <th>Dilute</th>
+                </tr>
+            </table>
+
+            <br><br>
+
+            <h1>Black Group Cats Reference</h1>
+            <table>
+                <tr>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/choco_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/brown_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/tan_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/charc_main_classic.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/grey_main_classic.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/smoke_main_classic.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/silver_main_classic.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+            <br><br>
+
+            <h1>Orange Group Cats Reference</h1>
+            <table>
+                <tr>
+                    <tr>
+                        <td>
+                            <div class="catjail" style="margin: auto;">
+                                <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/red_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                                <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                                <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                                <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="catjail" style="margin: auto;">
+                                <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/ginger_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                                <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                                <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                                <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="catjail" style="margin: auto;">
+                                <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/orange_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                                <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                                <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                                <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="catjail" style="margin: auto;">
+                                <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/aprico_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                                <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                                <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                                <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                            </div>
+                        </td>
+                    </tr>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/buff_main_classic.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/cream_main_classic.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/almond_main_classic.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/beige_main_classic.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+            <br><br>
+            <h1>Patterns Reference</h1>
+            <table>
+                <tr>
+                    <th>Mackerel</th>
+                    <th>Classic</th>
+                    <th>Broken</th>
+                    <th>Lynxpoint</th>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_classic.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_broken.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_lynxpoint.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>TT</th>
+                    <th>TM</th>
+                    <th>TS</th>
+                    <th>TP</th>
+                </tr>
+            </table>
+
+            <br><br>
+            <h1>No-White vs White References</h1>
+            <table>
+                <tr>
+                    <th>No-White</th>
+                    <th>Has White</th>
+                    <th>Has White</th>
+                    <th>Has White</th>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_classic_1.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_piebald_2.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_left_1.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+            <h1>Solids Reference</h1>
+            <table>
+                <tr>
+                    <th>Solid</th>
+                    <th>Solid</th>
+                    <th>Solid</th>
+                    <th>Solid</th>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_solid.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/orange_main_solid.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/TradeColors/aprico_trade_solid.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/beige_main_solid.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/TradeColors/silver_trade_solid.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_classic_4.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/grey_main_solid.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/TradeColors/smoke_trade_solid.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_inverse_5.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/smoke_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/TradeColors/silver_trade_mackerel.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_classic_1.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/silver_main_colorpoint.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/TradeColors/snow_trade_colorpoint.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_classic_1.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/beige_main_colorpoint.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_piebald_4.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/charc_main_mink.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Not Solid</th>
+                    <th>Not Solid</th>
+                    <th>Not Solid</th>
+                    <th>Not Solid</th>
+                </tr>
+            </table>
+
+            <br><br>
+            <h1>White Level 2 Reference</h1>
+            <table>
+                <tr>
+                    <th>Classic</th>
+                    <th>Piebald</th>
+                    <th>Left</th>
+                    <th>Right</th>
+                    <th>Inverse</th>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_classic_2.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_piebald_2.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_left_2.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_right_2.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="catjail" style="margin: auto;">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                            <img src="/assets/PCE_Assets/Cat/blank.png" class="adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                            <img src="/assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_inverse_2.png" class="adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                            <img src="/assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+
+        </div><br>
+
+        

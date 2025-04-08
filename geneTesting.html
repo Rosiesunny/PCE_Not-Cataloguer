@@ -2,8 +2,8 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <link rel="stylesheet" href = "geneTesting.css">
         <link rel="stylesheet" href = "generateBBCodeGeneString.css">
+        <link rel="stylesheet" href = "geneTesting.css">
         <link rel="icon" href ="favicon.ico">
     </head>
     <body onload = "loadStoredCatGene()">
@@ -23,7 +23,7 @@
                         <div id = "currentlyknowngenes">Currently Known Genes:</div>
                         <div id = "genecodefull">???</div>
                         <button id = "bbcodebutton" onclick="generateBBCodeGeneString(document.getElementById('genecodefull').innerText, 'bbcodebox')">Generate BBCode</button>
-                        <div id = "bbcodebox" class = "hidebbcodebox"></div>
+                        
                     </div>
                 </div>
                 <div class = "col2"> 
@@ -1291,9 +1291,11 @@
             PCE Early Alpha Not-CAT-aloguer - gene testing
         </p>
     </div>
+    
     <div id="entryarea">
         <textarea class = "testTextBox" placeholder = "Copy a cat's incomplete gene code from the Cat Data Entry section to gene test it"></textarea>
         <button id = "uwuButton" onclick= "checkTextGeneString()">Submit</button> 
         </div>  
+        <div id = "bbcodebox" class = "hidebbcodebox"></div>
     </body>
 </html>

@@ -370,7 +370,6 @@ function geneTestingButton(catGeneString, wind, id, name, furlength, color, colo
 function bbcodeButton(catGeneString) {
     if (catGeneString) {
         let geneString = geneStringifier(catGeneString)
-        console.log(geneStringifier)
         let functionName = "generateBBCodeGeneString('" + geneString + "', 'bbcodebox')"
         if (document.getElementById("generatebbcode")) {
             let geneTestButton = document.getElementById("generatebbcode")

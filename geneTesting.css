@@ -117,6 +117,7 @@ div {
     background-color: rgb(29, 31, 36);
     color:aliceblue;
     font-size: 150%;
+    isolation: isolate;   /* isolates the z-indexes so the cats don't appear on top of popup containers */
 }
 
 #testquestion-and-answer-container {
