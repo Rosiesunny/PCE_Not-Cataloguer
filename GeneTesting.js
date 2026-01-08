@@ -121,11 +121,11 @@ function checkWhatTestsAreNeeded(array) {
         alert("This cat is null and cannot be gene tested! If you want to know its hidden genes, you have to use a Family Tree on the cat")
         return // don't run tests, the cat is null it cannot breed
     }
-    if (array[1][1] == "?") {
+    if (array[1][0] == "?" || array[1][1] == "?") {
         // Wind test needed
         testsneededstring += "Recessive Wind Check(" + array[1][0] +")|" 
     }
-    if (array[2][1] == "?") {
+    if (array[2][0] == "?" || array[2][1] == "?") {
         // Fur length test needed
         testsneededstring += "Recessive Fur Length Check|" 
     }
@@ -295,6 +295,9 @@ function changeGenes(ID, value) {
                 case "P":
                     changeDescText(ID, "Point")
                     break; 
+                case "A":
+                    changeDescText(ID, "Agouti")
+                    break; 
             }
             break
         case "#white-yes-no-1":
@@ -327,6 +330,9 @@ function changeGenes(ID, value) {
                     break; 
                 case "I":
                     changeDescText(ID, "Inverse")
+                    break; 
+                case "T":
+                    changeDescText(ID, "Tabby")
                     break; 
             }
             break
@@ -429,11 +435,11 @@ function changeButtons() {
     hideExamples()
     let testTypesArray = ["Recessive Wind Check", "Recessive Fur Length Check", "Recessive Dilute Check", "Recessive Solid Check", "Hidden Color Check", "Hidden Pattern Check", "Recessive No-White Check", "0 White Possibility Check", "Hidden White Type Check", "Hidden White Level Check", "Albino Hidden Colors Check", "Albino Hidden Dilutes Check", "Albino Hidden Densities Check", "Albino Pattern Display Check", "Hidden Accent Color Check"]
     let lookingForArray = ["Any Null cats", "Any Longhair cats", "Any Dilute cats", "Any Solid cats", ["Any Black cats", "Any Orange cats"], "Check off seen patterns", "Any No-white cats", "Select how many cats are no-white", "Select white type from reference", "Mark highest white level found", "(hidden albino colors)", "Check what percentage of offspring are dilutes", "Select the lowest value density found", "Check what percentage of offspring are solid", "Check off seen accent colors"]
-    let buttonsTextArray = [["Nulls Found", "No Nulls Found"], ["Longhairs Found", "No Longhairs Found"], ["Dilutes Found", "No Dilutes Found"], ["Solids Found", "No Solids Found"], ["Orange Cats Found", "No Orange Cats Found", "Black Cats Found", "No Black Cats Found"], ["Mackerel (TT)", "Classic (TM)", "Broken (TS)", "Lynxpoint (TP)"], ["No-whites found", "All cats have white"], ["No cats have White Marks", "55% of cats don't have White Marks", "9% of cats don't have White Marks"], ["Classic Only", "Right and Classic", "Left and Classic", "Piebald and Classic", "Inverse and Classic"],["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"], ["Black and Orange", "Orange Only", "Black Only"], ["All Dilutes", "Half Dilutes", "No Dilutes"], ["1", "2", "3", "4"], ["All Solids", "Half Solids", "No Solids"], ["Blue (BB))", "Violet (BR)", "Green (BY)", "Indigo (BL)"]] 
+    let buttonsTextArray = [["Nulls Found", "No Nulls Found"], ["Longhairs Found", "No Longhairs Found"], ["Dilutes Found", "No Dilutes Found"], ["Solids Found", "No Solids Found"], ["Orange Cats Found", "No Orange Cats Found", "Black Cats Found", "No Black Cats Found"], ["Mackerel (TT)", "Classic (TM)", "Broken (TS)", "Lynxpoint (TP)", "Ticked (TA)"], ["No-whites found", "All cats have white"], ["No cats have White Marks", "55% of cats don't have White Marks", "9% of cats don't have White Marks"], ["Classic Only", "Right and Classic", "Left and Classic", "Piebald and Classic", "Inverse and Classic", "Tabby and Classic"],["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"], ["Black and Orange", "Orange Only", "Black Only"], ["All Dilutes", "Half Dilutes", "No Dilutes"], ["1", "2", "3", "4"], ["All Solids", "Half Solids", "No Solids"], ["Blue (BB))", "Violet (BR)", "Green (BY)", "Indigo (BL)"]] 
     let idsArray = ["Skip (wind)", "#fur-2", "#dilute-2", "#pattern-yes-no-2", "Skip (hidden color check)", "Skip (HIDDEN PATTERN CHECK)", "#white-yes-no-2", "SKIP (0 WHITE POSSIBILITY CHECK)", "#white-type", "#white-level", "Skip (albino hidden colors check)", "Skip (albino hidden dilutes check)", "#density", "skip (albino pattern display check)", "skip (hidden accent color check)"]
-    let valuesArray = ["Skip (wind)", ["L", "S"], ["D", "F"], ["N", "Y"], "Skip (hidden color)", "Skip (hidden pattern check)", ["N", "Y"], ["NN", "YN", "YY"], ["C", "R", "L", "P", "I"], ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"], "Skip (albino hidden colors)", ["DD", "FD", "FF"], ["1", "2", "3", "4"], ["NN", "YN", "YY"], "skip (hidden accent color check)"]
+    let valuesArray = ["Skip (wind)", ["L", "S"], ["D", "F"], ["N", "Y"], "Skip (hidden color)", "Skip (hidden pattern check)", ["N", "Y"], ["NN", "YN", "YY"], ["C", "R", "L", "P", "I", "T"], ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"], "Skip (albino hidden colors)", ["DD", "FD", "FF"], ["1", "2", "3", "4"], ["NN", "YN", "YY"], "skip (hidden accent color check)"]
     let testCatIDArray = ["skip (wind)", "983", "983", "983", "skip (hidden color checK)", "skip (hidden pattern check)", "983", "skip (0 white possibility check)", "2014", "15075", "skip (albino hidden colors)", "319584", "663", "219202", "skip (accent color)but it's 572"]
-    let examplesArray = ["NullsReference", "LonghairReference", ["Dilutes-BlackGroupReference", "Dilutes-OrangeGroupReference"], "SolidsReference", ["BlackGroupCatsReference", "OrangeGroupCatsReference"], "PatternsReference", "No-WhiteVSWhiteReference", "No-WhiteVSWhiteReference", ["ClassicWhiteTypeFullReference", "PiebaldWhiteTypeFullReference", "LeftWhiteTypeFullReference", "RightWhiteTypeFullReference", "InverseWhiteTypeFullReference"], ["ClassicWhiteTypeFullReference", "PiebaldWhiteTypeFullReference", "LeftWhiteTypeFullReference", "RightWhiteTypeFullReference", "InverseWhiteTypeFullReference"], ["BlackGroupCatsReference", "OrangeGroupCatsReference"], ["Dilutes-BlackGroupReference", "Dilutes-OrangeGroupReference"], "DensityReference", "SolidsReference"]
+    let examplesArray = ["NullsReference", "LonghairReference", ["Dilutes-BlackGroupReference", "Dilutes-OrangeGroupReference"], "SolidsReference", ["BlackGroupCatsReference", "OrangeGroupCatsReference"], "PatternsReference", "No-WhiteVSWhiteReference", "No-WhiteVSWhiteReference", ["ClassicWhiteTypeFullReference", "PiebaldWhiteTypeFullReference", "LeftWhiteTypeFullReference", "RightWhiteTypeFullReference", "InverseWhiteTypeFullReference", "TabbyWhiteTypeFullReference"], ["ClassicWhiteTypeFullReference", "PiebaldWhiteTypeFullReference", "LeftWhiteTypeFullReference", "RightWhiteTypeFullReference", "InverseWhiteTypeFullReference", "TabbyWhiteTypeFullReference"], ["BlackGroupCatsReference", "OrangeGroupCatsReference"], ["Dilutes-BlackGroupReference", "Dilutes-OrangeGroupReference"], "DensityReference", "SolidsReference"]
 
     let currentselect = document.getElementById("testquestion-select")
     console.log("changeButtons() ran")
@@ -532,6 +538,7 @@ function changeButtons() {
                         answersection.innerHTML = "Looking for: " + lookingForArray[i]
                         changeTestCatID("268864")
                         changeExamples("PatternsReference")
+                        console.log(buttonsTextArray)
                         for (let j = 0; j < buttonsTextArray[i].length; j++) {
                             let outerdiv = document.createElement('div')
                             outerdiv.id = "outerdiv"
@@ -622,8 +629,8 @@ function changeButtons() {
                 else {
                     answersection.innerHTML = "Looking for: " + lookingForArray[i]
                     if (currentselectvalue == "Hidden White Level Check") {
-                        let whitereferencearray = ["P", "L", "R", "I"]
-                        let whiteResultArray = ["PiebaldWhiteTypeFullReference", "LeftWhiteTypeFullReference", "RightWhiteTypeFullReference", "InverseWhiteTypeFullReference"]
+                        let whitereferencearray = ["P", "L", "R", "I", "T"]
+                        let whiteResultArray = ["PiebaldWhiteTypeFullReference", "LeftWhiteTypeFullReference", "RightWhiteTypeFullReference", "InverseWhiteTypeFullReference", "TabbyWhiteTypeFullReference"]
                         let whitetype = document.getElementById("white-type").innerText
                         if (whitetype == "?") {
                             alert("It's recommended to do the White Type test before this test!")
@@ -702,7 +709,7 @@ function albinoColorSubmitPart2(answer) {
 function patternSubmit() {
     let checkboxes = document.querySelectorAll(".checkboxes")
     let count = 0;
-    let hiddenPatternTypeArray = ["T", "M", "S", "P"]
+    let hiddenPatternTypeArray = ["T", "M", "S", "P", "A"]
     let twogenes = ""
     for (let i = 0; i<checkboxes.length; i++) {
         if (checkboxes[i].checked == true) {
@@ -790,84 +797,26 @@ function changeExamples(example) {
     }
 }
 
-function loadStoredCatGene() {
+// STARTS HERE via html
+function loadStoredCat() {
     let localstorageSetup = localStorage.getItem('geneTesterCatData')
-    localStorage.setItem('geneTesterCatData', "")
-    let localstorageArray = localstorageSetup.split("|")
-
-    let genecodestring = localstorageArray[2]
-    console.log(genecodestring)
-    let catgenecodesection = document.querySelector("#genecodefull")
-    catgenecodesection.textContent = genecodestring
-
-    let genecode1darray = make1darray(genecodestring)
-    let genecode2darray = make2darray(genecode1darray)
-
-    console.log(genecode2darray)
-    
-    initialGenesSetup(genecode2darray)
-    
-    let testList = checkWhatTestsAreNeeded(genecode2darray)
-    changeSelectText(testList)
-
-    changeYourCatName(localstorageArray[0])
-    changeYourCatID(localstorageArray[1])
-    generateYourCatImage(localstorageArray)
-}
-
-function generateYourCatImage(localstorageArray) {
-    let imagearea = document.getElementById("yourCatImage")
-    let furlength = localstorageArray[3].toLowerCase()
-    let age = localstorageArray[4].toLowerCase()
-    let species = localstorageArray[5]
-    let speciesAbbreviation = species.toLowerCase()[0]
-    if (species == "Not-cat") {
-        species = "Not-Cat"
-        speciesAbbreviation = "c"
+    if (localstorageSetup) {
+        let cat = JSON.parse(localstorageSetup)
+        localStorage.setItem('geneTesterCatData', "")
+        let location = document.getElementById("yourcat")
+        makeCatImage(cat.furlength, cat.color, cat.colortype, cat.whitelevel, cat.whitetype, cat.pattern, cat.accentColor, cat.eyes, cat.eyecolor, cat.pose, cat.age, cat.species, location)
+        let catgenecodesection = document.querySelector("#genecodefull")
+        catgenecodesection.textContent = cat.geneString
+        let genecode1darray = make1darray(cat.geneString)
+        let genecode2darray = make2darray(genecode1darray)
+        initialGenesSetup(genecode2darray)
+        let testList = checkWhatTestsAreNeeded(genecode2darray)
+        changeSelectText(testList)
+        changeYourCatName(cat.name)
+        changeYourCatID(cat.id)
+        document.getElementById("WindSave").innerText = cat.wind
     }
     
-    // not sure why I have this here but I assume something was breaking in the past to cause me to do something this redundant
-    if (age.includes("kitten")) {
-        age = "kitten"
-    }
-    if (age.includes("adolescent")) {
-        age = "adult"
-    }
-    let baseclass = speciesAbbreviation + "-" + age + "-" + furlength + "-standing"
-    // main
-    for (let i = 6; i < localstorageArray.length; i++) {
-        // handles main and trade
-        console.log(localstorageArray[i])
-        if (localstorageArray[i].includes("_main_") || localstorageArray[i].includes("_trade_")) {
-            let base = document.createElement("img")
-            if (localstorageArray[i].includes("_main_")) {
-                base.src = "assets/PCE_Assets/Cat/" + species + "/BaseColors/" + localstorageArray[i]
-            }
-            if (localstorageArray[i].includes("_trade_")) {
-                base.src = "assets/PCE_Assets/Cat/" + species + "/TradeColors/" + localstorageArray[i]
-            }
-            base.classList.add(baseclass, "cat-base")
-            imagearea.appendChild(base)
-        }
-        if (localstorageArray[i].includes("accent_")) {
-            let accent = document.createElement("img")
-            accent.src = "assets/PCE_Assets/Cat/" + species + "/AccentColors/" + localstorageArray[i]
-            accent.classList.add(baseclass, "cat-base")
-            imagearea.appendChild(accent)
-        }
-        if (localstorageArray[i].includes("white_")) {
-            let white = document.createElement("img")
-            white.src = "assets/PCE_Assets/Cat/" + species + "/WhiteMarkings/" + localstorageArray[i]
-            white.classList.add(baseclass, "cat-white")
-            imagearea.appendChild(white)
-        }
-        if (localstorageArray[i].includes("eyes_")) {
-            let eyes = document.createElement("img")
-            eyes.src = "assets/PCE_Assets/Cat/Eyes/" + localstorageArray[i]
-            eyes.classList.add(baseclass, "cat-eyes")
-            imagearea.appendChild(eyes)
-        }
-    }
 }
 
 function changeYourCatName(name) {

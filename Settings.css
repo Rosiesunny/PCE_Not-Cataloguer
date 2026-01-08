@@ -1,0 +1,60 @@
+.textbox {
+    margin-top: 4%;
+    padding: 1.5%;
+    border-radius: 10% 10%;
+    background-color: var(--helpbox);
+    color:var(--text);
+    font-size: 1.2rem;
+}
+
+a {
+    color: var(--links);
+}
+
+#settings-container {
+    margin-left: 8%;
+    display: flex;
+    justify-content: space-around;
+}
+
+#data-storage-settings {
+    max-width: 40%;
+}
+
+.explanation-box {
+    background-color: rgba(54, 173, 173, 0.253);
+    font-size: 80%;
+    padding: .5%;
+    padding-left: 5%;
+    border-radius: 5%;
+    padding: 3%;
+    margin: 5px 0 15px 25px;
+    border-left: 3px solid #cccccc46;
+    display: none;
+}
+
+.explanation-box-display-on {
+    flex-direction: column;
+    align-items: center;
+    display: flex
+}
+
+button {
+    font-size: 100%;
+}
+
+.sub-setting {
+    margin-left: 8%;;
+}
+
+.label-text {
+    background-color:rgba(23, 194, 194, 0.148);
+}
+
+.hoverable-label:hover {
+    background-color:rgba(23, 194, 194, 0.548)
+}
+
+.hoverable-label {
+    cursor: pointer;
+}

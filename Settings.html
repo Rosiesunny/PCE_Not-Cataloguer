@@ -3,6 +3,7 @@
 <html lang="en">
     <head>
         <link rel="stylesheet" href = "StartPage.css">
+        <link rel="stylesheet" href = "Settings.css">
         <link rel="icon" href ="favicon.ico">
     </head>
     <body>
@@ -17,29 +18,165 @@
                         <button onclick = "switchTheme()"><div class = "textbox" id = "theme-setting-text">Dark Theme</div><img src="assets/PCE_Assets/Symbols/sunmoon.png" alt="change color theme"></button>
                     </div>
                 </div>
+
+                
                 <div id = "bbcode-styling-setting" class = "textbox">
                     <div class = "menu-text">
-                        <h2>BBCode Styling: </h2>
+                        <h2>Gene BBCode Styling: </h2>
                     </div>
                     <h4>Prefix:</h4>
                     <textarea id = "bbcode-prefix" oninput = "auto_grow(this)"></textarea><button onclick = "savePrefixOrSuffix('Prefix', 'bbcode-prefix')">Submit</button>
                     <h4>Suffix:</h4>
                     <textarea id = "bbcode-suffix" oninput = "auto_grow(this)"></textarea><button onclick = "savePrefixOrSuffix('Suffix', 'bbcode-suffix')">Submit</button>
+                    <br>
+                    <br>
+
+                    <input type="checkbox" class = "data-storage-checkboxes" id = "colorBBCode-checkbox"  data-storage-key = "colorBBCode" checked>
+                    <label for = "colorBBCode-checkbox" class = "hoverable-label"><span class = "label-text">Color BBCode</span></label>
+                    <div class = "explanation-box">
+                        <p>Should generated BBCodes be color coded based on their genes, or just be plaintext? This setting also impacts whether recessive genes are a smaller font size or not.</p>
+                        <img src = "/assets/bbcode_example.png">
+
+                    </div>
+                    <br>
+                    <br>
+
+                    <input type="checkbox" class = "data-storage-checkboxes" id = "listHiddenRecessive-checkbox"  data-storage-key = "listHiddenRecessive" checked>
+                    <label for = "listHiddenRecessive-checkbox" class = "hoverable-label"><span class = "label-text">List Hidden/Recessive Traits</span></label>
+                    <div class = "explanation-box">
+                        <p>Should generated BBCodes include a list of a cat's hidden/recessive traits if there are any?</p>
+                    </div>
+                </div>
+
+                <div id = "data-storage-settings" class = "textbox">
+                    <h2>Data Storage Settings: </h2>
+                    <p>These settings only apply to cats going forward! You'll have to re-enter previous cats if you want to add to their stored data.</p>
+                    <p>When deciding what data to store, you should weigh how important the data is for you versus how much space it will take up. LocalStorage only has 5mg of space, so some things can cause your village to run out of space quickly. Click on a setting for more explanation and an storage impact estimate.</p>
+                    <input type="checkbox" class = "data-storage-checkboxes" id = "friends-checkbox" data-storage-key = "storeFriends">
+                    <label for = "friends-checkbox" class = "hoverable-label"><span class = "label-text">Store Friends</span></label>
+                    <div class = "explanation-box">
+                        <p>Should the Not-Cataloguer store your cat's friends/best friends/partners/rivals? This has a varying impact on storage. Cats with many friends will take up more space than cats with few. Overall, it has a moderate to high impact on storage.</p>
+                        <div class = "sub-setting">
+                            <p><b>Auto Match Friends Names</b>: When entering new cats, try to automatically link IDs to cats in your village with matching names. 
+                                <br>Example: Your cat named Cookie has a friend named Shark, and another cat in your village is named Shark - link Shark's ID to Cookie's friends list, and vice versa. 
+                                <br>(!) Note that if two cats in your village share a name, this may not function as intended. 
+                                <br>(!) Additionally, if your cat is friends with a cat outside of your village, and your village has a cat with the same name, it will link to your cat, not the correct one in the other village.
+                            </p>
+                            <input type = "checkbox" class = "data-storage-checkboxes" id = "auto-match-friends-checkbox"  data-storage-key = "autoMatchFriends">
+                            <label for = "auto-match-friends-checkbox"><span class = "label-text">Auto Match Friends Names</span></label>
+                        </div>
+                    </div>
+
+                    <br>
+
+
+                    <input type="checkbox" class = "data-storage-checkboxes" id = "family-checkbox"  data-storage-key = "storeFamily">
+                    <label for = "family-checkbox" class = "hoverable-label"><span class = "label-text">Store Family</span></label>
+                    <div class = "explanation-box">
+                        <p>Should the Not-Cataloguer store your cat's family members? This has a varying impact on storage. Cats with bigger families will take up more space than cats with smaller families. Overall, it has a moderate to high impact on storage.</p>
+                        <div class = "sub-setting">
+                            <p><b>Auto Match Family Names</b>: When entering new cats, try to automatically link IDs to cats in your village with matching names. 
+                                <br>Example: Your cat named Cookie has a child named Shark, and another cat in your village is named Shark - link Shark's ID to Cookie's family list, and vice versa. 
+                                <br>(!) Note that if two cats in your village share a name, this may not function as intended. 
+                                <br>(!) Additionally, if your cat is family with a cat outside of your village, and your village has a cat with the same name, it will link to your cat, not the correct one in the other village.
+                            </p>
+                            <input type = "checkbox" class = "data-storage-checkboxes" id = "auto-match-family-checkbox"  data-storage-key = "autoMatchFamily">
+                            <label for = "auto-match-family-checkbox"><span class = "label-text">Auto Match Family Names</span></label>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <input type="checkbox" class = "data-storage-checkboxes" id = "pose-checkbox"  data-storage-key = "storePose" checked>
+                    <label for = "pose-checkbox" class = "hoverable-label"><span class = "label-text">Store Pose</span></label>
+                    <div class = "explanation-box">
+                        <p>Should the Not-Cataloguer store your cat's pose? If poses are not stored, all cat previews will default to Standing. If poses are stored, cat previews will use the stored pose when generating cat previews. It has a very small impact on storage.</p>
+                    </div>
+
+                    <br>
+
+                    <input type="checkbox" class = "data-storage-checkboxes" id = "eyes-checkbox"  data-storage-key = "storeEyes" checked>
+                    <label for = "eyes-checkbox" class = "hoverable-label"><span class = "label-text">Store Eyes</span></label>
+                    <div class = "explanation-box">
+                        <p>Should the Not-Cataloguer store your cat's eye settings? (neutral, UwU, wimdy, etc) If eyes are not stored, all cat previews will default to neutral. If eyes are stored, cat previews will use the stored eyes when generating cat previews. It has a very small impact on storage.</p>
+                    </div>
+
+                    <br>
+
+                    <input type="checkbox" class = "data-storage-checkboxes" id = "size-checkbox"  data-storage-key = "storeSize" checked>
+                    <label for = "size-checkbox" class = "hoverable-label"><span class = "label-text">Store Size</span></label>
+                    <div class = "explanation-box">
+                        <p>Should the Not-Cataloguer store your cat's size/weight? Size only shows up on cat pages. It does have some use cases, such as (thus far unimplemented) size checks for Growth genes, and a check to see if the cat is the minimum or maximum size for the Sales Post Generator. It has a small impact on storage.</p>
+                    </div>
+
+                    <br>
+
+                    <input type="checkbox" class = "data-storage-checkboxes" id = "clothes-checkbox" data-storage-key = "storeClothes">
+                    <label for = "clothes-checkbox" class = "hoverable-label"><span class = "label-text">Store Clothes</span></label>
+                    <div class = "explanation-box">
+                        <p>Should the Not-Cataloguer store your cat's worn clothes? As of now, clothes previews are not implemented in the Not-Cataloguer, so clothes will not appear on cat previews, and will only be stored as a text list on cat pages. Clothes will eventually be implemented in cat previews, so having the data there will allow for compatibility later. It has a small to moderate impact on storage.</p>
+                    </div>
+                    <br>
+
+                    <input type="checkbox" class = "data-storage-checkboxes" id = "jobs-checkbox" data-storage-key = "storeJobs" checked>
+                    <label for = "jobs-checkbox" class = "hoverable-label"><span class = "label-text">Store Jobs</span></label>
+                    <div class = "explanation-box">
+                        <p>Should the Not-Cataloguer store your cat's job levels? This allows the Not-Cataloguer to better prioritize job affinities with level bonuses in mind. It has a small to moderate impact on storage.</p>
+                        <div class = "sub-setting">
+                            <p><b>Store Jobs EXP</b>: Should the Not-Cataloguer also store current EXP values for each job? This can be used to track how many days are needed to level up a job. This adds a small to moderate impact on storage.</p>
+                            <input type = "checkbox" class = "data-storage-checkboxes" id = "jobs-exp-checkbox" data-storage-key = "storeJobsEXP" checked>
+                            <label for = "jobs-exp-checkbox"><span class = "label-text">Store Jobs EXP</span></label>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <input type="checkbox" class = "data-storage-checkboxes" id = "adventuringclass-checkbox" data-storage-key = "storeAdventuringClasses" checked>
+                    <label for = "adventuringclass-checkbox" class = "hoverable-label"><span class = "label-text">Store Adventuring Classes</span></label>
+                    <div class = "explanation-box">
+                        <p>Should the Not-Cataloguer store your cat's adventuring class levels?</p>
+                        <div class = "sub-setting">
+                            <p><b>Store Jobs EXP</b>: Should the Not-Cataloguer also store current EXP values for each adventuring class? This can be used to track how close a cat is to leveling up in an adventuring class. This adds a small to moderate impact on storage.</p>
+                            <input type = "checkbox" class = "data-storage-checkboxes" id = "adventuringclass-exp-checkbox" data-storage-key = "storeAdventuringClassesEXP" checked>
+                            <label for = "adventuringclass-exp-checkbox"><span class = "label-text">Store Adventuring Classes EXP</span></label>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <input type="checkbox" class = "data-storage-checkboxes" id = "trinket-checkbox" data-storage-key = "storeTrinket" checked>
+                    <label for = "trinket-checkbox" class = "hoverable-label"><span class = "label-text">Store Trinket</span></label>
+                    <div class = "explanation-box">
+                        <p>Should the Not-Cataloguer store your cat's held trinket data? This has a small impact on storage.</p>
+                    </div>
+                    <br>
+                    
+                    <input type="checkbox" class = "data-storage-checkboxes" id = "biography-checkbox" data-storage-key = "storeBiography">
+                    <label for = "biography-checkbox" class = "hoverable-label"><span class = "label-text">Store Biography</span></label>
+                    <div class = "explanation-box">
+                        <p>Should the Not-Cataloguer store your cat's biography? With standard copy/paste input, this will not include images, including catmojis which will be converted to their alt text, and most text formatting. This has a varied impact on storage, but generally speaking, it has a huge potential impact on storage due to the large size biographys can take up.</p>
+                    </div>
+                    <br>
+                    <input type="checkbox" class = "data-storage-checkboxes" id = "overwrite-genestring-checkbox" data-storage-key = "overwriteGeneString" checked>
+                    <label for = "overwrite-genestring-checkbox" class = "hoverable-label"><span class = "label-text">Overwrite Existing Gene String</span></label>
+                    <div class = "explanation-box">
+                        <p>When re-entering a cat that already exists in your village, should the gene string overwrite the existing gene string? By default, all data is overriden when you input a cat again, but if you gened your cat already and are just trying to update other information like jobs progress, and don't want to lose your modified gene string, you can toggle this setting off.</p>
+                    </div>
+                    <br>
+
+
+
                 </div>
             </div>
         </div>
+
     <script src="./switch_theme.js"></script>
-    <script src="./generateBBCodeGeneString.js"></script>
-    <!-- BBCode Styling Autofill from Local Storage Script so we don't have to have another js file cluttering stuff up for something used only on one page -->
-    <script>
-        let prefixBox = document.getElementById("bbcode-prefix")
-        let suffixBox = document.getElementById("bbcode-suffix")
-        let prefix = localStorage.getItem('bbcodePrefix')
-        let suffix = localStorage.getItem('bbcodeSuffix')
-        prefixBox.value = JSON.parse(prefix)
-        suffixBox.value = JSON.parse(suffix)
-        auto_grow(prefixBox)
-        auto_grow(suffixBox)
-    </script>
+    <script src="./Settings.js"></script>
     </body>
 </html>
+
+
+
+
+
+

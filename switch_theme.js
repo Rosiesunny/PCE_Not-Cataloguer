@@ -21,10 +21,10 @@ function changeThemeText(text) {
 (function(){
     if(localStorage.getItem('theme')==='theme-dark'){
         setTheme('theme-dark');
-        changeThemeText("Dark Theme");
+        
     }
     else{
         setTheme('theme-light');
-        changeThemeText("Light Theme");
+        
     }
 })(); //ily squid ty for the theme change code

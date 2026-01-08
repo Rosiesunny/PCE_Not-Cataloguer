@@ -33,12 +33,16 @@ appearanceData += "Size: " + thisCat.size.lbs + " lbs. / " + thisCat.size.kg + "
 appearanceData += "Fur: " + thisCat.fur.length + "\n";
 appearanceData += "Color: " + thisCat.fur.color + " " + thisCat.fur.type + "\n";
 appearanceData += "Pattern: " + thisCat.pattern + "\n";
+appearanceData += "Accent Color: " + thisCat.accentColor + "\n"
 appearanceData += "White Marks: " + thisCat.white.markings + " / " + thisCat.white.type + thisCat.white.level + "\n";
-appearanceData += "Eye Color: " + thisCat.eyeColor + "\n";
+appearanceData += "Eyes: " + thisCat.eyes.color + " " + thisCat.eyes.eyes + "\n";
+appearanceData += "Pose: " + thisCat.pose + "\n"
 document.getElementById("appearance-data").innerText = appearanceData;
 
 var geneData = getGeneString(thisCat);
 document.getElementById("gene-data").innerText = geneData;
+geneTestingButton(thisCat.genes, thisCat.id, thisCat.name, thisCat.wind, thisCat.fur, thisCat.white, thisCat.pattern, thisCat.accentcolor, thisCat.eyes, thisCat.pose, thisCat.age, thisCat.species, document.getElementById("genetest-button-zone"))
+bbcodeButton(thisCat.genes, thisCat.wind, document.getElementById("bbcode-button-zone"))
 
 var personalityData = "";
 personalityData += thisCat.personality.type + " Personality: \n";
@@ -109,27 +113,88 @@ for (var i = 0; i < stats_list.length; i++) {
 }
 document.getElementById("attribute-data").innerText = attributeData;
 
-var clothesData = "";
-clothesData += "Currently Wearing: ";
-if (thisCat.clothes.wearing.numslots == 0) {
-    clothesData += "None";
-} else {
-    for (var i = 1; i <= thisCat.clothes.wearing.numslots; i++) {
-        clothesData += thisCat.clothes.wearing[i].name + " #" + thisCat.clothes.wearing[i].id;
-        if (!(i == (thisCat.clothes.wearing.numslots))) {
-            clothesData += ", ";
+let friendsList = thisCat.friends
+let friendsData = "Friends: \n"
+if (friendsList.length > 0) {
+    for (let i = 0; i < friendsList.length; i++) {
+        friendsData += friendsList[i].name + " - " + friendsList[i].relationship
+        if (friendsList[i].id) {
+            friendsData += " - id: " + friendsList[i].id
         }
+        friendsData += "\n"
     }
 }
-document.getElementById("clothes-data").innerText = clothesData;
-
-var travellingData = "";
-if (thisCat.travelling) {
-    travellingData = "This not-cat is currently out traveling the world!";
-} else {
-    travellingData = "This not-cat is currently home in your active village!";
+else {
+    friendsData += "None\n"
 }
-document.getElementById("travelling-data").innerText = travellingData;
+document.getElementById("friends-data").innerText = friendsData
+
+let familyList = thisCat.family
+let familyData = "Family: \n"
+if (familyList.length > 0) {
+    for (let i = 0; i < familyList.length; i++) {
+        familyData += familyList[i].name + " - " + familyList[i].relationship
+        if (familyList[i].id) {
+            familyData += " - id: " + familyList[i].id
+        }
+        familyData += "\n"
+    }
+}
+else {
+    familyData += "None\n"
+}
+document.getElementById("family-data").innerText = familyData
+
+if (thisCat.biography) {
+    document.getElementById("biography-data").innerText = "Biography:\n" + thisCat.biography
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var clothesData = "";
+clothesData += "Currently Wearing:\n";
+console.log(thisCat)
+if (thisCat.clothes.wearing) {
+    if (thisCat.clothes.wearing.length == 0) {
+    clothesData += "None";
+    } 
+    else {
+        for (var i = 0; i < thisCat.clothes.wearing.length; i++) {
+            console.log(i)
+            clothesData += thisCat.clothes.wearing[i].name + " #" + thisCat.clothes.wearing[i].id
+            if (thisCat.clothes.wearing[i].creator) {
+                clothesData += " by " + thisCat.clothes.wearing[i].creator
+            }
+            
+            if (i < thisCat.clothes.wearing.length-1) {
+                clothesData += ",\n"
+            }
+        }
+    }
+    document.getElementById("clothes-data").innerText = clothesData;
+}
+
+
+var locationData = "";
+if (thisCat.location) {
+    locationData = thisCat.location
+} else {
+    locationData = "Unknown Location";
+}
+document.getElementById("location-data").innerText = locationData;
 
 var updateData = "";
 var timestamp = new Date(thisCat.lastUpdated);

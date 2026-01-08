@@ -6,11 +6,12 @@
         <link rel="stylesheet" href = "geneTesting.css">
         <link rel="icon" href ="favicon.ico">
     </head>
-    <body onload = "loadStoredCatGene()">
+    <body onload = "loadStoredCat()">
         <script src="./init_village.js"></script>
         <script src="./GeneTesting.js"></script>
         <script src="./save_village.js"></script>
         <script src="./generateBBCodeGeneString.js"></script>
+        <script src="./CatImageGenerator.js"></script>
         <div id = "container">
             <a href = "index.html"><img src = "assets/pce_not-cataloguer_logo.png" id = "logo" alt = "Home Button" style = "padding-left: 0; max-width: 4%"></a>
             <div class = "btn-group">
@@ -22,7 +23,7 @@
                         Your Cat's ID # <div id = "yourCatID">???</div>
                         <div id = "currentlyknowngenes">Currently Known Genes:</div>
                         <div id = "genecodefull">???</div>
-                        <button id = "bbcodebutton" onclick="generateBBCodeGeneString(document.getElementById('genecodefull').innerText, 'bbcodebox')">Generate BBCode</button>
+                        <button id = "bbcodebutton" onclick="generateBBCodeGeneString(document.getElementById('genecodefull').innerText, 'bbcodebox', document.getElementById('WindSave').innerText)">Generate BBCode</button>
                         
                     </div>
                 </div>
@@ -372,6 +373,7 @@
                                             <th>Classic</th>
                                             <th>Broken</th>
                                             <th>Lynxpoint</th>
+                                            <th>Ticked</th>
                                         </tr>
                                         <tr>
                                             <td>
@@ -398,12 +400,19 @@
                                                     <img src="assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="c-adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
                                                 </div>
                                             </td>
+                                            <td>
+                                                <div class="catjail" style="margin: auto;">
+                                                    <img src="assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_ticked.png" class="c-adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                                                    <img src="assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="c-adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                                                </div>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <th>TT</th>
                                             <th>TM</th>
                                             <th>TS</th>
                                             <th>TP</th>
+                                            <th>TA</th>
                                         </tr>
                                     </table>
                                     </div>
@@ -456,7 +465,7 @@
                                         </div>
                                     <div id = "No-WhiteVSWhiteReference"  class = "hidden">
                                         <h1>No-White vs White References</h1>
-                                        Note: It may be benefitial to use the <a href = "BeansSandboxAltText.html" target="_blank">Beans Sandbox Alt Text Parser</a> to determine white levels with certainty, especially with laying cats and small beans who hide their white. 
+                                        Note: It may be benefitial to use the <a href = "ExtraTools/BeansSandboxAltText.html" target="_blank">Beans Sandbox Alt Text Parser</a> to determine white levels with certainty, especially with laying cats and small beans who hide their white. 
                                         <table>
                                             <tr>
                                                 <th>No-White</th>
@@ -1281,6 +1290,98 @@
                                                                                         </tr>
                                                                                     </table>
                                                                                     </div>
+																					<div id = "TabbyWhiteTypeFullReference" class = "hidden">
+                                                                                    <h1>Tabby White Type Full Reference</h1>
+                                                                                    <table>
+                                                                                        <tr>
+                                                                                            <th>1</th>
+                                                                                            <th>2</th>
+                                                                                            <th>3</th>
+                                                                                            <th>4</th>
+                                                                                            <th>5</th>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td>
+                                                                                                <div class="catjail" style="margin: auto;">
+                                                                                                    <img src="assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="c-adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                                                                                                    <img src="assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_tabby_1.png" class="c-adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                                                                                                    <img src="assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="c-adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                                                                                                </div>
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <div class="catjail" style="margin: auto;">
+                                                                                                    <img src="assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="c-adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                                                                                                    <img src="assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_tabby_2.png" class="c-adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                                                                                                    <img src="assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="c-adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                                                                                                </div>
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <div class="catjail" style="margin: auto;">
+                                                                                                    <img src="assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="c-adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                                                                                                    <img src="assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_tabby_3.png" class="c-adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                                                                                                    <img src="assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="c-adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                                                                                                </div>
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <div class="catjail" style="margin: auto;">
+                                                                                                    <img src="assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="c-adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                                                                                                    <img src="assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_tabby_4.png" class="c-adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                                                                                                    <img src="assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="c-adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                                                                                                </div>
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <div class="catjail" style="margin: auto;">
+                                                                                                    <img src="assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="c-adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                                                                                                    <img src="assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_tabby_5.png" class="c-adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                                                                                                    <img src="assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="c-adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                                                                                                </div>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td>
+                                                                                                <div class="catjail" style="margin: auto;">
+                                                                                                    <img src="assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="c-adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                                                                                                    <img src="assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_tabby_6.png" class="c-adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                                                                                                    <img src="assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="c-adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                                                                                                </div>
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <div class="catjail" style="margin: auto;">
+                                                                                                    <img src="assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="c-adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                                                                                                    <img src="assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_tabby_7.png" class="c-adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                                                                                                    <img src="assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="c-adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                                                                                                </div>
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <div class="catjail" style="margin: auto;">
+                                                                                                    <img src="assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="c-adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                                                                                                    <img src="assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_tabby_8.png" class="c-adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                                                                                                    <img src="assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="c-adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                                                                                                </div>
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <div class="catjail" style="margin: auto;">
+                                                                                                    <img src="assets/PCE_Assets/Cat/Not-Cat/BaseColors/black_main_mackerel.png" class="c-adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                                                                                                    <img src="assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_tabby_9.png" class="c-adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                                                                                                    <img src="assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="c-adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                                                                                                </div>
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <div class="catjail" style="margin: auto;">
+                                                                                                    <img src="assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_tabby_10.png" class="c-adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                                                                                                    <img src="assets/PCE_Assets/Cat/Eyes/eyes_neutral_a_tabby.png" class="c-adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                                                                                                </div>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <th>6</th>
+                                                                                            <th>7</th>
+                                                                                            <th>8</th>
+                                                                                            <th>9</th>
+                                                                                            <th>10</th>
+                                                                                        </tr>
+                                                                                    </table>
+                                                                                    </div>                                                                                    
                         </div>
                     </div>
                 </div>
@@ -1297,5 +1398,6 @@
         <button id = "uwuButton" onclick= "checkTextGeneString()">Submit</button> 
         </div>  
         <div id = "bbcodebox" class = "hidebbcodebox"></div>
+        <div id = "WindSave" class = "hidden"></div>
     </body>
 </html>

@@ -115,11 +115,12 @@ h2{
     justify-content:center;
     
 }
+/* https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_button_group */
 .btn-group button {
-    background-color: rgb(86, 127, 139); /* Green background */
-    color: white; /* White text */
-    padding: 4% 3%; /* Some padding */
-    cursor: pointer; /* Pointer/hand icon */
+    background-color: rgb(86, 127, 139); 
+    color: white; 
+    padding: 4% 3%; 
+    cursor: pointer; 
     float: left; /* Float the buttons side by side */
     width: 30%;
     margin: .9%;
@@ -148,21 +149,3 @@ h2{
 
 }
 
-.textbox {
-    margin-top: 4%;
-    padding: 1.5%;
-    border-radius: 10% 10%;
-    background-color: var(--helpbox);
-    color:var(--text);
-    font-size: 1.2rem;
-}
-
-a {
-    color: var(--links);
-}
-
-#settings-container {
-    margin-left: 8%;
-    display: flex;
-    justify-content: space-around;
-}

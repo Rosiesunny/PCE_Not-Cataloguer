@@ -28,28 +28,15 @@ const classEXPDict = {
 }
 
 village = {};
-console.log("Not-Cataloguer V 1.0 Alpha");
+
 
 // All cats in the village - accessed by village.cats[catID]
 village.cats = {};
 
 let cachedVillage = JSON.parse(window.localStorage.getItem("myVillage"));
-if (!(cachedVillage === null)) {
-    village = cachedVillage;
+village = checkForDataStorageUpdates(cachedVillage)
 
-    // Check initialization - currently only for backwards compatibility
-    cats_list = Object.keys(village.cats);
-    for(var i = 0; i < cats_list.length; i++) {
-        if (village.cats[cats_list[i]].clothes === undefined) {
-            village.cats[cats_list[i]].clothes = {};
-            village.cats[cats_list[i]].clothes.wearing = {};
-            village.cats[cats_list[i]].clothes.wearing.numslots = 0;
-            for (var j = 1; j <= 12; j++) {
-                village.cats[cats_list[i]].clothes.wearing[j] = {};
-            }
-        }
-    }
-}
+console.log("Not-Cataloguer V 1.1 Alpha");
 
 if (!(typeof(load_village) == 'undefined')) {
     if (load_village == 0) {
@@ -1956,4 +1943,77 @@ function getGeneString(cat) {
     geneString += " [" + cat.genes[18] + cat.genes[19] + "]";
     geneString += " [" + cat.genes[20] + cat.genes[21] + "]";
     return geneString;
+}
+
+function checkForDataStorageUpdates(cachedVillage) {
+    let storedVersion = localStorage.getItem("NotCataloguerVersion")
+    if (storedVersion) {
+        switch(storedVersion) {
+            // basically a list of versions that will call individual update functions. does nothing for now. first one should be "case (current version) and just break/return"
+            case "AAAA":
+                "eeee"
+            case "A1010":
+                "PEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE"
+        }
+    }
+    else {
+        // village data is older than when we started storing versions in localStorage, initialize it if the village exists
+        console.log(cachedVillage)
+        console.log("PEPEPEPEPPEPEPEP")
+        if (cachedVillage) {
+            console.log("Old data detected (from Alpha 1.0/unstored version name), fixing data")
+            cachedVillage = unnamedAlphaVersionClothesFix(cachedVillage)
+            cachedVillage = AlphaOnePointOneVersionUpdate(cachedVillage)
+        }
+    }
+    return cachedVillage
+}
+
+function unnamedAlphaVersionClothesFix(cachedVillage) {
+// first fix from Gou when we updated the clothing storage method, edited to exclude numslots as I don't use those
+    if (!(cachedVillage === null)) {
+        // Check initialization - currently only for backwards compatibility
+        cats_list = Object.keys(cachedVillage.cats);
+        for(var i = 0; i < cats_list.length; i++) {
+            if (cachedVillage.cats[cats_list[i]].clothes === undefined) {
+                cachedVillage.cats[cats_list[i]].clothes = {};
+                cachedVillage.cats[cats_list[i]].clothes.wearing = {};
+                for (var j = 1; j <= 12; j++) {
+                    cachedVillage.cats[cats_list[i]].clothes.wearing[j] = {};
+                }
+            }
+        }
+    }
+    return cachedVillage
+}
+
+function AlphaOnePointOneVersionUpdate(cachedVillage) {
+    cats_list = Object.keys(cachedVillage.cats)
+    for (let i = 0; i < cats_list.length; i++) {
+        if (cachedVillage.cats[cats_list[i]].hasOwnProperty("eyeColor")) {
+            let eyes = {
+                color: cachedVillage.cats[cats_list[i]].eyeColor
+            }
+            cachedVillage.cats[cats_list[i]].eyes = eyes
+            delete cachedVillage.cats[cats_list[i]].eyeColor
+        }
+        if (cachedVillage.cats[cats_list[i]].hasOwnProperty("genes")) {
+            if (cachedVillage.cats[cats_list[i]].genes[9] !== "?") {
+                cachedVillage.cats[cats_list[i]].genes[9] = Number(cachedVillage.cats[cats_list[i]].genes[9])
+            }
+        }
+        console.log(cachedVillage.cats[cats_list[i]])
+        if (cachedVillage.cats[cats_list[i]].hasOwnProperty("travelling")) {
+            if (cachedVillage.cats[cats_list[i]].travelling == false) {
+                cachedVillage.cats[cats_list[i]].location = "Active"
+            }
+            if (cachedVillage.cats[cats_list[i]].travelling == true) {
+                cachedVillage.cats[cats_list[i]].location = "Travelling"
+            }
+            delete cachedVillage.cats[cats_list[i]].travelling
+        }
+    }
+    console.log("Updated old data (if any) for Alpha 1.1")
+    localStorage.setItem("NotCataloguerVersion", "Alpha 1.1")
+    return cachedVillage
 }

@@ -7,7 +7,6 @@ function findRecessiveGenes(cat) {
     let recessivesList = []
     
     // if cat is not null, and has O gene, it carries null
-    console.log(cat.wind)
     if (cat.wind != "Null") {
         if (genes[1] == "O" || genes[2] == "O") {
             recessivesList.push("Null")
