@@ -16,7 +16,14 @@ function makeCatImage(furlength, color, colortype, whitelevel, whitetype, patter
     addImage(eyessrc, location, mainclass, "cat-eyes", 10)
 }
 
+
+
 function addImage(imgsrc, location, mainclass, otherclass, zindex) {
+    console.log(document.URL)
+    if (document.URL.includes("ExtraTools")) {
+        imgsrc = ".." + imgsrc
+    }
+    console.log(imgsrc)
     let catjailfound = location.querySelector(".catjail")
     if (!catjailfound) {
         let catjaildiv = document.createElement("div")
