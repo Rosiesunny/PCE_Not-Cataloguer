@@ -65,12 +65,12 @@ function generateMainClass(pose, furlength, species, age) {
 
 function makeBaseCatImageSRC(color, pattern, species) {
     if (color == "-hidden-") {
-        return "assets/PCE_Assets/Cat/blank.png"
+        return "/assets/PCE_Assets/Cat/blank.png"
     }
     else {
         let colorList = ["Black", "Chocolate", "Brown", "Tan", "Red", "Ginger", "Orange", "Apricot", "Charcoal", "Grey", "Smoke", "Silver", "Buff", "Cream", "Almond", "Beige", "Snow", "-hidden-"]
         let colorListFiles = ["black", "choco", "brown", "tan", "red", "ginger", "orange", "aprico", "charc", "grey", "smoke", "silver", "buff", "cream", "almond", "beige", "snow", "unknown"]
-        let imgsrc = "assets/PCE_Assets/Cat/"
+        let imgsrc = "/assets/PCE_Assets/Cat/"
         if (species == "Not-cat") {
             imgsrc += "Not-Cat/BaseColors/"
         }
@@ -92,16 +92,19 @@ function makeBaseCatImageSRC(color, pattern, species) {
 }
 
 function makeTradeImageSRC(color, pattern, species) {
+    console.log(color + " " + pattern + " " + species) 
     let colorList = ["Black", "Chocolate", "Brown", "Tan", "Red", "Ginger", "Orange", "Apricot", "Charcoal", "Grey", "Smoke", "Silver", "Buff", "Cream", "Almond", "Beige", "Snow", "-hidden-"]
     let colorListFiles = ["black", "choco", "brown", "tan", "red", "ginger", "orange", "aprico", "charc", "grey", "smoke", "silver", "buff", "cream", "almond", "beige", "snow", "unknown"]
-    let imgsrc = "assets/PCE_Assets/Cat/"
+    let imgsrc = "/assets/PCE_Assets/Cat/"
     if (species == "Not-cat") {
         imgsrc += "Not-Cat/TradeColors/"
     }
     if (species == "Mercat") {
         imgsrc += "Mercat/TradeColors/"
     }
-    color = color.split("-")[1]
+    if (color.includes("-")) {
+        color = color.split("-")[1]
+    }
     for (let i = 0; i < colorList.length; i++) {
         if (color === colorList[i]) {
             imgsrc += colorListFiles[i] + "_trade_"
@@ -118,7 +121,7 @@ function makeTradeImageSRC(color, pattern, species) {
 }
 
 function makeAccentImageSRC(accentcolor, pattern, species) {
-    let imgsrc = "assets/PCE_Assets/Cat/"
+    let imgsrc = "/assets/PCE_Assets/Cat/"
     if (species == "Mercat") {
         imgsrc += "Mercat/AccentColors/"
     }
@@ -141,10 +144,10 @@ function makeWhiteImageSRC(whitelevel, whitetype, species) {
     let whiteTypeLetterList = ["C", "P", "R", "L", "I", "T"]
     let whiteTypeList = ["classic", "piebald", "right", "left", "inverse", "tabby"]
     if (whitelevel == "-hidden-") {
-        return "assets/PCE_Assets/Cat/blank.png"
+        return "/assets/PCE_Assets/Cat/blank.png"
     }
     else {
-        let imgsrc = "assets/PCE_Assets/Cat/"
+        let imgsrc = "/assets/PCE_Assets/Cat/"
         if (species == "Not-cat") {
             imgsrc += "Not-Cat/WhiteMarkings/white_"
         }
@@ -163,7 +166,7 @@ function makeWhiteImageSRC(whitelevel, whitetype, species) {
 }
 
 function makeEyesImageSRC(eyes, eyecolor) {
-    let imgsrc = "assets/PCE_Assets/Cat/Eyes/eyes_"
+    let imgsrc = "/assets/PCE_Assets/Cat/Eyes/eyes_"
     if (typeof eyes == "undefined" || eyes.includes("undefined")) {
         eyes = "neutral"
     }

@@ -193,8 +193,6 @@ function generateInnerHTML(dataArray) {
 // function makeCatImage(furlength, color, colortype, whitelevel, whitetype, pattern, accentcolor, eyes, eyecolor, pose, age, species, location)
 
 function displayFindings(htmlArray, dataArray) {
-    console.log(htmlArray)
-    console.log(dataArray)
     for (let i = 0; i < 7; i++) {
         let number = i+1
         let id = "cat"+number
@@ -215,7 +213,7 @@ function displayFindings(htmlArray, dataArray) {
         for (let j = 0; j < colortypes.length; j++) {
             if (colortypes[j][1] == dataArray[i][2]) {
                 colortype = colortypes[j][0]
-                if (i > 0) {
+                if (j > 0) {
                     if (colortype == "Tortoiseshell") {
                         let colorgenes = [["Apricot", "Orange", "Ginger", "Red", "Beige", "Almond", "Cream", "Buff"], 
                                           ["Tan", "Brown", "Chocolate", "Black", "Silver", "Smoke", "Grey", "Charcoal"]
@@ -249,7 +247,6 @@ function displayFindings(htmlArray, dataArray) {
                             }
                         }
                     }
-                    console.log("EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE")
                 }
                 break
             }
@@ -273,8 +270,13 @@ function displayFindings(htmlArray, dataArray) {
         else {
             accentcolor = "-hidden-"
         }
-        
 
+        if (whitelevel == "hidden") {
+            whitelevel = "-hidden-"
+        }
+        if (whitetype == "hidden") {
+            whitetype == "hidden"
+        }
         makeCatImage(furlength, color, colortype, whitelevel, whitetype, pattern, accentcolor, "neutral", "Dark Brown", "standing", "Adult", species, tableentry)
         let tempdiv = document.createElement("div")
         tempdiv.innerHTML = htmlArray[i]
@@ -340,7 +342,6 @@ function ensmallenData(beansArray) {
         }
 
     }
-    console.log(beansArrayNew)
     return beansArrayNew
     
 }
