@@ -216,11 +216,14 @@ function checkMatch(match1, match2, matchyes, matchno) {
 
 function listHiddenRecessive(genestring, wind) {
     let genestringArray = genestring.split("]")
+    
     let carryArray = []
     let albinoSolidHiddenAppearance = []
     for (let i = 0; i < genestringArray.length; i++) {
         genestringArray[i] = genestringArray[i].split("[")[1]
     }
+    console.log(genestringArray)
+    console.log(wind)
     if (wind == "North" || wind == "South") {
         if (genestringArray[1].includes("O")) {
             carryArray.push("Null wind")
@@ -280,6 +283,12 @@ function listHiddenRecessive(genestring, wind) {
                 }
             }
             albinoSolidHiddenAppearance.push("Standard")
+        }
+        // works so long as D or F isn't added as a color gene
+        if (genestringArray[3].includes("F")) {
+            if (genestringArray[3].includes("D")) {
+                carryArray.push("Dilute")
+            }
         }
         if (wind == "Trade") {
             let colorgene1 = genestringArray[3][0]
@@ -395,7 +404,14 @@ function listHiddenRecessive(genestring, wind) {
                 }
                 albinoSolidHiddenAppearance.push("Standard")
         }
-        // colors/dilutes handling done, still need to determine pattern
+
+        // colors/dilutes handling done, still need to determine pattern. doing Y/N first
+        if (genestringArray[4].includes("Y")) {
+            if (genestringArray[4].includes("N")) {
+                carryArray.push("Solid")
+            }
+        }
+        
         if (genestringArray[4][0] == "N" && genestringArray[4][1] == "N") {
             // cat is solid
             albinoSolidHiddenAppearance.push("Solid")
@@ -450,45 +466,56 @@ function listHiddenRecessive(genestring, wind) {
             let colorgene1 = genestringArray[3][0]
             let colorgene2 = genestringArray[3][1]
             let colorgenes = [
-                    ["O", "Orange color gene", 
-                        [["Apricot", "Orange", "Ginger", "Red"], ["Beige", "Almond", "Cream", "Buff"]]
-                    ], 
-                    ["B", "Black color gene", 
-                        [["Tan", "Brown", "Chocolate", "Black"], ["Silver", "Smoke", "Grey", "Charcoal"]]
-                    ]
+                ["O", "Orange color gene", 
+                    [["Apricot", "Orange", "Ginger", "Red"], ["Beige", "Almond", "Cream", "Buff"]]
+                ], 
+                ["B", "Black color gene", 
+                    [["Tan", "Brown", "Chocolate", "Black"], ["Silver", "Smoke", "Grey", "Charcoal"]]
                 ]
-                let i1 = 0
-                // find color gene match 1
-                for (i1 = 0; i1 < colorgenes.length; i1++) {
-                    if (colorgene1 == colorgenes[i1][0]) {
-                        break
-                    }
+            ]
+            let i1 = 0
+            // find color gene match 1
+            for (i1 = 0; i1 < colorgenes.length; i1++) {
+                if (colorgene1 == colorgenes[i1][0]) {
+                    break
                 }
-                let i2 = 0
-                // find color gene match 1
-                for (i2 = 0; i2 < colorgenes.length; i2++) {
-                    if (colorgene2 == colorgenes[i2][0]) {
-                        break
-                    }
+            }
+            let i2 = 0
+            // find color gene match 1
+            for (i2 = 0; i2 < colorgenes.length; i2++) {
+                if (colorgene2 == colorgenes[i2][0]) {
+                    break
                 }
-                let j = 0
-                if (genestringArray[3][2] == "F" || genestringArray[3][3] == "F") {
-                    // cat is full
-                    j = 0
-                }
-                else {
-                    j = 1
-                }
-                let color1 = colorgenes[i1][2][j][Number(genestringArray[3][4])-1]
-                let color2 = colorgenes[i2][2][j][Number(genestringArray[3][4])-1]
-                if (color1 == color2) {
-                    albinoSolidHiddenAppearance.push(color1)
-                }
-                else {
-                    albinoSolidHiddenAppearance.push(color1 + "/" + color2)
-                }
-                
-                
+            }
+            let j = 0
+            if (genestringArray[3][2] == "F" || genestringArray[3][3] == "F") {
+                // cat is full
+                j = 0
+            }
+            else {
+                j = 1
+            }
+            let color1 = colorgenes[i1][2][j][Number(genestringArray[3][4])-1]
+            let color2 = colorgenes[i2][2][j][Number(genestringArray[3][4])-1]
+            if (color1 == color2) {
+                albinoSolidHiddenAppearance.push(color1)
+            }
+            else {
+                albinoSolidHiddenAppearance.push(color1 + "/" + color2)
+            }
+        }
+        // works so long as D or F isn't added as a color gene
+        if (genestringArray[3].includes("F")) {
+            if (genestringArray[3].includes("D")) {
+                carryArray.push("Dilute")
+            }
+        }
+
+        // colors/dilutes handling done, still need to determine pattern. doing Y/N first
+        if (genestringArray[4].includes("Y")) {
+            if (genestringArray[4].includes("N")) {
+                carryArray.push("Solid")
+            }
         }
         if (genestringArray[4][0] == "N" && genestringArray[4][1] == "N") {
             // cat is solid
@@ -553,7 +580,6 @@ function listHiddenRecessive(genestring, wind) {
             }
         }
     }
-
     // done finding hidden/carried genes, now list them
     let hidesCarriesString = ""
     if (carryArray.length > 0 || albinoSolidHiddenAppearance.length > 0) {
