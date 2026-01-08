@@ -140,6 +140,12 @@ function parseCats(beansArray) {
 
 
 function generateInnerHTML(dataArray) {
+    for (let i = 1; i < 8; i++) {
+        let id = "cat" + i
+        let thiscat = document.getElementById(id)
+        thiscat.innerHTML = ""
+    }
+    
     let colorslist = ["black", "choco", "brown", "tan", "red", "ginger", "orange", "aprico", "charc", "grey", "smoke", "silver", "buff", "cream", "almond", "beige", "snow"]
     let colorList = ["black", "chocolate", "brown", "tan", "red", "ginger", "orange", "apricot", "charcoal", "grey", "smoke", "silver", "buff", "cream", "almond", "beige", "snow"]
     let densityList = ["4", "3", "2", "1", "4", "3", "2", "1", "4", "3", "2", "1", "4", "3", "2", "1", "?"]
@@ -271,14 +277,22 @@ function displayFindings(htmlArray, dataArray) {
             accentcolor = "-hidden-"
         }
 
+        if (color == "hidden") {
+            color = "-hidden-"
+        }
         if (whitelevel == "hidden") {
             whitelevel = "-hidden-"
         }
         if (whitetype == "hidden") {
-            whitetype == "hidden"
+            whitetype == "-hidden-"
         }
+        if (accentcolor == "hidden") {
+            accentcolor = "-hidden-"
+        }
+        console.log(color)
         makeCatImage(furlength, color, colortype, whitelevel, whitetype, pattern, accentcolor, "neutral", "Dark Brown", "standing", "Adult", species, tableentry)
         let tempdiv = document.createElement("div")
+        tempdiv.classList.add("traitslist")
         tempdiv.innerHTML = htmlArray[i]
         tableentry.insertAdjacentElement("beforeend", tempdiv)
     }

@@ -19,11 +19,6 @@ function makeCatImage(furlength, color, colortype, whitelevel, whitetype, patter
 
 
 function addImage(imgsrc, location, mainclass, otherclass, zindex) {
-    console.log(document.URL)
-    if (document.URL.includes("ExtraTools")) {
-        imgsrc = "../" + imgsrc
-    }
-    console.log(imgsrc)
     let catjailfound = location.querySelector(".catjail")
     if (!catjailfound) {
         let catjaildiv = document.createElement("div")
@@ -33,6 +28,10 @@ function addImage(imgsrc, location, mainclass, otherclass, zindex) {
     }
     let catjaillocation = location.querySelector(".catjail")
     let catimage = document.createElement("img")
+    if (document.URL.includes("ExtraTools")) {
+        imgsrc = "../" + imgsrc
+        catimage.classList.add("extratools-float-up")
+    }
     catimage.src = imgsrc
     catimage.classList.add(mainclass)
     catimage.classList.add(otherclass)
@@ -71,8 +70,9 @@ function generateMainClass(pose, furlength, species, age) {
 }
 
 function makeBaseCatImageSRC(color, pattern, species) {
+    console.log(color)
     if (color == "-hidden-") {
-        return "/assets/PCE_Assets/Cat/blank.png"
+        return "assets/PCE_Assets/Cat/blank.png"
     }
     else {
         let colorList = ["Black", "Chocolate", "Brown", "Tan", "Red", "Ginger", "Orange", "Apricot", "Charcoal", "Grey", "Smoke", "Silver", "Buff", "Cream", "Almond", "Beige", "Snow", "-hidden-"]
@@ -99,7 +99,6 @@ function makeBaseCatImageSRC(color, pattern, species) {
 }
 
 function makeTradeImageSRC(color, pattern, species) {
-    console.log(color + " " + pattern + " " + species) 
     let colorList = ["Black", "Chocolate", "Brown", "Tan", "Red", "Ginger", "Orange", "Apricot", "Charcoal", "Grey", "Smoke", "Silver", "Buff", "Cream", "Almond", "Beige", "Snow", "-hidden-"]
     let colorListFiles = ["black", "choco", "brown", "tan", "red", "ginger", "orange", "aprico", "charc", "grey", "smoke", "silver", "buff", "cream", "almond", "beige", "snow", "unknown"]
     let imgsrc = "assets/PCE_Assets/Cat/"
