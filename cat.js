@@ -113,37 +113,45 @@ for (var i = 0; i < stats_list.length; i++) {
 }
 document.getElementById("attribute-data").innerText = attributeData;
 
-let friendsList = thisCat.friends
-let friendsData = "Friends: \n"
-if (friendsList.length > 0) {
-    for (let i = 0; i < friendsList.length; i++) {
-        friendsData += friendsList[i].name + " - " + friendsList[i].relationship
-        if (friendsList[i].id) {
-            friendsData += " - id: " + friendsList[i].id
+if (thisCat.hasOwnProperty("friends")) {
+    let friendsList = thisCat.friends
+    let friendsData = "Friends: \n"
+    if (friendsList.length > 0) {
+        for (let i = 0; i < friendsList.length; i++) {
+            friendsData += friendsList[i].name + " - " + friendsList[i].relationship
+            if (friendsList[i].id) {
+                friendsData += " - id: " + friendsList[i].id
+            }
+            friendsData += "\n"
         }
-        friendsData += "\n"
     }
+    else {
+        friendsData += "None\n"
+    }
+    document.getElementById("friends-data").innerText = friendsData
 }
-else {
-    friendsData += "None\n"
-}
-document.getElementById("friends-data").innerText = friendsData
 
-let familyList = thisCat.family
-let familyData = "Family: \n"
-if (familyList.length > 0) {
-    for (let i = 0; i < familyList.length; i++) {
-        familyData += familyList[i].name + " - " + familyList[i].relationship
-        if (familyList[i].id) {
-            familyData += " - id: " + familyList[i].id
+
+if (thisCat.hasOwnProperty("family")) {
+    let familyList = thisCat.family
+    let familyData = "Family: \n"
+    if (familyList.length > 0) {
+        for (let i = 0; i < familyList.length; i++) {
+            familyData += familyList[i].name + " - " + familyList[i].relationship
+            if (familyList[i].id) {
+                familyData += " - id: " + familyList[i].id
+            }
+            familyData += "\n"
         }
-        familyData += "\n"
     }
+    else {
+        familyData += "None\n"
+    }
+    document.getElementById("family-data").innerText = familyData
 }
-else {
-    familyData += "None\n"
-}
-document.getElementById("family-data").innerText = familyData
+
+
+
 
 if (thisCat.biography) {
     document.getElementById("biography-data").innerText = "Biography:\n" + thisCat.biography
