@@ -476,7 +476,7 @@ function localStorageSettingChecks(cat) {
 
 // set default settings if there are no storage settings set
 function fixLocalUndefined() {
-    let defaultSettingsArray = [["storeFriends", "false"], ["autoMatchFriends", "false"], ["storeFamily", "false"], ["autoMatchFamily", "false"], ["storePose", "true"], ["storeSize", "true"], ["storeClothes", "false"], ["storeJobs", "true"], ["storeJobsEXP", "true"], ["storeAdventuringClasses", "true"], ["storeAdventuringClassesEXP", "true"], ["storeTrinket", "true"], ["storeBiography", "false"], ["overwriteGeneString", "true"]]
+    let defaultSettingsArray = [["storeFriends", "false"], ["autoMatchFriends", "false"], ["storeFamily", "false"], ["autoMatchFamily", "false"], ["storePose", "true"], ["storeSize", "true"], ["storeClothes", "false"], ["storeJobs", "true"], ["storeJobsEXP", "true"], ["storeAdventuringClasses", "true"], ["storeAdventuringClassesEXP", "true"], ["storeTrinket", "true"], ["storeBiography", "false"], ["overwriteGeneString", "true"], ["colorBBCode", "true"], ["listHiddenRecessive", "true"]]
     for (let i = 0; i < defaultSettingsArray.length; i++) {
         localStorage.setItem(defaultSettingsArray[i][0], defaultSettingsArray[i][1])
     }
