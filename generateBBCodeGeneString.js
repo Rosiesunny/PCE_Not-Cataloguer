@@ -445,22 +445,28 @@ function listHiddenRecessive(genestring, wind) {
     // END OF ALBINOS HANDLING
     else { // cat is not albino
         if (wind == "North" || wind == "South") {
-            // cat is north or south so they're hiding a color gene
-            let colorgenes = [["O", "Orange color gene"], ["B", "Black color gene"]]       
+            let colorgeneShown = ""
+            let colorgeneHidden = ""
             if (wind == "North") {
-                for (let i = 0; i < colorgenes.length; i++) {
-                    if (colorgenes[i][0] !== genestringArray[3][1]) {
-                        carryArray.push(colorgenes[i][1])
-                    }
-                }
+                colorgeneShown = genestringArray[3][0]
+                colorgeneHidden = genestringArray[3][1]
             }
             if (wind == "South") {
+                colorgeneShown = genestringArray[3][1]
+                colorgeneHidden = genestringArray[3][0]
+            }
+            // cat is north or south so they're hiding a color gene
+            let colorgenes = [["O", "Orange color gene"], ["B", "Black color gene"]] 
+            if (colorgeneShown !== colorgeneHidden) {
                 for (let i = 0; i < colorgenes.length; i++) {
-                    if (colorgenes[i][0] !== genestringArray[3][0]) {
+                    if (colorgeneHidden === colorgenes[i][0]) {
+                        // color match found, hidden color gene is different from "shown" one (not rlly shown bc it's albino but whatever)
                         carryArray.push(colorgenes[i][1])
+                        break
                     }
                 }
-            }
+            }      
+
         }
         if (wind == "Null") {
             let colorgene1 = genestringArray[3][0]
@@ -556,7 +562,10 @@ function listHiddenRecessive(genestring, wind) {
     else {
         // cat is no-white via NN, what white is it hiding?
         let whitetrim = genestringArray[5].slice(2, 6)
-        carryArray.push(whitetrim + " white")
+        if (whitetrim !== "??") {
+            carryArray.push(whitetrim + " white")
+        }
+        
     }
     if (genestringArray[0] == "C") {
         let accentgenes = genestringArray[7]
