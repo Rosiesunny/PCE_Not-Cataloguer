@@ -36,7 +36,7 @@ function generateBBCodeGeneString(genestring, locationID, wind) {
         userStyleGeneStringText += JSON.parse(bbcodeSuffix)
     }
     if (localStorage.getItem("listHiddenRecessive") == "true") {
-        userStyleGeneStringText += "\n" + listHiddenRecessive(genestring, wind)
+        userStyleGeneStringText += "\nCarries/Hides: " + listHiddenRecessive(genestring, wind)
     }
     popupWindow(userStyleGeneStringText, locationID)
 }
@@ -208,11 +208,6 @@ function switchSpeciesBBCode(gene) {
             return "?"
     }
 }
-
-function checkMatch(match1, match2, matchyes, matchno) {
-
-}
-
 
 function listHiddenRecessive(genestring, wind) {
     let genestringArray = genestring.split("]")
@@ -592,7 +587,7 @@ function listHiddenRecessive(genestring, wind) {
     // done finding hidden/carried genes, now list them
     let hidesCarriesString = ""
     if (carryArray.length > 0 || albinoSolidHiddenAppearance.length > 0) {
-        hidesCarriesString += "Carries/Hides: "
+        hidesCarriesString += ""
         if (albinoSolidHiddenAppearance.length > 0) {
             for (let i = 0; i < albinoSolidHiddenAppearance.length; i++) {
                 hidesCarriesString += albinoSolidHiddenAppearance[i] + " "

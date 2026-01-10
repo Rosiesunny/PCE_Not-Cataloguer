@@ -36,7 +36,7 @@ village.cats = {};
 let cachedVillage = JSON.parse(window.localStorage.getItem("myVillage"));
 village = checkForDataStorageUpdates(cachedVillage)
 
-console.log("Not-Cataloguer V 1.1 Alpha hotfix 13");
+console.log("Not-Cataloguer V 1.1 Alpha hotfix 14");
 
 if (!(typeof(load_village) == 'undefined')) {
     if (load_village == 0) {
@@ -1932,18 +1932,7 @@ function clearVillage() {
     village.cats = {};
 }
 
-function getGeneString(cat) {
-    var geneString = "";
-    geneString += "[" + cat.genes[0] + "]";
-    geneString += " [" + cat.genes[1] + cat.genes[2] + "]";
-    geneString += " [" + cat.genes[3] + cat.genes[4] + "]";
-    geneString += " [" + cat.genes[5] + cat.genes[6] + cat.genes[7] + cat.genes[8] + cat.genes[9] + "]";
-    geneString += " [" + cat.genes[10] + cat.genes[11] + cat.genes[12] + cat.genes[13] + "]";
-    geneString += " [" + cat.genes[14] + cat.genes[15] + cat.genes[16] + cat.genes[17] + "]";
-    geneString += " [" + cat.genes[18] + cat.genes[19] + "]";
-    geneString += " [" + cat.genes[20] + cat.genes[21] + "]";
-    return geneString;
-}
+
 
 function checkForDataStorageUpdates(cachedVillage) {
     let storedVersion = localStorage.getItem("NotCataloguerVersion")

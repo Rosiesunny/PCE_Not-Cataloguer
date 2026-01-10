@@ -1,3 +1,4 @@
+/* Comments work like this */
 div {
     font-family: "Courier New";
     color: white;
@@ -16,38 +17,65 @@ div {
     width: 30%;
     outline: red 1px solid;
     display: flexbox;
+    flex-direction: column;
 }
-
 
 #icon-and-id {
     padding: 2%;
     display: flex;
-    align-items: center;
+    flex-direction: row;
+    align-items: flex-start;
 }
 
+#home-link {
+    max-width: 40%;
+}
+
+.toPCE {
+    margin-left: 5px;
+}
+
+.scaleUpImage {
+    -moz-transform: scale(2);
+    -ms-transform: scale(2);
+    -o-transform: scale(2);
+    -webkit-transform: scale(2);
+    transform: scale(2);
+    margin-left: 20px;
+}
+
+
 #logo {
-    max-width: 50%;
+    max-width: 90px;
+    margin-right: 50px;
 }
 
 #cat-id {
-    font-size: 300%;
+    font-size: 230%;
 }
 
 #col1-subcol {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     padding: 1%;
+    background-color:rgba(33, 23, 170, 0.651);
 }
 
 #col1-subcol1 {
-    width: 50%;
+    display: flex;
+    flex-direction: column;
     background-color: purple;
-    padding: 1%;
+    border-radius: 3%;
+    padding: 2%;
+    max-width: 50%;
+    align-self: flex-start;
 }
 
 #col1-subcol2 {
-    width: 50%;
+    display: flex;
+    flex-direction: column;
     background-color: rgb(221, 65, 221);
+    border-radius: 3%;
     padding: 1%;
 }
 
@@ -56,7 +84,7 @@ div {
 }
 
 #cat-name {
-    font-size: 200%;
+    font-size: 150%;
     text-align: center;
 }
 
@@ -65,7 +93,7 @@ div {
 }
 
 #cat-pronouns {
-    font-size: 150%;
+    font-size: 120%;
     text-align: center;
 }
 
@@ -76,12 +104,13 @@ div {
 
 .symbols {
     padding-right: 3%;
-    display: inline-block;
+    display: flex;
     align-self: center;
 }
 
 .data-point {
-    display: inline-block;
+    display: flex;
+    background-color: rgba(173, 233, 183, 0.486);
 }
 
 .sub-data-container {
@@ -94,19 +123,29 @@ div {
 }
 
 .data-container {
-    outline: 1px solid rgb(58, 14, 14)
+    outline: 1px solid rgb(106, 247, 240);
+    flex-direction: row;
+    display: flex; 
+    justify-content: space-between;
 }
 
 .demographics-label {
-    display: inline-block;
+    display: flex;
+    background-color: rgba(255, 255, 0, 0.24);
+}
+
+#genestring {
+    background-color:rgba(240, 87, 146, 0.363);
+    padding: 2%
 }
 
 .info-right {
-    float: right;
+    align-self: flex-start;
+    padding-right: 5%
 }
 
 .physical-traits-label {
-    display: inline-block;
+    display: flex;
 }
 
 #physicaltraits {
@@ -114,43 +153,72 @@ div {
     padding: 2%;
 }
 
+#genetest-and-bbcode-buttons {
+    justify-content: center;
+    display: flex;
+}
+
+.my-buttons {
+    display: flex;
+    padding: 5%;
+    margin-top: 3%;
+}
+
 #col2 {
     outline: 1px solid aqua;
-    width: 20%;
+    max-width: 20%;
     display: flexbox;
-    vertical-align: top;
+    flex-direction: column;
+    border-radius: 3%;
 }
 
 #held-trinket-section {
     outline: 1px solid rgb(204, 95, 207);
-    min-height: 75px;
+    padding: 2%;
+    display: flex;
+    flex-direction: row;
 }
 
 #trinket-image {
-    float: left;
+    align-self: flex-start
+}
+
+#trinket-info {
+    align-self: flex-start;
+}
+
+#personality-stats {
+    background-color:rgba(101, 96, 172, 0.726);
 }
 
 .cat-personality-stats {
     display: flex;
     align-items: center;
+    border-radius: 3%;
+    
 }
+
 
 #personality-stats {
     padding: 5%;
 }
 
 .personality-bars {
-    background-color: rgba(255, 36, 36, 0.205);
+    background-color: rgba(255, 36, 36, 0.432);
     width: 100%;
     margin-left: 5%;
     position: relative;
 }
 
 .bar-value {
-    height:100%;
-    display: inline-block;
+    display: flex;
     background-color:rgb(33, 23, 170);
-    text-align: center;
+    width: 50%;
+    text-align: left;
+}
+
+.bar-text {
+    margin-left: 5px;
 }
 
 .personality-label {
@@ -161,6 +229,7 @@ div {
 
 #attribute-stats {
     outline: 1px solid rgb(253, 210, 255);
+    padding: 2%;
 }
 
 .attribute-box-container {
@@ -170,24 +239,24 @@ div {
 }
 
 .attribute-box {
-    height:0;
     width:23%;
-    padding-bottom:30%;
     background-color:rgb(156, 78, 78);
     margin-bottom: 3%;
     text-align: center;
     display: inline-block;
+    border-radius: 5%;
+    padding: 1%;
 }
 
 .attribute-title {
-    background-color:rgb(85, 85, 117);
+    background-color:rgba(85, 85, 117, 0.589);
     margin: 0px;
     padding: 3%;
 }
 
 .attribute-values {
     font-size: 220%;
-    background-color: rgb(62, 62, 128);
+    background-color: rgba(62, 62, 128, 0.568);
 }
 
 .attribute-smaller-numbers {
@@ -199,27 +268,88 @@ div {
 .attribute-desc {
     margin-top: 5%;
     font-size: 80%;
-    background-color:rgb(89, 114, 78);
+    background-color:rgba(89, 114, 78, 0.575);
     padding: 2%;
 }
 
 #col3 {
-    width: 22%;
     display: flexbox;
+    border-radius: 3%;
+    padding: .5%;
+    outline: 1px solid black;
+    width: 315px;
 } 
 
 .job-class-label {
-    display: inline-block;
+    display: flex;
 }
 
 .listbox {
-    background-color:rgb(72, 179, 72)
+    background-color:rgba(72, 179, 72, 0.397);
+    line-height: 140%;
+    max-height: 200px;
+    overflow: auto;
+    margin-bottom: 2%;
+    padding: 2%
+
+}
+
+.bulletlists {
+    margin-left: -20px;
+    list-style: circle;
+}
+#col4 {
+    width: 600px;
+    background-color: rgba(143, 37, 37, 0.616);
+    padding: .5%
+}
+
+#col4-subcol {
+    display: flex;
+    align-items: flex-start;
+    padding: 1%;
+    background-color:rgba(33, 23, 170, 0.651);
+}
+
+#col4-subcol1 {
+    display: flex;
+    flex-direction: column;
+    background-color: purple;
+    border-radius: 3%;
+    padding: 1%;
+    width: 50%;
+}
+
+#col4-subcol2 {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(221, 65, 221);
+    border-radius: 3%;
+    padding: 1%;
+    width: 50%;
+}
+
+#biography {
+    max-height: 200px;
+    overflow: auto;
 }
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+.hidden {
+    display:none;
+}
 
 .theme-light {
     --main-color: #ffffff;
@@ -369,7 +499,6 @@ div {
     background-position:var(--cat-watermark) 0;
     overflow:hidden;
     position:relative;
-    display:inline-block
    }
    .catjail-wide {
     width:500px;

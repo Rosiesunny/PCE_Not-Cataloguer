@@ -39,7 +39,7 @@ appearanceData += "Eyes: " + thisCat.eyes.color + " " + thisCat.eyes.eyes + "\n"
 appearanceData += "Pose: " + thisCat.pose + "\n"
 document.getElementById("appearance-data").innerText = appearanceData;
 
-var geneData = getGeneString(thisCat);
+var geneData = getGeneString(thisCat.genes);
 document.getElementById("gene-data").innerText = geneData;
 geneTestingButton(thisCat.genes, thisCat.id, thisCat.name, thisCat.wind, thisCat.fur, thisCat.white, thisCat.pattern, thisCat.accentcolor, thisCat.eyes, thisCat.pose, thisCat.age, thisCat.species, document.getElementById("genetest-button-zone"))
 bbcodeButton(thisCat.genes, thisCat.wind, document.getElementById("bbcode-button-zone"))
@@ -208,3 +208,16 @@ var updateData = "";
 var timestamp = new Date(thisCat.lastUpdated);
 updateData += "Entry Last Updated: " + timestamp.toLocaleDateString();
 document.getElementById("update-data").innerText = updateData;
+
+function getGeneString(genes) {
+    var geneString = "";
+    geneString += "[" + genes[0] + "]";
+    geneString += " [" + genes[1] + genes[2] + "]";
+    geneString += " [" + genes[3] + genes[4] + "]";
+    geneString += " [" + genes[5] + genes[6] + genes[7] + genes[8] + genes[9] + "]";
+    geneString += " [" + genes[10] + genes[11] + genes[12] + genes[13] + "]";
+    geneString += " [" + genes[14] + genes[15] + genes[16] + genes[17] + "]";
+    geneString += " [" + genes[18] + genes[19] + "]";
+    geneString += " [" + genes[20] + genes[21] + "]";
+    return geneString;
+}
