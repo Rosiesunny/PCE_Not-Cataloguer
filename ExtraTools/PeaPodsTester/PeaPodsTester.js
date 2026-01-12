@@ -273,7 +273,7 @@ function displayInfo(planttraits, genes) {
             myArray.push("Flower color: Indigo (BP)")
             break
         case "white":
-            myArray.push("<span class = 'recessive'>white</span>")
+            myArray.push("<span class = 'recessive'>Flower color: White (OO)</span>")
             break
     }
     let myString = "<ul>"
