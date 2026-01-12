@@ -14,7 +14,7 @@ td {
 }
 
 .display td:first-child {
-    background-color: rgb(255, 255, 182)
+    background-color: rgba(188, 255, 182, 0.473)
 }
 
 .input {
@@ -28,4 +28,13 @@ td {
     padding: 40px;
     float: right;
     width: 18%
+}
+
+body {
+    background-color:rgb(29, 24, 24);
+    color:rgb(255, 237, 243)
+}
+
+.recessive {
+    background-color: rgba(255, 255, 0, 0.438);
 }

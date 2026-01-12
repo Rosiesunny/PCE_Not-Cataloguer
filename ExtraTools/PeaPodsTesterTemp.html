@@ -1,0 +1,174 @@
+<!-- Comments look like this -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href = "PeaPodsTester/PeaPodsTesterTemp.css">
+        <link rel="icon" href ="../favicon.ico">
+    </head>
+    <body onload = "loadStoredCat()">
+        <script src="init_village.js"></script>
+        <script src="GeneTesting.js"></script>
+        <script src="save_village.js"></script>
+        <script src="generateBBCodeGeneString.js"></script>
+        <script src="CatImageGenerator.js"></script>
+        <div id = "container">
+            <a href = "index.html"><img src = "../assets/pce_not-cataloguer_logo.png" id = "logo" alt = "Home Button" style = "padding-left: 0; max-width: 4%"></a>
+            <div class = "btn-group">
+                <div class = "col1" style = "margin-top: 4%">
+                    <div id = "yourcat">
+                        <div class = "yourCatName">Parent Plant 1</div><br>
+                        <div id = "yourCatImage">
+                            <img src = "../assets/addcat.png">
+                        </div>
+                        <div id = "currentlyknowngenes">Currently Known Genes:</div>
+                        <div id = "genecodefull">[NM] [SC] [DL] [SW] [GY] [YN] [WY] [1] [AB] [BP]</div>
+                        <select id = "testquestion-select" onchange = "functionAAA()">
+                            <option>Select another Plant</option>
+                            <option value="test">Select another Plant</option>
+                        </select>
+                    </div>
+                    <div id = "testcatcontainer">
+                    <div id = "testcat" class = "col1">
+                        <div class = "yourCatName">Parent Plant 1</div><br>
+                        <div id = "testcatimage">
+                            <img src = "../assets/addcat.png">
+                        </div>
+                        <div id = "currentlyknowngenes">Currently Known Genes:</div>
+                        <div id = "genecodefull">[NM] [SC] [DL] [SW] [GY] [YN] [WY] [1] [AB] [BP]</div>
+                        <select id = "testquestion-select" onchange = "functionAAA()">
+                            <option>Select another Plant</option>
+                            <option value="test">Select another Plant</option>
+                        </select>
+                    </div>
+                </div>
+                </div>
+                <div class = "col2"> 
+                    <div id = "genes-container">
+                        <div id = "subcol1" class = "subcol">
+                            <table>
+                                <tr>
+                                    <td class = "bgc gene" id = "wind-1" title = "Wind">N</td>
+                                    <td class = "bgc" id = "wind-1-desc">Normal Size</td>
+                                </tr>
+                                <tr>
+                                    <td class = "bgc gene" id = "wind-2" title = "Wind">M</td>
+                                    <td class = "bgc"  id = "wind-2-desc">Miniature Size</td>
+                                </tr>
+                                <tr><td class = "skip"></td></tr>
+                                <tr>
+                                    <td class = "bgc gene" id = "fur-1" title = "Fur Length">S</td>
+                                    <td class = "bgc" id = "fur-1-desc">Straight Stem</td>
+                                </tr>
+                                <tr>
+                                    <td class = "bgc gene" id = "fur-2" title = "Fur Length">C</td>
+                                    <td class = "bgc" id = "fur-2-desc">Curly Stem</td>
+                                </tr>
+                                <tr><td class = "skip"></td></tr>
+                                <tr>
+                                    <td class = "bgc gene" id = "color-1" title = "Color">D</td>
+                                    <td class = "bgc" id = "color-1-desc">Dark Green Stem</td>
+                                </tr>
+                                <tr>
+                                    <td class = "bgc gene" id = "color-2" title = "Color">L</td>
+                                    <td class = "bgc" id = "color-2-desc">Lavender Stem</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div id = "subcol2" class = "subcol">
+                            <table>
+                                <tr>
+                                    <td class = "bgc gene" id = "fur-1" title = "Fur Length">S</td>
+                                    <td class = "bgc" id = "fur-1-desc">Smooth Pods</td>
+                                </tr>
+                                <tr>
+                                    <td class = "bgc gene" id = "fur-2" title = "Fur Length">W</td>
+                                    <td class = "bgc" id = "fur-2-desc">Wrinkly Pods</td>
+                                </tr>
+                                <tr><td class = "skip"></td></tr>
+                                <tr>
+                                    <td class = "bgc gene" id = "fur-1" title = "Fur Length">G</td>
+                                    <td class = "bgc" id = "fur-1-desc">Green Pods</td>
+                                </tr>
+                                <tr>
+                                    <td class = "bgc gene" id = "fur-2" title = "Fur Length">Y</td>
+                                    <td class = "bgc" id = "fur-2-desc">Gold Pods</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div id = "subcol3" class = "subcol">
+                            <table>
+                                <tr>
+                                    <td class = "bgc gene" id = "pattern-yes-no-1" title = "Pattern Display">Y</td>
+                                    <td class = "bgc" id = "pattern-yes-no-1-desc">Yes (Shows Variegation)</td>
+                                </tr>
+                                <tr>
+                                    <td class = "bgc gene" id = "pattern-yes-no-2" title = "Pattern Display">N</td>
+                                    <td class = "bgc" id = "pattern-yes-no-2-desc">No (Hides Variegation)</td>
+                                </tr>
+                                <tr><td class = "skip"></td></tr>
+                                <tr>
+                                    <td class = "bgc gene" id = "fur-1" title = "Fur Length">W</td>
+                                    <td class = "bgc" id = "fur-1-desc">White Variegation</td>
+                                </tr>
+                                <tr>
+                                    <td class = "bgc gene" id = "fur-2" title = "Fur Length">Y</td>
+                                    <td class = "bgc" id = "fur-2-desc">Gold Variegation</td>
+                                </tr>
+                                <tr><td class = "skip"></td></tr>
+                                <tr>
+                                    <td class = "bgc gene" id = "fur-1" title = "Fur Length">?</td>
+                                    <td class = "bgc" id = "fur-1-desc">Unknown</td>
+                                </tr>
+                                
+                            </table>
+                        </div>
+                        <div id = "subcol4" class = "subcol">
+                            <table>
+                                <tr>
+                                    <td class = "bgc gene" id = "white-yes-no-1" title = "White Display">A</td>
+                                    <td class = "bgc" id = "white-yes-no-1-desc">Animal</td>
+                                </tr>
+                                <tr>
+                                    <td class = "bgc gene" id = "white-yes-no-2" title = "White Display">B</td>
+                                    <td class = "bgc" id = "white-yes-no-2-desc">Bell</td>
+                                </tr>
+                                <tr><td class = "skip"></td></tr>
+                                <tr>
+                                    <td class = "bgc gene" id = "fur-1" title = "Fur Length">B</td>
+                                    <td class = "bgc" id = "fur-1-desc">Blue Flowers</td>
+                                </tr>
+                                <tr>
+                                    <td class = "bgc gene" id = "fur-2" title = "Fur Length">P</td>
+                                    <td class = "bgc" id = "fur-2-desc">Purple Flowers</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id = "bottomcontainer">
+                <div id = "lookingfor-container" class ="col2">
+                    <div id = "testquestion-and-answer-container">
+                        <div id = "testquestion-container">
+                            <div id = "testquestion">
+                                <select id = "testquestion-select" onchange = "changeButtons()">
+                                    <option>Select Test</option>
+                                    <option value="test">Select Test</option>
+                                </select>
+                            </div>
+                            <div id = "answer-section"></div>
+                            <div id = "button-section"></div>
+                        </div>
+                    </div>
+                    <div id = "examples">Examples:
+                        <div id = "examplesbox" style = "overflow: normal;">                                                                              
+                        </div>
+                    </div>
+                        </div>
+                    </div>                                                                           
+                </div>
+            </div>
+        </div>
+        <div id = "bbcodebox" class = "hidebbcodebox"></div>
+    </body>
+</html>

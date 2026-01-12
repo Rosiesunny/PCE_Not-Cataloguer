@@ -1,7 +1,6 @@
 function parseText() {
     let textBoxEntry = document.querySelector(".input").value
-    console.log("PEPEPEPEP")
-    let plantRegEx = /a (normal|miniature) pea plant with a (straight|curly), (dark green|lavender|white|gold) stem(a tiny amount of|a small amount of|a medium amount of|a large amount of|full)? ?(white|gold)? ?(?:variegation.+)?.+(?:pot labeled with .+)(wrinkly|smooth), (green|gold) pea pods(blue|indigo|purple|white) (ghost bells|moose pansies|button blooms|squid bells|candle drops|eye daisies)/gm
+    let plantRegEx = /(mystery crate|(?:a (normal|miniature) pea plant with a (straight|curly), (dark green|lavender|white|gold) stem(a tiny amount of|a small amount of|a medium amount of|a large amount of|full)? ?(white|gold)? ?(?:variegation.+)?.+(?:pot labeled with .+)(wrinkly|smooth), (green|gold) pea pods(blue|indigo|purple|white) (ghost bells|moose pansies|button blooms|squid bells|candle drops|eye daisies)))/gm
     let matches = []
     let match  
     while ((match = plantRegEx.exec(textBoxEntry)) !== null) {
@@ -14,9 +13,8 @@ function parseText() {
         let num = i+1
         document.getElementById("plant" + num).innerText = getGeneString(genes)
         
+        document.getElementById("plant" + num).innerHTML += displayInfo(matches[i], genes)
     }
-    console.log(matches)
-    console.log(plantgenes)
 }
 
 
@@ -24,9 +22,8 @@ function genePlant(planttraits) {
     let genes = ["?", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?"]
     
     
-    console.log(planttraits)
     // genes[0] & genes[1] - plant size (N|M) M recessive 
-    switch(planttraits[1]) {
+    switch(planttraits[2]) {
         case "normal":
             genes[0] = "N"
             break
@@ -37,7 +34,7 @@ function genePlant(planttraits) {
     }
 
     // genes[2] & genes[3] - stem style (S|C) C recessive
-    switch (planttraits[2]) {
+    switch (planttraits[3]) {
         case "straight":
             genes[2] = "S"
             break
@@ -47,7 +44,7 @@ function genePlant(planttraits) {
     }
 
     // genes[4] & genes[5] - stem color (D|L) L recessive
-    switch (planttraits[3]) {
+    switch (planttraits[4]) {
         case "dark green":
             genes[4] = "D"
             break
@@ -58,7 +55,7 @@ function genePlant(planttraits) {
     }
 
     // genes[6] & genes[7] - pea pod texture (S|W) W recessive
-    switch(planttraits[6]) {
+    switch(planttraits[7]) {
         case "smooth":
             genes[6] = "S"
             break
@@ -69,7 +66,7 @@ function genePlant(planttraits) {
     }
 
     // genes[8] & genes[9] - pea pod color (G|Y) Y recessive
-    switch(planttraits[7]) {
+    switch(planttraits[8]) {
         case "green":
             genes[8] = "G"
             break
@@ -80,10 +77,10 @@ function genePlant(planttraits) {
     }
     
     // genes[10] & genes[11] - displays variegation (Y|N) N recessive
-    if (planttraits[4] || planttraits[5]) {
+    if (planttraits[5] || planttraits[6]) {
         genes[10] = "Y"
         // genes[12] & genes[13] - variegation color (W|Y) Y recessive
-        switch (planttraits[5]) {
+        switch (planttraits[6]) {
             case "white":
                 genes[12] = "W"
                 break
@@ -93,7 +90,7 @@ function genePlant(planttraits) {
                 break
         }
         // genes [14] - variegation amount (0|1|2|3|4|5)
-        switch(planttraits[4]) {
+        switch(planttraits[5]) {
             case "a tiny amount of":
                 genes[14] = 1
                 break
@@ -113,7 +110,7 @@ function genePlant(planttraits) {
     }
 
     // genes[15] & genes[16] - flower type (A|B|C)
-    switch(planttraits[9]) {
+    switch(planttraits[10]) {
         case "ghost bells":
             genes[15] = "B"
             genes[16] = "B"
@@ -144,7 +141,7 @@ function genePlant(planttraits) {
     }    
     
     // genes[17] & genes[18] - flower color (B|P|O) O recessive
-    switch(planttraits[8]) {
+    switch(planttraits[9]) {
         case "blue":
             genes[17] = "B"
             break
@@ -160,7 +157,6 @@ function genePlant(planttraits) {
             genes[18] = "O"
             break
     }
-    console.log(genes)
     return genes
 }
 
@@ -177,4 +173,121 @@ function getGeneString(genes) {
     geneString += " [" + genes[15] + genes[16] + "]";
     geneString += " [" + genes[17] + genes[18] + "]";
     return geneString;
+}
+
+function displayInfo(planttraits, genes) {
+    if (planttraits[0] == "mystery crate") {
+        return ""
+    }
+    let myArray = []
+    if (planttraits[2] == "miniature") {
+        myArray.push("<span class = 'recessive'>Size: Miniature</span>")
+    }
+    else {
+        myArray.push("Size: Normal")
+    }
+    if (planttraits[3] == "curly") {
+        myArray.push("<span class = 'recessive'>Stem style: Curly</span>")
+    }
+    else {
+        myArray.push("Stem style: Straight")
+    }
+    if (planttraits[4] == "lavender") {
+        myArray.push("<span class = 'recessive'>Stem color: Lavender</span>")
+    }
+    else {
+        myArray.push("Stem color: Dark Green")
+    }
+    switch(planttraits[5]) {
+        case "a tiny amount of":
+            myArray.push("Variegation level: 1" )
+            break
+        case "a small amount of":
+            myArray.push("Variegation level: 2" )
+            break
+        case "a medium amount of":
+            myArray.push("Variegation level: 3" )
+            break
+        case "a large amount of":
+            myArray.push("Variegation level: 4" )
+            break
+        case "full":
+            myArray.push("Variegation level: 5" )
+            break            
+    }
+    if (planttraits[6]) {
+        if (planttraits[6] == "gold") {
+            myArray.push("<span class = 'recessive'>Variegation color: Gold</span>")
+        }
+        else {
+            myArray.push("Variegation color: White")
+        }
+    }
+    if (planttraits[7] == "wrinkly") {
+        myArray.push("<span class = 'recessive'>Pea pod texture: Wrinkly</span>")
+    }
+    else {
+        myArray.push("Pea pod texture: Smooth")
+    }
+    if (planttraits[8] == "gold") {
+        myArray.push("<span class = 'recessive'>Pea pod color: Gold</span>")
+    }
+    else {
+        myArray.push("Pea pod color: Green")
+    }
+    
+    console.log(genes)
+
+    switch(planttraits[10]) {
+        case "ghost bells":
+            myArray.push("Flower type: " + capitalizeFirstLetter(planttraits[10].split(" ")[0]) + " " + capitalizeFirstLetter(planttraits[10].split(" ")[1]) + " [BB]")
+            break
+        case "moose pansies":
+            myArray.push("Flower type: " + capitalizeFirstLetter(planttraits[10].split(" ")[0]) + " " + capitalizeFirstLetter(planttraits[10].split(" ")[1]) + " [AA]")
+            break
+        case "button blooms":
+            myArray.push("Flower type: " + capitalizeFirstLetter(planttraits[10].split(" ")[0]) + " " + capitalizeFirstLetter(planttraits[10].split(" ")[1]) + " [CC]")
+            break
+
+        case "squid bells":
+            myArray.push("Flower type: " + capitalizeFirstLetter(planttraits[10].split(" ")[0]) + " " + capitalizeFirstLetter(planttraits[10].split(" ")[1]) + " [AB]")
+            break
+
+        case "candle drops":
+            myArray.push("Flower type: " + capitalizeFirstLetter(planttraits[10].split(" ")[0]) + " " + capitalizeFirstLetter(planttraits[10].split(" ")[1]) + " [BC]")
+            break
+
+        case "eye daisies":
+            myArray.push("Flower type: " + capitalizeFirstLetter(planttraits[10].split(" ")[0]) + " " + capitalizeFirstLetter(planttraits[10].split(" ")[1]) + " [AC]")
+            break
+    }
+    
+    switch(planttraits[9]) {
+        case "blue":
+            myArray.push("Flower color: Blue (BB or BO)")
+            break
+        case "purple":
+            myArray.push("Flower color: Purple (PP or PO)")
+            break
+        case "indigo":
+            myArray.push("Flower color: Indigo (BP)")
+            break
+        case "<span class = 'recessive'>white</span>":
+            myArray.push("Flower color: White (OO)")
+            break
+    }
+    let myString = "<ul>"
+
+    for (let i = 0; i < myArray.length; i++) {
+        myString += "<li>" + myArray[i] + "</li>"
+    }
+
+    myString += "</ul>"
+
+    return myString
+}
+
+// https://stackoverflow.com/questions/1026069/how-do-i-make-the-first-letter-of-a-string-uppercase-in-javascript
+function capitalizeFirstLetter(val) {
+    return String(val).charAt(0).toUpperCase() + String(val).slice(1);
 }

@@ -1,0 +1,421 @@
+div {
+    font-family: "Courier New";
+}
+
+#container {
+    border-radius: 15% 10%;
+    margin: .5%;
+    padding: 3%;
+    background-color:rgb(46, 46, 49);
+    display: flex;
+ }
+
+
+#logo {
+    position: absolute;
+    padding-left: 0%;
+    margin-top: -2%;
+    margin-left: 4%;
+}
+
+.btn-group {
+    margin-top: 0.5%;
+    width: 100%;
+    display: flex;
+    justify-content:center;
+}
+
+#lookingfor-container {
+    width: 100%;
+    height: 500px
+}
+
+.col2 {
+    width: 85%;
+    height: 60%;
+    display: flex;
+    justify-content:center;
+    background-color: red
+}
+
+.col1 {
+    width: 230px;
+    background-color: blue;
+}
+
+#yourcat {
+    background-color: rgb(36, 65, 66);
+    color:aliceblue;
+    border-radius: 15% ;
+    padding: 5%;
+    font-size: 140%;
+    margin-bottom: 10%
+}
+
+#testcat {
+    background-color: rgb(29, 31, 36);
+    color:aliceblue;
+    border-radius: 15% ;
+    padding: 5%;
+    font-size: 140%;
+}
+
+#genes-container {
+    display: flex;
+    color:aliceblue;
+    width: 100%;
+}
+
+#currentlyknowngenes {
+    font-size: 50%;
+    margin-bottom: 5%;
+}
+
+.subcol {
+    background-color: rgb(58, 160, 160);
+    margin: 1%;
+    border-radius: 5%;
+    padding: .7%;
+}
+
+#genecodefull {
+    font-size: 50%;
+}
+
+#bottomcontainer {
+    width: 80%;
+    display: flex;
+    align-self: flex-end
+}
+
+#examples {
+    width: 100%;
+    padding: .7%;
+    margin: .7%;
+    margin-left: 0%;
+    border-radius: 0% 5% 5% 0%;
+    background-color: rgb(29, 31, 36);
+    color:aliceblue;
+    font-size: 150%;
+    isolation: isolate;   /* isolates the z-indexes so the cats don't appear on top of popup containers */
+}
+
+#testquestion-and-answer-container {
+    width: 30%;
+    padding: .7%;
+    border-radius: 5% 0% 0% 5%;
+    margin: .7%;
+    margin-right: 0%;
+    background-color: rgb(58, 160, 160);
+}
+
+#testcatcontainer {
+    width: 230px;
+}
+
+.answerbutton {
+    background-color: rgb(227, 238, 241); /* Green background */
+    color: rgb(15, 57, 73); /* White text */
+    padding: 3% 3%; /* Some padding */
+    cursor: pointer; /* Pointer/hand icon */
+    margin: .9%;
+    border-radius: 10% 15%;
+}
+
+#testquestion-select {
+    background-color:rgb(36, 65, 66);
+    padding: 2%;
+    border-radius: 5%;
+    color:aliceblue;
+    font-size: 110%;
+    width: 100%;
+}
+
+#testCatID {
+    font-size: 100%;
+    font-weight: bold;
+    background-color:rgb(36, 65, 66);
+    padding-top: 10%;
+    padding-bottom: 10%;
+    text-align: center;
+    border-radius: 10% 15%;
+}
+
+#yourCatID {
+    font-size: 100%;
+    font-weight: bold;
+    background-color:rgb(29, 31, 36);
+    padding-top: 10%;
+    padding-bottom: 10%;
+    text-align: center;
+    border-radius: 10% 15%;
+    margin-bottom: 2%;
+}
+
+#currentlyknowngenes {
+    font-size: 80%;
+}
+
+#genecodefull {
+    font-size: 80%;
+    background-color: rgb(58, 160, 160);
+    border-radius: 10% 15%;
+    padding: 5%;
+}
+
+.bgc {
+    background-color:rgb(69, 180, 180);
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-radius: 5%;
+    text-align: center;
+    padding-left: 5px;
+    padding-right: 5px;
+    color: rgb(0,0,0)
+}
+
+.skip {
+    height: 30px;
+}
+
+.gene {
+    background-color: rgb(58, 219, 219);
+    color:rgb(6, 25, 32);
+    font-size: 160%;
+    font-weight: bolder;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#answer-section {
+    margin-top: 2%;
+    color:rgb(9, 17, 17);
+    font-weight: bold;
+    font-size: 110%;
+    background-color:rgba(227, 238, 241, .6);
+    padding: 5%;
+    border-radius: 10% 15%;
+
+}
+
+.checkboxes {
+    padding: 10px;
+    height:0.9em;
+    background-color: darkviolet;
+    margin: 3%;
+    margin-right: 5%;
+}
+
+input.checkboxes {
+    transform: scale(2);
+}
+
+#outerdiv {
+    border-radius: 10%;
+    color: white;
+    background-color:rgba(15, 57, 73, 0.432);
+    margin-bottom: 2%;
+    padding: 2px;
+    max-height: 25%;
+}
+
+label {
+    padding-left: 0px;
+    font-size: 0.9em;
+}
+
+#hidden {
+    display:none;
+}
+
+#examples {
+    max-height: 400px
+}
+
+#examplesbox {
+    overflow:scroll;
+    max-height: 100%;
+}
+
+
+#testquestion-and-answer-container {
+    max-height: 400px;
+}
+
+.hidden {
+    display:none;
+}
+
+.shown {
+    display: block;
+}
+
+#testcatimage {
+    margin-bottom: 2%;
+    align-items: center;
+}
+
+#testcatimg {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.yourCatName {
+    color:aliceblue;
+    font-size: 140%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.theme-light {
+    --main-color: #ffffff;
+    --segment-color: #f0f0f0;
+    --segment-color-hover: #d6d8d9;
+    --borders-color-lighter: gray;
+    --text-color: black;
+    --bg-color: #222222;
+    --bg-color-hover: #333333;
+    --quote-color: #d3e0e2;
+    --quote-text: #252525;
+    --quote-accent: #3c5460;
+    --link-color: #204052;
+    --user-link-color: #206d6a;
+    --link-hover-background: #d6d9dd;
+    --error-color: #a40404;
+    --lines-color: #3c5460;
+    --notif-color: #3e4247;
+    --notif-text: #eaeaea;
+    --red: #8B0000;
+    --orange: #c33500;
+    --yellow: #926904;
+    --green: #006400;
+    --blue: #191970;
+    --purple: #4B0082;
+    --pink: #DC143C;
+    --brown: #8B4513;
+    --grey: #6c6c6c;
+    --teal: #008080;
+    --cat-watermark: 0px;
+    --item-watermark: 0px;
+    --format-button-offset: 0px;
+    --speech-bubble-offset: 0px;
+    --clickme: #66CDAA;
+    --clicked: #87CEFA;
+    --fighter: #624b50;
+    --thief: #4f545c;
+    --guardian: #6b5e5b;
+    --ranger: #5f514d;
+    --medic: #4d5a5f;
+    --scout: #4f5d52;
+    --bard: #584f5d
+   }
+
+   .theme-dark {
+    --main-color: #414243;
+    --segment-color: #393b3c;
+    --segment-color-hover: #343637;
+    --borders-color-lighter: #2a2b2c;
+    --text-color: #dfdfdf;
+    --bg-color: #222222;
+    --bg-color-hover: #333333;
+    --quote-color: #4a5059;
+    --quote-text: #eaeaea;
+    --quote-accent: #1c2328;
+    --link-color: #c3dded;
+    --user-link-color: #ace0e1;
+    --link-hover-background: #323536;
+    --error-color: #ffd042;
+    --lines-color: #1c2328;
+    --notif-color: #3e4247;
+    --notif-text: #eaeaea;
+    --red: #ff9a9a;
+    --orange: #ffaa8b;
+    --yellow: #F0E68C;
+    --green: #baea59;
+    --blue: #87CEFA;
+    --purple: #d1b0ff;
+    --pink: #fc9ad5;
+    --brown: #DEB887;
+    --grey: #AAAEB0;
+    --teal: #66CDAA;
+    --cat-watermark: -100px;
+    --item-watermark: -75px;
+    --format-button-offset: 30px;
+    --speech-bubble-offset: -50px;
+    --clickme: #7badb6;
+    --clicked: #6a779a;
+    --fighter: #d5c8c9;
+    --thief: #c8c3d5;
+    --guardian: #d9d4c4;
+    --ranger: #d9cdc6;
+    --medic: #c7cfd6;
+    --scout: #bfd1ce;
+    --bard: #d7bfd0
+   }
+   html {
+    font-size:62.5%;
+    -webkit-text-size-adjust:100%
+   }
+   * {
+    box-sizing:border-box;
+    font-size:1.4rem;
+    font-family:open sans,arial,sans-serif
+   }
+   b {
+    font-size:inherit
+   }
+   i {
+    font-size:inherit
+   }
+   body {
+    background-color:var(--bg-color);
+    color:var(--text-color);
+    margin:0
+   }
+   h3 {
+    font-size:1.6rem;
+    margin-top:10px;
+    margin-bottom:10px
+   }
+   img {
+    image-rendering:-webkit-crisp-edges;
+    image-rendering:-moz-crisp-edges;
+    image-rendering:crisp-edges;
+    image-rendering:pixelated;
+    -ms-interpolation-mode:nearest-neighbor
+   }
+   span {
+    color:inherit;
+    font-size:inherit;
+    font-family:inherit;
+    text-decoration:inherit
+   }
+  
