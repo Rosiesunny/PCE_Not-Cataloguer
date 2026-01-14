@@ -34,9 +34,9 @@ village = {};
 village.cats = {};
 
 let cachedVillage = JSON.parse(window.localStorage.getItem("myVillage"));
-village = checkForDataStorageUpdates(cachedVillage)
+village = checkForDataStorageUpdates(cachedVillage, village)
 
-console.log("Not-Cataloguer V 1.1 Alpha hotfix 17");
+console.log("Not-Cataloguer V 1.1 Alpha hotfix 18");
 
 if (!(typeof(load_village) == 'undefined')) {
     if (load_village == 0) {
@@ -1934,7 +1934,7 @@ function clearVillage() {
 
 
 
-function checkForDataStorageUpdates(cachedVillage) {
+function checkForDataStorageUpdates(cachedVillage, village) {
     let storedVersion = localStorage.getItem("NotCataloguerVersion")
     if (storedVersion) {
         switch(storedVersion) {
@@ -1951,14 +1951,14 @@ function checkForDataStorageUpdates(cachedVillage) {
         console.log("PEPEPEPEPPEPEPEP")
         if (cachedVillage) {
             console.log("Old data detected (from Alpha 1.0/unstored version name), fixing data")
-            cachedVillage = unnamedAlphaVersionClothesFix(cachedVillage)
+            cachedVillage = unnamedAlphaVersionClothesFix(cachedVillage, village)
             cachedVillage = AlphaOnePointOneVersionUpdate(cachedVillage)
         }
     }
     return cachedVillage
 }
 
-function unnamedAlphaVersionClothesFix(cachedVillage) {
+function unnamedAlphaVersionClothesFix(cachedVillage, village) {
 // first fix from Gou when we updated the clothing storage method, edited to exclude numslots as I don't use those
     if (!(cachedVillage === null)) {
         // Check initialization - currently only for backwards compatibility
@@ -1972,8 +1972,11 @@ function unnamedAlphaVersionClothesFix(cachedVillage) {
                 }
             }
         }
+        return cachedVillage
     }
-    return cachedVillage
+    else {
+        return village
+    }
 }
 
 function AlphaOnePointOneVersionUpdate(cachedVillage) {

@@ -6,15 +6,11 @@
         <link rel="icon" href ="../favicon.ico">
     </head>
     <body onload = "loadStoredCat()">
-        <script src="init_village.js"></script>
-        <script src="GeneTesting.js"></script>
-        <script src="save_village.js"></script>
-        <script src="generateBBCodeGeneString.js"></script>
-        <script src="CatImageGenerator.js"></script>
+        <script src="PeaPodsTester/PeaPodsTester.js"></script>
         <div id = "container">
             <a href = "index.html"><img src = "../assets/pce_not-cataloguer_logo.png" id = "logo" alt = "Home Button" style = "padding-left: 0; max-width: 4%"></a>
             <div class = "btn-group">
-                <div class = "col1" style = "margin-top: 4%">
+                <div id = "col1" style = "margin-top: 4%">
                     <div id = "yourcat">
                         <div class = "yourCatName">Parent Plant 1</div><br>
                         <div id = "yourCatImage">
@@ -28,21 +24,29 @@
                         </select>
                     </div>
                     <div id = "testcatcontainer">
-                    <div id = "testcat" class = "col1">
-                        <div class = "yourCatName">Parent Plant 1</div><br>
-                        <div id = "testcatimage">
-                            <img src = "../assets/addcat.png">
+                        <div id = "testcat" class = "col1">
+                            <div class = "yourCatName">Parent Plant 2</div><br>
+                            <div id = "testcatimage">
+                                <img src = "../assets/addcat.png">
+                            </div>
+                            <div id = "currentlyknowngenes">Currently Known Genes:</div>
+                            <div id = "genecodefull">[NM] [SC] [DL] [SW] [GY] [YN] [WY] [1] [AB] [BP]</div>
+                            <select id = "testquestion-select" onchange = "functionAAA()">
+                                <option>Select another Plant</option>
+                                <option value="test">Select another Plant</option>
+                            </select>
                         </div>
-                        <div id = "currentlyknowngenes">Currently Known Genes:</div>
-                        <div id = "genecodefull">[NM] [SC] [DL] [SW] [GY] [YN] [WY] [1] [AB] [BP]</div>
-                        <select id = "testquestion-select" onchange = "functionAAA()">
-                            <option>Select another Plant</option>
-                            <option value="test">Select another Plant</option>
-                        </select>
                     </div>
+                    <div id = "offspring-settings">
+                        Parser Settings:<br>
+                        <input type="checkbox" class = "data-storage-checkboxes" id = "jobs-checkbox" data-storage-key = "storeJobs" checked>
+                        <label for = "jobs-checkbox" class = "hoverable-label"><span class = "label-text">Highlight Recessives</span></label><br>
+                        <input type="checkbox" class = "data-storage-checkboxes" id = "jobs-checkbox" data-storage-key = "storeJobs" checked>
+                        <label for = "jobs-checkbox" class = "hoverable-label"><span class = "label-text">Only list current test relevant info</span></label>
+                    </div>
+                    
                 </div>
-                </div>
-                <div class = "col2"> 
+                <div id = "col2"> 
                     <div id = "genes-container">
                         <div id = "subcol1" class = "subcol">
                             <table>
@@ -144,28 +148,141 @@
                             </table>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div id = "bottomcontainer">
-                <div id = "lookingfor-container" class ="col2">
-                    <div id = "testquestion-and-answer-container">
-                        <div id = "testquestion-container">
-                            <div id = "testquestion">
-                                <select id = "testquestion-select" onchange = "changeButtons()">
-                                    <option>Select Test</option>
-                                    <option value="test">Select Test</option>
-                                </select>
+                    <div id = "bottomcontainer">
+                        <div id = "lookingfor-container" class ="col2">
+                            <div id = "testquestion-and-answer-container">
+                                <div id = "testquestion-container">
+                                    <div id = "testquestion">
+                                        <select id = "testquestion-select" onchange = "changeButtons()">
+                                            <option>Select Test</option>
+                                            <option value="test">Select Test</option>
+                                        </select>
+                                    </div>
+                                    <div id = "answer-section"></div>
+                                    <div id = "button-section"></div>
+                                </div>
                             </div>
-                            <div id = "answer-section"></div>
-                            <div id = "button-section"></div>
+                            <div id = "examples">Examples:
+                                <div id = "examplesbox" style = "overflow: normal;">     
+                                    <div id = "NullsReference">
+                                        <h1>Nulls Reference</h1>
+                                        <table>
+                                            <tr>
+                                                <th>Null</th>
+                                                <th>Null</th>
+                                                <th>Null</th>
+                                                <th>Null</th>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="catjail" style="margin: auto;">
+                                                        <img src = "assets/PCE_Assets/Cat/Not-Cat/BaseColors/snow_main_classic.png" class="c-adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                                                        <img src = "assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_classic_2.png" class="c-adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                                                        <img src = "assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="c-adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="catjail" style="margin: auto;">
+                                                        <img src = "assets/PCE_Assets/Cat/Not-Cat/BaseColors/snow_main_cloudpoint.png" class="c-adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                                                        <img src = "assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_left_3.png" class="c-adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                                                        <img src = "assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="c-adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="catjail" style="margin: auto;">
+                                                        <img src = "assets/PCE_Assets/Cat/Not-Cat/BaseColors/snow_main_mink.png" class="c-adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                                                        <img src = "assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_piebald_3.png" class="c-adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                                                        <img src = "assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="c-adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="catjail" style="margin: auto;">
+                                                        <img src = "assets/PCE_Assets/Cat/Not-Cat/BaseColors/snow_main_rosette.png" class="c-adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                                                        <img src = "assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_piebald_6.png" class="c-adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                                                        <img src = "assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="c-adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="catjail" style="margin: auto;">
+                                                        <img src = "assets/PCE_Assets/Cat/Not-Cat/BaseColors/silver_main_clouded.png" class="c-adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                                                        <img src = "assets/PCE_Assets/Cat/Not-Cat/TradeColors/snow_trade_clouded.png" class="c-adult-longhair-standing cat-base" alt="cat trade" id="cat-trade">
+                                                        <img src = "assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_classic_7.png" class="c-adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                                                        <img src = "assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="c-adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="catjail" style="margin: auto;">
+                                                        <img src = "assets/PCE_Assets/Cat/Not-Cat/BaseColors/beige_main_colorpoint.png" class="c-adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                                                        <img src = "assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_classic_7.png" class="c-adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                                                        <img src = "assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="c-adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="catjail" style="margin: auto;">
+                                                        <img src = "assets/PCE_Assets/Cat/Not-Cat/BaseColors/aprico_main_rosette.png" class="c-adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                                                        <img src = "assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_piebald_5.png" class="c-adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                                                        <img src = "assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="c-adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="catjail" style="margin: auto;">
+                                                        <img src = "assets/PCE_Assets/Cat/Not-Cat/BaseColors/smoke_main_clouded.png" class="c-adult-longhair-standing cat-base" alt="cat base" id="cat-base">
+                                                        <img src = "assets/PCE_Assets/Cat/Not-Cat/WhiteMarkings/white_classic_9.png" class="c-adult-longhair-standing cat-white" alt="cat white" id="cat-white">
+                                                        <img src = "assets/PCE_Assets/Cat/Eyes/eyes_neutral.png" class="c-adult-longhair-standing cat-eyes" alt="cat eyes" id="cat-eyes">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Not Null</th>
+                                                <th>Not Null</th>
+                                                <th>Not Null</th>
+                                                <th>Not Null</th>
+                                            </tr>
+                                        </table>
+                                    </div>                                                                         
+                                </div>
+                            </div>
                         </div>
+                    </div>  
+                </div>
+                <div id = "col3">
+                    <div id="entryarea">
+                        <div id = "input-and-delete-button">
+                            <textarea class = "input" placeholder = "In PCE, <Ctrl+A> on the pea pods page to select the whole page, then <Ctrl+C> to copy it. Then, navigate to this website, click this text box, and <Ctrl+V> to paste everything!"></textarea>
+                            <a href = "index.html"><img src = "../assets/backarrow.png" id = "delete-plant-data" alt = "Home Button"></a>
+                        </div>
+                        
+                        <button id = "submit" onclick= "parseText()">Submit</button> 
                     </div>
-                    <div id = "examples">Examples:
-                        <div id = "examplesbox" style = "overflow: normal;">                                                                              
-                        </div>
+                    <div id = "offspring-plants">
+                        <table>
+                            <tr>
+                                <th>Offspring Plant 1</th>
+                                <th>Offspring Plant 2</th>
+                                <th>Offspring Plant 3</th>
+                            </tr>
+                            <tr>
+                                <td id = "plant7" class = "testplantbox"></td>
+                                <td id = "plant8" class = "testplantbox"></td>
+                                <td id = "plant9" class = "testplantbox"></td>
+                            </tr>
+                            <tr class = "skip"></tr>
+                            <tr>
+                                <td id = "plant10" class = "testplantbox"></td>
+                                <td id = "plant11" class = "testplantbox"></td>
+                                <td id = "plant12" class = "testplantbox"></td>
+                            </tr>
+                            <tr>
+                                <th>Offspring Plant 4</th>
+                                <th>Offspring Plant 5</th>
+                                <th>Offspring Plant 6</th>
+                            </tr>
+                        </table>
                     </div>
-                        </div>
-                    </div>                                                                           
+                </div>
+            </div>                                                               
                 </div>
             </div>
         </div>

@@ -11,9 +11,10 @@ function parseText() {
         let genes = genePlant(matches[i])
         plantgenes.push(genes)
         let num = i+1
-        document.getElementById("plant" + num).innerText = getGeneString(genes)
-        
-        document.getElementById("plant" + num).innerHTML += displayInfo(matches[i], genes)
+        //if (num > 6) {
+            document.getElementById("plant" + num).innerText = getGeneString(genes)
+            document.getElementById("plant" + num).innerHTML += displayInfo(matches[i], genes)
+        //}
     }
 }
 

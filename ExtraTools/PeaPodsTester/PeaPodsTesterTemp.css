@@ -3,9 +3,9 @@ div {
 }
 
 #container {
-    border-radius: 15% 10%;
+    border-radius: 5% 5%;
     margin: .5%;
-    padding: 3%;
+    padding: 1%;
     background-color:rgb(46, 46, 49);
     display: flex;
  }
@@ -14,8 +14,7 @@ div {
 #logo {
     position: absolute;
     padding-left: 0%;
-    margin-top: -2%;
-    margin-left: 4%;
+    margin-left: 2%;
 }
 
 .btn-group {
@@ -27,20 +26,22 @@ div {
 
 #lookingfor-container {
     width: 100%;
-    height: 500px
-}
-
-.col2 {
-    width: 85%;
-    height: 60%;
+    min-height: 300px;
     display: flex;
-    justify-content:center;
-    background-color: red
+    flex-direction: row;
+    align-content: flex-start;
+
 }
 
-.col1 {
-    width: 230px;
-    background-color: blue;
+#col2 {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(94, 189, 206, 0.562);
+    border-radius: 3%
+}
+
+#col1 {
+    width: 270px;
 }
 
 #yourcat {
@@ -50,6 +51,10 @@ div {
     padding: 5%;
     font-size: 140%;
     margin-bottom: 10%
+}
+
+#testcatcontainer {
+    width: 100%;
 }
 
 #testcat {
@@ -62,6 +67,7 @@ div {
 
 #genes-container {
     display: flex;
+    flex-direction: row;
     color:aliceblue;
     width: 100%;
 }
@@ -83,15 +89,14 @@ div {
 }
 
 #bottomcontainer {
-    width: 80%;
     display: flex;
-    align-self: flex-end
+    flex-direction: row;
+    height: 100%;
 }
 
 #examples {
-    width: 100%;
+    height: 100%;
     padding: .7%;
-    margin: .7%;
     margin-left: 0%;
     border-radius: 0% 5% 5% 0%;
     background-color: rgb(29, 31, 36);
@@ -104,14 +109,11 @@ div {
     width: 30%;
     padding: .7%;
     border-radius: 5% 0% 0% 5%;
-    margin: .7%;
-    margin-right: 0%;
     background-color: rgb(58, 160, 160);
+    height: 100%;
 }
 
-#testcatcontainer {
-    width: 230px;
-}
+
 
 .answerbutton {
     background-color: rgb(227, 238, 241); /* Green background */
@@ -175,7 +177,7 @@ div {
 }
 
 .skip {
-    height: 30px;
+    height: 20px;
 }
 
 .gene {
@@ -188,7 +190,6 @@ div {
 }
 
 #answer-section {
-    margin-top: 2%;
     color:rgb(9, 17, 17);
     font-weight: bold;
     font-size: 110%;
@@ -201,7 +202,6 @@ div {
 .checkboxes {
     padding: 10px;
     height:0.9em;
-    background-color: darkviolet;
     margin: 3%;
     margin-right: 5%;
 }
@@ -229,17 +229,13 @@ label {
 }
 
 #examples {
+    align-self: flex-start;
     max-height: 400px
 }
 
 #examplesbox {
     overflow:scroll;
     max-height: 100%;
-}
-
-
-#testquestion-and-answer-container {
-    max-height: 400px;
 }
 
 .hidden {
@@ -266,11 +262,51 @@ label {
     font-size: 140%;
 }
 
+#col3 {
+    width: 40%;
+    background-color:rgb(146, 77, 202);
+    border-radius: 3%
+}
 
+#entryarea {
+    display: flex;
+    margin: 2%;
+    flex-direction: column;
+}
 
+.input {
+    border-radius: 5%;
+    padding: 1%;
+    min-height: 100px;
+    background-color: black;
+    color: white;
+    width: 100%;
+}
 
+.testplantbox {
+    height: 300px;
+    width: 250px;
+    border-radius: 5%;
+    background-color: rgb(101, 81, 172);
+    text-align: center;
+}
 
+#delete-plant-data {
+    background-color: red;
+    padding: 20%;
+}
 
+#input-and-delete-button {
+    display: flex;
+    align-items: center;
+    width: 100%
+}
+
+#offspring-settings {
+    background-color:rgb(50, 126, 126);
+    border-radius: 5%;
+    padding: 3%;
+}
 
 
 
