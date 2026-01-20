@@ -1,0 +1,45 @@
+/* Peas Game Stuff */
+
+.pea-miniature-curly {left: 0px;}
+.pea-miniature-straight {left: -101px;}
+.pea-normal-curly {left: -202px;}
+.pea-normal-straight {left: -303px;}
+
+.plantjail {
+	width: 101px;
+	height: 108px;
+	overflow: hidden;
+	position: relative;
+	margin: 0px auto;
+}
+
+.plant-pot {
+	position: absolute;
+	z-index: 4;
+}
+
+.plant-base {
+	position: absolute;
+	z-index: 2;
+}
+
+.plant-peas {
+	position: absolute;
+	z-index: 5;
+}
+
+.plant-varie {
+	position: absolute;
+	z-index: 3;
+}
+
+.plant-flower {
+	position: absolute;
+	z-index: 6;
+}
+
+.tooltipplant {
+	color: var(--text-color);
+	text-align: left;
+	margin: 25px 0px;
+}

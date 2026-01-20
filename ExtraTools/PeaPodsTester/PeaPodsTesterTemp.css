@@ -277,7 +277,6 @@ label {
 .input {
     border-radius: 5%;
     padding: 1%;
-    min-height: 100px;
     background-color: black;
     color: white;
     width: 100%;
@@ -292,9 +291,36 @@ label {
 }
 
 #delete-plant-data {
-    background-color: red;
-    padding: 20%;
+    background-color: rgb(121, 28, 28);
+    padding: 8%;
+    border-radius: 5%;
 }
+
+#delete-plant-data:hover {
+    cursor: pointer;
+}
+
+#reset-label {
+    opacity: 0;
+    padding-left: 10%;
+    padding-right: 10%;
+    border-radius: 5%;
+    transition: .2s;
+}
+
+#reset-button-area {
+    padding-left: 2%;
+    border-radius: 5%;
+}
+
+#reset-button-area:hover {
+    background-color: rgb(196, 82, 82);
+}
+
+#reset-button-area:hover #reset-label {
+    opacity: 1;
+}
+
 
 #input-and-delete-button {
     display: flex;

@@ -1,7 +1,9 @@
 function makeCatImage(furlength, color, colortype, whitelevel, whitetype, pattern, accentcolor, eyes, eyecolor, pose, age, species, location) {
     let mainclass = generateMainClass(pose, furlength, species, age)
     let basecatsrc = makeBaseCatImageSRC(color, pattern, species)
-    addImage(basecatsrc, location, mainclass, "cat-base", 8)
+    if (!basecatsrc.includes("/blank.png")) {
+        addImage(basecatsrc, location, mainclass, "cat-base", 8)
+    }
     if (colortype == "Tortoiseshell" || colortype == "Watercolor") {
        let tradesrc = makeTradeImageSRC(color, pattern, species)
        addImage(tradesrc, location, mainclass, "cat-base", 9)
@@ -11,7 +13,10 @@ function makeCatImage(furlength, color, colortype, whitelevel, whitetype, patter
         addImage(accentsrc, location, mainclass, "cat-base", 9)
     }
     let whitesrc = makeWhiteImageSRC(whitelevel, whitetype, species)
-    addImage(whitesrc, location, mainclass, "cat-white", 10)
+    if (!whitesrc.includes("/blank.png")) {
+        addImage(whitesrc, location, mainclass, "cat-white", 10)
+    }
+    
     let eyessrc = makeEyesImageSRC(eyes, eyecolor)
     addImage(eyessrc, location, mainclass, "cat-eyes", 10)
 }
@@ -70,7 +75,6 @@ function generateMainClass(pose, furlength, species, age) {
 }
 
 function makeBaseCatImageSRC(color, pattern, species) {
-    console.log(color)
     if (color == "-hidden-") {
         return "assets/PCE_Assets/Cat/blank.png"
     }
@@ -150,7 +154,7 @@ function makeWhiteImageSRC(whitelevel, whitetype, species) {
     let whiteTypeLetterList = ["C", "P", "R", "L", "I", "T"]
     let whiteTypeList = ["classic", "piebald", "right", "left", "inverse", "tabby"]
     if (whitelevel == "-hidden-") {
-        return "/assets/PCE_Assets/Cat/blank.png"
+        return "assets/PCE_Assets/Cat/blank.png"
     }
     else {
         let imgsrc = "assets/PCE_Assets/Cat/"

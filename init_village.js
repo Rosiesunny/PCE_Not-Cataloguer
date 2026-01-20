@@ -36,7 +36,7 @@ village.cats = {};
 let cachedVillage = JSON.parse(window.localStorage.getItem("myVillage"));
 village = checkForDataStorageUpdates(cachedVillage, village)
 
-console.log("Not-Cataloguer V 1.1 Alpha hotfix 19");
+console.log("Not-Cataloguer V 1.1 Alpha hotfix 20");
 
 if (!(typeof(load_village) == 'undefined')) {
     if (load_village == 0) {

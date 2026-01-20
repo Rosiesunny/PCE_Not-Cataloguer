@@ -3,10 +3,12 @@
 <html lang="en">
     <head>
         <link rel="stylesheet" href = "PeaPodsTester/PeaPodsTesterTemp.css">
+        <link rel="stylesheet" href = "PeaPodsTester/PCE_Plantjail_Default.css">
         <link rel="icon" href ="../favicon.ico">
     </head>
     <body onload = "loadStoredCat()">
         <script src="PeaPodsTester/PeaPodsTester.js"></script>
+        <script src="PeaPodsTester/PeaPodImageGenerator.js"></script>
         <div id = "container">
             <a href = "index.html"><img src = "../assets/pce_not-cataloguer_logo.png" id = "logo" alt = "Home Button" style = "padding-left: 0; max-width: 4%"></a>
             <div class = "btn-group">
@@ -14,7 +16,7 @@
                     <div id = "yourcat">
                         <div class = "yourCatName">Parent Plant 1</div><br>
                         <div id = "yourCatImage">
-                            <img src = "../assets/addcat.png">
+                            <img src = "../assets/plant_placeholder.png">
                         </div>
                         <div id = "currentlyknowngenes">Currently Known Genes:</div>
                         <div id = "genecodefull">[NM] [SC] [DL] [SW] [GY] [YN] [WY] [1] [AB] [BP]</div>
@@ -27,7 +29,7 @@
                         <div id = "testcat" class = "col1">
                             <div class = "yourCatName">Parent Plant 2</div><br>
                             <div id = "testcatimage">
-                                <img src = "../assets/addcat.png">
+                                <img src = "../assets/plant_placeholder.png">
                             </div>
                             <div id = "currentlyknowngenes">Currently Known Genes:</div>
                             <div id = "genecodefull">[NM] [SC] [DL] [SW] [GY] [YN] [WY] [1] [AB] [BP]</div>
@@ -51,77 +53,77 @@
                         <div id = "subcol1" class = "subcol">
                             <table>
                                 <tr>
-                                    <td class = "bgc gene" id = "wind-1" title = "Wind">N</td>
-                                    <td class = "bgc" id = "wind-1-desc">Normal Size</td>
+                                    <td class = "bgc gene" id = "size-1" title = "Size">N</td>
+                                    <td class = "bgc" id = "size-1-desc">Normal Size</td>
                                 </tr>
                                 <tr>
-                                    <td class = "bgc gene" id = "wind-2" title = "Wind">M</td>
-                                    <td class = "bgc"  id = "wind-2-desc">Miniature Size</td>
-                                </tr>
-                                <tr><td class = "skip"></td></tr>
-                                <tr>
-                                    <td class = "bgc gene" id = "fur-1" title = "Fur Length">S</td>
-                                    <td class = "bgc" id = "fur-1-desc">Straight Stem</td>
-                                </tr>
-                                <tr>
-                                    <td class = "bgc gene" id = "fur-2" title = "Fur Length">C</td>
-                                    <td class = "bgc" id = "fur-2-desc">Curly Stem</td>
+                                    <td class = "bgc gene" id = "size-2" title = "Size">M</td>
+                                    <td class = "bgc"  id = "size-2-desc">Miniature Size</td>
                                 </tr>
                                 <tr><td class = "skip"></td></tr>
                                 <tr>
-                                    <td class = "bgc gene" id = "color-1" title = "Color">D</td>
-                                    <td class = "bgc" id = "color-1-desc">Dark Green Stem</td>
+                                    <td class = "bgc gene" id = "stem-style-1" title = "Stem Style">S</td>
+                                    <td class = "bgc" id = "stem-style-1-desc">Straight Stem</td>
                                 </tr>
                                 <tr>
-                                    <td class = "bgc gene" id = "color-2" title = "Color">L</td>
-                                    <td class = "bgc" id = "color-2-desc">Lavender Stem</td>
+                                    <td class = "bgc gene" id = "stem-style-2" title = "Stem Style">C</td>
+                                    <td class = "bgc" id = "stem-style-2-desc">Curly Stem</td>
+                                </tr>
+                                <tr><td class = "skip"></td></tr>
+                                <tr>
+                                    <td class = "bgc gene" id = "stem-color-1" title = "Stem Color">D</td>
+                                    <td class = "bgc" id = "stem-color-1-desc">Dark Green Stem</td>
+                                </tr>
+                                <tr>
+                                    <td class = "bgc gene" id = "stem-color-2" title = "Stem Color">L</td>
+                                    <td class = "bgc" id = "stem-color-2-desc">Lavender Stem</td>
                                 </tr>
                             </table>
                         </div>
                         <div id = "subcol2" class = "subcol">
                             <table>
                                 <tr>
-                                    <td class = "bgc gene" id = "fur-1" title = "Fur Length">S</td>
-                                    <td class = "bgc" id = "fur-1-desc">Smooth Pods</td>
+                                    <td class = "bgc gene" id = "pod-texture-1" title = "Pod Texture">S</td>
+                                    <td class = "bgc" id = "pod-texture-1-desc">Smooth Pods</td>
                                 </tr>
                                 <tr>
-                                    <td class = "bgc gene" id = "fur-2" title = "Fur Length">W</td>
-                                    <td class = "bgc" id = "fur-2-desc">Wrinkly Pods</td>
+                                    <td class = "bgc gene" id = "pod-texture-2" title = "Pod Texture">W</td>
+                                    <td class = "bgc" id = "pod-texture-2-desc">Wrinkly Pods</td>
                                 </tr>
                                 <tr><td class = "skip"></td></tr>
                                 <tr>
-                                    <td class = "bgc gene" id = "fur-1" title = "Fur Length">G</td>
-                                    <td class = "bgc" id = "fur-1-desc">Green Pods</td>
+                                    <td class = "bgc gene" id = "pod-color-1" title = "Pod Color">G</td>
+                                    <td class = "bgc" id = "pod-color-1-desc">Green Pods</td>
                                 </tr>
                                 <tr>
-                                    <td class = "bgc gene" id = "fur-2" title = "Fur Length">Y</td>
-                                    <td class = "bgc" id = "fur-2-desc">Gold Pods</td>
+                                    <td class = "bgc gene" id = "pod-color-2" title = "Pod Color">Y</td>
+                                    <td class = "bgc" id = "pod-color-2-desc">Gold Pods</td>
                                 </tr>
                             </table>
                         </div>
                         <div id = "subcol3" class = "subcol">
                             <table>
                                 <tr>
-                                    <td class = "bgc gene" id = "pattern-yes-no-1" title = "Pattern Display">Y</td>
-                                    <td class = "bgc" id = "pattern-yes-no-1-desc">Yes (Shows Variegation)</td>
+                                    <td class = "bgc gene" id = "variegation-display-1" title = "Variegation Display">Y</td>
+                                    <td class = "bgc" id = "variegation-display-1-desc">Yes (Shows Variegation)</td>
                                 </tr>
                                 <tr>
-                                    <td class = "bgc gene" id = "pattern-yes-no-2" title = "Pattern Display">N</td>
-                                    <td class = "bgc" id = "pattern-yes-no-2-desc">No (Hides Variegation)</td>
-                                </tr>
-                                <tr><td class = "skip"></td></tr>
-                                <tr>
-                                    <td class = "bgc gene" id = "fur-1" title = "Fur Length">W</td>
-                                    <td class = "bgc" id = "fur-1-desc">White Variegation</td>
-                                </tr>
-                                <tr>
-                                    <td class = "bgc gene" id = "fur-2" title = "Fur Length">Y</td>
-                                    <td class = "bgc" id = "fur-2-desc">Gold Variegation</td>
+                                    <td class = "bgc gene" id = "variegation-display-2" title = "Variegation Display">N</td>
+                                    <td class = "bgc" id = "variegation-display-2-desc">No (Hides Variegation)</td>
                                 </tr>
                                 <tr><td class = "skip"></td></tr>
                                 <tr>
-                                    <td class = "bgc gene" id = "fur-1" title = "Fur Length">?</td>
-                                    <td class = "bgc" id = "fur-1-desc">Unknown</td>
+                                    <td class = "bgc gene" id = "variegation-color-1" title = "Variegation Color">W</td>
+                                    <td class = "bgc" id = "variegation-color-1-desc">White Variegation</td>
+                                </tr>
+                                <tr>
+                                    <td class = "bgc gene" id = "variegation-color-2" title = "Variegation Color">Y</td>
+                                    <td class = "bgc" id = "variegation-color-2-desc">Gold Variegation</td>
+                                </tr>
+                                <tr><td class = "skip"></td></tr>
+                                <tr>
+                                    <td class = "bgc gene" id = "variegation-level" title = "Fur Length">?</td>
+                                    <td class = "bgc" id = "variegation-level-desc">Unknown</td>
                                 </tr>
                                 
                             </table>
@@ -129,21 +131,21 @@
                         <div id = "subcol4" class = "subcol">
                             <table>
                                 <tr>
-                                    <td class = "bgc gene" id = "white-yes-no-1" title = "White Display">A</td>
-                                    <td class = "bgc" id = "white-yes-no-1-desc">Animal</td>
+                                    <td class = "bgc gene" id = "flower-type-1" title = "Flower Type">A</td>
+                                    <td class = "bgc" id = "flower-type-1-desc">Animal</td>
                                 </tr>
                                 <tr>
-                                    <td class = "bgc gene" id = "white-yes-no-2" title = "White Display">B</td>
-                                    <td class = "bgc" id = "white-yes-no-2-desc">Bell</td>
+                                    <td class = "bgc gene" id = "flower-type-2" title = "Flower Type">B</td>
+                                    <td class = "bgc" id = "flower-type-2-desc">Bell</td>
                                 </tr>
                                 <tr><td class = "skip"></td></tr>
                                 <tr>
-                                    <td class = "bgc gene" id = "fur-1" title = "Fur Length">B</td>
-                                    <td class = "bgc" id = "fur-1-desc">Blue Flowers</td>
+                                    <td class = "bgc gene" id = "flower-color-1" title = "Flower Color">B</td>
+                                    <td class = "bgc" id = "flower-color-1-desc">Blue Flowers</td>
                                 </tr>
                                 <tr>
-                                    <td class = "bgc gene" id = "fur-2" title = "Fur Length">P</td>
-                                    <td class = "bgc" id = "fur-2-desc">Purple Flowers</td>
+                                    <td class = "bgc gene" id = "flower-color-2" title = "Flower Color">P</td>
+                                    <td class = "bgc" id = "flower-color-2-desc">Purple Flowers</td>
                                 </tr>
                             </table>
                         </div>
@@ -251,7 +253,12 @@
                     <div id="entryarea">
                         <div id = "input-and-delete-button">
                             <textarea class = "input" placeholder = "In PCE, <Ctrl+A> on the pea pods page to select the whole page, then <Ctrl+C> to copy it. Then, navigate to this website, click this text box, and <Ctrl+V> to paste everything!"></textarea>
-                            <a href = "index.html"><img src = "../assets/backarrow.png" id = "delete-plant-data" alt = "Home Button"></a>
+                            <div id = "reset-button-area">
+                                <img src = "../assets/trashcan.png" id = "delete-plant-data" alt = "Home Button" onclick = "resetTestPlants()">
+                                <p id = "reset-label">Reset Test Plants</p>
+                                </img>
+                            </div>
+                            
                         </div>
                         
                         <button id = "submit" onclick= "parseText()">Submit</button> 
