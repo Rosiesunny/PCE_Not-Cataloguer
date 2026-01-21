@@ -552,48 +552,52 @@ function tempDisplay(cat) {
     displayhtml += addToDisplayHtml("Held Trinket: ", cat.trinket?.name + " [" + cat.trinket?.stat + " " + cat.trinket?.mod + "]")
 
     displayhtml += addToDisplayHtml("Day Job: ", cat.job)
-
-    let jobNamesArray = ["Hunter", "Gatherer", "Miner", "Fisher", "Bug Catcher", "Gardener", "Herbalist", "Farmer", "Flockherd", "Apothecary", "Clothier", "Scribe", "Artist", "Blacksmith", "Craftscat", "Builder", "Mason", "Baker"]
-    for (let i = 0; i < jobNamesArray.length; i++) {
-        let jobstring = ""
-        if (localStorage.getItem("storeJobs") == "true") {
-            if (i == 0) {
-                jobstring += "Jobs:<br>"
-            }
-            if (i == 4) {
-                jobstring += " - " + jobNamesArray[i] + ": Level " +cat.jobs?.Bugcatcher.level
-            }
-            else {
-                jobstring += " - " + jobNamesArray[i] + ": Level " + eval("cat.jobs?." + jobNamesArray[i] + ".level")
-            }
-            if (localStorage.getItem("storeJobsEXP") == "true") {
+    if (cat.age !== "Bean") {
+        let jobNamesArray = ["Hunter", "Gatherer", "Miner", "Fisher", "Bug Catcher", "Gardener", "Herbalist", "Farmer", "Flockherd", "Apothecary", "Clothier", "Scribe", "Artist", "Blacksmith", "Craftscat", "Builder", "Mason", "Baker"]
+        for (let i = 0; i < jobNamesArray.length; i++) {
+            let jobstring = ""
+            if (localStorage.getItem("storeJobs") == "true") {
+                if (i == 0) {
+                    jobstring += "Jobs:<br>"
+                }
                 if (i == 4) {
-                    jobstring += " [" + cat.jobs?.Bugcatcher.exp + " EXP]"
+                    jobstring += " - " + jobNamesArray[i] + ": Level " +cat.jobs?.Bugcatcher.level
                 }
                 else {
-                    jobstring += " [" + eval("cat.jobs?." + jobNamesArray[i] + ".exp") + " EXP]"
+                    jobstring += " - " + jobNamesArray[i] + ": Level " + eval("cat.jobs?." + jobNamesArray[i] + ".level")
                 }
+                if (localStorage.getItem("storeJobsEXP") == "true") {
+                    if (i == 4) {
+                        jobstring += " [" + cat.jobs?.Bugcatcher.exp + " EXP]"
+                    }
+                    else {
+                        jobstring += " [" + eval("cat.jobs?." + jobNamesArray[i] + ".exp") + " EXP]"
+                    }
+                }
+                displayhtml += "<br>" + jobstring
             }
-            displayhtml += "<br>" + jobstring
         }
     }
     
+    
     displayhtml += addToDisplayHtml("Adventuring Class: ", cat.class)
-
-    let classNamesArray = ["Fighter", "Thief", "Guardian", "Ranger", "Medic", "Scout", "Bard"]
-    for (let i = 0; i < classNamesArray.length; i++) {
-        let classstring = ""
-        if (localStorage.getItem("storeAdventuringClasses") == "true") {
-            if (i == 0) {
-                classstring += "Adventuring Classes:<br>"
+    if (cat.age !== "Bean") {
+        let classNamesArray = ["Fighter", "Thief", "Guardian", "Ranger", "Medic", "Scout", "Bard"]
+        for (let i = 0; i < classNamesArray.length; i++) {
+            let classstring = ""
+            if (localStorage.getItem("storeAdventuringClasses") == "true") {
+                if (i == 0) {
+                    classstring += "Adventuring Classes:<br>"
+                }
+                classstring += " - " + classNamesArray[i] + ": Level " + eval("cat.classes?." + classNamesArray[i] + ".level")
+                if (localStorage.getItem("storeAdventuringClassesEXP") == "true") {
+                    classstring += " [" + eval("cat.classes?." + classNamesArray[i] + ".exp") + " EXP]"
+                }
+                displayhtml += "<br>" + classstring
             }
-            classstring += " - " + classNamesArray[i] + ": Level " + eval("cat.classes?." + classNamesArray[i] + ".level")
-            if (localStorage.getItem("storeAdventuringClassesEXP") == "true") {
-                classstring += " [" + eval("cat.classes?." + classNamesArray[i] + ".exp") + " EXP]"
-            }
-            displayhtml += "<br>" + classstring
         }
     }
+    
 
     displayhtml += addToDisplayHtml("Stats:<br> - Strength: ", cat.stats?.Strength)
     displayhtml += addToDisplayHtml(" - Agility: ", cat.stats?.Agility)

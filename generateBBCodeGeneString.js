@@ -176,8 +176,8 @@ function switchWhiteTypeBBCode(gene) {
             return "[color=green]R[/color]"
         case "I":
             return "[color=yellow]I[/color]"
-        case "[color=teal]T[/color]":
-            return "T"
+        case "T":
+            return "[color=teal]T[/color]"
         case "?":
             return "?"
     }
