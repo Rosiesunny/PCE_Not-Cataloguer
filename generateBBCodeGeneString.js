@@ -217,8 +217,7 @@ function listHiddenRecessive(genestring, wind) {
     for (let i = 0; i < genestringArray.length; i++) {
         genestringArray[i] = genestringArray[i].split("[")[1]
     }
-    console.log(genestringArray)
-    console.log(wind)
+
     if (wind == "North" || wind == "South") {
         if (genestringArray[1].includes("O")) {
             carryArray.push("Null wind")
@@ -581,6 +580,31 @@ function listHiddenRecessive(genestring, wind) {
             if (accentgenes == accentcolors[i][1] || accentgenes == accentcolors[i][2]) {
                 carryArray.push(accentcolors[i][0] + " accent")
                 break
+            }
+        }
+    }
+    else {
+        // cat is mercat (at least until we get new species it sure is. but it probably shows accent color?)
+        if (genestringArray[5].includes("10") && genestringArray[5].includes("Y")) {
+            let accentgenes = genestringArray[7]
+            // mercat is albino, hiding accent genes
+            let accentcolors = [
+                ["Ruby", "RR"],
+                ["Violet", "RB", "BR"],
+                ["Amber", "RY", "YR"],
+                ["Pink", "RL", "LR"],
+                ["Blue", "BB"],
+                ["Green", "BY", "YB"],
+                ["Indigo", "BL", "LB"],
+                ["Gold", "YY"],
+                ["Teal", "YL", "LY"],
+                ["Black", "BB"],
+            ]
+            for (let i = 0; i < accentcolors.length; i++) {
+                if (accentgenes == accentcolors[i][1] || accentgenes == accentcolors[i][2]) {
+                    carryArray.push(accentcolors[i][0] + " accent")
+                    break
+                }
             }
         }
     }

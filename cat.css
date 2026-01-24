@@ -5,19 +5,18 @@ div {
 }
 
 #container {
-    border-radius: 15% 10%;
-    margin: .5%;
-    padding: 3%;
+    border-radius: 5% 5%;
+    padding: 1.5%;
     background-color:rgb(46, 46, 49);
     outline: rgb(51, 40, 216) 1px solid;
     display: flex;
  }
 
 #col1 {
-    width: 30%;
     outline: red 1px solid;
-    display: flexbox;
+    display: flex;
     flex-direction: column;
+    min-width: 28%
 }
 
 #icon-and-id {
@@ -56,7 +55,6 @@ div {
 
 #col1-subcol {
     display: flex;
-    align-items: flex-start;
     padding: 1%;
     background-color:rgba(33, 23, 170, 0.651);
 }
@@ -67,8 +65,6 @@ div {
     background-color: purple;
     border-radius: 3%;
     padding: 2%;
-    max-width: 50%;
-    align-self: flex-start;
 }
 
 #col1-subcol2 {
@@ -77,6 +73,7 @@ div {
     background-color: rgb(221, 65, 221);
     border-radius: 3%;
     padding: 1%;
+    min-width: 58%
 }
 
 #cat-name-image-pronouns {
@@ -166,10 +163,9 @@ div {
 
 #col2 {
     outline: 1px solid aqua;
-    max-width: 20%;
-    display: flexbox;
+    display: flex;
     flex-direction: column;
-    border-radius: 3%;
+    min-width: 20%;
 }
 
 #held-trinket-section {
@@ -277,7 +273,6 @@ div {
     border-radius: 3%;
     padding: .5%;
     outline: 1px solid black;
-    width: 315px;
 } 
 
 .job-class-label {
@@ -299,7 +294,6 @@ div {
     list-style: circle;
 }
 #col4 {
-    width: 600px;
     background-color: rgba(143, 37, 37, 0.616);
     padding: .5%
 }
@@ -474,310 +468,3 @@ div {
     font-family:inherit;
     text-decoration:inherit
    }
-   .horizontalflex {
-    display:flex;
-    flex-direction:row
-   }
-   .wrapflex {
-    flex-wrap:wrap;
-    align-content:flex-start
-   }
-   .justify {
-    justify-content:center
-   }
-   .catjail {
-    width:100px;
-    height:100px;
-    background-position:var(--cat-watermark) 0;
-    overflow:hidden;
-    position:relative;
-    margin:0 auto
-   }
-   .catforum {
-    width:100px;
-    height:100px;
-    background-position:var(--cat-watermark) 0;
-    overflow:hidden;
-    position:relative;
-   }
-   .catjail-wide {
-    width:500px;
-    height:100px;
-    overflow:hidden;
-    position:relative;
-    margin:auto
-   }
-   .catjail-nobars {
-    width:100px;
-    height:100px;
-    overflow:hidden;
-    position:relative;
-    max-width:100px;
-    max-height:100px
-   }
-   .cat-base{
-    position:absolute;
-    z-index:3
-    }
-    .cat-white{
-    position:absolute;
-    z-index:4
-    }
-    .cat-eyes{
-    position:absolute;
-    z-index:5
-    }
-    .cat-clothes{
-    position:absolute;
-    z-index:6
-    }
-    .avatar-cat-clothes{
-    position:absolute;
-    z-index:6
-    }
-    .cat-link-topper{
-    z-index:7;
-    position:absolute;
-    left:0;
-    right:0
-    }
-    .c-adult-shorthair-sitting{
-    left:0;
-    top:0
-    }
-    .c-adult-shorthair-standing{
-    left:-100px;
-    top:0
-    }
-    .c-adult-shorthair-playing{
-    left:-200px;
-    top:-2px
-    }
-    .c-adult-shorthair-sleeping{
-    left:-300px;
-    top:0
-    }
-    .c-adult-shorthair-upsidedown{
-    left:-400px;
-    top:0
-    }
-    .c-adult-longhair-sitting{
-    left:0;
-    top:-100px
-    }
-    .c-adult-longhair-standing{
-    left:-100px;
-    top:-100px
-    }
-    .c-adult-longhair-playing{
-    left:-200px;
-    top:-102px
-    }
-    .c-adult-longhair-sleeping{
-    left:-300px;
-    top:-100px
-    }
-    .c-adult-longhair-upsidedown{
-    left:-400px;
-    top:-100px
-    }
-    .c-kitten-shorthair-sitting{
-    left:0;
-    top:-200px
-    }
-    .c-kitten-shorthair-standing{
-    left:-100px;
-    top:-200px
-    }
-    .c-kitten-shorthair-playing{
-    left:-200px;
-    top:-202px
-    }
-    .c-kitten-shorthair-sleeping{
-    left:-300px;
-    top:-200px
-    }
-    .c-kitten-shorthair-upsidedown{
-    left:-400px;
-    top:-200px
-    }
-    .c-kitten-longhair-sitting{
-    left:0;
-    top:-300px
-    }
-    .c-kitten-longhair-standing{
-    left:-100px;
-    top:-300px
-    }
-    .c-kitten-longhair-playing{
-    left:-200px;
-    top:-302px
-    }
-    .c-kitten-longhair-sleeping{
-    left:-300px;
-    top:-300px
-    }
-    .c-kitten-longhair-upsidedown{
-    left:-400px;
-    top:-300px
-    }
-    .c-bean-shorthair-sitting{
-    left:0;
-    top:-400px
-    }
-    .c-bean-shorthair-standing{
-    left:-100px;
-    top:-400px
-    }
-    .c-bean-shorthair-playing{
-    left:-200px;
-    top:-400px
-    }
-    .c-bean-shorthair-sleeping{
-    left:-300px;
-    top:-400px
-    }
-    .c-bean-shorthair-upsidedown{
-    left:-400px;
-    top:-400px
-    }
-    .c-bean-longhair-sitting{
-    left:0;
-    top:-500px
-    }
-    .c-bean-longhair-standing{
-    left:-100px;
-    top:-500px
-    }
-    .c-bean-longhair-playing{
-    left:-200px;
-    top:-500px
-    }
-    .c-bean-longhair-sleeping{
-    left:-300px;
-    top:-500px
-    }
-    .c-bean-longhair-upsidedown{
-    left:-400px;
-    top:-500px
-    }
-    .m-adult-shorthair-sitting{
-    left:0;
-    top:-11px
-    }
-    .m-adult-shorthair-standing{
-    left:-100px;
-    top:-8px
-    }
-    .m-adult-shorthair-playing{
-    left:-200px;
-    top:-2px
-    }
-    .m-adult-shorthair-sleeping{
-    left:-300px;
-    top:0
-    }
-    .m-adult-shorthair-upsidedown{
-    left:-400px;
-    top:0
-    }
-    .m-adult-longhair-sitting{
-    left:0;
-    top:-111px
-    }
-    .m-adult-longhair-standing{
-    left:-100px;
-    top:-108px
-    }
-    .m-adult-longhair-playing{
-    left:-200px;
-    top:-102px
-    }
-    .m-adult-longhair-sleeping{
-    left:-300px;
-    top:-100px
-    }
-    .m-adult-longhair-upsidedown{
-    left:-400px;
-    top:-100px
-    }
-    .m-kitten-shorthair-sitting{
-    left:0;
-    top:-211px
-    }
-    .m-kitten-shorthair-standing{
-    left:-100px;
-    top:-208px
-    }
-    .m-kitten-shorthair-playing{
-    left:-200px;
-    top:-202px
-    }
-    .m-kitten-shorthair-sleeping{
-    left:-300px;
-    top:-200px
-    }
-    .m-kitten-shorthair-upsidedown{
-    left:-400px;
-    top:-200px
-    }
-    .m-kitten-longhair-sitting{
-    left:0;
-    top:-311px
-    }
-    .m-kitten-longhair-standing{
-    left:-100px;
-    top:-308px
-    }
-    .m-kitten-longhair-playing{
-    left:-200px;
-    top:-302px
-    }
-    .m-kitten-longhair-sleeping{
-    left:-300px;
-    top:-300px
-    }
-    .m-kitten-longhair-upsidedown{
-    left:-400px;
-    top:-300px
-    }
-    .m-bean-shorthair-sitting{
-    left:0;
-    top:-411px
-    }
-    .m-bean-shorthair-standing{
-    left:-100px;
-    top:-400px
-    }
-    .m-bean-shorthair-playing{
-    left:-200px;
-    top:-400px
-    }
-    .m-bean-shorthair-sleeping{
-    left:-300px;
-    top:-400px
-    }
-    .m-bean-shorthair-upsidedown{
-    left:-400px;
-    top:-400px
-    }
-    .m-bean-longhair-sitting{
-    left:0;
-    top:-511px
-    }
-    .m-bean-longhair-standing{
-    left:-100px;
-    top:-500px
-    }
-    .m-bean-longhair-playing{
-    left:-200px;
-    top:-500px
-    }
-    .m-bean-longhair-sleeping{
-    left:-300px;
-    top:-500px
-    }
-    .m-bean-longhair-upsidedown{
-    left:-400px;
-    top:-500px
-    }

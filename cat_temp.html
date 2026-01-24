@@ -120,41 +120,41 @@
                 <div id = "held-trinket-section">
                     <img src = "assets/PCE_Assets/Trinkets/acorn.png" id = "trinket-image">
                     <div id = "trinket-info">
-                        <p id = "cat-trinket-name">Acorn</p>
-                        <p id = "cat-trinket-stats">Dedication +1</p>
+                        <p id = "cat-trinket-name">None</p>
+                        <p id = "cat-trinket-stats"></p>
                     </div>
                 </div>
                 <div id = "personality-stats">
                     <p>Personality Stats: </p> <!--To set bar lengths, in code set "cat-X-bar" width to whatever percentage-->
                     <div class = "cat-personality-stats"><p class = "personality-label">Bravery: </p>
-                        <div id = "cat-bravery" class = "personality-bars" data-label="#/10">
-                            <div id = "cat-bravery-bar" class = "bar-value bar"><div class = "bar-text">#/10</div></div>
+                        <div id = "cat-bravery" class = "personality-bars" data-label="?/10">
+                            <div id = "cat-bravery-bar" class = "bar-value bar"><div class = "bar-text">?/10</div></div>
                         </div>
                     </div>
                     <div class = "cat-personality-stats"><p class = "personality-label">Benevolence: </p>
-                        <div id = "cat-benevolence" class = "personality-bars" data-label="#/10">
-                            <div id = "cat-benevolence-bar" class = "bar-value"><div class = "bar-text">#/10</div></div>
+                        <div id = "cat-benevolence" class = "personality-bars" data-label="?/10">
+                            <div id = "cat-benevolence-bar" class = "bar-value"><div class = "bar-text">?/10</div></div>
                         </div>
                     </div>
                     <div class = "cat-personality-stats"><p class = "personality-label">Energy: </p>
-                        <div id = "cat-energy" class = "personality-bars" data-label="#/10">
-                            <div id = "cat-energy-bar" class = "bar-value" style = "width: 80%"><div class = "bar-text">#/10</div></div>
+                        <div id = "cat-energy" class = "personality-bars" data-label="?/10">
+                            <div id = "cat-energy-bar" class = "bar-value"><div class = "bar-text">?/10</div></div>
                         </div>
                     </div>
                     <div class = "cat-personality-stats"><p class = "personality-label">Extroversion: </p>
-                        <div id = "cat-extroversion" class = "personality-bars" data-label="#/10">
-                            <div id = "cat-extroversion-bar" class = "bar-value"><div class = "bar-text">#/10</div></div>
+                        <div id = "cat-extroversion" class = "personality-bars" data-label="?/10">
+                            <div id = "cat-extroversion-bar" class = "bar-value"><div class = "bar-text">?/10</div></div>
                         </div>
                     </div>
                     <div class = "cat-personality-stats"><p class = "personality-label">Dedication: </p>
-                        <div id = "cat-dedication" class = "personality-bars" data-label="#/10">
-                            <div id = "cat-dedication-bar" class = "bar-value"><div class = "bar-text">#/10</div></div>
+                        <div id = "cat-dedication" class = "personality-bars" data-label="?/10">
+                            <div id = "cat-dedication-bar" class = "bar-value"><div class = "bar-text">?/10</div></div>
                         </div>
                     </div>
                 </div>
                 <div id = "attribute-stats">
                     <p>Attribute Stats: </p>
-                    <div class = "attribute-box"><!--Strength-->
+                    <div id = "strength-box" class = "attribute-box"><!--Strength-->
                         <div>
                             <p class = "attribute-title">Strength:</p>
                             <div id = "cat-strength-value" class = "attribute-values">20</div>
@@ -165,7 +165,7 @@
                             <div id = "cat-strength-desc" class = "attribute-desc">Very Good</div>
                         </div>
                     </div>
-                    <div class = "attribute-box"><!--agility-->
+                    <div id = "agility-box" class = "attribute-box"><!--agility-->
                         <div>
                             <p class = "attribute-title">Agility:</p>
                             <div id = "cat-agility-value" class = "attribute-values">20</div>
@@ -176,7 +176,7 @@
                             <div id = "cat-agility-desc" class = "attribute-desc">Very Good</div>
                         </div>
                     </div>
-                    <div class = "attribute-box"><!--health-->
+                    <div id = "health-box" class = "attribute-box"><!--health-->
                         <div>
                             <p class = "attribute-title">Health:</p>
                             <div id = "cat-health-value" class = "attribute-values">20</div>
@@ -187,7 +187,7 @@
                             <div id = "cat-health-desc" class = "attribute-desc">Very Good</div>
                         </div>
                     </div>
-                    <div class = "attribute-box"><!--finesse-->
+                    <div id = "finesse-box" class = "attribute-box"><!--finesse-->
                         <div>
                             <p class = "attribute-title">Finesse:</p>
                             <div id = "cat-finesse-value" class = "attribute-values">20</div>
@@ -198,7 +198,7 @@
                             <div id = "cat-finesse-desc" class = "attribute-desc">Very Good</div>
                         </div>
                     </div>
-                    <div class = "attribute-box"><!--cleverness-->
+                    <div id = "cleverness-box" class = "attribute-box"><!--cleverness-->
                         <div>
                             <p class = "attribute-title">Cleverness:</p>
                             <div id = "cat-cleverness-value" class = "attribute-values">20</div>
@@ -209,7 +209,7 @@
                             <div id = "cat-cleverness-desc" class = "attribute-desc">Very Good</div>
                         </div>
                     </div>
-                    <div class = "attribute-box"><!--perception-->
+                    <div id = "perception-box" class = "attribute-box"><!--perception-->
                         <div>
                             <p class = "attribute-title">Perception:</p>
                             <div id = "cat-perception-value" class = "attribute-values">20</div>
@@ -220,7 +220,7 @@
                             <div id = "cat-perception-desc" class = "attribute-desc">Very Good</div>
                         </div>
                     </div>
-                    <div class = "attribute-box"><!--luck-->
+                    <div id = "luck-box" class = "attribute-box"><!--luck-->
                         <div>
                             <p class = "attribute-title">Luck:</p>
                             <div id = "cat-luck-value" class = "attribute-values">20</div>
