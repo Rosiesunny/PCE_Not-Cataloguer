@@ -584,7 +584,7 @@ function listHiddenRecessive(genestring, wind) {
             ["Indigo", "BL", "LB"],
             ["Gold", "YY"],
             ["Teal", "YL", "LY"],
-            ["Black", "BB"],
+            ["Black", "LL"],
         ]
         for (let i = 0; i < accentcolors.length; i++) {
             if (accentgenes == accentcolors[i][1] || accentgenes == accentcolors[i][2]) {
