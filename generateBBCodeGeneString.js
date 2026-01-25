@@ -557,7 +557,17 @@ function listHiddenRecessive(genestring, wind) {
         // cat is no-white via NN, what white is it hiding?
         let whitetrim = genestringArray[5].slice(2, 6)
         if (whitetrim !== "??") {
-            carryArray.push(whitetrim + " white")
+            if (whitetrim.length > 2) {
+                let whitelevel = whitetrim.slice(0, 2)
+                let whitetype = whitetrim.slice(2, 3)
+                carryArray.push(whitetype + whitelevel + " white")
+            }
+            else {
+                let whitelevel = whitetrim.slice(0, 1)
+                let whitetype = whitetrim.slice(1, 2)
+                carryArray.push(whitetype + whitelevel + " white")
+            }
+            
         }
         
     }
