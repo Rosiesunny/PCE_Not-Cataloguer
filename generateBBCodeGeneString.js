@@ -418,7 +418,7 @@ function listHiddenRecessive(genestring, wind) {
             ["Lynxpoint", "TP", "PT"],
             ["Ticked", "TA", "AT"],
             ["Clouded", "MM"],
-            ["Rosette", "MS, SM"],
+            ["Rosette", "MS", "SM"],
             ["Cloudpoint", "MP", "PM"],
             ["Ripple", "MA", "AM"],
             ["Spotted", "SS"],
