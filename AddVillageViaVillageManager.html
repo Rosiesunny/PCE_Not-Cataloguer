@@ -1,0 +1,45 @@
+<!-- Comments look like this -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href = "PCE_Catjail_Default.css">
+        <link rel="stylesheet" href = "AddCat.css">
+        <link rel="icon" href ="favicon.ico">
+        <link rel="stylesheet" href = "generateBBCodeGeneString.css">
+    </head>
+    <body>
+        <!-- Use the following to load a village object -->
+        <script>
+            // This variable should be set to the id of the test village you'd like to load
+            // Current test village count: 1
+            // Setting it to 0 will turn off (Currently means an empty village gets initialized)
+            load_village = 0;
+        </script>
+        <!-- End Test village Loading -->
+        <script src="init_village.js"></script>
+        <script src="save_village.js"></script>
+        <script src = "AddVillageViaVillageManager.js"></script>
+        <script src="CatImageGenerator.js"></script>
+        <div id = "box">
+            <div id = "testbox">
+            (ADD VILLAGE PAGE)
+            Please check results for accuracy and submit a bug report if something is wrong!
+            <p class ="test">
+                <a href = "index.html"><img src="assets/pce_not-cataloguer_logo.png" style = "width: 10%"></a>PCE Not-CAT-aloguer Alpha - add cat page (data entry)
+            </p>
+            <p id = "catpreview"></p>
+            <p class ="display"></p>
+        </div>
+        <div id="entryarea">
+            <textarea class = "input" placeholder = "In PCE, <Ctrl+A> on your cat's page to select the whole page, then <Ctrl+C> to copy it. Then, navigate to this website, click this text box, and <Ctrl+V> to paste everything!"></textarea>
+            <button id = "submit" onclick= "addVillage(document.querySelector('.input').value)">Submit</button> 
+            </div>
+            <div id = "genetestingbutton"></div>
+            <div id = "bbcodebutton"></div>
+            <div id = "bbcodebox" class = "hidebbcodebox"></div>
+        </div>
+        
+        <script src="generateBBCodeGeneString.js"></script>
+        <script src="geneTestingButton.js"></script>
+    </body>
+</html>

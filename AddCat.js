@@ -459,8 +459,8 @@ function localStorageSettingChecks(cat) {
     if (localStorage.getItem("storeTrinket") == "false") {
         delete cat.trinket
     }
-    if (localStorage.getItem("storeBiography") == "false") {
-        delete cat.biography
+    if (localStorage.getItem("checkBioForGeneString") == "true") {
+        cat.genes = detectGeneStringInBiography(cat.biography, cat.genes)
     }
     if (localStorage.getItem("overwriteGeneString") == "false") {
         let savedcat = village.cats[cat.id] //if the cat is already saved this won't be undefined
@@ -469,6 +469,9 @@ function localStorageSettingChecks(cat) {
                 cat.genes = savedcat.genes
             }
         }
+    }
+    if (localStorage.getItem("storeBiography") == "false") {
+        delete cat.biography
     }
     cat.lastUpdated = Date()
     return cat
@@ -966,4 +969,16 @@ function sectionWhite(geneString, whitetype, whitelevel) {
 
 // AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
-
+function detectGeneStringInBiography(biography, genes) {
+    let genesRegEx = /\[ ?(.) ?\] \[ ?(.)(.) ?\] \[ ?(.)(.) ?\] \[ ?(.)(.)(.)(.)(.) ?\] \[ ?(.)(.)(.)(.) ?\] \[ ?(.)(.)(.)(.) ?\] \[ ?(.)(.) ?\] \[ ?(.)(.) ?\]/gm
+    let match = genesRegEx.exec(biography)
+    if (match) {
+        console.log(match)
+        console.log(genes)
+        match.shift()
+        return match
+    }
+    else {
+        return genes
+    }
+}

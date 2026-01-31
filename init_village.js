@@ -36,7 +36,7 @@ village.cats = {};
 let cachedVillage = JSON.parse(window.localStorage.getItem("myVillage"));
 village = checkForDataStorageUpdates(cachedVillage, village)
 
-console.log("Not-Cataloguer V 1.1 Alpha hotfix 26");
+console.log("Not-Cataloguer V 1.2 Alpha");
 
 if (!(typeof(load_village) == 'undefined')) {
     if (load_village == 0) {
@@ -1937,10 +1937,11 @@ function clearVillage() {
 function checkForDataStorageUpdates(cachedVillage, village) {
     let storedVersion = localStorage.getItem("NotCataloguerVersion")
     if (storedVersion) {
+        console.log(storedVersion)
         switch(storedVersion) {
             // basically a list of versions that will call individual update functions. does nothing for now. first one should be "case (current version) and just break/return"
-            case "AAAA":
-                "eeee"
+            case "Alpha 1.1":
+                AlphaOnePointTwoVersionUpdate() // adds a default for new setting, checkBioForGeneString
             case "A1010":
                 "PEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE"
         }
@@ -2008,4 +2009,11 @@ function AlphaOnePointOneVersionUpdate(cachedVillage) {
     console.log("Updated old data (if any) for Alpha 1.1")
     localStorage.setItem("NotCataloguerVersion", "Alpha 1.1")
     return cachedVillage
+}
+
+function AlphaOnePointTwoVersionUpdate() {
+    console.log("PEEEEEEEEEEEEEEEEE")
+    localStorage.setItem("checkBioForGeneString", "false")
+    localStorage.setItem("NotCataloguerVersion", "Alpha 1.2")
+    return
 }

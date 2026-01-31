@@ -157,6 +157,14 @@
                         <p>Should the Not-Cataloguer store your cat's biography? With standard copy/paste input, this will not include images, including catmojis which will be converted to their alt text, and most text formatting. This has a varied impact on storage, but generally speaking, it has a huge potential impact on storage due to the large size biographys can take up.</p>
                     </div>
                     <br>
+
+                    <input type="checkbox" class = "data-storage-checkboxes" id = "check-biography-for-genes-checkbox" data-storage-key = "checkBioForGeneString">
+                    <label for = "check-biography-for-genes-checkbox" class = "hoverable-label"><span class = "label-text">Check Biography for Gene String</span></label>
+                    <div class = "explanation-box">
+                        <p>Should the Not-Cataloguer check your cat's biography for a gene string to override the automatically generated gene string? This is helpful if you have already gened your cats without the Not-Cataloguer, and have their genes in their biography, and want those genes also saved in the Not-Cataloguer for searching purposes. Note: it checks the biography BEFORE deleting the biography if you have store biography disabled, so feel free to leave that toggled off, it will still check for the gene string and then discard the biography! If you already have entered this cat before, and have "Overwrite Existing Gene String" disabled, the Not-Cataloguer's stored gene string will take priority over the description gene string. Another note: if your cat has had its genes revealed, but you also put a gene string in its biography, the biography gene string will take precedence, even if it is an incorrect match to the revealed gene string. For this reason, if you have this setting enabled, you should make sure that the first gene string present in your biography is the correct gene string. In the biography scan for a gene code, the Not-Cataloguer recognizes two formats, "[C] [NS] [LL] [BBFD4] [YYMP] [YN2P] [??] [RR]" and "[ C ] [ NS ] [ LL ] [ BBFD4 ] [ YYMP ] [ YN2P ] [ ?? ] [ RR ]". If your gene string pastes are not formatted in these formats of spacing and brackets, it will not recognize them. </p>
+                    </div>
+                    <br>
+
                     <input type="checkbox" class = "data-storage-checkboxes" id = "overwrite-genestring-checkbox" data-storage-key = "overwriteGeneString" checked>
                     <label for = "overwrite-genestring-checkbox" class = "hoverable-label"><span class = "label-text">Overwrite Existing Gene String</span></label>
                     <div class = "explanation-box">
