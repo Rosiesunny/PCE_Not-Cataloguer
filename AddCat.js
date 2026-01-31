@@ -970,7 +970,7 @@ function sectionWhite(geneString, whitetype, whitelevel) {
 // AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
 function detectGeneStringInBiography(biography, genes) {
-    let genesRegEx = /\[ ?(.) ?\] \[ ?(.)(.) ?\] \[ ?(.)(.) ?\] \[ ?(.)(.)(.)(.)(.) ?\] \[ ?(.)(.)(.)(.) ?\] \[ ?(.)(.)(.)(.) ?\] \[ ?(.)(.) ?\] \[ ?(.)(.) ?\]/gm
+    let genesRegEx = /\[ ?(.) ?\] \[ ?(.)(.) ?\] \[ ?(.)(.) ?\] \[ ?(.)(.)(.)(.)(.) ?\] \[ ?(.)(.)(.)(.) ?\] \[ ?(.)(.)([0-9]+|\?)(.) ?\] \[ ?(.)(.) ?\] \[ ?(.)(.) ?\]/gm
     let match = genesRegEx.exec(biography)
     if (match) {
         console.log(match)
