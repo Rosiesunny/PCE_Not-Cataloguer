@@ -34,6 +34,8 @@ function addCat(plaintext) {
 
     geneTestingButton(cat.genes, cat.id, cat.name, cat.wind, cat.fur, cat.white, cat.pattern, cat.accentColor, cat.eyes, cat.pose, cat.age, cat.species, document.getElementById("genetestingbutton"))
     bbcodeButton(cat.genes, cat.wind, document.getElementById("bbcodebutton"))
+    let textbox = document.querySelector(".input")
+    textbox.value = ""
 }
 
 
@@ -545,7 +547,17 @@ function tempDisplay(cat) {
             break
         }
     }
-    displayhtml += "<br>Age: " + cat.age + "<br>Wind: " + cat.wind + "<br>Pronouns: " + cat.pronouns.primary + "/" + cat.pronouns.secondary + "<br>Aspect: " + cat.aspect + "<br>Origin: " + cat.origin + "<br>ID: " + cat.id + "<br>Species: " + cat.species + "<br>Size: " + cat.size.lbs + " lbs / " + cat.size.kg + "kg<br>Fur: " + cat.fur.length + "<br>Color: " +   cat.fur.color + " " + cat.fur.type + "<br>Pattern: " + cat.pattern + "<br>Accent Color: " + cat.accentColor + "<br>White Marks: " + cat.white.markings + " - " + cat.white.type + cat.white.level + "<br>Eyes: " + cat.eyes.color + " " + cat.eyes.eyes 
+    displayhtml += "<br>Age: " + cat.age + "<br>Wind: " + cat.wind + "<br>Pronouns: " + cat.pronouns.primary + "/" + cat.pronouns.secondary + "<br>Aspect: " + cat.aspect + "<br>Origin: " + cat.origin + "<br>ID: " + cat.id + "<br>Species: " + cat.species 
+    if (cat.size) {
+        displayhtml += "<br>Size: " + cat.size.lbs + " lbs / " + cat.size.kg
+    } 
+    displayhtml += "kg<br>Fur: " + cat.fur.length + "<br>Color: " +   cat.fur.color + " " + cat.fur.type + "<br>Pattern: " + cat.pattern + "<br>Accent Color: " + cat.accentColor + "<br>White Marks: " + cat.white.markings + " - " + cat.white.type + cat.white.level + "<br>Eyes: " + cat.eyes.color
+    if (cat.eyes.eyes) {
+        displayhtml += " " + cat.eyes.eyes
+    } 
+    if (cat.pose) {
+        displayhtml += "<br>Pose: " + cat.pose
+    }
     displayhtml += addToDisplayHtml("Personality Type: ", cat.personality?.type)
     displayhtml += addToDisplayHtml("Personality Stats:<br> - Bravery: ", cat.personality?.Bravery)
     displayhtml += addToDisplayHtml(" - Benevolence: ", cat.personality?.Benevolence)
