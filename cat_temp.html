@@ -5,7 +5,7 @@
         <link rel="stylesheet" href = "cat.css"> 
         <link rel="icon" href ="favicon.ico">
     </head>
-    <body onload = "loadStoredCat()"></body>>
+    <body onload = "loadStoredCat()"></body>
         <script src = "init_village.js"></script>
         <script src="save_village.js"></script>
         <script src="generateBBCodeGeneString.js"></script>
@@ -128,7 +128,7 @@
                     <p>Personality Stats: </p> <!--To set bar lengths, in code set "cat-X-bar" width to whatever percentage-->
                     <div class = "cat-personality-stats"><p class = "personality-label">Bravery: </p>
                         <div id = "cat-bravery" class = "personality-bars" data-label="?/10">
-                            <div id = "cat-bravery-bar" class = "bar-value bar"><div class = "bar-text">?/10</div></div>
+                            <div id = "cat-bravery-bar" class = "bar-value"><div class = "bar-text">?/10</div></div>
                         </div>
                     </div>
                     <div class = "cat-personality-stats"><p class = "personality-label">Benevolence: </p>
@@ -158,7 +158,7 @@
                         <div>
                             <p class = "attribute-title">Strength:</p>
                             <div id = "cat-strength-value" class = "attribute-values">20</div>
-                            <div style = "display: flex; justify-content: space-between">
+                            <div class = "diemodifiersection">
                                 <div id = "cat-strength-die" class = "attribute-smaller-numbers">4d</div>
                                 <div id = "cat-strength-modifier" class="info-right attribute-smaller-numbers">+2</div>
                             </div>
@@ -169,7 +169,7 @@
                         <div>
                             <p class = "attribute-title">Agility:</p>
                             <div id = "cat-agility-value" class = "attribute-values">20</div>
-                            <div style = "display: flex; justify-content: space-between">
+                            <div class = "diemodifiersection">
                                 <div id = "cat-agility-die" class = "attribute-smaller-numbers">4d</div>
                                 <div id = "cat-agility-modifier" class="info-right attribute-smaller-numbers">+2</div>
                             </div>
@@ -180,7 +180,7 @@
                         <div>
                             <p class = "attribute-title">Health:</p>
                             <div id = "cat-health-value" class = "attribute-values">20</div>
-                            <div style = "display: flex; justify-content: space-between">
+                            <div class = "diemodifiersection">
                                 <div id = "cat-health-die" class = "attribute-smaller-numbers">4d</div>
                                 <div id = "cat-health-modifier" class="info-right attribute-smaller-numbers">+2</div>
                             </div>
@@ -191,7 +191,7 @@
                         <div>
                             <p class = "attribute-title">Finesse:</p>
                             <div id = "cat-finesse-value" class = "attribute-values">20</div>
-                            <div style = "display: flex; justify-content: space-between">
+                            <div class = "diemodifiersection">
                                 <div id = "cat-finesse-die" class = "attribute-smaller-numbers">4d</div>
                                 <div id = "cat-finesse-modifier" class="info-right attribute-smaller-numbers">+2</div>
                             </div>
@@ -202,7 +202,7 @@
                         <div>
                             <p class = "attribute-title">Cleverness:</p>
                             <div id = "cat-cleverness-value" class = "attribute-values">20</div>
-                            <div style = "display: flex; justify-content: space-between">
+                            <div class = "diemodifiersection">
                                 <div id = "cat-cleverness-die" class = "attribute-smaller-numbers">4d</div>
                                 <div id = "cat-cleverness-modifier" class="info-right attribute-smaller-numbers">+2</div>
                             </div>
@@ -213,7 +213,7 @@
                         <div>
                             <p class = "attribute-title">Perception:</p>
                             <div id = "cat-perception-value" class = "attribute-values">20</div>
-                            <div style = "display: flex; justify-content: space-between">
+                            <div class = "diemodifiersection">
                                 <div id = "cat-perception-die" class = "attribute-smaller-numbers">4d</div>
                                 <div id = "cat-perception-modifier" class="info-right attribute-smaller-numbers">+2</div>
                             </div>
@@ -224,7 +224,7 @@
                         <div>
                             <p class = "attribute-title">Luck:</p>
                             <div id = "cat-luck-value" class = "attribute-values">20</div>
-                            <div style = "display: flex; justify-content: space-between">
+                            <div class = "diemodifiersection">
                                 <div id = "cat-luck-die" class = "attribute-smaller-numbers">4d</div>
                                 <div id = "cat-luck-modifier" class="info-right attribute-smaller-numbers">+2</div>
                             </div>

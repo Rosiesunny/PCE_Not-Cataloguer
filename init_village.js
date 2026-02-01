@@ -36,7 +36,7 @@ village.cats = {};
 let cachedVillage = JSON.parse(window.localStorage.getItem("myVillage"));
 village = checkForDataStorageUpdates(cachedVillage, village)
 
-console.log("Not-Cataloguer V 1.2 Alpha hotfix 3");
+console.log("Not-Cataloguer V 1.2 Alpha hotfix 4");
 
 if (!(typeof(load_village) == 'undefined')) {
     if (load_village == 0) {
@@ -1937,7 +1937,6 @@ function clearVillage() {
 function checkForDataStorageUpdates(cachedVillage, village) {
     let storedVersion = localStorage.getItem("NotCataloguerVersion")
     if (storedVersion) {
-        console.log(storedVersion)
         switch(storedVersion) {
             // basically a list of versions that will call individual update functions. does nothing for now. first one should be "case (current version) and just break/return"
             case "Alpha 1.1":

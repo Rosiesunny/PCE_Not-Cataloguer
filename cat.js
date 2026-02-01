@@ -29,7 +29,9 @@ document.getElementById("basic-data").innerText = basicData;
 
 var appearanceData = "";
 appearanceData += "Species: " + thisCat.species + "\n";
-appearanceData += "Size: " + thisCat.size.lbs + " lbs. / " + thisCat.size.kg + " kg\n";
+if (thisCat.size) {
+    appearanceData += "Size: " + thisCat.size.lbs + " lbs. / " + thisCat.size.kg + " kg\n";
+}
 appearanceData += "Fur: " + thisCat.fur.length + "\n";
 appearanceData += "Color: " + thisCat.fur.color + " " + thisCat.fur.type + "\n";
 appearanceData += "Pattern: " + thisCat.pattern + "\n";
@@ -53,56 +55,67 @@ for (var i = 1; i < traits_list.length; i++) {
 }
 document.getElementById("personality-data").innerText = personalityData;
 
-var trinketData = "Held Trinket: ";
-if (thisCat.trinket.mod == 0) {
-    trinketData += "None\n";
-} else {
-    trinketData += thisCat.trinket.name + " [" + thisCat.trinket.stat + " +" + thisCat.trinket.mod + "]\n";
+
+if (thisCat.hasOwnProperty("trinket")) {
+    var trinketData = "Held Trinket: ";
+    if (thisCat.trinket.mod == 0) {
+        trinketData += "None\n";
+    } else {
+        trinketData += thisCat.trinket.name + " [" + thisCat.trinket.stat + " +" + thisCat.trinket.mod + "]\n";
+    }
+    document.getElementById("trinket-data").innerText = trinketData;
 }
-document.getElementById("trinket-data").innerText = trinketData;
+
 
 var jobData = "";
 jobData += "Day Job: " + thisCat.job + "\n";
-var jobs_list = Object.keys(thisCat.jobs);
-for (var i = 0; i < jobs_list.length; i++) {
-    if (thisCat.jobs[jobs_list[i]].level > 0) {
-        jobData += "+ " + jobs_list[i] + " Level " + thisCat.jobs[jobs_list[i]].level + " [";
-        switch(typeof(thisCat.jobs[jobs_list[i]].exp)) {
-            case 'string':
-                jobData += thisCat.jobs[jobs_list[i]].exp + "]\n";
-                break;
-            case 'number':
-                jobData += thisCat.jobs[jobs_list[i]].exp;
-                jobData += "/" + jobEXPDict[thisCat.jobs[jobs_list[i]].level];
-                jobData += " EXP]\n";
-                break;
-            default:
-                break;
+if (thisCat.hasOwnProperty("jobs")) {
+    
+    var jobs_list = Object.keys(thisCat.jobs);
+    for (var i = 0; i < jobs_list.length; i++) {
+        if (thisCat.jobs[jobs_list[i]].level > 0) {
+            jobData += "+ " + jobs_list[i] + " Level " + thisCat.jobs[jobs_list[i]].level + " [";
+            switch(typeof(thisCat.jobs[jobs_list[i]].exp)) {
+                case 'string':
+                    jobData += thisCat.jobs[jobs_list[i]].exp + "]\n";
+                    break;
+                case 'number':
+                    jobData += thisCat.jobs[jobs_list[i]].exp;
+                    jobData += "/" + jobEXPDict[thisCat.jobs[jobs_list[i]].level];
+                    jobData += " EXP]\n";
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
 document.getElementById("job-data").innerText = jobData;
 
+
 var classData = "";
 classData += "Adventuring Class: " + thisCat.class + "\n";
-var classes_list = Object.keys(thisCat.classes);
-for (var i = 0; i < classes_list.length; i++) {
-    if (thisCat.classes[classes_list[i]].level > 0) {
-        classData += "+ " + classes_list[i] + " Level " + thisCat.classes[classes_list[i]].level + " [";
-        switch(typeof(thisCat.classes[classes_list[i]].exp)) {
-            case 'string':
-                classData += thisCat.classes[classes_list[i]].exp + "]\n";
-                break;
-            case 'number':
-                classData += thisCat.classes[classes_list[i]].exp;
-                classData += "/" + classEXPDict[thisCat.classes[classes_list[i]].level];
-                classData += " EXP]\n";
-                break;
-            default:
-                break;
+if (thisCat.hasOwnProperty("classes")) {
+    var classes_list = Object.keys(thisCat.classes);
+    for (var i = 0; i < classes_list.length; i++) {
+        if (thisCat.classes[classes_list[i]].level > 0) {
+            classData += "+ " + classes_list[i] + " Level " + thisCat.classes[classes_list[i]].level + " [";
+            switch(typeof(thisCat.classes[classes_list[i]].exp)) {
+                case 'string':
+                    classData += thisCat.classes[classes_list[i]].exp + "]\n";
+                    break;
+                case 'number':
+                    classData += thisCat.classes[classes_list[i]].exp;
+                    classData += "/" + classEXPDict[thisCat.classes[classes_list[i]].level];
+                    classData += " EXP]\n";
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
+
 document.getElementById("class-data").innerText = classData;
 
 var attributeData = "";
@@ -174,14 +187,12 @@ if (thisCat.biography) {
 
 var clothesData = "";
 clothesData += "Currently Wearing:\n";
-console.log(thisCat)
-if (thisCat.clothes.wearing) {
+if (thisCat.hasOwnProperty("clothes")) {
     if (thisCat.clothes.wearing.length == 0) {
     clothesData += "None";
     } 
     else {
         for (var i = 0; i < thisCat.clothes.wearing.length; i++) {
-            console.log(i)
             clothesData += thisCat.clothes.wearing[i].name + " #" + thisCat.clothes.wearing[i].id
             if (thisCat.clothes.wearing[i].creator) {
                 clothesData += " by " + thisCat.clothes.wearing[i].creator

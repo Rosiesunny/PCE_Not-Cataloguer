@@ -5,7 +5,7 @@ div {
 }
 
 #container {
-    border-radius: 5% 5%;
+    border-radius: 5%;
     padding: 1.5%;
     background-color:rgb(46, 46, 49);
     outline: rgb(51, 40, 216) 1px solid;
@@ -16,22 +16,14 @@ div {
     outline: red 1px solid;
     display: flex;
     flex-direction: column;
-    min-width: 28%
 }
 
 #icon-and-id {
-    padding: 2%;
     display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-}
-
-#home-link {
-    max-width: 40%;
 }
 
 .toPCE {
-    margin-left: 5px;
+    margin-left: 5%;
 }
 
 .scaleUpImage {
@@ -42,7 +34,6 @@ div {
     transform: scale(2);
     margin-left: 20px;
 }
-
 
 #logo {
     max-width: 90px;
@@ -55,7 +46,6 @@ div {
 
 #col1-subcol {
     display: flex;
-    padding: 1%;
     background-color:rgba(33, 23, 170, 0.651);
 }
 
@@ -72,31 +62,20 @@ div {
     flex-direction: column;
     background-color: rgb(221, 65, 221);
     border-radius: 3%;
-    padding: 1%;
-    min-width: 58%
+    padding: 2%;
+    min-width: 250px;
 }
 
 #cat-name-image-pronouns {
-    outline: 1px solid rgb(102, 75, 75);
+    text-align: center;
 }
 
 #cat-name {
     font-size: 150%;
-    text-align: center;
-}
-
-#catjail-container {
-    text-align: center;
 }
 
 #cat-pronouns {
     font-size: 120%;
-    text-align: center;
-}
-
-#wind-personality-aspect-travelling {
-    outline: 1px solid rgb(102, 75, 75);
-    padding: 2%;
 }
 
 .symbols {
@@ -114,14 +93,8 @@ div {
     display: flex;
 }
 
-#birthday-age-origin {
-    outline: 1px solid rgb(102, 75, 75);
-    padding: 2%;
-}
-
 .data-container {
     outline: 1px solid rgb(106, 247, 240);
-    flex-direction: row;
     display: flex; 
     justify-content: space-between;
 }
@@ -131,13 +104,17 @@ div {
     background-color: rgba(255, 255, 0, 0.24);
 }
 
+#genes-and-carries {
+    max-width: 250px;
+}
+
 #genestring {
     background-color:rgba(240, 87, 146, 0.363);
-    padding: 2%
+    padding: 2%;
+    overflow: scroll;
 }
 
 .info-right {
-    align-self: flex-start;
     padding-right: 5%
 }
 
@@ -147,7 +124,6 @@ div {
 
 #physicaltraits {
     outline: 1px solid rgb(102, 75, 75);
-    padding: 2%;
 }
 
 #genetest-and-bbcode-buttons {
@@ -165,22 +141,12 @@ div {
     outline: 1px solid aqua;
     display: flex;
     flex-direction: column;
-    min-width: 20%;
 }
 
 #held-trinket-section {
     outline: 1px solid rgb(204, 95, 207);
     padding: 2%;
     display: flex;
-    flex-direction: row;
-}
-
-#trinket-image {
-    align-self: flex-start
-}
-
-#trinket-info {
-    align-self: flex-start;
 }
 
 #personality-stats {
@@ -189,11 +155,8 @@ div {
 
 .cat-personality-stats {
     display: flex;
-    align-items: center;
-    border-radius: 3%;
-    
+    align-items: center;    
 }
-
 
 #personality-stats {
     padding: 5%;
@@ -203,7 +166,6 @@ div {
     background-color: rgba(255, 36, 36, 0.432);
     width: 100%;
     margin-left: 5%;
-    position: relative;
 }
 
 .bar-value {
@@ -220,34 +182,26 @@ div {
 .personality-label {
     width: 40%;
     text-align: right;
-
 }
 
 #attribute-stats {
     outline: 1px solid rgb(253, 210, 255);
-    padding: 2%;
 }
 
 .attribute-box-container {
     background-color: rgb(143, 121, 206);
-    display: flex;
-    flex-direction: row;
 }
 
 .attribute-box {
     width:23%;
     background-color:rgb(156, 78, 78);
-    margin-bottom: 3%;
     text-align: center;
     display: inline-block;
     border-radius: 5%;
-    padding: 1%;
 }
 
 .attribute-title {
     background-color:rgba(85, 85, 117, 0.589);
-    margin: 0px;
-    padding: 3%;
 }
 
 .attribute-values {
@@ -257,19 +211,22 @@ div {
 
 .attribute-smaller-numbers {
     font-size: 130%;
-    padding: 5%;
     outline: 1px solid black
 }
 
 .attribute-desc {
-    margin-top: 5%;
     font-size: 80%;
     background-color:rgba(89, 114, 78, 0.575);
-    padding: 2%;
+}
+
+.diemodifiersection {
+    display: flex; 
+    justify-content: space-between;
 }
 
 #col3 {
-    display: flexbox;
+    display: flex;
+    flex-direction: column;
     border-radius: 3%;
     padding: .5%;
     outline: 1px solid black;
@@ -293,14 +250,16 @@ div {
     margin-left: -20px;
     list-style: circle;
 }
+
 #col4 {
     background-color: rgba(143, 37, 37, 0.616);
+    display: flex;
+    flex-direction: column;
     padding: .5%
 }
 
 #col4-subcol {
     display: flex;
-    align-items: flex-start;
     padding: 1%;
     background-color:rgba(33, 23, 170, 0.651);
 }
