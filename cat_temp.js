@@ -5,7 +5,8 @@ function loadStoredCat() {
     console.log(thisCat)
 
     if (thisCat) {
-        changeInnerHTML("cat-id", "#" + thisCat.id + "<a href = 'https://www.pixelcatsend.com/cat&id=" + thisCat.id +"'><img class = 'toPCE scaleUpImage' src = 'assets/toPCE.png'></a>")
+        // this is broken currently! it adds an extra link to PCE instead of editing the current one. just fix that
+        //changeInnerHTML("cat-id", "#" + thisCat.id + "<a href = 'https://www.pixelcatsend.com/cat&id=" + thisCat.id +"'><img class = 'toPCE scaleUpImage' src = 'assets/toPCE.png'></a>")
         changeInnerText("cat-name", thisCat.name)
         changeInnerText("cat-pronouns", thisCat.pronouns.primary + "/" + thisCat.pronouns.secondary)
         changeWind(thisCat.wind)

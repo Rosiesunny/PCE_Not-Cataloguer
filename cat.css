@@ -4,26 +4,38 @@ div {
     color: white;
 }
 
+.flex {
+    display: flex;
+}
+
+.column {
+    flex-direction: column;
+}
+
+.center {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
 #container {
     border-radius: 5%;
     padding: 1.5%;
     background-color:rgb(46, 46, 49);
     outline: rgb(51, 40, 216) 1px solid;
-    display: flex;
  }
 
 #col1 {
     outline: red 1px solid;
-    display: flex;
-    flex-direction: column;
 }
 
-#icon-and-id {
-    display: flex;
+#cat-id {
+    background-color: red;
 }
 
-.toPCE {
-    margin-left: 5%;
+#cat-pce-link {
+    align-self: center;
+    margin-left: 30px;
 }
 
 .scaleUpImage {
@@ -32,42 +44,29 @@ div {
     -o-transform: scale(2);
     -webkit-transform: scale(2);
     transform: scale(2);
-    margin-left: 20px;
 }
 
 #logo {
     max-width: 90px;
-    margin-right: 50px;
+    margin-right: 30px;
 }
 
 #cat-id {
     font-size: 230%;
 }
 
-#col1-subcol {
-    display: flex;
-    background-color:rgba(33, 23, 170, 0.651);
-}
-
 #col1-subcol1 {
-    display: flex;
-    flex-direction: column;
     background-color: purple;
-    border-radius: 3%;
-    padding: 2%;
-}
-
-#col1-subcol2 {
-    display: flex;
-    flex-direction: column;
-    background-color: rgb(221, 65, 221);
     border-radius: 3%;
     padding: 2%;
     min-width: 250px;
 }
 
-#cat-name-image-pronouns {
-    text-align: center;
+#col1-subcol2 {
+    background-color: rgb(221, 65, 221);
+    border-radius: 3%;
+    padding: 2%;
+    min-width: 250px;
 }
 
 #cat-name {
@@ -78,52 +77,24 @@ div {
     font-size: 120%;
 }
 
+/* fix this later ig it just squishes the symbols*/ 
 .symbols {
-    padding-right: 3%;
-    display: flex;
+    margin-right: 3%;
+    display: inline-block;
     align-self: center;
+    width: 20px;
+    height: 20px;
 }
 
-.data-point {
-    display: flex;
-    background-color: rgba(173, 233, 183, 0.486);
-}
-
-.sub-data-container {
-    display: flex;
-}
-
+/* hmm consider if I wanna fix this to be more general classes */
 .data-container {
     outline: 1px solid rgb(106, 247, 240);
     display: flex; 
     justify-content: space-between;
 }
 
-.demographics-label {
-    display: flex;
-    background-color: rgba(255, 255, 0, 0.24);
-}
-
-#genes-and-carries {
-    max-width: 250px;
-}
-
-#genestring {
-    background-color:rgba(240, 87, 146, 0.363);
-    padding: 2%;
-    overflow: scroll;
-}
-
 .info-right {
     padding-right: 5%
-}
-
-.physical-traits-label {
-    display: flex;
-}
-
-#physicaltraits {
-    outline: 1px solid rgb(102, 75, 75);
 }
 
 #genetest-and-bbcode-buttons {
@@ -135,31 +106,25 @@ div {
     display: flex;
     padding: 5%;
     margin-top: 3%;
+    background-color:rgb(95, 206, 73);
 }
 
 #col2 {
     outline: 1px solid aqua;
-    display: flex;
-    flex-direction: column;
 }
 
 #held-trinket-section {
     outline: 1px solid rgb(204, 95, 207);
     padding: 2%;
-    display: flex;
+}
+
+#trinket-image {
+    max-width: 75px;
+    max-height: 75px;
 }
 
 #personality-stats {
     background-color:rgba(101, 96, 172, 0.726);
-}
-
-.cat-personality-stats {
-    display: flex;
-    align-items: center;    
-}
-
-#personality-stats {
-    padding: 5%;
 }
 
 .personality-bars {

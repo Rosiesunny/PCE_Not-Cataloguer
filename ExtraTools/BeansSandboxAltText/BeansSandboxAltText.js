@@ -78,12 +78,16 @@ function parseCats(beansArray) {
 
         let whitelevel 
         let whitetype
+        let eyecolor
         // if cat is albino, we gotta redo our whitemarkings check via the eye color
         if (whitemarkings.includes("albino")) {
-            let eyecolors = ["red", "violet", "blue", "green", "gold", "cool odd"]
-            let eyecolor = beansArray[i].split(" eyes")[0].split("white markings")[1].split(" ")
+            let eyecolors = ["pale red", "pale violet", "pale blue", "pale green", "pale gold", "cool odd"]
+            eyecolor = beansArray[i].split(" eyes")[0].split("white markings")[1]
+            console.log(eyecolor)
+
             for (let i = 0; i < eyecolors.length; i++) {
                 if (eyecolor.includes(eyecolors[i])) {
+                    eyecolor = eyecolors[i]
                     whitetype = whitetypelist[i]
                     whitelevel = 10
                     whitemarkings = "albino"
@@ -128,7 +132,7 @@ function parseCats(beansArray) {
         else {
             accentcolor = "hidden"
         }
-        dataArray[i] = [fur, color, colortype, pattern, whitemarkings, whitelevel, whitetype, accentcolor]
+        dataArray[i] = [fur, color, colortype, pattern, whitemarkings, whitelevel, whitetype, accentcolor, eyecolor]
         
     }
 
@@ -289,8 +293,12 @@ function displayFindings(htmlArray, dataArray) {
         if (accentcolor == "hidden") {
             accentcolor = "-hidden-"
         }
-        console.log(color)
-        makeCatImage(furlength, color, colortype, whitelevel, whitetype, pattern, accentcolor, "neutral", "Dark Brown", "standing", "Adult", species, tableentry)
+        let eyecolor = "Dark Brown"
+        if (dataArray[i][8]) {
+            eyecolor = capitalizeFirstLetters(dataArray[i][8])
+            console.log(eyecolor)
+        }
+        makeCatImage(furlength, color, colortype, whitelevel, whitetype, pattern, accentcolor, "neutral", eyecolor, "standing", "Adult", species, tableentry)
         let tempdiv = document.createElement("div")
         tempdiv.classList.add("traitslist")
         tempdiv.innerHTML = htmlArray[i]
@@ -301,6 +309,13 @@ function displayFindings(htmlArray, dataArray) {
 // https://stackoverflow.com/questions/1026069/how-do-i-make-the-first-letter-of-a-string-uppercase-in-javascript
 function capitalizeFirstLetter(val) {
     return String(val).charAt(0).toUpperCase() + String(val).slice(1);
+}
+
+function capitalizeFirstLetters(val) {
+    let temp = val.split(" ")
+    let temp1 = capitalizeFirstLetter(temp[0])
+    let temp2 = capitalizeFirstLetter(temp[1])
+    return temp1 + " " + temp2
 }
 
 
