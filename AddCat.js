@@ -985,12 +985,32 @@ function detectGeneStringInBiography(biography, genes) {
     let genesRegEx = /\[ ?(.) ?\] ?\[ ?(.)(.) ?\] ?\[ ?(.)(.) ?\] ?\[ ?(.)(.)(.)(.)(.) ?\] ?\[ ?(.)(.)(.)(.) ?\] ?\[ ?(.)(.)([0-9]+|\?)(.) ?\] ?\[ ?(.)(.) ?\] ?\[ ?(.)(.) ?\]/gm
     let match = genesRegEx.exec(biography)
     if (match) {
-        console.log(match)
-        console.log(genes)
         match.shift()
-        return match
+        let newarray = []
+        for (let i = 0; i < match.length; i++) {
+            newarray[i] = match[i]
+        }
+        return newarray
     }
     else {
-        return genes
+        // check if the person is writing the white type wrong (C4 instead of 4C for example) and still accept that but fix the data
+        let genesRegEx2 = /\[ ?(.) ?\] ?\[ ?(.)(.) ?\] ?\[ ?(.)(.) ?\] ?\[ ?(.)(.)(.)(.)(.) ?\] ?\[ ?(.)(.)(.)(.) ?\] ?\[ ?(.)(.)(.)([0-9]+|\?) ?\] ?\[ ?(.)(.) ?\] ?\[ ?(.)(.) ?\]/gm
+        let match2 = genesRegEx2.exec(biography)
+        if (match2) {
+            match2.shift()
+            let newarray = []
+            for (let i = 0; i < match2.length; i++) {
+                newarray[i] = match2[i]
+            }
+            let whitelevel = newarray[17]
+            let whitetype = newarray[16]
+            // fixing incorrect gene code
+            newarray[16] = whitelevel
+            newarray[17] = whitetype
+            return newarray
+        }
+        else {
+            return genes
+        }
     }
 }

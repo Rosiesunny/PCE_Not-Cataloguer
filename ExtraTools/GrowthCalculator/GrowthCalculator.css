@@ -1,0 +1,21 @@
+body {
+    background-color:rgb(17, 17, 17);
+    color:rgb(255, 237, 243)
+}
+
+#container {
+    background-color:rgb(238, 93, 141);
+    display: flex;
+    border-radius: 5%;
+}
+
+#col1 {
+    background-color:rgb(155, 60, 60);
+    padding: 1%;
+    border-radius: 5%;
+}
+
+.kitten-weights {
+    display: flex;
+    justify-content: space-between;
+}

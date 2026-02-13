@@ -1,0 +1,69 @@
+<!-- Comments look like this -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href = "GrowthCalculator/GrowthCalculator.css">
+        <link rel="icon" href ="../favicon.ico">
+        <link rel="stylesheet" href = "../PCE_Catjail_Default.css">
+
+        
+    </head>
+    <body>
+        <a href = "../index.html"><img src="../assets/pce_not-cataloguer_logo.png" style = "width: 5%"></a>
+        <script src="GrowthCalculator/GrowthCalculator.js"></script>
+        <script src="../CatImageGenerator.js"></script>
+        <div id = "container">
+            <div id = "col1">
+                <h2>Non-adult Cat Info:</h2>
+                <h3>Weights at different ages: </h3>
+                <div id = "bean-weight" class = "kitten-weights">
+                    <p class = "kitten-weights-label">Bean:</p><input type = "text" id = "beanweight"></input>
+                </div>
+                <div id = "youngkitten-weight" class = "kitten-weights">
+                    <p class = "kitten-weights-label">Young Kitten:</p><input type = "text" id = "youngkittenweight"></input>
+                </div>
+                <div id = "kitten-weight" class = "kitten-weights">
+                    <p class = "kitten-weights-label">Kitten:</p><input type = "text" id = "kittenweight"></input>
+                </div>
+                <div id = "adolescent-weight" class = "kitten-weights">
+                    <p class = "kitten-weights-label">Bean:</p><input type = "text" id = "adolescentweight"></input>
+                </div>
+                <h2>Biological Parent Info (if applicable): </h2>
+                <div style = "display: flex;">
+                    <div id = "parent1">
+                        <h4>Parent 1: </h4>
+                        <h5>Weight: </h5>
+                        <input type = "text" id = "parent-weight-1"></input>
+                        <h5>Wind: </h5>
+                        <input type = "text" id = "parent-wind-1"></input>
+                        <h5>Growth Genes: </h5>
+                        <input type = "text" id = "parent-genes-1"></input>
+                    </div>
+                    <div id = "parent2">
+                        <h4>Parent 2: </h4>
+                        <h5>Weight: </h5>
+                        <input type = "text" id = "parent-weight-2"></input>
+                        <h5>Wind: </h5>
+                        <input type = "text" id = "parent-wind-2"></input>
+                        <h5>Growth Genes: </h5>
+                        <input type = "text" id = "parent-genes-2"></input>
+                    </div>
+                </div>
+                <button onclick = "submitInfo()">Submit</button>
+            </div>
+            <div id = "col2">
+                <div>
+                    <p>Possible Growth Patterns:</p>
+                    <p>ALL OF EM</p>
+                </div>
+                <div>
+                    <p id = "display">
+                        wawa
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+    
+    </body>
+</html>
