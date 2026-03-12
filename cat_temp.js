@@ -7,7 +7,9 @@ function loadStoredCat() {
     if (thisCat) {
         // this is broken currently! it adds an extra link to PCE instead of editing the current one. just fix that
         //changeInnerHTML("cat-id", "#" + thisCat.id + "<a href = 'https://www.pixelcatsend.com/cat&id=" + thisCat.id +"'><img class = 'toPCE scaleUpImage' src = 'assets/toPCE.png'></a>")
+        changeId(thisCat.id)
         changeInnerText("cat-name", thisCat.name)
+        makeCatImage(thisCat.fur.length, thisCat.fur.color, thisCat.fur.type, thisCat.white.level, thisCat.white.type, thisCat.pattern, thisCat.accentColor, thisCat.eyes.eyes, thisCat.eyes.color, thisCat.pose, thisCat.age, thisCat.species, document.getElementById("catjail-container"))
         changeInnerText("cat-pronouns", thisCat.pronouns.primary + "/" + thisCat.pronouns.secondary)
         changeWind(thisCat.wind)
         changePersonality(thisCat.personality.type)
@@ -21,7 +23,15 @@ function loadStoredCat() {
         changeAge(thisCat.birthday, thisCat.age)
         changeInnerText("cat-origin", thisCat.origin)
         changeInnerText("cat-species", thisCat.species)
-        changeInnerText("cat-size", thisCat.size.lbs + " lbs. / " + thisCat.size.kg + " kg")
+        if (thisCat.size) {
+            changeInnerText("cat-size", thisCat.size.lbs + " lbs. / " + thisCat.size.kg + " kg")
+            let sizediv = document.getElementById("cat-size").parentNode
+            sizediv.classList.remove("hidden")
+        }
+        else {
+            let sizediv = document.getElementById("cat-size").parentNode
+            sizediv.classList.add("hidden")
+        }
         changeInnerText("cat-fur-length", thisCat.fur.length)
         changeInnerText("cat-color", thisCat.fur.color + " " + thisCat.fur.type)
         changeInnerText("cat-pattern", thisCat.pattern)
@@ -29,28 +39,36 @@ function loadStoredCat() {
         changeCatWhite(thisCat.white)
         changeInnerText("cat-eye-color", thisCat.eyes.color)
         if (thisCat.trinket || thisCat.personality.Bravery || thisCat.stats) {
-            if (thisCat.trinket) {
-                changeHeldTrinket(thisCat.trinket)
-            }
-            if (thisCat.personality.Bravery) {
-                changePersonalityStats(thisCat.personality)
-            }
-            if (thisCat.stats) {
-                changeAttributeStats(thisCat.stats) 
+            changeHeldTrinket(thisCat.trinket)
+            changePersonalityStats(thisCat.personality)
+            changeAttributeStats(thisCat.stats) 
                 // add in something here to check if stats are accurate to current age
                 // or if the cat has aged up since they were added
-
-            }
         }
         else {
             hideColumn("col2")
         }
         if (thisCat.job || thisCat.jobs || thisCat.class || thisCat.classes || thisCat.clothes) {
-            console.log("WEEWOOO")
+            changeInnerText("cat-day-job", thisCat.job)
+            changeJobClassList("cat-job-list", thisCat.jobs)
+            changeInnerText("cat-adventuring-class", thisCat.class)
+            changeJobClassList("cat-adventuring-class-list", thisCat.classes)
+            changeWearing(thisCat.clothes)
         }
         else {
             hideColumn("col3")
         }
+        changeRelations("cat-friends-list", thisCat.friends)
+        changeRelations("cat-family-list", thisCat.family)
+        if (thisCat.biography) {
+            changeInnerText("cat-biography", thisCat.biography)
+        }
+        else {
+            changeInnerText("cat-biography", "Not Stored")
+        }
+        changeBBCodeButtonFunction(genestringtext, thisCat.wind)
+
+
         
         
         
@@ -61,6 +79,15 @@ function loadStoredCat() {
 
     }
 
+}
+
+function changeBBCodeButtonFunction(genes, wind) {
+    let thisDiv = document.getElementById("bbcode-button")
+    let functionstring = function() {console.log("PEES")
+        generateBBCodeGeneString(genes, 'bbcodebox', wind)
+    }
+    console.log(functionstring)
+    thisDiv.onclick = functionstring
 }
 
 function changeInnerText(div_id, value) {
@@ -73,9 +100,21 @@ function changeInnerHTML(div_id, value) {
     div.innerHTML = value
 }
 
+function changeId(id) {
+    let div = document.getElementById("cat-id")
+    div.innerText = "#" + id
+    let catpagelink = "https://www.pixelcatsend.com/cat&id=" + id
+    let link = document.createElement("a")
+    link.id = "cat-pce-link"
+    link.href = catpagelink
+    link.innerHTML = "<img class = 'toPCE scaleUpImage' src = 'assets/toPCE.png'>"
+    div.parentElement.appendChild(link)
+
+}
+
 function changeWind(wind) {
     let symbol = document.getElementById("cat-wind-symbol")
-    symbol.src = "assets/PCE_Assets/Symbols/Wind/wind_" + wind.toLowerCase() + ".png"
+    symbol.style.backgroundImage = "url('assets/PCE_Assets/Symbols/Wind/wind_" + wind.toLowerCase() + ".png')"
     let div = document.getElementById("cat-wind")
     div.innerText = wind
 }
@@ -86,7 +125,7 @@ function changePersonality(personality) {
         personalityfile = "None"
     }
     let symbol = document.getElementById("cat-personality-symbol")
-    symbol.src = "assets/PCE_Assets/Symbols/Personality/person_" + personalityfile.toLowerCase() + ".png"
+    symbol.style.backgroundImage = "url('assets/PCE_Assets/Symbols/Personality/person_" + personalityfile.toLowerCase() + ".png')"
     let div = document.getElementById("cat-personality")
     div.innerText = personality
 }
@@ -97,7 +136,7 @@ function changeAspect(aspect) {
         aspectfile = "None"
     }
     let symbol = document.getElementById("cat-aspect-symbol")
-    symbol.src = "assets/PCE_Assets/Symbols/Aspect/aspect_" + aspectfile.toLowerCase() + ".png"
+    symbol.style.backgroundImage = "url('assets/PCE_Assets/Symbols/Aspect/aspect_" + aspectfile.toLowerCase() + ".png')"
     let div = document.getElementById("cat-aspect")
     div.innerText = aspect
 }
@@ -126,12 +165,14 @@ function changeCatWhite(white) {
 
 function changeHeldTrinket(trinket) {
     if (trinket) {
-        // ADD IN TRINKET IMAGE HANDLING EVENTUALLY 
         if (trinket.name == "None") {
             document.getElementById("cat-trinket-name").innerText = trinket.name
             document.getElementById("cat-trinket-stats").innerText = ""
         }
         else {
+            let trinketimageurl = "assets/PCE_Assets/Trinkets/" + trinketsList[trinket.name] + ".png"
+            let trinketimgdiv = document.getElementById("trinket-image")
+            trinketimgdiv.src = trinketimageurl
             document.getElementById("cat-trinket-name").innerText = trinket.name
             let plusorminus = ""
             if (trinket.mod >= 0) {
@@ -143,7 +184,8 @@ function changeHeldTrinket(trinket) {
         
     }
     else {
-        document.getElementById("held-trinket-section").classList.add("hidden")
+        document.getElementById("cat-trinket-name").innerText = "Not Stored"
+        document.getElementById("cat-trinket-stats").innerText = ""
     }
 }
 
@@ -339,6 +381,19 @@ function changeAttributeStats(stats) {
 
 }
 
+function toggleBirthday() {
+    let birthdaydivs = document.querySelectorAll(".catbirthdays")
+    for (let i = 0; i < birthdaydivs.length; i++) {
+        if (birthdaydivs[i].classList.contains("hidden")) {
+            birthdaydivs[i].classList.remove("hidden")
+        }
+        else {
+            birthdaydivs[i].classList.add("hidden")
+        }
+    }
+
+}
+
 function changeAge(birthday, age) {
     // Spring 1 Year 1
     // September 1, 2019 EST in UTC for standardization
@@ -409,4 +464,132 @@ function convertMiliseconds(miliseconds, format) {
 function hideColumn(column_id) {
     let column = document.getElementById(column_id)
     column.style.display = "none"
+}
+
+function changeJobClassList(id, list) {
+    if (typeof list !== "undefined") {
+        let hidediv = document.getElementById(id).parentNode
+        hidediv.classList.remove("hidden")
+        let listhtml = "<ul class = 'bulletlists'>"
+        for (let job in list) {
+            let thisjob = eval("list." + job)
+            let tempstring = job + " Level " + thisjob.level 
+            if (Object.hasOwn(thisjob, "exp")) {
+                if (thisjob.level == 0 || thisjob.level == 1) {
+                    if (thisjob.exp !== 0) {
+                        tempstring += addJobClassExp(thisjob)
+                        listhtml += "<li>" + tempstring + "</li>"
+                    }
+                }
+                else {
+                    tempstring += addJobClassExp(thisjob)
+                    listhtml += "<li>" + tempstring + "</li>"
+                }
+            }
+            else {
+                if (thisjob.level !== 0) {
+                    listhtml += "<li>" + tempstring + "</li>"
+                }
+            }
+        }
+        listhtml += "</ul>"
+        if (listhtml == "<ul class = 'bulletlists'></ul>") {
+            listhtml = "<ul class = 'bulletlists'>None Leveled</ul>"
+        }
+        let listdiv = document.getElementById(id)
+        listdiv.innerHTML = listhtml
+    }
+    else {
+        let listdiv = document.getElementById(id)
+        listdiv.innerHTML = "<ul class = 'bulletlists'>Not Stored</ul>"
+    }
+}
+
+function addJobClassExp(thisjob) {
+    let tempstring = ""
+    if (thisjob.exp === "Maximum Level") {
+        tempstring += " [Maximim Level]"
+    }
+    else {
+        // in init_village.js -  
+        // const jobEXPDict = {
+            //1: 140,
+            //2: 280,
+            //3: 560,
+            //4: 1120,
+        //}
+        for (let number in jobEXPDict) {
+            if (thisjob.level == number) {
+                let maxexp = eval("jobEXPDict[" + number + "]")
+                tempstring += " [" + thisjob.exp + "/" + maxexp + " EXP]"
+            }
+        }
+    }
+    return tempstring
+}
+
+function changeWearing(clothes) {
+    if (clothes) {
+        let wearing = clothes.wearing
+        let listhtml =  "<ul class = 'bulletlists'>"
+        for (let i = 0; i < wearing.length; i++) {
+            let itemstring = wearing[i].name + " #" + wearing[i].id
+            if (wearing[i].creator) {
+                itemstring += " by " + wearing[i].creator
+            }
+            listhtml += "<li>" + itemstring + "</li>"
+        }
+        listhtml += "</ul>"
+        if (listhtml == "<ul class = 'bulletlists'></ul>") {
+            let listdiv = document.getElementById("cat-wearing-list")
+            listdiv.innerHTML = "<ul class = 'bulletlists'>None</ul>"
+        }
+        else {
+            let listdiv = document.getElementById("cat-wearing-list")
+            listdiv.innerHTML = listhtml
+        }
+    }
+    else {
+        let listdiv = document.getElementById("cat-wearing-list")
+        listdiv.innerHTML = "<ul class = 'bulletlists'>Not Stored</ul>"
+    }
+}
+
+function changeRelations(id, relations) {
+    if (relations) {
+        let listhtml = "<ul class = 'bulletlists'>"
+        if (relations.length > 0) {
+            for (let i = 0; i < relations.length; i++) {
+                let thisCat = relations[i]
+                let relationhtml = "<li>"
+                if (thisCat.id) {
+                    let pcelink = "https://www.pixelcatsend.com/cat&id=" + thisCat.id
+                    let imghtml = "<a href = '" + pcelink + "'><img src='assets/toPCE.png'></a>"
+                    if (village.cats[thisCat.id]) {
+                        relationhtml += "<a href = 'cat.html?" + thisCat.id + "'>" + thisCat.name + "</a> - " + thisCat.relationship + " " + imghtml
+                    }
+                    else {
+                        relationhtml += thisCat.name + " - " + thisCat.relationship + " " + imghtml
+                    }
+                }
+                else {
+                    relationhtml += thisCat.name + " - " + thisCat.relationship
+                }
+                relationhtml += "</li>"
+                listhtml += relationhtml
+            }
+        }
+        else {
+            listhtml += "None"
+        }
+        
+        listhtml += "</ul>"
+        let listdiv = document.getElementById(id)
+        listdiv.innerHTML = listhtml
+    }
+    else {
+        listhtml += "<ul class = 'bulletlists'>Not Stored</ul>"
+        let listdiv = document.getElementById(id)
+        listdiv.innerHTML = listhtml
+    }
 }

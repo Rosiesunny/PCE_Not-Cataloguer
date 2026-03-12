@@ -95,16 +95,18 @@ function parseCatAltTextMultiple(text) {
 // Does the same as parseCatAltText but only returns the cat object with pose and expression
 // used for individual cat pages where the rest of the info is extracted from the cat page more cleanly than from the alt text
 function parseCatOwnerPoseEyesNameLocationPersonality(text) {
-    const catAltTextRegEx = /(?:(.+)'s Village: Profile » Scenery » Cats » Collections)?\n?\n?(This not-cat is a resident of Gardenhome City.|This not-cat is a resident of Crescent Pier.|Note: This not-cat is currently out traveling the world!)?\n?\n?‹?\n?›?\n?(playing|standing|sleeping|upsidedown|sitting) (Not-cat|Mercat) (adult|kitten|bean) with a (black|choco|brown|tan|charc|grey|smoke|silver|red|ginger|orange|aprico|buff|cream|almond|beige|snow|albino) (solid|mackerel|classic|broken|lynxpoint|clouded|rosette|cloudpoint|spotted|mink|colorpoint|ticked|ripple|agouti|karpati|freckle)? ?(shorthair|longhair) coat ?(?:and )?(black|choco|brown|tan|charc|grey|smoke|silver|red|ginger|orange|aprico|buff|cream|almond|beige|snow)? ?(solid|mackerel|classic|broken|lynxpoint|clouded|rosette|cloudpoint|spotted|mink|colorpoint|ticked|ripple|agouti|karpati|freckle)? ?(?:trade markings)?(ruby|violet|amber|pink|blue|green|indigo|gold|teal|black)? ?(solid|mackerel|classic|broken|lynxpoint|clouded|rosette|cloudpoint|spotted|mink|colorpoint|ticked|ripple|agouti|karpati|freckle)? ?(?:tail)?(.+) (dark brown|dark aqua|pale red|pale violet|pale blue|pale green|pale gold|cool odd) (neutral|squint|sleepy|uwu|content|danger|sad|stern|right|left|wink|happy|pensive|ough|sparkle|wimdy|whoa|zoinks|sneer|cute) eyes\.(?:.+)?\n?(.+)\n(?:(.+) (?:Wind)? \[(.+)\])?\n?(?:(.+) Personality)?\n?(?:(.+) Aspect)?/gm
+    
+    const catAltTextRegEx = /(?:(.+)'s Village: Profile » Scenery » Cats \[(.+)\] » Collections)?\n?\n?(This not-cat is a resident of Gardenhome City.|This not-cat is a resident of Crescent Pier.|Note: This not-cat is currently out traveling the world!)?\n?\n?‹?\n?›?\n?(playing|standing|sleeping|upsidedown|sitting) (Not-cat|Mercat) (adult|kitten|bean) with a (black|choco|brown|tan|charc|grey|smoke|silver|red|ginger|orange|aprico|buff|cream|almond|beige|snow|albino) (solid|mackerel|classic|broken|lynxpoint|clouded|rosette|cloudpoint|spotted|mink|colorpoint|ticked|ripple|agouti|karpati|freckle)? ?(shorthair|longhair) coat ?(?:and )?(black|choco|brown|tan|charc|grey|smoke|silver|red|ginger|orange|aprico|buff|cream|almond|beige|snow)? ?(solid|mackerel|classic|broken|lynxpoint|clouded|rosette|cloudpoint|spotted|mink|colorpoint|ticked|ripple|agouti|karpati|freckle)? ?(?:trade markings)?(ruby|violet|amber|pink|blue|green|indigo|gold|teal|black)? ?(solid|mackerel|classic|broken|lynxpoint|clouded|rosette|cloudpoint|spotted|mink|colorpoint|ticked|ripple|agouti|karpati|freckle)? ?(?:tail)?(.+) (dark brown|dark aqua|pale red|pale violet|pale blue|pale green|pale gold|cool odd) (neutral|squint|sleepy|uwu|content|danger|sad|stern|right|left|wink|happy|pensive|ough|sparkle|wimdy|whoa|zoinks|sneer|cute) eyes\.(?:.+)?\n?(.+)\n(?:(.+) (?:Wind)? \[(.+)\])?\n?(?:(.+) Personality)?\n?(?:(.+) Aspect)?/gm
     let match = catAltTextRegEx.exec(text)
     let cat = {
         owner: match[1],
-        location: match[2],
-        pose: match[3],
-        eyes: match[15],
-        name: match[16],
+        tab: match[2],
+        location: match[3],
+        pose: match[4],
+        eyes: match[16],
+        name: match[17],
         personality: {
-            type: match[19]
+            type: match[20]
         }
     }
     if (typeof cat.location !== "undefined") {
@@ -122,6 +124,9 @@ function parseCatOwnerPoseEyesNameLocationPersonality(text) {
     }
     else {
         cat.location = "Active"
+    }
+    if (!cat.tab) {
+        delete cat.tab
     }
     return cat
 }
@@ -355,6 +360,7 @@ function parseWearing(text) {
 }
 
 function adjustStats(attributesandmayorboosts, personalityandtrinket) {
+    console.log(attributesandmayorboosts)
     // https://www.geeksforgeeks.org/how-to-use-dynamic-variable-names-in-javascript/
     const persoStatsArray = ["Bravery", "Benevolence", "Energy", "Extroversion", "Dedication"]
     const statsArray = ["Strength", "Agility", "Health", "Finesse", "Cleverness", "Perception", "Luck"]
@@ -372,7 +378,16 @@ function adjustStats(attributesandmayorboosts, personalityandtrinket) {
     for (let i = 0; i < statsArray.length; i++) {
         eval("cat.stats." + statsArray[i] + "-= cat.mayorboosts." + statsArray[i])
     }
+    if (personalityandtrinket) {
+        if (personalityandtrinket.trinket.stat !== "None") {
+            eval("cat.stats." + personalityandtrinket.trinket.stat + " -= " + personalityandtrinket.trinket.mod)
+        }
+        
+    }
+    
     delete cat.mayorboosts
+    console.log(personalityandtrinket)
+    console.log(cat)
     return cat
 }
 
@@ -508,9 +523,8 @@ function autoMatchFamilyFriends(relations, friendsorfamily, catid, name) {
                     if (typeof storedRelations !== "undefined") {
                         for (let k = 0; k < storedRelations.length; k++) {
                             if (name === storedRelations[k].name) {
-                                // double name match, they both have the same name on their friends lists. but let's check relationship still
-                                if (relations[i].relationship === storedRelations[k].relationship) {
-                                    // the relations match too, let's add the ids to both of them
+                                let relationmatch = checkRelationshipMatch(relations[i].relationship, storedRelations[k].relationship, friendsorfamily)
+                                if (relationmatch == true) {
                                     relations[i].id = Number(storedId)
                                     if (friendsorfamily == "friends") {
                                         village.cats[storedId].friends[k].id = catid
@@ -519,17 +533,100 @@ function autoMatchFamilyFriends(relations, friendsorfamily, catid, name) {
                                         village.cats[storedId].family[k].id = catid
                                     }
                                     myVillageArray.splice(j, 1) // delete cat from myVillageArray so it is skipped in future checks of friends/family
-                                    break
-                                }   
+                                    break                              
+                                }
                             }
                         }
                     }
-                    break
                 }
             }
         }
     }
 
+}
+
+function checkRelationshipMatch(relation1, relation2, friendsorfamily) {
+    let relationsMatchTerms
+    if (friendsorfamily == "friends") {
+        relationsMatchTerms = [
+            ["Friend"],
+            ["Rival"],
+            ["Partner"],
+            ["Best Friend"],
+            ["Partner in Crime"],
+            ["Best Nemesis"],
+            ["Battle Buddy"],
+            ["Sparring Partner"],
+            ["Mentor", "Fosterling"]
+        ]
+    }
+    if (friendsorfamily == "family") {
+        // close or mischevious modifier can happen on all of these
+        relationsMatchTerms = [
+            ["Parent", "Child"],
+            ["Not-Parent", "Not-Child"],
+            ["Littermate"],
+            ["Not-Littermate"],
+            ["Sibling"],
+            ["Not-Sibling"],
+            ["Grandparent", "Grandchild"],
+            ["Great Grandparent", "Great Grandchild"],
+            ["Great Great Grandparent", "Great Great Grandchild"],
+            ["Pibling", "Nibling"],
+            ["Good Pibling", "Good Nibling"],
+            ["Cousin"],
+            ["Not-Cousin"],
+            ["Good Cousin"]
+        ]
+        let modifiers = ["Close", "Mischievous"]
+        for (let i = 0; i < modifiers.length; i++) {
+            if (relation1.includes(modifiers[i])) {
+                if (relation2.includes(modifiers[i])) {
+                    relation1 = relation1.split(modifiers[i] + " ")[1]
+                    relation2 = relation2.split(modifiers[i] + " ")[1]
+                    break
+                }
+                else {
+                    // first relationship is close/mischief, and the second isn't, return false already, it can't be a match
+                    return false
+                }
+            }
+        }
+    }
+    for (let i = 0; i < relationsMatchTerms.length; i++) {
+        if (relationsMatchTerms[i].length > 1) {
+            if (relation1 == relationsMatchTerms[i][0]) {
+                if (relation2 == relationsMatchTerms[i][1]) {
+                    // MATCH
+                    return true
+                }
+                else {
+                    return false
+                }
+            }
+            if (relation1 == relationsMatchTerms[i][1]) {
+                if (relation2 == relationsMatchTerms[i][0]) {
+                    // MATCH
+                    return true
+                }
+                else {
+                    return false
+                }
+
+            }
+        }
+        else {
+            if (relation1 == relationsMatchTerms[i][0]) {
+                if (relation1 == relation2) {
+                    // MATCH
+                    return true
+                }
+                else {
+                    return false
+                }
+            }
+        }
+    }
 }
 
 function tempDisplay(cat) {

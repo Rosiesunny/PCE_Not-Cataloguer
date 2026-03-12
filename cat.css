@@ -27,6 +27,7 @@ div {
 
 #col1 {
     outline: red 1px solid;
+    max-width: 35%;
 }
 
 #cat-id {
@@ -60,6 +61,7 @@ div {
     border-radius: 3%;
     padding: 2%;
     min-width: 250px;
+    max-width: 50%;
 }
 
 #col1-subcol2 {
@@ -111,6 +113,8 @@ div {
 
 #col2 {
     outline: 1px solid aqua;
+    padding: .5%;
+    max-width: 23%;
 }
 
 #held-trinket-section {
@@ -121,6 +125,10 @@ div {
 #trinket-image {
     max-width: 75px;
     max-height: 75px;
+    overflow: hidden;
+    position: relative;
+    background-image: url('assets/PCE_Assets/Trinkets/watermark_item.png');
+    background-position: -75px;
 }
 
 #personality-stats {
@@ -149,39 +157,30 @@ div {
     text-align: right;
 }
 
-#attribute-stats {
-    outline: 1px solid rgb(253, 210, 255);
-}
-
-.attribute-box-container {
-    background-color: rgb(143, 121, 206);
-}
-
 .attribute-box {
     width:23%;
-    background-color:rgb(156, 78, 78);
     text-align: center;
     display: inline-block;
     border-radius: 5%;
+    margin-bottom: 5%;
 }
 
 .attribute-title {
-    background-color:rgba(85, 85, 117, 0.589);
+    background-color:rgba(0, 0, 0, 0.589);
 }
 
 .attribute-values {
     font-size: 220%;
-    background-color: rgba(62, 62, 128, 0.568);
+    background-color: rgba(0, 0, 0, 0.568);
 }
 
 .attribute-smaller-numbers {
     font-size: 130%;
-    outline: 1px solid black
 }
 
 .attribute-desc {
     font-size: 80%;
-    background-color:rgba(89, 114, 78, 0.575);
+    background-color:rgba(0, 0, 0, 0.575);
 }
 
 .diemodifiersection {
@@ -195,6 +194,7 @@ div {
     border-radius: 3%;
     padding: .5%;
     outline: 1px solid black;
+    min-width: 15%;
 } 
 
 .job-class-label {
@@ -220,7 +220,9 @@ div {
     background-color: rgba(143, 37, 37, 0.616);
     display: flex;
     flex-direction: column;
-    padding: .5%
+    padding: .5%;
+    min-width: 23%;
+    max-width: 30%;
 }
 
 #col4-subcol {
@@ -247,15 +249,57 @@ div {
     width: 50%;
 }
 
-#biography {
+#cat-biography {
     max-height: 200px;
+    background-color:rgba(5, 5, 5, 0.582);
     overflow: auto;
 }
 
+.sb-legendary {
+    background-color: #ff42fc1f;
+    outline: solid;
+    outline-color: #ff42fc70;
+}
 
+.sb-exceptional {
+    background-color: #5b2bdf1f;
+    outline: solid;
+    outline-color: #5b2bdf70;
+}
 
+.sb-excellent {
+    background-color: #2ea2fb1f;
+    outline: solid;
+    outline-color: #2ea2fb70;
+}
 
+.sb-verygood {
+    background-color: #49e3271f;
+    outline: solid;
+    outline-color: #49e32770;
+}
 
+.sb-good {
+    background-color: #ecdd351f;
+    outline: solid;
+    outline-color: #ecdd3570;
+}
+
+.sb-average {
+    background-color: #ff760a1f;
+    outline: solid;
+    outline-color: #ff760a70;
+}
+
+.sb-poor {
+    background-color: #ff32321f;
+    outline: solid;
+    outline-color: #ff323270;
+}
+
+.catbirthdays {
+    cursor: pointer;
+}
 
 
 
@@ -392,3 +436,4 @@ div {
     font-family:inherit;
     text-decoration:inherit
    }
+

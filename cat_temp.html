@@ -3,6 +3,8 @@
 <html lang="en">
     <head>
         <link rel="stylesheet" href = "cat.css"> 
+        <link rel="stylesheet" href = "PCE_Catjail_Default.css"> 
+        <link rel="stylesheet" href = "generateBBCodeGeneString.css"> 
         <link rel="icon" href ="favicon.ico">
     </head>
     <body onload = "loadStoredCat()"></body>
@@ -11,37 +13,38 @@
         <script src="generateBBCodeGeneString.js"></script>
         <script src="geneTestingButton.js"></script>
         <script src="cat_temp.js"></script>
+        <script src="trinketsList.js"></script>
         <script src="CatImageGenerator.js"></script>
 
         <div id = "container" class = "flex">
             <div id = "col1" class = "flex column">
                 <div id = "icon-and-id" class = "flex">
                     <a href = "index.html" id = "home-link"><img src = "assets/pce_not-cataloguer_logo.png" id = "logo" alt = "Home Button"></a>
-                    <p id = "cat-id">#1234567</p><img src = "assets/toPCE.png" id = "cat-pce-link" class = "scaleUpImage">
+                    <p id = "cat-id">#1234567</p>
                 </div>
                 <div id = "col1-subcol" class = "flex">
                     <div id = "col1-subcol1" class = "flex column">
                         <div id = "cat-name-image-pronouns" class = "center">
                             <p id = "cat-name">Name</p>
                             <div id = "catjail-container">
-                                <img src = "assets/Test_Cats/983.png">
+                                
                             </div>
                             <p id = "cat-pronouns">Pronouns</p>
                         </div>
                         <div id = "wind-personality-aspect-travelling">
                             <div class = "data-container"><p class = "flex">Wind: </p>
                                 <div class = "flex info-right">
-                                    <img src = "assets/PCE_Assets/Symbols/Wind/wind_north.png" id = "cat-wind-symbol" class = "symbols"><p id = "cat-wind" class = "flex">North</p>
+                                    <div id = "cat-wind-symbol" class = "symbols"></div><p id = "cat-wind" class = "flex">North</p>
                                 </div>
                             </div>
                             <div class = "data-container"><p class = "flex">Personality: </p>
                                 <div class = "flex info-right">
-                                    <img src = "assets/PCE_Assets/Symbols/Personality/person_adventurous.png" id = "cat-personality-symbol" class = "symbols"><p id = "cat-personality" class = "flex">Adventurous</p>
+                                    <div id = "cat-personality-symbol" class = "symbols"></div><p id = "cat-personality" class = "flex">Adventurous</p>
                                 </div>
                             </div>
                             <div class = "data-container"><p class = "flex">Aspect: </p>
                                 <div class = "flex info-right">
-                                    <img src = "assets/PCE_Assets/Symbols/Aspect/aspect_none.png" id = "cat-aspect-symbol" class = "symbols"><p id = "cat-aspect" class = "flex">Undiscovered</p>
+                                    <div id = "cat-aspect-symbol" class = "symbols"></div><p id = "cat-aspect" class = "flex">Undiscovered</p>
                                 </div>
                             </div>
                             <div class = "data-container"><p class = "flex">Location: </p>
@@ -69,10 +72,10 @@
                     </div>
                     <div id = "col1-subcol2" class = "flex column">
                         <div id = "birthday-age-origin">
-                            <div class = "data-container"><p class = "flex">Birthday (PCE): </p>
+                            <div class = "data-container catbirthdays" onclick = "toggleBirthday()"><p class = "flex">Birthday (PCE): </p>
                                 <p id = "cat-birthday" class = "info-right">Spring 1, Year 1</p>
                             </div>
-                            <div class = "data-container"><p class = "flex">Birthday (IRL): </p>
+                            <div class = "data-container catbirthdays hidden" onclick = "toggleBirthday()"><p class = "flex">Birthday (IRL): </p>
                                 <p id = "cat-birthday-irl" class = "info-right">December 23, 2019</p>
                             </div>
                             <div class = "data-container"><p class = "flex">Age: </p>
@@ -118,7 +121,7 @@
             <div id = "col2" class = "flex column">
                 <p>Held Trinket: </p> 
                 <div id = "held-trinket-section" class = "flex">
-                    <img src = "assets/PCE_Assets/Trinkets/acorn.png" id = "trinket-image">
+                    <img id = "trinket-image">
                     <div id = "trinket-info">
                         <p id = "cat-trinket-name">None</p>
                         <p id = "cat-trinket-stats"></p>
@@ -240,36 +243,36 @@
                 <p>Job List: </p>
                 <div class = "listbox" id = "cat-job-list">
                     <ul class = "bulletlists">
-                        <li>Gatherer Level 5 [Maximum Level]</li>
-                        <li>Miner Level 4 [450/1120 EXP]</li>
-                        <li>Fisher Level 3 [40/560 EXP]</li>
-                        <li>Bug Catcher Level 1 [10/140 EXP]</li>
-                        <li>Gardener Level 5 [Maximum Level]</li>
-                        <li>Herbalist Level 3 [300/560 EXP]</li>
-                        <li>Farmer Level 5 [Maximum Level]</li>
-                        <li>Flockherd Level 1 [10/140 EXP]</li>
-                        <li>Apothecary Level 2 [250/280 EXP]</li>
-                        <li>Clothier Level 1 [10/140 EXP]</li>
-                        <li>Scribe Level 1 [10/140 EXP]</li>
-                        <li>Artist Level 1 [10/140 EXP]</li>
-                        <li>Blacksmith Level 1 [20/140 EXP]</li>
-                        <li>Craftscat Level 1 [10/140 EXP]</li>
-                        <li>Builder Level 2 [90/280 EXP]</li>
-                        <li>Mason Level 1 [30/140 EXP]</li>
-                        <li>Baker Level 1 [10/140 EXP]</li>
+                        <li>Test Level 5 [Maximum Level]</li>
+                        <li>Test Level 4 [450/1120 EXP]</li>
+                        <li>Test Level 3 [40/560 EXP]</li>
+                        <li>Test Level 1 [10/140 EXP]</li>
+                        <li>Test Level 5 [Maximum Level]</li>
+                        <li>Test Level 3 [300/560 EXP]</li>
+                        <li>Test Level 5 [Maximum Level]</li>
+                        <li>Test Level 1 [10/140 EXP]</li>
+                        <li>Test Level 2 [250/280 EXP]</li>
+                        <li>Test Level 1 [10/140 EXP]</li>
+                        <li>Test Level 1 [10/140 EXP]</li>
+                        <li>Test Level 1 [10/140 EXP]</li>
+                        <li>Test Level 1 [20/140 EXP]</li>
+                        <li>Test Level 1 [10/140 EXP]</li>
+                        <li>Test Level 2 [90/280 EXP]</li>
+                        <li>Test Level 1 [30/140 EXP]</li>
+                        <li>Test Level 1 [10/140 EXP]</li>
                     </ul>
                 </div>
                 <div class = "data-container"><p class = "job-class-label">Adventuring Class: </p>
                     <p id = "cat-adventuring-class" class = "info-right">Fighter</p>
                 </div>
                 <p>Adventuring Class List: </p>
-                <div class = "listbox" id = "cat-job-list">
+                <div class = "listbox" id = "cat-adventuring-class-list">
                     <ul class = "bulletlists">
-                        <li>Fighter Level 3 [30/300 EXP]</li>
-                        <li>Ranger Level 4 [Maximum Level]</li>
-                        <li>Medic Level 2 [19/150 EXP]</li>
-                        <li>Scout Level 4 [Maximum Level]</li>
-                        <li>Bard Level 4 [Maximum Level]</li>
+                        <li>Test Level 3 [30/300 EXP]</li>
+                        <li>Test Level 4 [Maximum Level]</li>
+                        <li>Test Level 2 [19/150 EXP]</li>
+                        <li>Test Level 4 [Maximum Level]</li>
+                        <li>Test Level 4 [Maximum Level]</li>
                     </ul>
                 </div>
                 <p>Wearing: </p>
@@ -357,5 +360,6 @@
             </div>
             <a href = "catalogue.html"><img src = "assets/backarrow.png" alt = "Back Button" style = "padding-left: 0;"></a>
         </div>
+        <div id = "bbcodebox" class = "hidden"></div>
     </body>
 </html>

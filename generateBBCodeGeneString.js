@@ -506,7 +506,6 @@ function listHiddenRecessive(genestring, wind) {
                     // cat is full
                     j = 1
                 }
-                console.log(colorgenes)
                 let color1 = colorgenes[i1][2][j][Number(genestringArray[3][4])-1]
                 let color2 = colorgenes[i2][2][j][Number(genestringArray[3][4])-1]
                 if (color1 == color2) {
