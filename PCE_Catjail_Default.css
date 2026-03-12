@@ -22,7 +22,8 @@
     background-position:var(--cat-watermark) 0;
     overflow:hidden;
     position:relative;
-    margin:0 auto
+    margin:0 auto;
+    isolation: isolate;   /* isolates the z-indexes so the cats don't appear on top of popup containers < - if something breaks soon after 3/12/26 with cat previews this is probably it. I think it'll be fine but shrug*/ 
    }
    .catforum {
     width:100px;

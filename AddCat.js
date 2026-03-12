@@ -360,7 +360,6 @@ function parseWearing(text) {
 }
 
 function adjustStats(attributesandmayorboosts, personalityandtrinket) {
-    console.log(attributesandmayorboosts)
     // https://www.geeksforgeeks.org/how-to-use-dynamic-variable-names-in-javascript/
     const persoStatsArray = ["Bravery", "Benevolence", "Energy", "Extroversion", "Dedication"]
     const statsArray = ["Strength", "Agility", "Health", "Finesse", "Cleverness", "Perception", "Luck"]
@@ -377,17 +376,12 @@ function adjustStats(attributesandmayorboosts, personalityandtrinket) {
     }
     for (let i = 0; i < statsArray.length; i++) {
         eval("cat.stats." + statsArray[i] + "-= cat.mayorboosts." + statsArray[i])
-    }
-    if (personalityandtrinket) {
-        if (personalityandtrinket.trinket.stat !== "None") {
-            eval("cat.stats." + personalityandtrinket.trinket.stat + " -= " + personalityandtrinket.trinket.mod)
+        if (cat.trinket.stat == statsArray[i]) {
+            eval("cat.stats." + statsArray[i] + "-= " + cat.trinket.mod)
         }
-        
     }
     
     delete cat.mayorboosts
-    console.log(personalityandtrinket)
-    console.log(cat)
     return cat
 }
 
