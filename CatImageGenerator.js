@@ -44,6 +44,24 @@ function addImage(imgsrc, location, mainclass, otherclass, zindex) {
     catjaillocation.insertAdjacentElement("beforeend", catimage)
 }
 
+function addBlankCat(location) {
+    let catjailfound = location.querySelector(".catjail")
+    if (catjailfound) {
+        catjailfound.innerHTML = ""
+    }
+    if (!catjailfound) {
+        let catjaildiv = document.createElement("div")
+        catjaildiv.classList.add("catjail")
+        catjaildiv.style = "margin: auto;"
+        location.appendChild(catjaildiv)
+    }
+    let catjaillocation = location.querySelector(".catjail")
+    let catimage = document.createElement("img")
+    catimage.src = "assets/placeholdercat.png"
+    catjaillocation.insertAdjacentElement("beforeend", catimage)
+
+}
+
 function generateMainClass(pose, furlength, species, age) {
     let mainclass = ""
     if (species == "Not-cat") {

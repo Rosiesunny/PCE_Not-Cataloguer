@@ -2,46 +2,367 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <!-- <link rel="stylesheet" href = "cat.css"> -->
+        <link rel="stylesheet" href = "PCE_Catjail_Default.css"> 
+        <link rel="stylesheet" href = "cat.css"> 
+        <link rel="stylesheet" href = "generateBBCodeGeneString.css"> 
         <link rel="icon" href ="favicon.ico">
     </head>
-    <body>
+    <body onload = "loadStoredCat()"></body>
         <script src="init_village.js"></script>
         <script src="save_village.js"></script>
         <script src="generateBBCodeGeneString.js"></script>
         <script src="geneTestingButton.js"></script>
+        <script src="cat.js"></script>
+        <script src="trinketsList.js"></script>
+        <script src="CatImageGenerator.js"></script>
 
-        <div id = "container">
-            <a href = "index.html"><img src = "assets/pce_not-cataloguer_logo.png" id = "logo" alt = "Home Button" style = "padding-left: 0; max-width: 4%"></a>
-            <a href = "catalogue.html"><img src = "assets/backarrow.png" alt = "Back Button" style = "padding-left: 0; max-width: 4%"></a>
-            <div id = "contents">
-                <p id = "cat-name"></p>
-                <p id = "cat-id"></p>
-                <p id = "cat-wind"></p>
-                <p id = "cat-personality"></p>
-                <div id = "cat-data">
-                    <p id = "basic-data"></p>
-                    <p id = "appearance-data"></p>
-                    <p id = "gene-data"></p>
-                    <div id = "genetest-button-zone"></div>
-                    <div id = "bbcode-button-zone"></div>
-                    <div id = "bbcodebox" class = "hidebbcodebox"></div>
-                    <p id = "personality-data"></p>
-                    <p id = "trinket-data"></p>
-                    <p id = "job-data"></p>
-                    <p id = "class-data"></p>
-                    <p id = "attribute-data"></p>
-                    <p id = "friends-data"></p>
-                    <p id = "family-data"></p>
-                    <p id = "biography-data"></p>
-                    <p id = "clothes-data"></p>
-                    <p id = "location-data"></p>
-                    <p id = "update-data"></p>
+        <div id = "container" class = "flex">
+            <div id = "col1" class = "flex column">
+                <div id = "icon-and-id" class = "flex">
+                    <a href = "index.html" id = "home-link"><img src = "assets/pce_not-cataloguer_logo.png" id = "logo" alt = "Home Button"></a>
+                    <p id = "cat-id">#1234567</p>
+                </div>
+                <div id = "col1-subcol" class = "flex">
+                    <div id = "col1-subcol1" class = "flex column">
+                        <div id = "cat-name-image-pronouns" class = "center">
+                            <p id = "cat-name">Name</p>
+                            <div id = "catjail-container">
+
+                            </div>
+                            <p id = "cat-pronouns">Unknown Pronouns</p>
+                        </div>
+                        <div id = "wind-personality-aspect-travelling">
+                            <div class = "data-container"><p class = "flex">Wind: </p>
+                                <div class = "flex info-right">
+                                    <div id = "cat-wind-symbol" class = "symbols"></div><p id = "cat-wind" class = "flex">North</p>
+                                </div>
+                            </div>
+                            <div class = "data-container"><p class = "flex">Personality: </p>
+                                <div class = "flex info-right">
+                                    <div id = "cat-personality-symbol" class = "symbols"></div><p id = "cat-personality" class = "flex">Adventurous</p>
+                                </div>
+                            </div>
+                            <div class = "data-container"><p class = "flex">Aspect: </p>
+                                <div class = "flex info-right">
+                                    <div id = "cat-aspect-symbol" class = "symbols"></div><p id = "cat-aspect" class = "flex">Undiscovered</p>
+                                </div>
+                            </div>
+                            <div class = "data-container"><p class = "flex">Location: </p>
+                                <div class = "flex info-right">
+                                    <p id = "cat-location" class = "flex">Unknown</p>
+                                </div>
+                            </div>
+                            <div class = "data-container"><p class = "flex">Owner: </p>
+                                <div class = "flex info-right">
+                                    <p id = "cat-owner" class = "flex">Username</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div id = "genes-and-carries">
+                            <p class = "flex" style = "font-size: 120%">Genetic Info: </p>
+                            <p class = "flex">Gene String: </p>
+                            <div id = "cat-gene-string">
+                                [C] [SO] [LL] [BBFF3] [YYPP] [YN6L] [BB] [BY]
+                            </div>
+                            <p class = "flex">Carries/Hides: </p>
+                            <div id = "cat-carries-list">
+                                Null wind, Orange color gene, Dilute, Solid, No-white, Amber accent
+                            </div>
+                        </div>
+                    </div>
+                    <div id = "col1-subcol2" class = "flex column">
+                        <div id = "birthday-age-origin">
+                            <div class = "data-container catbirthdays" onclick = "toggleBirthday()"><p class = "flex">Birthday (PCE): </p>
+                                <p id = "cat-birthday" class = "info-right">Spring 1, Year 1</p>
+                            </div>
+                            <div class = "data-container catbirthdays hidden" onclick = "toggleBirthday()"><p class = "flex">Birthday (IRL): </p>
+                                <p id = "cat-birthday-irl" class = "info-right">December 23, 2019</p>
+                            </div>
+                            <div class = "data-container"><p class = "flex">Age: </p>
+                                <p id = "cat-age" class = "info-right">Adult (7 years)</p>
+                            </div>
+                            <div class = "data-container"><p class = "flex">Origin: </p>
+                                <p id = "cat-origin" class = "info-right">Born in Nestor's Wood</p>
+                            </div>
+                        </div>
+                        <div id = "physicaltraits">
+                            <div class = "data-container"><p class = "flex">Species: </p>
+                                <p id = "cat-species" class = "info-right">Not-Cat</p>
+                            </div>
+                            <div class = "data-container"><p class = "flex">Size: </p>
+                                <p id = "cat-size" class = "info-right">14lbs</p>
+                            </div>
+                            <div class = "data-container"><p class = "flex">Fur Length: </p>
+                                <p id = "cat-fur-length" class = "info-right">Longhair</p>
+                            </div>
+                            <div class = "data-container"><p class = "flex">Color: </p>
+                                <p id = "cat-color" class = "info-right">Ginger</p>
+                            </div>
+                            <div class = "data-container"><p class = "flex">Pattern: </p>
+                                <p id = "cat-pattern" class = "info-right">Mink</p>
+                            </div>
+                            <div class = "data-container"><p class = "flex">Accent Color: </p>
+                                <p id = "cat-accent" class = "info-right">Black</p>
+                            </div>
+                            <div class = "data-container"><p class = "flex">White Markings: </p>
+                                <p id = "cat-white-markings" class = "info-right">Snowspots / I6</p>
+                            </div>
+                            <div class = "data-container"><p class = "flex">Eye Color: </p>
+                                <p id = "cat-eye-color" class = "info-right">Dark Brown</p>
+                            </div>
+                        </div>
+                        <div id = "genetest-and-bbcode-buttons" class = "flex center">
+                            <button id = "bbcode-button" class = "my-buttons">Generate BBCode</button>
+                            <button id = "genetest-button" class = "my-buttons">Test cat in Gene Tester</button>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <div id = "col2" class = "flex column">
+                <p>Held Trinket: </p> 
+                <div id = "held-trinket-section" class = "flex">
+                    <img id = "trinket-image">
+                    <div id = "trinket-info">
+                        <p id = "cat-trinket-name">None</p>
+                        <p id = "cat-trinket-stats"></p>
+                    </div>
+                </div>
+                <div id = "personality-stats">
+                    <p>Personality Stats: </p> <!--To set bar lengths, in code set "cat-X-bar" width to whatever percentage-->
+                    <div class = "flex center"><p class = "personality-label">Bravery: </p>
+                        <div id = "cat-bravery" class = "personality-bars" data-label="?/10">
+                            <div id = "cat-bravery-bar" class = "bar-value"><div class = "bar-text">?/10</div></div>
+                        </div>
+                    </div>
+                    <div class = "flex center"><p class = "personality-label">Benevolence: </p>
+                        <div id = "cat-benevolence" class = "personality-bars" data-label="?/10">
+                            <div id = "cat-benevolence-bar" class = "bar-value"><div class = "bar-text">?/10</div></div>
+                        </div>
+                    </div>
+                    <div class = "flex center"><p class = "personality-label">Energy: </p>
+                        <div id = "cat-energy" class = "personality-bars" data-label="?/10">
+                            <div id = "cat-energy-bar" class = "bar-value"><div class = "bar-text">?/10</div></div>
+                        </div>
+                    </div>
+                    <div class = "flex center"><p class = "personality-label">Extroversion: </p>
+                        <div id = "cat-extroversion" class = "personality-bars" data-label="?/10">
+                            <div id = "cat-extroversion-bar" class = "bar-value"><div class = "bar-text">?/10</div></div>
+                        </div>
+                    </div>
+                    <div class = "flex center"><p class = "personality-label">Dedication: </p>
+                        <div id = "cat-dedication" class = "personality-bars" data-label="?/10">
+                            <div id = "cat-dedication-bar" class = "bar-value"><div class = "bar-text">?/10</div></div>
+                        </div>
+                    </div>
+                </div>
+                <div id = "attribute-stats">
+                    <p>Attribute Stats: </p>
+                    <div id = "strength-box" class = "attribute-box"><!--Strength-->
+                        <div>
+                            <p class = "attribute-title">Strength:</p>
+                            <div id = "cat-strength-value" class = "attribute-values">20</div>
+                            <div class = "diemodifiersection">
+                                <div id = "cat-strength-die" class = "attribute-smaller-numbers">4d</div>
+                                <div id = "cat-strength-modifier" class="info-right attribute-smaller-numbers">+2</div>
+                            </div>
+                            <div id = "cat-strength-desc" class = "attribute-desc">Very Good</div>
+                        </div>
+                    </div>
+                    <div id = "agility-box" class = "attribute-box"><!--agility-->
+                        <div>
+                            <p class = "attribute-title">Agility:</p>
+                            <div id = "cat-agility-value" class = "attribute-values">20</div>
+                            <div class = "diemodifiersection">
+                                <div id = "cat-agility-die" class = "attribute-smaller-numbers">4d</div>
+                                <div id = "cat-agility-modifier" class="info-right attribute-smaller-numbers">+2</div>
+                            </div>
+                            <div id = "cat-agility-desc" class = "attribute-desc">Very Good</div>
+                        </div>
+                    </div>
+                    <div id = "health-box" class = "attribute-box"><!--health-->
+                        <div>
+                            <p class = "attribute-title">Health:</p>
+                            <div id = "cat-health-value" class = "attribute-values">20</div>
+                            <div class = "diemodifiersection">
+                                <div id = "cat-health-die" class = "attribute-smaller-numbers">4d</div>
+                                <div id = "cat-health-modifier" class="info-right attribute-smaller-numbers">+2</div>
+                            </div>
+                            <div id = "cat-health-desc" class = "attribute-desc">Very Good</div>
+                        </div>
+                    </div>
+                    <div id = "finesse-box" class = "attribute-box"><!--finesse-->
+                        <div>
+                            <p class = "attribute-title">Finesse:</p>
+                            <div id = "cat-finesse-value" class = "attribute-values">20</div>
+                            <div class = "diemodifiersection">
+                                <div id = "cat-finesse-die" class = "attribute-smaller-numbers">4d</div>
+                                <div id = "cat-finesse-modifier" class="info-right attribute-smaller-numbers">+2</div>
+                            </div>
+                            <div id = "cat-finesse-desc" class = "attribute-desc">Very Good</div>
+                        </div>
+                    </div>
+                    <div id = "cleverness-box" class = "attribute-box"><!--cleverness-->
+                        <div>
+                            <p class = "attribute-title">Cleverness:</p>
+                            <div id = "cat-cleverness-value" class = "attribute-values">20</div>
+                            <div class = "diemodifiersection">
+                                <div id = "cat-cleverness-die" class = "attribute-smaller-numbers">4d</div>
+                                <div id = "cat-cleverness-modifier" class="info-right attribute-smaller-numbers">+2</div>
+                            </div>
+                            <div id = "cat-cleverness-desc" class = "attribute-desc">Very Good</div>
+                        </div>
+                    </div>
+                    <div id = "perception-box" class = "attribute-box"><!--perception-->
+                        <div>
+                            <p class = "attribute-title">Perception:</p>
+                            <div id = "cat-perception-value" class = "attribute-values">20</div>
+                            <div class = "diemodifiersection">
+                                <div id = "cat-perception-die" class = "attribute-smaller-numbers">4d</div>
+                                <div id = "cat-perception-modifier" class="info-right attribute-smaller-numbers">+2</div>
+                            </div>
+                            <div id = "cat-perception-desc" class = "attribute-desc">Very Good</div>
+                        </div>
+                    </div>
+                    <div id = "luck-box" class = "attribute-box"><!--luck-->
+                        <div>
+                            <p class = "attribute-title">Luck:</p>
+                            <div id = "cat-luck-value" class = "attribute-values">20</div>
+                            <div class = "diemodifiersection">
+                                <div id = "cat-luck-die" class = "attribute-smaller-numbers">4d</div>
+                                <div id = "cat-luck-modifier" class="info-right attribute-smaller-numbers">+2</div>
+                            </div>
+                            <div id = "cat-luck-desc" class = "attribute-desc">Very Good</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id = "col3">
+                <div class = "data-container"><p class = "job-class-label">Day Job: </p>
+                    <p id = "cat-day-job" class = "info-right">Farmer</p>
+                </div>
+                <p>Job List: </p>
+                <div class = "listbox" id = "cat-job-list">
+                    <ul class = "bulletlists">
+                        <li>Test Level 5 [Maximum Level]</li>
+                        <li>Test Level 4 [450/1120 EXP]</li>
+                        <li>Test Level 3 [40/560 EXP]</li>
+                        <li>Test Level 1 [10/140 EXP]</li>
+                        <li>Test Level 5 [Maximum Level]</li>
+                        <li>Test Level 3 [300/560 EXP]</li>
+                        <li>Test Level 5 [Maximum Level]</li>
+                        <li>Test Level 1 [10/140 EXP]</li>
+                        <li>Test Level 2 [250/280 EXP]</li>
+                        <li>Test Level 1 [10/140 EXP]</li>
+                        <li>Test Level 1 [10/140 EXP]</li>
+                        <li>Test Level 1 [10/140 EXP]</li>
+                        <li>Test Level 1 [20/140 EXP]</li>
+                        <li>Test Level 1 [10/140 EXP]</li>
+                        <li>Test Level 2 [90/280 EXP]</li>
+                        <li>Test Level 1 [30/140 EXP]</li>
+                        <li>Test Level 1 [10/140 EXP]</li>
+                    </ul>
+                </div>
+                <div class = "data-container"><p class = "job-class-label">Adventuring Class: </p>
+                    <p id = "cat-adventuring-class" class = "info-right">Fighter</p>
+                </div>
+                <p>Adventuring Class List: </p>
+                <div class = "listbox" id = "cat-adventuring-class-list">
+                    <ul class = "bulletlists">
+                        <li>Test Level 3 [30/300 EXP]</li>
+                        <li>Test Level 4 [Maximum Level]</li>
+                        <li>Test Level 2 [19/150 EXP]</li>
+                        <li>Test Level 4 [Maximum Level]</li>
+                        <li>Test Level 4 [Maximum Level]</li>
+                    </ul>
+                </div>
+                <p>Wearing: </p>
+                <div class = "listbox" id = "cat-wearing-list">
+                    <ul class = "bulletlists">
+                        <li>Right Blue Daisy Headpiece #2974</li>
+                        <li>White Wildflower Crown #312</li>
+                        <li>Heavy Pink Wool Scarf #1284</li>
+                        <li>aaaaaaaaaa #2876</li>
+                        <li>Gay Streamers #1601</li>
+                        <li>Rainbow Confetti #2874</li>
+                        <li>Tasty Sunflower #753</li>
+                        <li>[Custom] Rainbow Stage Fog #5373 by BlueOrchidWolf</li>
+                        <li>[Custom] gay woerm spirit #5330 by Rosiesunny</li>
+                    </ul>
+                </div>
+            </div>
+            <div id = "col4">
+                <div id = "col4-subcol">
+                    <div id = "col4-subcol1">
+                        <p>Friends: </p>
+                        <div class = "listbox" id = "cat-friends-list">
+                            <ul class = "bulletlists">
+                                <li>Tish - Best Friend</li>
+                                <li>Pointy - Partner</li>
+                                <li>Jasper - Partner</li>
+                                <li>Liriene - Friend</li>
+                                <li>Leo - Friend</li>
+                                <li>Gay Streamers #1601</li>
+                                <li>💖Petri - Friend</li>
+                                <li>Dew - Friend</li>
+                                <li>Cove - Friend</li>
+                                <li>Alala - Friend</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div id = "col4-subcol2">
+                        <p>Family: </p>
+                        <div class = "listbox" id = "cat-family-list">
+                            <ul class = "bulletlists">
+                                <li>Miss Direction - Not-Littermate <img src = "assets/toPCE.png"></li>
+                                <li>Dusaro - Littermate</li>
+                                <li>Camchak - Littermate</li>
+                                <li>💖Cookie - Parent</li>
+                                <li>Zip - Parent</li>
+                                <li>Bittersweet - Child</li>
+                                <li>🐁Qidan - Child</li>
+                                <li>Kita - Sibling <img src = "assets/toPCE.png"></li>
+                                <li>Arch - Sibling <img src = "assets/toPCE.png"></li>
+                                <li>Seed - Sibling <img src = "assets/toPCE.png"></li>
+                                <li>Ruby - Sibling</li>
+                                <li>Gold - Grandchild</li>
+                                <li>Marigold - Grandchild</li>
+                                <li>Balsa - Grandchild</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id = "biography-section">
+                    <p>Biography: </p>
+                    <p id = "cat-biography">
+                        WAHHDHSJDHSH BIOPGRAPHY HERE JSADJKAHFJHDJK HJAKDHFJKDSHKFhSDJKFH KJSDHFKJSDHKJ HDFSJKHDJKHFKJ HKJHKJH KHJJH<br>
+                        SJKFHKDJSHFKJH KJHSDFKHFDKSJH JKH<br>
+                        JDHFJKHDJKHDSKJHSFDKJHDKJHJDKHF<br>
+                        SKDHJKSHDKJHSJKDHSDKJHSKJDHKHSDJKDSHJKHSDKJSDJKH<br>
+                        A<br>
+                        A<br>
+                        SJKFHKDJSHFKJH KJHSDFKHFDKSJH JKH<br>
+                        JDHFJKHDJKHDSKJHSFDKJHDKJHJDKHF<br>
+                        SKDHJKSHDKJHSJKDHSDKJHSKJDHKHSDJKDSHJKHSDKJSDJKH<br>
+                        A<br>
+                        ASDAD<br>
+                        ASJHSDHJSD<br>
+                        ASDSIHSJKHSDKJHSDKJHSJD<br>
+                    </p>
+                </div>
+                <div id = "tags-section">
+                    <p>Tags: </p>
+                    <div id = "cat-tags">
+                        WIP WILL BE DONE LATER
+                    </div>
+                </div>
+                <div class = "data-container"><p class = "flex">Last Updated: </p>
+                    <p id = "cat-last-updated" class = "info-right">Date</p>
+                </div>
+                <br><br><br><br><br><br>
+                <button id = "delete-cat" onclick = "deleteCat((document.getElementById('cat-id').innerText).split('#')[1]);location.href = '/catalogue.html'">Delete Cat</button>
+            </div>
+            <a href = "catalogue.html"><img src = "assets/backarrow.png" alt = "Back Button" style = "padding-left: 0;"></a>
         </div>
-        <script src ="cat.js"></script>
-    </div> 
-    <button style = "background-color:rgb(214, 93, 93)" onclick = "deleteCat((document.getElementById('cat-id').innerText).split('#')[1]);location.href = '/catalogue.html'">Delete Cat</button>
+        <div id = "bbcodebox" class = "hidden"></div>
     </body>
 </html>

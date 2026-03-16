@@ -26,12 +26,11 @@ div {
  }
 
 #col1 {
-    outline: red 1px solid;
     max-width: 35%;
 }
 
 #cat-id {
-    background-color: red;
+    background-color: rgb(17, 74, 82);
 }
 
 #cat-pce-link {
@@ -56,8 +55,12 @@ div {
     font-size: 230%;
 }
 
+#catjail-container {
+    text-align:start;
+}
+
 #col1-subcol1 {
-    background-color: purple;
+    background-color: rgb(35, 72, 77);
     border-radius: 3%;
     padding: 2%;
     min-width: 250px;
@@ -65,7 +68,7 @@ div {
 }
 
 #col1-subcol2 {
-    background-color: rgb(221, 65, 221);
+    background-color: rgb(47, 105, 107);
     border-radius: 3%;
     padding: 2%;
     min-width: 250px;
@@ -90,9 +93,22 @@ div {
 
 /* hmm consider if I wanna fix this to be more general classes */
 .data-container {
-    outline: 1px solid rgb(106, 247, 240);
     display: flex; 
     justify-content: space-between;
+    border-radius: 5px;
+}
+
+.data-container:nth-child(1) {
+    background-color: rgba(28, 145, 129, 0.623);
+}
+.data-container:nth-child(3) {
+    background-color: rgba(28, 145, 129, 0.623);
+}
+.data-container:nth-child(5) {
+    background-color: rgba(28, 145, 129, 0.623);
+}
+.data-container:nth-child(7) {
+    background-color: rgba(28, 145, 129, 0.623);
 }
 
 .info-right {
@@ -108,17 +124,17 @@ div {
     display: flex;
     padding: 5%;
     margin-top: 3%;
-    background-color:rgb(95, 206, 73);
+    background-color:rgb(80, 241, 220);
 }
 
 #col2 {
-    outline: 1px solid aqua;
     padding: .5%;
     max-width: 23%;
+    background-color:rgba(9, 39, 43, 0.596);
+    border-radius: 25px;
 }
 
 #held-trinket-section {
-    outline: 1px solid rgb(204, 95, 207);
     padding: 2%;
 }
 
@@ -132,24 +148,27 @@ div {
 }
 
 #personality-stats {
-    background-color:rgba(101, 96, 172, 0.726);
+    background-color:rgba(38, 73, 69, 0.726);
+    padding: 1%;
+    border-radius: 10px;
 }
 
 .personality-bars {
-    background-color: rgba(255, 36, 36, 0.432);
+    background-color: rgba(150, 196, 190, 0.432);
     width: 100%;
     margin-left: 5%;
 }
 
 .bar-value {
     display: flex;
-    background-color:rgb(33, 23, 170);
+    background-color:rgb(44, 202, 207);
     width: 50%;
     text-align: left;
 }
 
 .bar-text {
     margin-left: 5px;
+    color: black;
 }
 
 .personality-label {
@@ -193,8 +212,8 @@ div {
     flex-direction: column;
     border-radius: 3%;
     padding: .5%;
-    outline: 1px solid black;
     min-width: 15%;
+    background-color:rgb(17, 74, 82)
 } 
 
 .job-class-label {
@@ -202,12 +221,13 @@ div {
 }
 
 .listbox {
-    background-color:rgba(72, 179, 72, 0.397);
+    background-color:rgba(5, 23, 34, 0.397);
     line-height: 140%;
     max-height: 200px;
     overflow: auto;
     margin-bottom: 2%;
-    padding: 2%
+    padding: 2%;
+    border-radius: 10px;
 
 }
 
@@ -217,24 +237,24 @@ div {
 }
 
 #col4 {
-    background-color: rgba(143, 37, 37, 0.616);
+    background-color: rgba(10, 59, 61, 0.801);
     display: flex;
     flex-direction: column;
     padding: .5%;
     min-width: 23%;
     max-width: 30%;
+    border-radius: 15px;
 }
 
 #col4-subcol {
     display: flex;
     padding: 1%;
-    background-color:rgba(33, 23, 170, 0.651);
 }
 
 #col4-subcol1 {
     display: flex;
     flex-direction: column;
-    background-color: purple;
+    background-color: rgba(0, 87, 128, 0.397);
     border-radius: 3%;
     padding: 1%;
     width: 50%;
@@ -243,7 +263,7 @@ div {
 #col4-subcol2 {
     display: flex;
     flex-direction: column;
-    background-color: rgb(221, 65, 221);
+    background-color: rgba(65, 172, 221, 0.445);
     border-radius: 3%;
     padding: 1%;
     width: 50%;
@@ -253,6 +273,8 @@ div {
     max-height: 200px;
     background-color:rgba(5, 5, 5, 0.582);
     overflow: auto;
+    border-radius: 5px;
+    padding: 1%;
 }
 
 .sb-legendary {
@@ -301,9 +323,17 @@ div {
     cursor: pointer;
 }
 
+#delete-cat {
+    background-color: rgb(228, 86, 86);
+    padding: 2%;
+    width: 30%;
+    align-self: flex-end;
+    margin-top: 10%;
+}
 
-
-
+a:visited {
+    color: rgb(0, 195, 255);
+}
 
 
 

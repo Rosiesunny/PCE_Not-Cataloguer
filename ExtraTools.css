@@ -21,6 +21,14 @@ div {
     font-family: "Courier New";
 }
 
+img {
+    image-rendering:-webkit-crisp-edges;
+    image-rendering:-moz-crisp-edges;
+    image-rendering:crisp-edges;
+    image-rendering:pixelated;
+    -ms-interpolation-mode:nearest-neighbor
+   }
+
 button {
     font-family: "Courier New";
     font-size: 250%
@@ -38,8 +46,8 @@ h2{
 
 #logo {
     position: absolute;
-    max-width: 10%;
-    margin-left: 60px;
+    max-width: 8%;
+    margin-left: 30px;
 }
 
 #sidebar {
@@ -61,32 +69,6 @@ h2{
     font-size: 1.2vw;
     margin-top: 0px;
     padding-top: 0px;
-}
-
-#settings {
-    margin-left: 40%;
-}
-
-#help-div {
-    text-align: end;
-    margin-top: 1%;
-}
-#help-text {
-    overflow: auto; 
-    max-height: 180px; 
-    background-color: rgba(79, 138, 161, 0.329); 
-    padding: 2%; 
-    border-radius: 5%;
-    color: var(--madeby-text);
-}
-
-#help {
-    max-width: 5vw;
-}
-
-#settings-div {
-    text-align: end;
-    margin-top: 1%;
 }
 
 .colorswitch {
@@ -133,19 +115,24 @@ h2{
     width: 6vw;
 }
 
-/* Clear floats (clearfix hack) 
-.btn-group:after {
-    content: "";
-    clear: both;
-    display: table;
-}*/
-
-/*.btn-group button:not(:last-child) {
-    border-right: none; /* Prevent double borders
-}*/
-
-  /* Add a background color on hover */
 .btn-group button:hover {
     background-color: #1f5d61;
+}
 
+.btn-group button:last-child{
+    background-color: grey;
+    cursor:not-allowed;
+}
+
+.btn-group button:nth-child(3){
+    background-color: grey;
+    cursor:not-allowed;
+}
+
+h1 {
+    margin-left: 15%;
+    background-color: rgb(134, 221, 228);
+    padding: 2%;
+    width: 20%;
+    border-radius: 25px;
 }

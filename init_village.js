@@ -36,7 +36,7 @@ village.cats = {};
 let cachedVillage = JSON.parse(window.localStorage.getItem("myVillage"));
 village = checkForDataStorageUpdates(cachedVillage, village)
 
-console.log("Not-Cataloguer V 1.2 Alpha hotfix 8");
+console.log("Not-Cataloguer V 1.3 Alpha");
 
 if (!(typeof(load_village) == 'undefined')) {
     if (load_village == 0) {
@@ -1941,8 +1941,9 @@ function checkForDataStorageUpdates(cachedVillage, village) {
             // basically a list of versions that will call individual update functions. does nothing for now. first one should be "case (current version) and just break/return"
             case "Alpha 1.1":
                 AlphaOnePointTwoVersionUpdate() // adds a default for new setting, checkBioForGeneString
-            case "A1010":
-                "PEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE"
+            case "Alpha 1.2":
+                AlphaOnePointThreeVersionUpdate(cachedVillage) // changes all lvl 0 cats to lvl 1 to match village manager
+                
         }
     }
     else {
@@ -2011,8 +2012,35 @@ function AlphaOnePointOneVersionUpdate(cachedVillage) {
 }
 
 function AlphaOnePointTwoVersionUpdate() {
-    console.log("PEEEEEEEEEEEEEEEEE")
+    console.log("Updated old data (if any) for Alpha 1.2")
     localStorage.setItem("checkBioForGeneString", "false")
     localStorage.setItem("NotCataloguerVersion", "Alpha 1.2")
     return
+}
+
+function AlphaOnePointThreeVersionUpdate(cachedVillage) {
+    cats_list = Object.keys(cachedVillage.cats)
+    console.log(cats_list)
+    for (let i = 0; i < cats_list.length; i++) {
+        let cat = cachedVillage.cats[cats_list[i]]
+        if (cat.hasOwnProperty("jobs")) {
+            let jobs_list = Object.keys(cat.jobs)
+            for (let j = 0; j < jobs_list.length; j++) {
+                let joblevel = eval("cat.jobs."+jobs_list[j]+".level")
+                if (joblevel == 0) {
+                    eval("cat.jobs."+jobs_list[j]+".level = 1")
+                }
+            }
+        }
+        if (cat.hasOwnProperty("classes")) {
+            let classes_list = Object.keys(cat.classes)
+            for (let j = 0; j < classes_list.length; j++) {
+                let classlevel = eval("cat.classes."+classes_list[j]+".level")
+                if (classlevel == 0) {
+                    eval("cat.classes."+classes_list[j]+".level = 1")
+                }
+            }
+        }
+    }
+    localStorage.setItem("NotCataloguerVersion", "Alpha 1.3")
 }

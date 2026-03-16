@@ -220,12 +220,48 @@ function parseJobAndAdvClassData(text) {
     const jobAndAdvClassRegEx = /Attributes and Occupations\n?Day Job: ([A-z ]+)(?: .+)?\n?(?:Hunter Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?(?:Gatherer Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?(?:Miner Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?(?:Fisher Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?(?:Bug Catcher Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?(?:Gardener Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?(?:Herbalist Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?(?:Farmer Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?(?:Flockherd Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?(?:Apothecary Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?(?:Clothier Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?(?:Scribe Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?(?:Artist Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?(?:Blacksmith Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?(?:Craftscat Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?(?:Builder Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?(?:Mason Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?(?:Baker Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?Adventuring Class: (.+)\n?(?:Fighter Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?(?:Thief Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?(?:Guardian Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?(?:Ranger Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?(?:Medic Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?(?:Scout Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?(?:Bard Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?/gm
     let match = jobAndAdvClassRegEx.exec(text)
     for (let i = 2; i < match.length; i++) {
-        if (typeof match[i] == "undefined") {
-            match[i] = 0
+        if (i < 38) {
+            if (i % 2 == 0) {
+                if (typeof match[i] == "undefined") {
+                    match[i] = 1
+                }
+                else {
+                    if (!isNaN(match[i])) {
+                        match[i] = Number(match[i])
+                    }
+                }
+            }
+            else {
+                if (typeof match[i] == "undefined") {
+                    match[i] = 0
+                }
+                else {
+                    if (!isNaN(match[i])) {
+                        match[i] = Number(match[i])
+                    }
+                }
+            }
         }
         else {
-            if (!isNaN(match[i])) {
-                match[i] = Number(match[i])
+            if (i % 2 == 0) {
+                if (typeof match[i] == "undefined") {
+                    match[i] = 0
+                }
+                else {
+                    if (!isNaN(match[i])) {
+                        match[i] = Number(match[i])
+                    }
+                }
+            }
+            else {
+                if (typeof match[i] == "undefined") {
+                    match[i] = 1
+                }
+                else {
+                    if (!isNaN(match[i])) {
+                        match[i] = Number(match[i])
+                    }
+                }
             }
         }
     }
@@ -412,216 +448,7 @@ function saveCat(poseeyesnamelocationpersonality, basicdata, appearancedata, cat
 
 
 
-function localStorageSettingChecks(cat) {
-    if (typeof localStorage.getItem("storeFriends") !== "string") {
-        fixLocalUndefined() // if storage settings don't exist yet, set to default
-    }
-    if (localStorage.getItem("storeFriends") == "false") {
-        delete cat.friends
-    }
-    else {
-        if (localStorage.getItem("autoMatchFriends") == "true") {
-            autoMatchFamilyFriends(cat.friends, "friends", cat.id, cat.name)
-        }
-    }
-    // in the future run auto match checks in another function here
-    if (localStorage.getItem("storeFamily") == "false") {
-        delete cat.family
-    }
-    else {
-        if (localStorage.getItem("autoMatchFamily") == "true") {
-            autoMatchFamilyFriends(cat.family, "family", cat.id, cat.name)
-        }
-    }
-    if (localStorage.getItem("storePose") == "false") {
-        delete cat.pose
-    }
-    if (localStorage.getItem("storeEyes") == "false") {
-        delete cat.eyes.eyes
-    }
-    if (localStorage.getItem("storeSize") == "false") {
-        delete cat.size
-    }
-    if (localStorage.getItem("storeClothes") == "false") {
-        delete cat.clothes
-    }
-    if (localStorage.getItem("storeJobs") == "false") {
-        delete cat.jobs
-    }
-    else {
-        if (localStorage.getItem("storeJobsEXP") == "false") {
-            let jobsArray = ["Apothecary", "Artist", "Baker", "Blacksmith", "Bugcatcher", "Builder", "Clothier", "Craftscat", "Farmer", "Fisher", "Flockherd", "Gardener", "Gatherer", "Herbalist", "Hunter", "Mason", "Miner", "Scribe"]
-            for (let i = 0; i < jobsArray.length; i++) {
-                eval("delete cat.jobs." + jobsArray[i] + ".exp")
-            }
-        }
-    }
-    if (localStorage.getItem("storeAdventuringClasses") == "false") {
-        delete cat.classes
-    }
-    else {
-        if (localStorage.getItem("storeAdventuringClassesEXP") == "false") {
-            let classesArray = ["Bard", "Fighter", "Guardian", "Medic", "Ranger", "Scout", "Thief"]
-            for (let i = 0; i < classesArray.length; i++) {
-                eval("delete cat.classes." + classesArray[i] + ".exp")
-            }
-        }
-    }
-    if (localStorage.getItem("storeTrinket") == "false") {
-        delete cat.trinket
-    }
-    if (localStorage.getItem("checkBioForGeneString") == "true") {
-        cat.genes = detectGeneStringInBiography(cat.biography, cat.genes)
-    }
-    if (localStorage.getItem("overwriteGeneString") == "false") {
-        let savedcat = village.cats[cat.id] //if the cat is already saved this won't be undefined
-        if (typeof savedcat !== "undefined") {
-            if (savedcat.hasOwnProperty("genes")) {
-                cat.genes = savedcat.genes
-            }
-        }
-    }
-    if (localStorage.getItem("storeBiography") == "false") {
-        delete cat.biography
-    }
-    cat.lastUpdated = Date()
-    return cat
-}
 
-// set default settings if there are no storage settings set
-function fixLocalUndefined() {
-    let defaultSettingsArray = [["storeFriends", "false"], ["autoMatchFriends", "false"], ["storeFamily", "false"], ["autoMatchFamily", "false"], ["storePose", "true"], ["storeSize", "true"], ["storeClothes", "false"], ["storeJobs", "true"], ["storeJobsEXP", "true"], ["storeAdventuringClasses", "true"], ["storeAdventuringClassesEXP", "true"], ["storeTrinket", "true"], ["storeBiography", "false"], ["overwriteGeneString", "true"], ["colorBBCode", "true"], ["listHiddenRecessive", "true"]]
-    for (let i = 0; i < defaultSettingsArray.length; i++) {
-        localStorage.setItem(defaultSettingsArray[i][0], defaultSettingsArray[i][1])
-    }
-    alert("No storage settings found- Default storage settings applied!")
-}
-
-function autoMatchFamilyFriends(relations, friendsorfamily, catid, name) {
-    let myVillageArray = Object.entries(village.cats)
-    // storedName is from myVillage in localstorage, relations is sent from the cat we're checking's friend/family list. first we find a name that matches
-    for (let i = 0; i < relations.length; i++) {
-        if (typeof(relations[i].id) === "undefined") { // there is no id assigned to the cat searched
-            for (let j = 0; j < myVillageArray.length; j++) {
-                let storedId = myVillageArray[j][0] // id of the cat we're looking up from storage, not current cat's id
-                let storedName = village.cats[storedId].name
-                if (storedName === relations[i].name) {
-                    // name match found, now check if the other cat has that match too, and if the relationship matches
-                    let storedRelations
-                    if (friendsorfamily == "friends") {
-                        storedRelations = village.cats[storedId].friends
-                    }
-                    if (friendsorfamily == "family") {
-                        storedRelations = village.cats[storedId].family
-                    }
-                    if (typeof storedRelations !== "undefined") {
-                        for (let k = 0; k < storedRelations.length; k++) {
-                            if (name === storedRelations[k].name) {
-                                let relationmatch = checkRelationshipMatch(relations[i].relationship, storedRelations[k].relationship, friendsorfamily)
-                                if (relationmatch == true) {
-                                    relations[i].id = Number(storedId)
-                                    if (friendsorfamily == "friends") {
-                                        village.cats[storedId].friends[k].id = catid
-                                    }
-                                    if (friendsorfamily == "family") {
-                                        village.cats[storedId].family[k].id = catid
-                                    }
-                                    myVillageArray.splice(j, 1) // delete cat from myVillageArray so it is skipped in future checks of friends/family
-                                    break                              
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-}
-
-function checkRelationshipMatch(relation1, relation2, friendsorfamily) {
-    let relationsMatchTerms
-    if (friendsorfamily == "friends") {
-        relationsMatchTerms = [
-            ["Friend"],
-            ["Rival"],
-            ["Partner"],
-            ["Best Friend"],
-            ["Partner in Crime"],
-            ["Best Nemesis"],
-            ["Battle Buddy"],
-            ["Sparring Partner"],
-            ["Mentor", "Fosterling"]
-        ]
-    }
-    if (friendsorfamily == "family") {
-        // close or mischevious modifier can happen on all of these
-        relationsMatchTerms = [
-            ["Parent", "Child"],
-            ["Not-Parent", "Not-Child"],
-            ["Littermate"],
-            ["Not-Littermate"],
-            ["Sibling"],
-            ["Not-Sibling"],
-            ["Grandparent", "Grandchild"],
-            ["Great Grandparent", "Great Grandchild"],
-            ["Great Great Grandparent", "Great Great Grandchild"],
-            ["Pibling", "Nibling"],
-            ["Good Pibling", "Good Nibling"],
-            ["Cousin"],
-            ["Not-Cousin"],
-            ["Good Cousin"]
-        ]
-        let modifiers = ["Close", "Mischievous"]
-        for (let i = 0; i < modifiers.length; i++) {
-            if (relation1.includes(modifiers[i])) {
-                if (relation2.includes(modifiers[i])) {
-                    relation1 = relation1.split(modifiers[i] + " ")[1]
-                    relation2 = relation2.split(modifiers[i] + " ")[1]
-                    break
-                }
-                else {
-                    // first relationship is close/mischief, and the second isn't, return false already, it can't be a match
-                    return false
-                }
-            }
-        }
-    }
-    for (let i = 0; i < relationsMatchTerms.length; i++) {
-        if (relationsMatchTerms[i].length > 1) {
-            if (relation1 == relationsMatchTerms[i][0]) {
-                if (relation2 == relationsMatchTerms[i][1]) {
-                    // MATCH
-                    return true
-                }
-                else {
-                    return false
-                }
-            }
-            if (relation1 == relationsMatchTerms[i][1]) {
-                if (relation2 == relationsMatchTerms[i][0]) {
-                    // MATCH
-                    return true
-                }
-                else {
-                    return false
-                }
-
-            }
-        }
-        else {
-            if (relation1 == relationsMatchTerms[i][0]) {
-                if (relation1 == relation2) {
-                    // MATCH
-                    return true
-                }
-                else {
-                    return false
-                }
-            }
-        }
-    }
-}
 
 function tempDisplay(cat) {
     let test = document.querySelector(".display")
@@ -797,311 +624,5 @@ function displayKnownGenes(label, genes) {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function findKnownGenes(species, wind, fur, color, colortype, pattern, accentcolor, whitetype, whitelevel) {
-    let geneString = ["?",   "?","?",   "?","?",    "?","?","?","?","?",    "?","?","?","?",    "?","?","?","?",    "?","?",    "?","?"]
-        sectionSpecies(geneString, species)
-        sectionWind(geneString, wind)
-        sectionFur(geneString, fur)
-        sectionColor(geneString, color, colortype, wind)
-        sectionPattern(geneString, pattern)
-        sectionAccentColor(geneString, accentcolor)
-        sectionWhite(geneString, whitetype, whitelevel)
-        return geneString
-}
-
-function sectionSpecies(geneString, species) {
-    switch(species) {
-        case "Not-cat": 
-            geneString[0] = "C"
-            break
-        case "Mercat":
-            geneString[0] = "M"
-            break
-    }
-}
-
-//NS
-//1 2 
-function sectionWind(geneString, wind) {
-    switch(wind) {
-        case "Trade":
-            geneString[1] = "N"
-            geneString[2] = "S"
-            break
-        case "North":
-            geneString[1] = "N"
-            break
-        case "South":
-            geneString[1] = "S"
-            break
-        case "Null":
-            geneString[1] = "O"
-            geneString[2] = "O"
-            break
-    }
-}
-
-//SL
-//3 4
-function sectionFur(geneString, fur) {
-    switch(fur) {
-        case "Shorthair":
-            geneString[3] = "S"
-            break
-        case "Longhair":
-            geneString[3] = "L"
-            geneString[4] = "L"
-            break
-    }
-}
-
-//BOFD3
-//5 6 7 8 9
-function sectionColor(geneString, color, colortype, wind) {
-    let colorList = ["Black", "Chocolate", "Brown", "Tan", "Red", "Ginger", "Orange", "Apricot", "Charcoal", "Grey", "Smoke", "Silver", "Buff", "Cream", "Almond", "Beige"]
-    let densityList = [4, 3, 2, 1, 4, 3, 2, 1, 4, 3, 2, 1, 4, 3, 2, 1]
-    let colorGeneList = ["B", "B", "B", "B", "O", "O", "O", "O", "B", "B", "B", "B", "O", "O", "O", "O"]
-    let invertedColorGeneList = ["O", "O", "O", "O", "B", "B", "B", "B", "O", "O", "O", "O", "B", "B", "B", "B"]
-    let colorNew = color
-    if (colortype != "Standard") {
-        colorNew = color.split("-")[0]
-    }
-    for (let i = 0; i< colorList.length; i++) {
-        if (colorNew == colorList[i]) {
-            if (i>7) {
-                geneString[7] = "D"
-                geneString[8] = "D"
-            }
-            else {
-                geneString[7] = "F"
-            }
-            geneString[9] = densityList[i]
-            switch(colortype) {
-                case "Standard":
-                    switch(wind) {
-                        case "North":
-                            geneString[5] = colorGeneList[i]
-                            break
-                        case "South":
-                            geneString[6] = colorGeneList[i]
-                            break
-                    }
-                    break
-                case "Watercolor":
-                    geneString[5] = colorGeneList[i]
-                    geneString[6] = colorGeneList[i]
-                    break
-                case "Tortoiseshell":
-                    geneString[5] = colorGeneList[i]
-                    geneString[6] = invertedColorGeneList[i]
-                    break
-            }
-        }
-    }
-}
-
-//YYTT
-//10 11 12 13
-function sectionPattern(geneString, pattern) {
-    if (pattern == "Solid") {
-        geneString[10] = "N"
-        geneString[11] = "N"
-    }
-    else {
-        if (pattern != "-hidden-") {
-            geneString[10] = "Y"
-        }
-    }
-    switch(pattern) {
-        case "Mackerel":
-            geneString[12] = "T"
-            geneString[13] = "T"
-            break
-        case "Classic":
-            geneString[12] = "T"
-            geneString[13] = "M"
-            break
-        case "Broken":
-            geneString[12] = "T"
-            geneString[13] = "S"
-            break
-        case "Clouded":
-            geneString[12] = "M"
-            geneString[13] = "M"
-            break     
-        case "Spotted":
-            geneString[12] = "S"
-            geneString[13] = "S"
-            break
-        case "Rosette":
-            geneString[12] = "M"
-            geneString[13] = "S"
-            break
-        case "Lynxpoint":
-            geneString[12] = "T"
-            geneString[13] = "P"
-            break
-        case "Mink":
-            geneString[12] = "S"
-            geneString[13] = "P"
-            break  
-        case "Cloudpoint":
-            geneString[12] = "M"
-            geneString[13] = "P"
-            break
-        case "Colorpoint":
-            geneString[12] = "P"
-            geneString[13] = "P"
-            break
-        case "Ticked":
-            geneString[12] = "T"
-            geneString[13] = "A"
-            break
-        case "Ripple":
-            geneString[12] = "M"
-            geneString[13] = "A"
-            break
-        case "Agouti":
-            geneString[12] = "S"
-            geneString[13] = "A"
-            break
-        case "Karpati":
-            geneString[12] = "P"
-            geneString[13] = "A"
-            break
-        case "Freckle":
-            geneString[12] = "A"
-            geneString[13] = "A"
-            break
-    }
-}
-
-function sectionAccentColor(geneString, accentcolor) {
-    switch(accentcolor) {
-        case "Ruby":
-            geneString[20] = "R"
-            geneString[21] = "R"
-            break
-        case "Violet":
-            geneString[20] = "R"
-            geneString[21] = "B"
-            break
-        case "Amber":
-            geneString[20] = "R"
-            geneString[21] = "Y"
-            break
-        case "Pink":
-            geneString[20] = "R"
-            geneString[21] = "L"
-            break
-        case "Blue":
-            geneString[20] = "B"
-            geneString[21] = "B"
-            break
-        case "Green":
-            geneString[20] = "B"
-            geneString[21] = "Y"
-            break
-        case "Indigo":
-            geneString[20] = "B"
-            geneString[21] = "L"
-            break
-        case "Gold":
-            geneString[20] = "Y"
-            geneString[21] = "Y"
-            break
-        case "Teal":
-            geneString[20] = "Y"
-            geneString[21] = "L"
-            break
-        case "Black":
-            geneString[20] = "L"
-            geneString[21] = "L"
-            break
-    }
-}
-
-//YN7C
-//14 15 16 17
-function sectionWhite(geneString, whitetype, whitelevel) {
-    if (whitelevel != "-hidden-") {
-        geneString[14] = "Y"
-        geneString[16] = Number(whitelevel)
-        geneString[17] = whitetype
-    }
-}
-
 // AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
-function detectGeneStringInBiography(biography, genes) {
-    let genesRegEx = /\[ ?(.) ?\] ?\[ ?(.)(.) ?\] ?\[ ?(.)(.) ?\] ?\[ ?(.)(.)(.)(.)(.) ?\] ?\[ ?(.)(.)(.)(.) ?\] ?\[ ?(.)(.)([0-9]+|\?)(.) ?\] ?\[ ?(.)(.) ?\] ?\[ ?(.)(.) ?\]/gm
-    let match = genesRegEx.exec(biography)
-    if (match) {
-        match.shift()
-        let newarray = []
-        for (let i = 0; i < match.length; i++) {
-            newarray[i] = match[i]
-        }
-        return newarray
-    }
-    else {
-        // check if the person is writing the white type wrong (C4 instead of 4C for example) and still accept that but fix the data
-        let genesRegEx2 = /\[ ?(.) ?\] ?\[ ?(.)(.) ?\] ?\[ ?(.)(.) ?\] ?\[ ?(.)(.)(.)(.)(.) ?\] ?\[ ?(.)(.)(.)(.) ?\] ?\[ ?(.)(.)(.)([0-9]+|\?) ?\] ?\[ ?(.)(.) ?\] ?\[ ?(.)(.) ?\]/gm
-        let match2 = genesRegEx2.exec(biography)
-        if (match2) {
-            match2.shift()
-            let newarray = []
-            for (let i = 0; i < match2.length; i++) {
-                newarray[i] = match2[i]
-            }
-            let whitelevel = newarray[17]
-            let whitetype = newarray[16]
-            // fixing incorrect gene code
-            newarray[16] = whitelevel
-            newarray[17] = whitetype
-            return newarray
-        }
-        else {
-            return genes
-        }
-    }
-}

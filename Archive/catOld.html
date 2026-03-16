@@ -1,0 +1,47 @@
+<!-- Comments look like this -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- <link rel="stylesheet" href = "cat.css"> -->
+        <link rel="icon" href ="favicon.ico">
+    </head>
+    <body>
+        <script src="init_village.js"></script>
+        <script src="save_village.js"></script>
+        <script src="generateBBCodeGeneString.js"></script>
+        <script src="geneTestingButton.js"></script>
+
+        <div id = "container">
+            <a href = "index.html"><img src = "assets/pce_not-cataloguer_logo.png" id = "logo" alt = "Home Button" style = "padding-left: 0; max-width: 4%"></a>
+            <a href = "catalogue.html"><img src = "assets/backarrow.png" alt = "Back Button" style = "padding-left: 0; max-width: 4%"></a>
+            <div id = "contents">
+                <p id = "cat-name"></p>
+                <p id = "cat-id"></p>
+                <p id = "cat-wind"></p>
+                <p id = "cat-personality"></p>
+                <div id = "cat-data">
+                    <p id = "basic-data"></p>
+                    <p id = "appearance-data"></p>
+                    <p id = "gene-data"></p>
+                    <div id = "genetest-button-zone"></div>
+                    <div id = "bbcode-button-zone"></div>
+                    <div id = "bbcodebox" class = "hidebbcodebox"></div>
+                    <p id = "personality-data"></p>
+                    <p id = "trinket-data"></p>
+                    <p id = "job-data"></p>
+                    <p id = "class-data"></p>
+                    <p id = "attribute-data"></p>
+                    <p id = "friends-data"></p>
+                    <p id = "family-data"></p>
+                    <p id = "biography-data"></p>
+                    <p id = "clothes-data"></p>
+                    <p id = "location-data"></p>
+                    <p id = "update-data"></p>
+                </div>
+            </div>
+        </div>
+        <script src ="catOld.js"></script>
+    </div> 
+    <button style = "background-color:rgb(214, 93, 93)" onclick = "deleteCat((document.getElementById('cat-id').innerText).split('#')[1]);location.href = '/catalogue.html'">Delete Cat</button>
+    </body>
+</html>

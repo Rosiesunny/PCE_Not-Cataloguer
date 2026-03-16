@@ -4,13 +4,13 @@ body {
 }
 
 #container {
-    background-color:rgb(238, 93, 141);
+    background-color:rgb(124, 51, 75);
     display: flex;
     border-radius: 5%;
 }
 
 #col1 {
-    background-color:rgb(155, 60, 60);
+    background-color:rgb(71, 26, 26);
     padding: 1%;
     border-radius: 5%;
 }
