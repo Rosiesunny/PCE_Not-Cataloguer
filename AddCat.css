@@ -1,75 +1,160 @@
 /* Comments work like this */
-.test {
-    background-color:rgb(70, 62, 139);
-    padding: 15px;
-    font-size: 24px;
-    width: 40%;
-    overflow-wrap: break-word;
+header {
+    display:flex;
+    flex-direction: row;
+    text-decoration: none;
+    align-items: flex-end;
+}
+ul{
+    margin: 0%;
+}
+header li a:hover{
+    text-decoration: none;
+    color:#17c2c28c;
+}
+header li:hover {
+    background-color: #1f5d61;
+}
+header li:first-child {
+background-color: #494949;
+padding-left: 20px;
+padding-right: 20px;
+color: grey;
+}
+
+header li:first-child:hover {
+background-color: #494949;
+cursor: not-allowed;
+}
+    
+header li a{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    display: block;
+    padding: 20px;
+    padding-top: 0.5px;
+    padding-bottom: 0.5px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    margin-bottom: 0%;
+}
+header li {
+    background-color: grey;
+    height: 50px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    font-family: sans-serif;
+    color: rgb(255, 255, 255);
+    float: left;
+    display:block;
+    padding-top: 0%;
+    padding-bottom: 20px;
+    margin-left: 20px;
+    margin-bottom: 0%;
+}
+
+.back {
+    margin-left: 20px;
+    max-height: 85px;
+    max-width: 85px;
+    margin: 10px;
+}
+body {
+    background-color:rgb(22, 12, 12);
+    color:rgb(255, 255, 255);
+}
+section {
+    background-color: #494949;
+    display: flex;
+    flex-direction: row;
+    border-style: solid;
+    border-width: 20px;
+    border-color: #494949;
+    border-radius: 20px;
+    flex-wrap: wrap;
 }
 
 #submit {
-    width: 100%;
-    height: 100px;
     font-size: 24px;
-    background-color:rgb(138, 54, 106);
+    background-color:#17c2c28c;
+    margin: 2%;
+    flex-basis: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#submit img{
+    margin-left: 5%;
+    margin-top: 1%;
+    margin-bottom: 1%;
 }
 
 .input {
-    width: 100%;
-    height: 600px;
-    max-height: 700px;
     overflow: normal;
-    background-color:rgb(41, 9, 41);
+    overflow-y: auto;
+    height: calc(100vh - 550px);
+    background-color:#1f5d61;
     color:rgb(255, 255, 240);
-}
-
-body {
-    background-color:rgb(22, 12, 12);
-    color:rgb(255, 250, 205)
+    margin: 2%;
+    padding: 2%;
 }
 
 #entryarea {
-    width: 40%;
-    float: right;
+    flex-basis: 50%;
+    display: flex;
+    flex-direction: column;
+    height: 70%;
 }
-
 #testbox {
-    float: left;
-    width: 58%
+    flex-basis: 100%;
 }
 
-#box {
-    overflow: hidden
+#catbox {
+    display: flex;
+    flex-basis: 50%;
+    flex-direction: column;
+    height: 70%;
 }
 
 .display {
-    max-height: 700px;
     overflow: scroll;
-    margin-left: 10px;
-    padding-left: 10px;
-    padding-top: 10px;
-    border-width: 2px;
-    background-color:rgb(39, 33, 90);
-    border-color:rgb(17, 17, 17);
+    overflow-y: auto;
+    height: calc(100vh - 550px);
+    background-color:#103d41;
+    margin: 2%;
+    padding: 2%;
 }
 
 #continuetogenetester {
-    padding: 3%;
     font-size: 150%;
     font-weight: bold;
-    float: left;
 }
 
 #generatebbcode {
-    padding: 5%;
-    margin-left: 10%;
     background-color:rgb(72, 204, 197);
-    z-index: 69;
+    margin: 2%;
+}
+
+#generatebbcode:hover {
+    background-color:rgb(36, 139, 134);
 }
 
 #bbcodebutton {
-    float: right;
     font-size: 150%;
     font-weight: bold;
-    padding: 5%
+    align-self: center;
+    margin-top: 1%;
+}
+
+#genetestingbutton{
+    align-self: center;
+}
+#catpreview {
+flex-basis: 10%;
+}
+
+#endbuttons {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
 }

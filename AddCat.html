@@ -7,7 +7,20 @@
         <link rel="icon" href ="favicon.ico">
         <link rel="stylesheet" href = "generateBBCodeGeneString.css">
     </head>
+    
     <body>
+        <header>
+        <div class = "back">
+            <a href = "index.html"><img src="assets/pce_not-cataloguer_logo.png" height="85" width="85"></a>
+        </div>
+            <ul>
+            <li><h2>Add Cat</h2></li>
+            <li><a href="AddVillage.html"><h2>Add Village</h2></a></li>
+            <li><a href="catalogue.html"><h2>Village View</h2></a></li>
+            <li><a href="ExtraTools.html"><h2>Extratools</h2></li>
+                <li><a href="geneTesting.html"><h2>Gene Tester</h2></a></li>
+            </ul>
+        </header>
         <!-- Use the following to load a village object -->
         <script>
             // This variable should be set to the id of the test village you'd like to load
@@ -16,32 +29,32 @@
             load_village = 0;
         </script>
         <!-- End Test village Loading -->
-        <script src="init_village.js"></script>
-        <script src="save_village.js"></script>
-        <script src="AddCat.js"></script>
-        <script src="storageSettingsCheck.js"></script>
-        <script src="findKnownGenes.js"></script>
-        <script src="CatImageGenerator.js"></script>
-        <div id = "box">
+        <section>
+            <script src="init_village.js"></script>
+            <script src="save_village.js"></script>
+            <script src="AddCat.js"></script>
+            <script src="storageSettingsCheck.js"></script>
+            <script src="findKnownGenes.js"></script>
+            <script src="CatImageGenerator.js"></script>
             <div id = "testbox">
-            (Ignore how ugly this page is, it'll get prettied up later)
-            Please check results for accuracy and submit a bug report if something is wrong!
-            <p class ="test">
-                <a href = "index.html"><img src="assets/pce_not-cataloguer_logo.png" style = "width: 10%"></a>PCE Not-CAT-aloguer Alpha - add cat page (data entry)
-            </p>
-            <p id = "catpreview"></p>
-            <p class ="display"></p>
-        </div>
-        <div id="entryarea">
-            <textarea class = "input" placeholder = "In PCE, <Ctrl+A> on your cat's page to select the whole page, then <Ctrl+C> to copy it. Then, navigate to this website, click this text box, and <Ctrl+V> to paste everything!"></textarea>
-            <button id = "submit" onclick= "addCat(document.querySelector('.input').value)">Submit<img src = "assets/addcat.png"></button> 
+            <!--(Ignore how ugly this page is, it'll get prettied up later)-->
+            <p>Please check results for accuracy and submit a bug report if something is wrong!</p>
             </div>
-            <div id = "genetestingbutton"></div>
-            <div id = "bbcodebutton"></div>
+            <div id="catbox">
+                <p id = "catpreview"></p>
+                <p class ="display"></p>
+            </div>
+            <div id="entryarea">
+                <textarea class = "input" placeholder = "In PCE, <Ctrl+A> on your cat's page to select the whole page, then <Ctrl+C> to copy it. Then, navigate to this website, click this text box, and <Ctrl+V> to paste everything!"></textarea>
+                <button id = "submit" onclick= "addCat(document.querySelector('.input').value)">Submit<img src = "assets/addcat.png"></button> 
+            </div>
+            <div id="endbuttons">
+                <div id = "genetestingbutton"></div>
+                <div id = "bbcodebutton"></div>
+            </div>
             <div id = "bbcodebox" class = "hidebbcodebox"></div>
-        </div>
-        
-        <script src="generateBBCodeGeneString.js"></script>
-        <script src="geneTestingButton.js"></script>
+            <script src="generateBBCodeGeneString.js"></script>
+            <script src="geneTestingButton.js"></script>
+        </section>
     </body>
 </html>
