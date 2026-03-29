@@ -67,6 +67,7 @@ function loadStoredCat() {
             if (thisCat.wind) {
                 changeInnerText("cat-carries-list", listHiddenRecessive(genestringtext, thisCat.wind))
                 changeBBCodeButtonFunction(genestringtext, thisCat.wind)
+                changeGeneTesterButtonFunction(thisCat)
             }
             else {}
         }
@@ -166,6 +167,10 @@ function changeBBCodeButtonFunction(genes, wind) {
         generateBBCodeGeneString(genes, 'bbcodebox', wind)
     }
     thisDiv.onclick = functionstring
+}
+
+function changeGeneTesterButtonFunction(cat) {
+    geneTestingButton(cat.genes, cat.id, cat.name, cat.wind, cat.fur, cat.white, cat.pattern, cat.accentColor, cat.eyes, cat.pose, cat.age, cat.species, document.getElementById("genetest-button"))
 }
 
 function changeInnerText(div_id, value) {

@@ -5,6 +5,8 @@ function addVillage(plaintext) {
     console.log(trimmedTexts)
     let catsInfo = parseCatData(trimmedTexts[1], tab)
     console.log(catsInfo)
+    let displaybox = document.querySelector(".display")
+    displaybox.innerText = catsInfo
 }
 
 function trimText(text) {

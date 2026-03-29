@@ -209,150 +209,166 @@ function changeGenes(ID, value) {
     if (value == "?") {
         changeDescText(ID, "Unknown")
     }
-    switch(ID) {
-        case "#species":
-            switch(value) {
-                case "C":
-                    changeDescText(ID, "Not-Cat")
-                    break;
-                case "M":
-                    changeDescText(ID, "Mercat")
-                    break;
-            }
-        case "#wind-1":
-        case "#wind-2":
-            switch(value) {
-                case "N":
-                    changeDescText(ID, "North")
-                    break;
-                case "S": 
-                    changeDescText(ID, "South")
-                    break;
-                case "O":
-                    changeDescText(ID, "Null")
-                    break;
-            }
-            break
-        case "#fur-1":
-        case "#fur-2":
-            switch(value) {
-                case "S":
-                    changeDescText(ID, "Shorthair")
-                    break; 
-                case "L":
-                    changeDescText(ID, "Longhair")
-                    break; 
-            }
-            break
-        case "#color-1":
-        case "#color-2":
-            switch(value) {
-                case "O":
-                    changeDescText(ID, "Orange")
-                    break; 
-                case "B":
-                    changeDescText(ID, "Black")
-                    break; 
-            }
-            break
-        case "#dilute-1":
-        case "#dilute-2":
-            switch(value) {
-                case "F":
-                    changeDescText(ID, "Full")
-                    break; 
-                case "D":
-                    changeDescText(ID, "Dilute")
-                    break; 
-            }
-            break
-        case "#density":
-            changeDescText(ID, value+ "/4 Color Density")
-            break
-        case "#pattern-yes-no-1":
-        case "#pattern-yes-no-2":
-            switch(value) {
-                case "Y":
-                    changeDescText(ID, "Yes Pattern")
-                    break; 
-                case "N":
-                    changeDescText(ID, "No Pattern")
-                    break; 
-            }
-            break
-        case "#pattern-1":
-        case "#pattern-2":
-            switch(value) {
-                case "T":
-                    changeDescText(ID, "Stripe")
-                    break; 
-                case "S":
-                    changeDescText(ID, "Spot")
-                    break; 
-                case "M":
-                    changeDescText(ID, "Marble")
-                    break; 
-                case "P":
-                    changeDescText(ID, "Point")
-                    break; 
-                case "A":
-                    changeDescText(ID, "Agouti")
-                    break; 
-            }
-            break
-        case "#white-yes-no-1":
-        case "#white-yes-no-2":
-            switch(value) {
-                case "Y":
-                    changeDescText(ID, "Yes White")
-                    break; 
-                case "N":
-                    changeDescText(ID, "No White")
-                    break; 
-            }
-            break
-        case "#white-level":
-            changeDescText(ID, value+ "/10 White Level")
-            break
-        case "#white-type":
-            switch(value) {
-                case "C":
-                    changeDescText(ID, "Classic")
-                    break; 
-                case "P":
-                    changeDescText(ID, "Piebald")
-                    break; 
-                case "L":
-                    changeDescText(ID, "Left")
-                    break; 
-                case "R":
-                    changeDescText(ID, "Right")
-                    break; 
-                case "I":
-                    changeDescText(ID, "Inverse")
-                    break; 
-                case "T":
-                    changeDescText(ID, "Tabby")
-                    break; 
-            }
-            break
-        case "#accent-color-1":
-        case "#accent-color-2":
-            switch(value) {
-                case "R":
-                    changeDescText(ID, "Red")
-                    break;
-                case "B":
-                    changeDescText(ID, "Blue")
-                    break;
-                case "Y":
-                    changeDescText(ID, "Yellow")
-                    break;
-                case "L":
-                    changeDescText(ID, "Black")
-                    break;
-            }
+    else {
+        switch(ID) {
+            case "#species":
+                switch(value) {
+                    case "C":
+                        changeDescText(ID, "Not-Cat")
+                        break;
+                    case "M":
+                        changeDescText(ID, "Mercat")
+                        break;
+                }
+            case "#wind-1":
+            case "#wind-2":
+                switch(value) {
+                    case "N":
+                        changeDescText(ID, "North")
+                        break;
+                    case "S": 
+                        changeDescText(ID, "South")
+                        break;
+                    case "O":
+                        changeDescText(ID, "Null")
+                        break;
+                }
+                break
+            case "#fur-1":
+            case "#fur-2":
+                switch(value) {
+                    case "S":
+                        changeDescText(ID, "Shorthair")
+                        break; 
+                    case "L":
+                        changeDescText(ID, "Longhair")
+                        break; 
+                }
+                break
+            case "#color-1":
+            case "#color-2":
+                switch(value) {
+                    case "O":
+                        changeDescText(ID, "Orange")
+                        break; 
+                    case "B":
+                        changeDescText(ID, "Black")
+                        break; 
+                }
+                break
+            case "#dilute-1":
+            case "#dilute-2":
+                switch(value) {
+                    case "F":
+                        changeDescText(ID, "Full")
+                        break; 
+                    case "D":
+                        changeDescText(ID, "Dilute")
+                        break; 
+                }
+                break
+            case "#density":
+                changeDescText(ID, value+ "/4 Color Density")
+                break
+            case "#pattern-yes-no-1":
+            case "#pattern-yes-no-2":
+                switch(value) {
+                    case "Y":
+                        changeDescText(ID, "Yes Pattern")
+                        break; 
+                    case "N":
+                        changeDescText(ID, "No Pattern")
+                        break; 
+                }
+                break
+            case "#pattern-1":
+            case "#pattern-2":
+                switch(value) {
+                    case "T":
+                        changeDescText(ID, "Stripe")
+                        break; 
+                    case "S":
+                        changeDescText(ID, "Spot")
+                        break; 
+                    case "M":
+                        changeDescText(ID, "Marble")
+                        break; 
+                    case "P":
+                        changeDescText(ID, "Point")
+                        break; 
+                    case "A":
+                        changeDescText(ID, "Agouti")
+                        break; 
+                }
+                break
+            case "#white-yes-no-1":
+            case "#white-yes-no-2":
+                switch(value) {
+                    case "Y":
+                        changeDescText(ID, "Yes White")
+                        break; 
+                    case "N":
+                        changeDescText(ID, "No White")
+                        break; 
+                }
+                break
+            case "#white-level":
+                changeDescText(ID, value+ "/10 White Level")
+                break
+            case "#white-type":
+                switch(value) {
+                    case "C":
+                        changeDescText(ID, "Classic")
+                        break; 
+                    case "P":
+                        changeDescText(ID, "Piebald")
+                        break; 
+                    case "L":
+                        changeDescText(ID, "Left")
+                        break; 
+                    case "R":
+                        changeDescText(ID, "Right")
+                        break; 
+                    case "I":
+                        changeDescText(ID, "Inverse")
+                        break; 
+                    case "T":
+                        changeDescText(ID, "Tabby")
+                        break; 
+                }
+                break
+            case "#growth-1":
+            case "#growth-2": 
+                switch(value) {
+                    case "A":
+                        changeDescText(ID, "A Growth Gene")
+                        break;
+                    case "B":
+                        changeDescText(ID, "B Growth Gene")
+                        break;
+                    case "C":
+                        changeDescText(ID, "C Growth Gene")
+                        break;
+                }
+            case "#accent-color-1":
+            case "#accent-color-2":
+                switch(value) {
+                    case "R":
+                        changeDescText(ID, "Red")
+                        break;
+                    case "B":
+                        changeDescText(ID, "Blue")
+                        break;
+                    case "Y":
+                        changeDescText(ID, "Yellow")
+                        break;
+                    case "L":
+                        changeDescText(ID, "Black")
+                        break;
+                }
+        }
     }
+    
 }
 
 function changeDescText(ID, value) {
@@ -381,6 +397,8 @@ function initialGenesSetup(genes) {
     changeGenes("#white-yes-no-2", genes[5][1])
     changeGenes("#white-level", genes[5][2])
     changeGenes("#white-type", genes[5][3])
+    changeGenes("#growth-1", genes[6][0])
+    changeGenes("#growth-2", genes[6][1])
     changeGenes("#accent-color-1", genes[7][0])
     changeGenes("#accent-color-2", genes[7][1])
 }

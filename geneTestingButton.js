@@ -1,16 +1,17 @@
 // handles adding buttons for various pages that are repeated across multiple pages, like gene testing button 
 
 function geneTestingButton(catGeneString, id, name, wind, fur, white, pattern, accentcolor, eyes, pose, age, species, location) {
+    console.log(location)
     if (catGeneString) {
         let geneString = geneStringifier(catGeneString)
         let functionName = "redirectToGeneTesting('" + geneString + "', '" + id + "', '" + name + "', '" + wind + "', '" + fur.length  + "', '" + fur.color + "', '" + fur.type  + "', '" + white.level  + "', '" + white.type + "', '"  + pattern + "', '" + accentcolor + "', '" + eyes.eyes + "', '" + eyes.color + "', '" + pose + "', '" + age + "', '" + species + "')"
-        if (document.getElementById("continuetogenetester")) {
-            let geneTestButton = document.getElementById("continuetogenetester")
+        if (document.getElementById("genetest-button")) {
+            let geneTestButton = document.getElementById("genetest-button")
             geneTestButton.setAttribute("onclick", functionName)
         }
         else {
             let geneTestButton = document.createElement('button')
-            geneTestButton.setAttribute("id", "continuetogenetester")
+            geneTestButton.setAttribute("id", "genetest-button")
             geneTestButton.textContent = "Continue to Gene Testing"
             
             geneTestButton.setAttribute("onclick", functionName)
