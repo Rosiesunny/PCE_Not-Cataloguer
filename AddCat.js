@@ -195,7 +195,7 @@ function parseAppearanceData(text, basicdata) {
 
 
 function parsePersonalityAndTrinketData(text) {
-    const personalityRegEx = /Personality Traits\n?(Adventurous|Commanding|Curious|Dramatic|Gentle|Imaginative|Jovial|Mysterious|Ordinary|Pleasant|Protective|Rebellious) Personality:\n?Bravery:\n?([0-9]+)\n?Benevolence:\n?([0-9]+)\n?Energy:\n?([0-9]+)\n?Extroversion:\n?([0-9]+)\n?Dedication:\n?([0-9]+)\n?Held Trinket:\n?(.+)\n?(?:\[(.+) (.+)\])?/gm
+    const personalityRegEx = /Personality Traits\n?(Adventurous|Commanding|Curious|Dramatic|Gentle|Imaginative|Jovial|Mysterious|Ordinary|Pleasant|Protective|Rebellious) Personality:\n?Bravery:\n?([-]?[0-9]+)\n?Benevolence:\n?([-]?[0-9]+)\n?Energy:\n?([-]?[0-9]+)\n?Extroversion:\n?([-]?[0-9]+)\n?Dedication:\n?([-]?[0-9]+)\n?Held Trinket:\n?(.+)\n?(?:\[(.+) (.+)\])?/gm
     let match = personalityRegEx.exec(text)
 
     let cat = {
