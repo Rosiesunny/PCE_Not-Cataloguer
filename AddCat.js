@@ -5,6 +5,16 @@ function addCat(plaintext) {
     let relationshipsText = trimmedTexts[1] // just cat relationships
     let biographyText = trimmedTexts[2] // just the biography
     let wearingText = trimmedTexts[3] // just the clothes
+    if (!relationshipsText) {
+        relationshipsText = ""
+    }
+    if (!biographyText) {
+        biographyText = ""
+    }
+    if (!wearingText) {
+        wearingText = ""
+    }
+    console.log(trimmedTexts)
 
     let catOwnerPoseEyesNameLocationPersonality = parseCatOwnerPoseEyesNameLocationPersonality(text)
     let catBasicInfo = parseBasicData(text)

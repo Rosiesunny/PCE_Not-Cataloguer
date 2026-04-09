@@ -1943,7 +1943,8 @@ function checkForDataStorageUpdates(cachedVillage, village) {
                 AlphaOnePointTwoVersionUpdate() // adds a default for new setting, checkBioForGeneString
             case "Alpha 1.2":
                 AlphaOnePointThreeVersionUpdate(cachedVillage) // changes all lvl 0 cats to lvl 1 to match village manager
-                
+            case "Alpha 1.3":
+                AlphaOnePointFourVersionUpdate(cachedVillage) // adds a default for 2 new settings, includeExtraSpaces and smallerRecessives, and fixes gene strings with strings instead of numbers for density/white level
         }
     }
     else {
@@ -2043,4 +2044,25 @@ function AlphaOnePointThreeVersionUpdate(cachedVillage) {
         }
     }
     localStorage.setItem("NotCataloguerVersion", "Alpha 1.3")
+}
+
+function AlphaOnePointFourVersionUpdate(cachedVillage) {
+    console.log("Updated old data (if any) for Alpha 1.4")
+    localStorage.setItem("includeExtraSpaces", "false")
+    localStorage.setItem("smallerRecessives", "true")
+    localStorage.setItem("NotCataloguerVersion", "Alpha 1.4")
+    cats_list = Object.keys(cachedVillage.cats)
+    console.log(cats_list)
+    for (let i = 0; i < cats_list.length; i++) {
+        let cat = cachedVillage.cats[cats_list[i]]
+        if (cat.hasOwnProperty("genes")) {
+            if (cat.genes[9] !== "?") {
+                cat.genes[9] = Number(cat.genes[9])
+            }
+            if (cat.genes[16] !== "?") {
+                cat.genes[16] = Number(cat.genes[9])
+            }
+        }
+    }
+    return
 }

@@ -220,6 +220,10 @@ function checkRelationshipMatch(relation1, relation2, friendsorfamily) {
 }
 
 function detectGeneStringInBiography(biography, genes) {
+    if (typeof genes == "undefined") {
+        genes = ["?", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?"]
+    }
+    
     let genesRegEx = /\[ ?(.) ?\] ?\[ ?(.)(.) ?\] ?\[ ?(.)(.) ?\] ?\[ ?(.)(.)(.)(.)(.) ?\] ?\[ ?(.)(.)(.)(.) ?\] ?\[ ?(.)(.)([0-9]+|\?)(.) ?\] ?\[ ?(.)(.) ?\] ?\[ ?(.)(.) ?\]/gm
     let match = genesRegEx.exec(biography)
     if (match) {
@@ -227,6 +231,12 @@ function detectGeneStringInBiography(biography, genes) {
         let newarray = []
         for (let i = 0; i < match.length; i++) {
             newarray[i] = match[i]
+        }
+        if (newarray[9] !== "?") {
+            newarray[9] = Number(newarray[9])
+        }
+        if (newarray[16] !== "?") {
+            newarray[16] = Number(newarray[16])
         }
         return newarray
     }
@@ -245,6 +255,12 @@ function detectGeneStringInBiography(biography, genes) {
             // fixing incorrect gene code
             newarray[16] = whitelevel
             newarray[17] = whitetype
+            if (newarray[9] !== "?") {
+            newarray[9] = Number(newarray[9])
+            }
+            if (newarray[16] !== "?") {
+                newarray[16] = Number(newarray[16])
+            }
             return newarray
         }
         else {

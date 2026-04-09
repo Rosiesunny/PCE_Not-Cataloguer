@@ -1,0 +1,42 @@
+<!-- Comments look like this -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href = "../PCE_Catjail_Default.css">
+        <link rel="icon" href ="../favicon.ico">
+        <link rel="stylesheet" href = "BBCodeGenerator/BBCodeGenerator.css">
+    </head>
+    
+    <body>
+        <header>
+        <div class = "back">
+            <a href = "../index.html"><img src="../assets/pce_not-cataloguer_logo.png" height="85" width="85"></a>
+        </div>
+        </header>
+        <h1>Plain Gene -> BBCode</h1>
+        <section>
+            <div id = "testbox">
+            </div>
+            <div id="catbox">
+                <p id = "catpreview"></p>
+                <div class = "display">
+                    <textarea id = "display" placeholder = "BBCode will show up here when you press the button"></textarea>
+                </div>
+                
+            </div>
+            <div id="entryarea">
+                <textarea class = "input" placeholder = "Paste a plain gene code here to generate a BBCode for it!"></textarea>
+                <button id = "submit" onclick= "checkGeneCode(document.querySelector('.input').value)"><img src = "../assets/genetesting.png">Generate BBCode for this Gene String<img src = "../assets/genetesting.png"></button> 
+            </div>
+            <div id="endbuttons">
+                <div id = "bbcodebutton"></div>
+            </div>
+            <div id = "bbcodebox" class = "hidebbcodebox"></div>
+            <script src="../generateBBCodeGeneString.js"></script>
+            <script src="../geneTestingButton.js"></script>
+            <script src="../storageSettingsCheck.js"></script>
+            <script src="BBCodeGenerator/BBCodeGenerator.js"></script>
+        </section>
+        For people who already gened their cats and wanna use the fancy BBCode generator without the hassle of adding all their cats to the Not-Cataloguer. Just paste a gene code in the right box and it'll spit out a BBCode for you, following all the same rules you have set up in <a href="../Settings.html">Settings</a>
+    </body>
+</html>

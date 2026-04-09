@@ -91,6 +91,34 @@ h2{
     margin-left:auto;
     max-width:200px
 }
+
+.not-done {
+    background-color: grey;
+    cursor:not-allowed;
+    padding: 3.5%; 
+    float: left; /* Float the buttons side by side */
+    width: 24%;
+    margin: .9%;
+    font-size: 1.3rem;
+    border-radius: 50px;
+}
+
+.done {
+    background-color: rgb(86, 127, 139); 
+    color: white; 
+    padding: 3.5%; 
+    cursor: pointer; 
+    float: left; /* Float the buttons side by side */
+    width: 24%;
+    margin: .9%;
+    font-size: 1.3rem;
+    border-radius: 50px;
+}
+
+.done:hover {
+    background-color: #1f5d61;
+}
+
 .btn-group {
     width: 100%;
     display: flex;
@@ -99,35 +127,12 @@ h2{
     
 }
 /* https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_button_group */
-.btn-group button {
-    background-color: rgb(86, 127, 139); 
-    color: white; 
-    padding: 3.5%; 
-    cursor: pointer; 
-    float: left; /* Float the buttons side by side */
-    width: 18%;
-    margin: .9%;
-    font-size: 1.3rem;
-    border-radius: 50px;
-}
+
 
 .btn-group img {
-    width: 6vw;
+    width: 5vw;
 }
 
-.btn-group button:hover {
-    background-color: #1f5d61;
-}
-
-.btn-group button:last-child{
-    background-color: grey;
-    cursor:not-allowed;
-}
-
-.btn-group button:nth-child(3){
-    background-color: grey;
-    cursor:not-allowed;
-}
 
 h1 {
     margin-left: 15%;

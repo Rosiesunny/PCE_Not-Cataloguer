@@ -34,7 +34,7 @@
                     <input type="checkbox" class = "data-storage-checkboxes" id = "colorBBCode-checkbox"  data-storage-key = "colorBBCode" checked>
                     <label for = "colorBBCode-checkbox" class = "hoverable-label"><span class = "label-text">Color BBCode</span></label>
                     <div class = "explanation-box">
-                        <p>Should generated BBCodes be color coded based on their genes, or just be plaintext? This setting also impacts whether recessive genes are a smaller font size or not.</p>
+                        <p>Should generated BBCodes be color coded based on their genes, or just be plaintext?</p>
                         <img src = "assets/bbcode_example.png">
 
                     </div>
@@ -46,6 +46,24 @@
                     <div class = "explanation-box">
                         <p>Should generated BBCodes include a list of a cat's hidden/recessive traits if there are any?</p>
                     </div>
+                    <br>
+                    <br>
+
+                    <input type="checkbox" class = "data-storage-checkboxes" id = "smallerRecessives-checkbox"  data-storage-key = "smallerRecessives" checked>
+                    <label for = "smallerRecessives-checkbox" class = "hoverable-label"><span class = "label-text">Smaller Recessives</span></label>
+                    <div class = "explanation-box">
+                        <p>Should recessive genes be smaller than dominant genes?</p>
+                        <img src = "assets/bbcode_example_smaller_recessives.png">
+                    </div>
+                    <br>
+                    <br>
+
+                    <input type="checkbox" class = "data-storage-checkboxes" id = "includeExtraSpaces-checkbox"  data-storage-key = "includeExtraSpaces">
+                    <label for = "includeExtraSpaces-checkbox" class = "hoverable-label"><span class = "label-text">Include Extra Spaces</span></label>
+                    <div class = "explanation-box">
+                        <p>By default, gene codes generated with the Not-Cataloguer are generated with the format [?] [??] [??] [?????] [????] [????] [??] [??]. On the PCE website, revealed genes have an extra space inbetween the brackets and the alleles like this: [ ? ] [ ?? ] [ ?? ] [ ????? ] [ ???? ] [ ???? ] [ ?? ] [ ?? ]. If you prefer extra spaces to match PCE's revealed genes, check this box!</p>
+                    </div>
+
                 </div>
 
                 <div id = "data-storage-settings" class = "textbox">

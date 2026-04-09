@@ -1,44 +1,80 @@
-function generateBBCodeGeneString(genestring, locationID, wind) {
+function generateBBCodeGeneString(genestring, locationID, wind, directID) {
     // https://www.geeksforgeeks.org/how-to-create-popup-box-using-html-and-css/#
-    let genestringText = ""
-    if (localStorage.getItem("colorBBCode") == "false") {
-        genestringText = genestring
-    }
-    else {
-        let genestringArray = genestring.split("]")
+    let bbcodeText = ""
+    let genestringArray = []
+    console.log(genestring)
+    if (typeof genestring == "string") {
+        genestringArray = genestring.split("]")
         for (let i = 0; i < genestringArray.length; i++) {
             genestringArray[i] = genestringArray[i].split("[")[1]
         }
+        console.log(genestringArray)
+    }
+    else {
+        if (genestring.length == 22) {
+            genestringArray = [genestring[0], genestring[1]+genestring[2], genestring[3]+genestring[4], genestring[5]+genestring[6]+genestring[7]+genestring[8]+genestring[9], genestring[10]+genestring[11]+genestring[12]+genestring[13], genestring[14]+genestring[15]+genestring[16]+genestring[17], genestring[18]+genestring[19], genestring[20]+genestring[21]]
+            genestring = "[" + genestringArray[0] + "] [" + genestringArray[1] + "] [" + genestringArray[2] + "] [" + genestringArray[3] + "] [" + genestringArray[4] + "] [" + genestringArray[5] + "] [" + genestringArray[6] + "] [" + genestringArray[7] + "]"
+        }
         
-        genestringText += "[" + switchSpeciesBBCode(genestringArray[0]) + "] " 
-        genestringText += "[" + switchWindBBCode(genestringArray[1][0]) + switchWindBBCode(genestringArray[1][1]) + "] " 
-        genestringText += "[" + switchFurBBCode(genestringArray[2][0]) + switchFurBBCode(genestringArray[2][1]) + "] "
-        genestringText += "[" + switchColorBBCode(genestringArray[3][0]) + switchColorBBCode(genestringArray[3][1]) + switchDiluteBBCode(genestringArray[3][2]) + switchDiluteBBCode(genestringArray[3][3]) + genestringArray[3][4] + "] "
-        genestringText += "[" + switchYesNoBBCode(genestringArray[4][0]) + switchYesNoBBCode(genestringArray[4][1]) + genestringArray[4][2] + genestringArray[4][3] + "] "
-        genestringText += "[" + switchYesNoBBCode(genestringArray[5][0]) + switchYesNoBBCode(genestringArray[5][1]) 
-        if (genestringArray[5].length > 4) {
-            genestringText += genestringArray[5][2] + genestringArray[5][3] + switchWhiteTypeBBCode(genestringArray[5][4]) + "] "
+    }
+    console.log(genestring)
+    console.log(genestringArray)
+    if (localStorage.getItem("colorBBCode") == "false") {
+        if (localStorage.getItem("includeExtraSpaces") == "true") {
+            bbcodeText += "[ " + genestringArray[0] + " ] [ " + genestringArray[1] + " ] [ " + genestringArray[2] + " ] [ " + genestringArray[3] + " ] [ " + genestringArray[4] + " ] [ " + genestringArray[5] + " ] [ " + genestringArray[6] + " ] [ " + genestringArray[7] + " ]"
         }
         else {
-            genestringText += genestringArray[5][2] + switchWhiteTypeBBCode(genestringArray[5][3]) + "] "
+            if (typeof genestring == "string") {
+                bbcodeText = genestring
+            }
+            if (Array.isArray(genestring)) {
+                bbcodeText += "[" + genestringArray[0] + "] [" + genestringArray[1] + "] [" + genestringArray[2] + "] [" + genestringArray[3] + "] [" + genestringArray[4] + "] [" + genestringArray[5] + "] [" + genestringArray[6] + "] [" + genestringArray[7] + "]"
+            }
         }
-        genestringText += "[" + genestringArray[6] + "] [" + switchAccentColorBBCode(genestringArray[7][0]) + switchAccentColorBBCode(genestringArray[7][1]) + "]"
+    }
+    else {
+        let space = ""
+        if (localStorage.getItem("includeExtraSpaces") == "true") {
+            space = " "
+        }
+        bbcodeText += "[" + space + switchSpeciesBBCode(genestringArray[0]) + space + "] " 
+        bbcodeText += "[" + space + switchWindBBCode(genestringArray[1][0]) + switchWindBBCode(genestringArray[1][1]) + space + "] " 
+        bbcodeText += "[" + space + switchFurBBCode(genestringArray[2][0]) + switchFurBBCode(genestringArray[2][1]) + space + "] "
+        bbcodeText += "[" + space + switchColorBBCode(genestringArray[3][0]) + switchColorBBCode(genestringArray[3][1]) + switchDiluteBBCode(genestringArray[3][2]) + switchDiluteBBCode(genestringArray[3][3]) + genestringArray[3][4] + space + "] "
+        bbcodeText += "[" + space + switchYesNoBBCode(genestringArray[4][0]) + switchYesNoBBCode(genestringArray[4][1]) + genestringArray[4][2] + genestringArray[4][3] + space + "] "
+        bbcodeText += "[" + space + switchYesNoBBCode(genestringArray[5][0]) + switchYesNoBBCode(genestringArray[5][1]) 
+        if (genestringArray[5].length > 4) {
+            bbcodeText += genestringArray[5][2] + genestringArray[5][3] + switchWhiteTypeBBCode(genestringArray[5][4]) + space + "] "
+        }
+        else {
+            bbcodeText += genestringArray[5][2] + switchWhiteTypeBBCode(genestringArray[5][3]) + space + "] "
+        }
+        bbcodeText += "[" + space + genestringArray[6] + space + "] [" + space + switchAccentColorBBCode(genestringArray[7][0]) + switchAccentColorBBCode(genestringArray[7][1]) + space + "]"
     }
 
     let bbcodePrefix = localStorage.getItem("bbcodePrefix")
     let bbcodeSuffix = localStorage.getItem("bbcodeSuffix")
-    let userStyleGeneStringText = ""
+    let userStylebbcodeText = ""
     if (bbcodePrefix) {
-        userStyleGeneStringText += JSON.parse(bbcodePrefix)
+        userStylebbcodeText += JSON.parse(bbcodePrefix)
     }
-    userStyleGeneStringText += genestringText
+    userStylebbcodeText += bbcodeText
     if (bbcodeSuffix) {
-        userStyleGeneStringText += JSON.parse(bbcodeSuffix)
+        userStylebbcodeText += JSON.parse(bbcodeSuffix)
     }
     if (localStorage.getItem("listHiddenRecessive") == "true") {
-        userStyleGeneStringText += "\nCarries/Hides: " + listHiddenRecessive(genestring, wind)
+        userStylebbcodeText += "\nCarries/Hides: " + listHiddenRecessive(genestring, wind)
     }
-    popupWindow(userStyleGeneStringText, locationID)
+    console.log(userStylebbcodeText)
+    if (directID) {
+        popupWindow(userStylebbcodeText, locationID)
+        let outputBox = document.getElementById(locationID)
+        outputBox.value = bbcodeText
+    }
+    else {
+        popupWindow(userStylebbcodeText, locationID)
+    }
+    
 }
 
 function bbcodeButton(catGeneString, wind, location) {
@@ -60,7 +96,7 @@ function bbcodeButton(catGeneString, wind, location) {
     }
 }
 
-function popupWindow(genestringText, locationID) {
+function popupWindow(bbcodeText, locationID) {
     let location = document.getElementById(locationID)
     location.innerHTML = ""
     location.classList.add("showbbcodebox")
@@ -71,7 +107,7 @@ function popupWindow(genestringText, locationID) {
 
     let popupGenes = document.createElement("textarea")
     popupGenes.classList.add("popupGenes")
-    popupGenes.value = genestringText
+    popupGenes.value = bbcodeText
 
     let popupX = document.createElement("button")
     popupX.classList.add("xbutton")
@@ -114,7 +150,12 @@ function switchWindBBCode(gene) {
         case "S":
             return "[color=red]S[/color]"
         case "O":
-            return "[color=grey][size=1]O[/size][/color]"
+            if (localStorage.getItem("smallerRecessives") == "true") {
+                return "[color=grey][size=1]O[/size][/color]"
+            }
+            else {
+                return "[color=grey]O[/color]"
+            }
         case "?":
             return "?"
     }
@@ -125,7 +166,12 @@ function switchFurBBCode(gene) {
         case "S":
             return "[color=yellow]S[/color]"
         case "L":
-            return "[color=purple][size=1]L[/size][/color]"
+            if (localStorage.getItem("smallerRecessives") == "true") {
+                return "[color=purple][size=1]L[/size][/color]"
+            }
+            else {
+                return "[color=purple]L[/color]"
+            }
         case "?":
             return "?"
     }
@@ -147,7 +193,12 @@ function switchDiluteBBCode(gene) {
         case "F":
             return "[color=brown]F[/color]"
         case "D":
-            return "[color=yellow][size=1]D[/size][/color]"
+            if (localStorage.getItem("smallerRecessives") == "true") {
+                return "[color=yellow][size=1]D[/size][/color]"
+            }
+            else {
+                return "[color=yellow]D[/color]"
+            }
         case "?":
             return "?"
     }
@@ -158,7 +209,12 @@ function switchYesNoBBCode(gene) {
         case "Y":
             return "[color=green]Y[/color]"
         case "N":
-            return "[color=red][size=1]N[/size][/color]"
+            if (localStorage.getItem("smallerRecessives") == "true") {
+                return "[color=red][size=1]N[/size][/color]"
+            }
+            else {
+                return "[color=red]N[/color]"
+            }
         case "?":
             return "?"
     }

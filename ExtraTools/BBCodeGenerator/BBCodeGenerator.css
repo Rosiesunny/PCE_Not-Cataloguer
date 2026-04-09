@@ -1,0 +1,117 @@
+/* Comments work like this */
+header {
+    display:flex;
+    flex-direction: row;
+    text-decoration: none;
+    align-items: flex-end;
+}
+ul{
+    margin: 0%;
+}
+
+body {
+    background-color:rgb(22, 12, 12);
+    color:rgb(255, 255, 255);
+}
+
+section {
+    background-color: #50585a;
+    display: flex;
+    flex-direction: row;
+    border-style: solid;
+    border-width: 20px;
+    border-color: #494949;
+    border-radius: 20px;
+    flex-wrap: wrap;
+}
+
+#submit {
+    font-size: 24px;
+    background-color:#1df0f08c;
+    margin: 2%;
+    flex-basis: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#submit img{
+    margin: 2%
+}
+
+.input {
+    overflow: normal;
+    overflow-y: auto;
+    height: calc(100vh - 550px);
+    background-color:#1f5d61;
+    color:rgb(255, 255, 240);
+    margin: 2%;
+    padding: 2%;
+}
+
+#display {
+    background-color:#34afb8;
+    height: calc(100vh - 600px);
+    width: 98%;
+}
+
+#entryarea {
+    flex-basis: 50%;
+    display: flex;
+    flex-direction: column;
+    height: 70%;
+}
+
+#testbox {
+    flex-basis: 100%;
+}
+
+#catbox {
+    display: flex;
+    flex-basis: 50%;
+    flex-direction: column;
+    height: 70%;
+}
+
+.display {
+    overflow: scroll;
+    overflow-y: auto;
+    height: calc(100vh - 550px);
+    background-color:#103d41;
+    margin: 2%;
+    padding: 2%;
+}
+
+#continuetogenetester {
+    font-size: 150%;
+    font-weight: bold;
+}
+
+#generatebbcode {
+    background-color:rgb(72, 204, 197);
+    margin: 2%;
+}
+
+#generatebbcode:hover {
+    background-color:rgb(36, 139, 134);
+}
+
+#bbcodebutton {
+    font-size: 150%;
+    font-weight: bold;
+    align-self: center;
+    margin-top: 1%;
+}
+
+#genetestingbutton{
+    align-self: center;
+}
+#catpreview {
+    flex-basis: 10%;
+}
+
+#endbuttons {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+}
