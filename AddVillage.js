@@ -10,7 +10,7 @@ function addVillage(plaintext) {
 }
 
 function trimText(text) {
-    let trimRegEx = /.+\nAll Cats\nActive Cats Only\nTraveling Cats Only\nBasic Information\nPersonality \[Base\]\nAttributes \[Base\]\nPersonality \[w\/Bonus\]\nAttributes \[w\/Bonus\]\nDay Job Bonuses\nAdventuring Levels\nAdventuring Dice\nAppearances\nBirthdays\n\n((?:.|\n)+)\n[0-9]+ Users Online\nTerms of Service\nCommunity Guidelines\nPrivacy Policy\nCredits\nContact Us/gm
+    let trimRegEx = /.+\nAll Cats\nActive Cats Only\nTraveling Cats Only\nBasic Information\nPersonality \[Base\]\nAttributes \[Base\]\nPersonality \[w\/Bonus\]\nAttributes \[w\/Bonus\]\nDay Job Bonuses\nAdventuring Levels\nAdventuring Dice\nAppearances\nBirthdays\n?\n((?:.|\n)+)\n[0-9]+ Users Online\nTerms of Service\nCommunity Guidelines\nPrivacy Policy\nCredits\nContact Us/gm
     let match = trimRegEx.exec(text)
     let trimColumnHeadersRegEx = /(Name	ID	.+\n)((?:.|\n)+)*/gm
     let match2 = trimColumnHeadersRegEx.exec(match[1])
