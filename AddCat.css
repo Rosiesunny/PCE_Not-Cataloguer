@@ -1,4 +1,34 @@
 /* Comments work like this */
+/*COLOUR CODES
+white: #f4f4f4
+grey: dcdce0
+charcoal: 2e2e31
+black: 222222
+teal: 567f8a
+dark teal: 4b6e78
+light blue: c3dded
+blue: 9ec5d8
+light tan: e2dbd3
+tan: ccc3b9
+brown: 635b5c
+dark brown: 554f50
+*/
+:root {
+    --main-color: rgb(221, 221, 221);
+    --backdrop: rgb(0, 0, 0);
+    --helpbox: rgb(195, 195, 195);
+    --text: rgb(0,0,0); 
+    --madeby-text: rgb(0,0,0);
+    --links: rgb(0, 21, 66);
+}
+.theme-dark {
+    --main-color:rgb(46, 46, 49);
+    --backdrop: #ffffff;
+    --helpbox: rgb(29, 31, 36);
+    --text: aliceblue;
+    --madeby-text: rgb(218, 230, 240);
+    --links: rgb(105, 171, 228);
+}
 header {
     display:flex;
     flex-direction: row;
@@ -7,23 +37,25 @@ header {
 }
 ul{
     margin: 0%;
+    display: flex;
+    
 }
 header li a:hover{
     text-decoration: none;
-    color:#17c2c28c;
+    color:#ffffff;
 }
 header li:hover {
-    background-color: #1f5d61;
+    background-color: #4b6e78;
 }
 header li:first-child {
-background-color: #494949;
+background-color: #2e2e31;
 padding-left: 20px;
 padding-right: 20px;
 color: grey;
 }
 
 header li:first-child:hover {
-background-color: #494949;
+background-color: #2e2e31;
 cursor: not-allowed;
 }
     
@@ -39,17 +71,17 @@ header li a{
     margin-bottom: 0%;
 }
 header li {
-    background-color: grey;
+    background-color: #635b5c;
     height: 50px;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     font-family: sans-serif;
+    font-size: small;
     color: rgb(255, 255, 255);
-    float: left;
-    display:block;
+    display:flex;
     padding-top: 0%;
     padding-bottom: 20px;
-    margin-left: 20px;
+    margin-left: 2%;
     margin-bottom: 0%;
 }
 
@@ -60,23 +92,21 @@ header li {
     margin: 10px;
 }
 body {
-    background-color:rgb(22, 12, 12);
-    color:rgb(255, 255, 255);
+    background-color: var(--backdrop);
 }
 section {
-    background-color: #494949;
+    background-color: var(--main-color);
     display: flex;
     flex-direction: row;
-    border-style: solid;
     border-width: 20px;
-    border-color: #494949;
     border-radius: 20px;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 #submit {
     font-size: 24px;
-    background-color:#17c2c28c;
+    background-color:#4b6e78;
     margin: 2%;
     flex-basis: 10%;
     display: flex;
@@ -93,36 +123,49 @@ section {
     overflow: normal;
     overflow-y: auto;
     height: calc(100vh - 550px);
-    background-color:#1f5d61;
+    background-color:#567f8a;
     color:rgb(255, 255, 240);
     margin: 2%;
     padding: 2%;
 }
 
 #entryarea {
-    flex-basis: 50%;
     display: flex;
+    align-self: center;
     flex-direction: column;
-    height: 70%;
+    flex-basis: 50%;
 }
 #testbox {
-    flex-basis: 100%;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    align-content: center;
+    align-self: center;
+    margin-left: 5%;
+    margin-right: 5%;
+    color: var(--text);
+    flex-basis: 100vw;
+    margin-top: 2%;
 }
 
 #catbox {
     display: flex;
-    flex-basis: 50%;
     flex-direction: column;
-    height: 70%;
 }
 
 .display {
     overflow: scroll;
     overflow-y: auto;
-    height: calc(100vh - 550px);
-    background-color:#103d41;
+    height: 40vh;
+    width: 50vh;
+    background-color:#554f50;
     margin: 2%;
+    margin-right: 20%;
     padding: 2%;
+    align-self: center;
+    margin-bottom: 6%;
+
 }
 
 #continuetogenetester {
@@ -131,12 +174,13 @@ section {
 }
 
 #generatebbcode {
-    background-color:rgb(72, 204, 197);
+    background-color:#c3dded;
     margin: 2%;
+    margin-bottom: 20%;
 }
 
 #generatebbcode:hover {
-    background-color:rgb(36, 139, 134);
+    background-color:#9ec5d8;
 }
 
 #bbcodebutton {
@@ -150,11 +194,74 @@ section {
     align-self: center;
 }
 #catpreview {
-flex-basis: 10%;
+height: 19vh;
+margin-right: 20%;
 }
 
 #endbuttons {
     display: flex;
     flex-direction: column;
     flex-basis: 100%;
+}
+@media only screen and (max-width: 768px) {
+    .display{
+        margin-top: 0%;
+        padding-top: 0%;
+        width:  60vw;
+        height: 30vh;
+        margin-right: 0;
+    }
+    #catpreview{
+        width: 20vh;
+        height: 10vh;
+        align-self: center;
+        justify-self: center;
+        margin: 0%;
+    }
+    section{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        justify-items: center;
+    }
+    header ul {
+        padding: 0%;
+        width: 75%;
+    }
+    header ul li{
+        margin: 0%;
+        margin-left: 1%;
+        font-size: 7px;
+        padding-bottom: 5px;
+        margin-left: 5px;
+        border-radius: 0%;
+        padding-left: 3%;
+        padding-right: 3%;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        width: 75%;
+        align-items: center;
+    }
+    header ul li a{
+        margin: 0;
+        padding: 0;
+        
+    }
+    #testbox{
+        flex-basis: 0%;
+        align-self: center;
+    }
+    #entryarea{
+        height: 80vh;
+        width: 50vw;
+    }
+    .input{
+        height: 20vh;
+    }
+    #submit{
+        margin-bottom: 20%;
+    }
+
 }

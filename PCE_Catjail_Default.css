@@ -1,72 +1,86 @@
+   /*COLOUR CODES
+white: #f4f4f4
+grey: dcdce0
+charcoal: 2e2e31
+black: 222222
+teal: 567f8a
+dark teal: 4b6e78
+light blue: c3dded
+blue: 9ec5d8
+light tan: e2dbd3
+tan: ccc3b9
+brown: 635b5c
+dark brown: 554f50
+*/
    img {
-    image-rendering:-webkit-crisp-edges;
-    image-rendering:-moz-crisp-edges;
-    image-rendering:crisp-edges;
-    image-rendering:pixelated;
-    -ms-interpolation-mode:nearest-neighbor
+   image-rendering:-webkit-crisp-edges;
+   image-rendering:-moz-crisp-edges;
+   image-rendering:crisp-edges;
+   image-rendering:pixelated;
+   -ms-interpolation-mode:nearest-neighbor
    }
    .horizontalflex {
-    display:flex;
-    flex-direction:row
+   display:flex;
+   flex-direction:row
    }
    .wrapflex {
-    flex-wrap:wrap;
-    align-content:flex-start
+   flex-wrap:wrap;
+   align-content:flex-start
    }
    .justify {
-    justify-content:center
+   justify-content:center
    }
    .catjail {
-    width:100px;
-    height:100px;
-    background-position:var(--cat-watermark) 0;
-    overflow:hidden;
-    position:relative;
-    margin:0 auto;
-    isolation: isolate;   /* isolates the z-indexes so the cats don't appear on top of popup containers < - if something breaks soon after 3/12/26 with cat previews this is probably it. I think it'll be fine but shrug*/ 
+   width:100px;
+   height:100px;
+   background-position:var(--cat-watermark) 0;
+   overflow:hidden;
+   position:relative;
+   margin:0 auto;
+   isolation: isolate;   /* isolates the z-indexes so the cats don't appear on top of popup containers < - if something breaks soon after 3/12/26 with cat previews this is probably it. I think it'll be fine but shrug*/ 
    }
    .catforum {
-    width:100px;
-    height:100px;
-    background-position:var(--cat-watermark) 0;
-    overflow:hidden;
-    position:relative;
-    display:inline-block
+   width:100px;
+   height:100px;
+   background-position:var(--cat-watermark) 0;
+   overflow:hidden;
+   position:relative;
+   display:inline-block
    }
    .catjail-wide {
-    width:500px;
-    height:100px;
-    overflow:hidden;
-    position:relative;
-    margin:auto
+   width:500px;
+   height:100px;
+   overflow:hidden;
+   position:relative;
+   margin:auto
    }
    .catjail-nobars {
-    width:100px;
-    height:100px;
-    overflow:hidden;
-    position:relative;
-    max-width:100px;
-    max-height:100px
+   width:100px;
+   height:100px;
+   overflow:hidden;
+   position:relative;
+   max-width:100px;
+   max-height:100px
    }
    .cat-base{
-    position:absolute;
-    z-index:3
-    }
-    .cat-white{
-    position:absolute;
-    z-index:4
-    }
-    .cat-eyes{
-    position:absolute;
-    z-index:5
-    }
-    .cat-clothes{
-    position:absolute;
-    z-index:6
-    }
-    .avatar-cat-clothes{
-    position:absolute;
-    z-index:6
+   position:absolute;
+   z-index:3
+   }
+   .cat-white{
+   position:absolute;
+   z-index:4
+   }
+   .cat-eyes{
+   position:absolute;
+   z-index:5
+   }
+   .cat-clothes{
+   position:absolute;
+   z-index:6
+   }
+   .avatar-cat-clothes{
+   position:absolute;
+   z-index:6
     }
     .cat-link-topper{
     z-index:7;

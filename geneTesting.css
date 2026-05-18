@@ -1,20 +1,34 @@
+/*COLOUR CODES
+white: #f4f4f4
+grey: dcdce0
+charcoal: 2e2e31
+black: 222222
+teal: 567f8a
+dark teal: 4b6e78
+light blue: c3dded
+blue: 9ec5d8
+light tan: e2dbd3
+tan: ccc3b9
+brown: 635b5c
+dark brown: 554f50
+*/
 div {
     font-family: "Courier New";
 }
 
 #container {
-    border-radius: 15% 10%;
+    border-radius: 100px;
     margin: .5%;
     padding: 3%;
-    background-color:rgb(46, 46, 49);
- }
+    background-color:#2e2e31;
+}
 
 
 #logo {
     position: absolute;
     padding-left: 0%;
-    margin-top: -2%;
-    margin-left: 8%;
+    margin-top: -1%;
+    margin-left: 0%;
 }
 
 .btn-group {
@@ -47,20 +61,22 @@ div {
 }
 
 #yourcat {
-    background-color: rgb(36, 65, 66);
+    background-color: #4b6e78;
     color:aliceblue;
-    border-radius: 15% ;
+    border-radius: 20px;
     padding: 5%;
     font-size: 140%;
+    margin: 3%;
 }
 
 #testcat {
-    background-color: rgb(29, 31, 36);
+    background-color: #222222;
     color:aliceblue;
-    border-radius: 15% ;
+    border-radius: 20px;
     padding: 5%;
-    width: 90%;
-    font-size: 140%;
+    width: 95%;
+    font-size: 120%;
+    margin: 3%;
 }
 
 #genes-container {
@@ -75,10 +91,10 @@ div {
 }
 
 .subcol {
-    background-color: rgb(58, 160, 160);
+    background-color: #567f8a;
     margin: 1%;
     float: left;
-    border-radius: 5%;
+    border-radius: 20px;
     padding: .7%;
 }
 
@@ -113,8 +129,8 @@ div {
     padding: .7%;
     margin: .7%;
     margin-left: 0%;
-    border-radius: 0% 5% 5% 0%;
-    background-color: rgb(29, 31, 36);
+    border-radius: 20px;
+    background-color: #222222;
     color:aliceblue;
     font-size: 150%;
     isolation: isolate;   /* isolates the z-indexes so the cats don't appear on top of popup containers */
@@ -123,10 +139,10 @@ div {
 #testquestion-and-answer-container {
     width: 30%;
     padding: .7%;
-    border-radius: 5% 0% 0% 5%;
+    border-radius: 20px;
     margin: .7%;
     margin-right: 0%;
-    background-color: rgb(58, 160, 160);
+    background-color: #567f8a;
 }
 
 #testcatcontainer {
@@ -139,14 +155,14 @@ div {
     padding: 3% 3%; /* Some padding */
     cursor: pointer; /* Pointer/hand icon */
     float: left; /* Float the buttons side by side */
-    margin: .9%;
-    border-radius: 10% 15%;
+    margin-top: 1%;
+    border-radius: 10px;
 }
 
 #testquestion-select {
-    background-color:rgb(36, 65, 66);
+    background-color:#4b6e78;
     padding: 2%;
-    border-radius: 5%;
+    border-radius: 10px;
     color:aliceblue;
     font-size: 110%;
     width: 100%;
@@ -155,22 +171,23 @@ div {
 #testCatID {
     font-size: 100%;
     font-weight: bold;
-    background-color:rgb(36, 65, 66);
+    background-color:#4b6e78;
     padding-top: 10%;
     padding-bottom: 10%;
     text-align: center;
-    border-radius: 10% 15%;
+    border-radius: 20px;
+    margin-top: 5%;
 }
 
 #yourCatID {
     font-size: 100%;
     font-weight: bold;
-    background-color:rgb(29, 31, 36);
+    background-color:#222222;
     padding-top: 10%;
     padding-bottom: 10%;
     text-align: center;
-    border-radius: 10% 15%;
-    margin-bottom: 2%;
+    border-radius: 20px;
+    margin: 5%
 }
 
 #currentlyknowngenes {
@@ -179,16 +196,17 @@ div {
 
 #genecodefull {
     font-size: 80%;
-    background-color: rgb(58, 160, 160);
-    border-radius: 10% 15%;
+    background-color: #567f8a;
+    border-radius: 20px;
     padding: 5%;
+    margin-bottom: 5%;
 }
 
 .bgc {
-    background-color:rgb(69, 180, 180);
+    background-color:#9ec5d8;
     padding-top: 15px;
     padding-bottom: 15px;
-    border-radius: 5%;
+    border-radius: 5px;
     text-align: center;
     padding-left: 5px;
     padding-right: 5px;
@@ -200,7 +218,7 @@ div {
 }
 
 .gene {
-    background-color: rgb(58, 219, 219);
+    background-color: #c3dded;
     color:rgb(6, 25, 32);
     font-size: 160%;
     font-weight: bolder;
@@ -210,19 +228,19 @@ div {
 
 #answer-section {
     margin-top: 2%;
-    color:rgb(9, 17, 17);
+    color:#091111;
     font-weight: bold;
     font-size: 110%;
-    background-color:rgba(227, 238, 241, .6);
+    background-color:#c3dded;
     padding: 5%;
-    border-radius: 10% 15%;
+    border-radius: 5px;
 
 }
 
 .checkboxes {
     padding: 10px;
     height:0.9em;
-    background-color: darkviolet;
+    background-color: rgb(139, 52, 177);
     margin: 3%;
     margin-right: 5%;
 }
@@ -232,10 +250,10 @@ input.checkboxes {
 }
 
 #outerdiv {
-    border-radius: 10%;
+    border-radius: 5px;
     color: white;
-    background-color:rgba(15, 57, 73, 0.432);
-    margin-bottom: 2%;
+    background-color:#4b6e78;
+    margin-top: 2%;
     padding: 2px;
     max-height: 25%;
 }
@@ -289,6 +307,13 @@ label {
     font-size: 140%;
 }
 
+.test {
+    padding-left: 5%;
+}
+
+.testTextBox {
+    margin-left: 5%;
+}
 
 
 

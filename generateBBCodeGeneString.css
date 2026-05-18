@@ -1,7 +1,21 @@
+/*COLOUR CODES
+white: #f4f4f4
+grey: dcdce0
+charcoal: 2e2e31
+black: 222222
+teal: 567f8a
+dark teal: 4b6e78
+light blue: c3dded
+blue: 9ec5d8
+light tan: e2dbd3
+tan: ccc3b9
+brown: 635b5c
+dark brown: 554f50
+*/
 .popupcontainer {
-    background-color:rgb(80, 223, 228);
+    background-color:#0eb6b6;
     width: 100%;
-    border-radius: 5%;
+    border-radius: 30px;
     position: relative;
     z-index: 999;
     top: 0;
@@ -9,15 +23,15 @@
 }
 
 .copybutton {
-    padding: 5%;
+    padding: 2%;
     font-size: 150%;
-    margin-left: 5%;
-    border-radius: 5%;
+    margin: 2%;
+    border-radius: 30px;
 }
 
 
 .popupGenes {
-    background-color:rgba(195, 255, 255, 0.651);
+    background-color:#0e9b9b;
     font-size: 120%;
     word-wrap:break-word;
     width: 90%;
@@ -27,18 +41,19 @@
 }
 
 .xbutton {
-    background-color: rgb(236, 58, 73);
+    background-color: rgb(210, 0, 17);
     float: right;
     font-size: 200%;
-    padding: 2%;
-    padding-left: 6%;
-    padding-right: 6%;
-    border-radius: 20%;
+    color: aliceblue;
+    margin: 1%;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-bottom: 0.5%;
+    border-radius: 20px;
     
 }
 
 #bbcodebox {
-    background-color: rgba(3, 10, 12, 0.925);
     height: 60%;
     width: 60%;
     margin-left: 17%;
@@ -48,9 +63,8 @@
     inset: 0;
     position: fixed;
     left: 0%;
-    border-radius: 5%;
+    
 }
-
 
 
 .showbbcodebox {
