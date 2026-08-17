@@ -106,33 +106,31 @@ function parseCatAltTextMultiple(text) {
 // used for individual cat pages where the rest of the info is extracted from the cat page more cleanly than from the alt text
 function parseCatOwnerPoseEyesNameLocationPersonality(text) {
     
-    const catAltTextRegEx = /(?:(.+)'s Village: Profile » Scenery » Cats \[(.+)\] » Collections)?\n?\n?(This not-cat is a resident of Gardenhome City.|This not-cat is a resident of Crescent Pier.|Note: This not-cat is currently out traveling the world!)?\n?\n?‹?\n?›?\n?(playing|standing|sleeping|upsidedown|sitting) (Not-cat|Mercat) (adult|kitten|bean) with a (black|choco|brown|tan|charc|grey|smoke|silver|red|ginger|orange|aprico|buff|cream|almond|beige|snow|albino) (solid|mackerel|classic|broken|lynxpoint|clouded|rosette|cloudpoint|spotted|mink|colorpoint|ticked|ripple|agouti|karpati|freckle)? ?(shorthair|longhair) coat ?(?:and )?(black|choco|brown|tan|charc|grey|smoke|silver|red|ginger|orange|aprico|buff|cream|almond|beige|snow)? ?(solid|mackerel|classic|broken|lynxpoint|clouded|rosette|cloudpoint|spotted|mink|colorpoint|ticked|ripple|agouti|karpati|freckle)? ?(?:trade markings)?(ruby|violet|amber|pink|blue|green|indigo|gold|teal|black)? ?(solid|mackerel|classic|broken|lynxpoint|clouded|rosette|cloudpoint|spotted|mink|colorpoint|ticked|ripple|agouti|karpati|freckle)? ?(?:tail)?(.+) (dark brown|dark aqua|pale red|pale violet|pale blue|pale green|pale gold|cool odd) (neutral|squint|sleepy|uwu|content|danger|sad|stern|right|left|wink|happy|pensive|ough|sparkle|wimdy|whoa|zoinks|sneer|cute) eyes\.(?:.+)?\n?(.+)\n(?:(.+) (?:Wind)? \[(.+)\])?\n?(?:(.+) Personality)?\n?(?:(.+) Aspect)?/gm
+    const catAltTextRegEx = /(?:(.+)'s Village: Profile » Scenery » Cats \[(.+)\] » Collections|This not-cat is a resident of (Gardenhome City).|This not-cat is a resident of (Crescent Pier).)\n?\n?(?:Note: This not-cat is currently out (traveling) the world!)?\n?\n?‹?\n?›?\n?(playing|standing|sleeping|upsidedown|sitting) (Not-cat|Mercat) (adult|kitten|bean) with a (black|choco|brown|tan|charc|grey|smoke|silver|red|ginger|orange|aprico|buff|cream|almond|beige|snow|albino) (solid|mackerel|classic|broken|lynxpoint|clouded|rosette|cloudpoint|spotted|mink|colorpoint|ticked|ripple|agouti|karpati|freckle)? ?(shorthair|longhair) coat ?(?:and )?(black|choco|brown|tan|charc|grey|smoke|silver|red|ginger|orange|aprico|buff|cream|almond|beige|snow)? ?(solid|mackerel|classic|broken|lynxpoint|clouded|rosette|cloudpoint|spotted|mink|colorpoint|ticked|ripple|agouti|karpati|freckle)? ?(?:trade markings)?(ruby|violet|amber|pink|blue|green|indigo|gold|teal|black)? ?(solid|mackerel|classic|broken|lynxpoint|clouded|rosette|cloudpoint|spotted|mink|colorpoint|ticked|ripple|agouti|karpati|freckle)? ?(?:tail)?(.+) (dark brown|dark aqua|pale red|pale violet|pale blue|pale green|pale gold|cool odd) (neutral|squint|sleepy|uwu|content|danger|sad|stern|right|left|wink|happy|pensive|ough|sparkle|wimdy|whoa|zoinks|sneer|cute) eyes\.(?:.+)?\n?(.+)\n(?:(.+) (?:Wind)? \[(.+)\])?\n?(?:(.+) Personality)?\n?(?:(.+) Aspect)?/gm
     let match = catAltTextRegEx.exec(text)
+
     let cat = {
         owner: match[1],
         tab: match[2],
-        location: match[3],
-        pose: match[4],
-        eyes: match[16],
-        name: match[17],
+        pose: match[6],
+        eyes: match[18],
+        name: match[19],
         personality: {
-            type: match[20]
+            type: match[22]
         }
     }
-    if (typeof cat.location !== "undefined") {
-        if (cat.location === "Note: This not-cat is currently out traveling the world!") {
-            cat.location = "Traveling"
-        }
-        if (cat.location === "This not-cat is a resident of Gardenhome City.") {
-            cat.location = "Gardenhome City"
-            delete cat.owner
-        }
-        if (cat.location === "This not-cat is a resident of Crescent Pier.") {
-            cat.location = "Crescent Pier"
-            delete cat.owner
-        }
+    if (match[3] == "Gardenhome City") {
+        cat.location = "Gardenhome City"
+        delete cat.owner
     }
-    else {
+    if (match[4] == "Crescent Pier") {
+        cat.location = "Crescent Pier"
+        delete cat.owner
+    }
+    if (match[5] == "traveling") {
+        cat.location = "Traveling"
+    }
+    if (typeof cat.location == "undefined") {
         cat.location = "Active"
     }
     if (!cat.tab) {
@@ -142,7 +140,7 @@ function parseCatOwnerPoseEyesNameLocationPersonality(text) {
 }
 
 function parseBasicData(text) {
-    const basicDataRegEx = /Physical Traits\n?Basic Data:\n?Birthday:\n?(Spring|Summer|Autumn|Winter) ([0-9]+), Year ([0-9]+)\n?Age:\n?(Bean|Young Kitten|Kitten|Adolescent|Adult) \(.+\)\n?Wind:\n?(North|South|Trade|Null)\n?Pronouns:\n?(.+)\n?Aspect:\n?(Undiscovered)\n?Origin:\n?(Custom Cat|Migrated from Earth|Born in Nestor's Wood|Born in Gardenhome City|Born in Crescent Pier)\n?ID Code:\n?\[cat=([0-9]+)\]/gm
+    const basicDataRegEx = /Physical Traits\n?Basic Data\n?Birthday:\n?(Spring|Summer|Autumn|Winter) ([0-9]+), Year ([0-9]+)\n?Age:\n?(Bean|Young Kitten|Kitten|Adolescent|Adult|Ascended) \(.+\)\n?Wind:\n?(North|South|Trade|Null)\n?Pronouns:\n?(.+)\n?Aspect:\n?(Undiscovered)\n?Origin:\n?(Custom Cat|Migrated from Earth|Born in Nestor's Wood|Born in Gardenhome City|Born in Crescent Pier)\n?ID Code:\n?\[cat=([0-9]+)\]/gm
     let match = basicDataRegEx.exec(text)
     let seasons = ["Spring", "Summer", "Autumn", "Winter"]
     let seasonnum
@@ -166,7 +164,7 @@ function parseBasicData(text) {
 }
 
 function parseAppearanceData(text, basicdata) {
-    const appearanceRegEx = /Appearance:\n?Species:\n?(Not-cat|Mercat)\n?Size:\n?([0-9]+\.?(?:[0-9]+)?) lbs. \/ ([0-9]+\.?(?:[0-9]+)?) kg\n?Fur:\n?(Shorthair|Longhair)\n?Color:\n?(-hid|.+[^ ]) ?(Tortoiseshell|Watercolor|Standard|den-)\n?Pattern:\n?(Solid|Mackerel|Classic|Broken|Lynxpoint|Clouded|Rosette|Cloudpoint|Spotted|Mink|Colorpoint|Ticked|Ripple|Agouti|Karpati|Freckle|-hidden-)\n?(?:Accent Color:)?\n?(Ruby|Violet|Amber|Pink|Blue|Green|Indigo|Gold|Teal|Black|-hidden-)?\n?White Marks:\n?(.+)\n?Eye Color:\n?(Dark Brown|Dark Aqua|Pale Red|Pale Violet|Pale Blue|Pale Green|Pale Gold|Cool Odd)\n?(?:\[ (C|M) ] \[ (N|S|O)(N|S|O) ] \[ (S|L)(S|L) ] \[ (B|O)(B|O)(F|D)(F|D)([1-4]) ] \[ (Y|N)(Y|N)(T|S|M|P|A)(T|S|M|P|A) ] \[ (Y|N)(Y|N)([0-9]+)(C|P|L|R|I|T) ] \[ (A|B|C)(A|B|C) ] \[ (R|B|Y|L)(R|B|Y|L) ])?/gm
+    const appearanceRegEx = /Appearance\n?Species:\n?(Not-cat|Mercat)\n?Size:\n?([0-9]+\.?(?:[0-9]+)?) lbs. \/ ([0-9]+\.?(?:[0-9]+)?) kg\n?Fur:\n?(Shorthair|Longhair)\n?Color:\n?(-hid|.+[^ ]) ?(Tortoiseshell|Watercolor|Standard|den-)\n?Pattern:\n?(Solid|Mackerel|Classic|Broken|Lynxpoint|Clouded|Rosette|Cloudpoint|Spotted|Mink|Colorpoint|Ticked|Ripple|Agouti|Karpati|Freckle|-hidden-)\n?(?:Accent Color:)?\n?(Ruby|Violet|Amber|Pink|Blue|Green|Indigo|Gold|Teal|Black|-hidden-)?\n?White Marks:\n?(.+)\n?Eye Color:\n?(Dark Brown|Dark Aqua|Pale Red|Pale Violet|Pale Blue|Pale Green|Pale Gold|Cool Odd)\n?(?:\[ (C|M) ] \[ (N|S|O)(N|S|O) ] \[ (S|L)(S|L) ] \[ (B|O)(B|O)(F|D)(F|D)([1-4]) ] \[ (Y|N)(Y|N)(T|S|M|P|A)(T|S|M|P|A) ] \[ (Y|N)(Y|N)([0-9]+)(C|P|L|R|I|T) ] \[ (A|B|C)(A|B|C) ] \[ (R|B|Y|L)(R|B|Y|L) ])?/gm
     let match = appearanceRegEx.exec(text)
     let cat = {
         species: match[1],
@@ -227,8 +225,10 @@ function parsePersonalityAndTrinketData(text) {
 }
 
 function parseJobAndAdvClassData(text) {
-    const jobAndAdvClassRegEx = /Attributes and Occupations\n?Day Job: ([A-z ]+)(?: .+)?\n?(?:Hunter Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?(?:Gatherer Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?(?:Miner Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?(?:Fisher Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?(?:Bug Catcher Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?(?:Gardener Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?(?:Herbalist Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?(?:Farmer Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?(?:Flockherd Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?(?:Apothecary Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?(?:Clothier Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?(?:Scribe Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?(?:Artist Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?(?:Blacksmith Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?(?:Craftscat Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?(?:Builder Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?(?:Mason Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?(?:Baker Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?Adventuring Class: (.+)\n?(?:Fighter Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?(?:Thief Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?(?:Guardian Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?(?:Ranger Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?(?:Medic Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?(?:Scout Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?(?:Bard Level ([0-9]) \[([0-9]+|Maximum Level).+)?\n?/gm
+    console.log(text)
+    const jobAndAdvClassRegEx = /Attributes and Occupations\n?Day Job: ([A-z ]+)(?: .+)?\n?(?:Hunter Level ([0-9]) \[([0-9]+|Max Level).+)?\n?(?:Gatherer Level ([0-9]) \[([0-9]+|Max Level).+)?\n?(?:Miner Level ([0-9]) \[([0-9]+|Max Level).+)?\n?(?:Fisher Level ([0-9]) \[([0-9]+|Max Level).+)?\n?(?:Bug Catcher Level ([0-9]) \[([0-9]+|Max Level).+)?\n?(?:Gardener Level ([0-9]) \[([0-9]+|Max Level).+)?\n?(?:Herbalist Level ([0-9]) \[([0-9]+|Max Level).+)?\n?(?:Farmer Level ([0-9]) \[([0-9]+|Max Level).+)?\n?(?:Flockherd Level ([0-9]) \[([0-9]+|Max Level).+)?\n?(?:Apothecary Level ([0-9]) \[([0-9]+|Max Level).+)?\n?(?:Clothier Level ([0-9]) \[([0-9]+|Max Level).+)?\n?(?:Scribe Level ([0-9]) \[([0-9]+|Max Level).+)?\n?(?:Artist Level ([0-9]) \[([0-9]+|Max Level).+)?\n?(?:Blacksmith Level ([0-9]) \[([0-9]+|Max Level).+)?\n?(?:Craftscat Level ([0-9]) \[([0-9]+|Max Level).+)?\n?(?:Builder Level ([0-9]) \[([0-9]+|Max Level).+)?\n?(?:Mason Level ([0-9]) \[([0-9]+|Max Level).+)?\n?(?:Baker Level ([0-9]) \[([0-9]+|Max Level).+)?\n?Adventuring Class: (.+)\n?(?:Fighter Level ([0-9]) \[([0-9]+|Max Level).+)?\n?(?:Thief Level ([0-9]) \[([0-9]+|Max Level).+)?\n?(?:Guardian Level ([0-9]) \[([0-9]+|Max Level).+)?\n?(?:Ranger Level ([0-9]) \[([0-9]+|Max Level).+)?\n?(?:Medic Level ([0-9]) \[([0-9]+|Max Level).+)?\n?(?:Scout Level ([0-9]) \[([0-9]+|Max Level).+)?\n?(?:Bard Level ([0-9]) \[([0-9]+|Max Level).+)?\n?/gm
     let match = jobAndAdvClassRegEx.exec(text)
+    console.log(match)
     for (let i = 2; i < match.length; i++) {
         if (i < 38) {
             if (i % 2 == 0) {
@@ -351,8 +351,8 @@ function parseAttributeAndMayorBoostData(text) {
 }
 
 function parseRelationships(text) {
-    let friendsandfamily = text.split("Friends:")[1]
-    let relationships = friendsandfamily.split("Family:")
+    let friendsandfamily = text.split("Friends")[1]
+    let relationships = friendsandfamily.split("Family")
     const relationshipsRegEx = /(.+) - (.+)\n?/gm
     let friends = []  
     let family = []

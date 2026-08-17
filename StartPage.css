@@ -200,12 +200,14 @@ h2{
         left: 10%;
         top: 5%;
     }
-    #title-sign{
-        height: auto;
-    }
 
 }
-#title-sign {
-    height: auto;
-    max-width: 100%;
+
+.title-sign-frontPage {
+    max-width: 70%;
+    position: relative;
+    top: -20px;
+    left: 15%;
+    align-items: center;
+    justify-content: center;
 }
