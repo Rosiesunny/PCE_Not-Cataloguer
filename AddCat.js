@@ -5,6 +5,8 @@ function addCat(plaintext) {
     let relationshipsText = trimmedTexts[1] // just cat relationships
     let biographyText = trimmedTexts[2] // just the biography
     let wearingText = trimmedTexts[3] // just the clothes
+    let ascensionfeaturesText = trimmedTexts[4]
+
     if (!relationshipsText) {
         relationshipsText = ""
     }
@@ -14,7 +16,6 @@ function addCat(plaintext) {
     if (!wearingText) {
         wearingText = ""
     }
-    console.log(trimmedTexts)
 
     let catOwnerPoseEyesNameLocationPersonality = parseCatOwnerPoseEyesNameLocationPersonality(text)
     let catBasicInfo = parseBasicData(text)
@@ -22,14 +23,20 @@ function addCat(plaintext) {
     let catRelationships = parseRelationships(relationshipsText)
 
     let cat
-    if (catOwnerPoseEyesNameLocationPersonality.location !== "Gardenhome City") {
+    if (catOwnerPoseEyesNameLocationPersonality.location !== "Gardenhome City" && catOwnerPoseEyesNameLocationPersonality.location !== "Crescent Pier") {
         if (catBasicInfo.age !== "Bean") {
             let catPersonalityAndTrinket = parsePersonalityAndTrinketData(text) // do not send to savecat
             let catJobAndAdvClass = parseJobAndAdvClassData(text)
             let catAttributeAndMayorBoost = parseAttributeAndMayorBoostData(text) // do not send to savecat
             let catAdjustedStats = adjustStats(catAttributeAndMayorBoost, catPersonalityAndTrinket)
             let catWearing = parseWearing(wearingText)
-            cat = saveCat(catOwnerPoseEyesNameLocationPersonality, catBasicInfo, catAppearanceInfo, catJobAndAdvClass, catAdjustedStats, catRelationships, catWearing, biographyText)
+            if (catBasicInfo.age !== "Ascended") {
+                cat = saveCat(catOwnerPoseEyesNameLocationPersonality, catBasicInfo, catAppearanceInfo, catJobAndAdvClass, catAdjustedStats, catRelationships, catWearing, biographyText)
+            }
+            else {
+                let catAscensionFeatures = parseAscensionFeatures(ascensionfeaturesText)
+                cat = saveCat(catOwnerPoseEyesNameLocationPersonality, catBasicInfo, catAppearanceInfo, catJobAndAdvClass, catAdjustedStats, catRelationships, catWearing, biographyText, catAscensionFeatures)
+            }
         }
         else {
             cat = saveCat(catOwnerPoseEyesNameLocationPersonality, catBasicInfo, catAppearanceInfo, "", "", catRelationships, "", biographyText)
@@ -51,17 +58,30 @@ function addCat(plaintext) {
 
 function trimWebsiteText(text) {
     const topSectionRegEx = /(?:Nestor's Wood ★|Gardenhome City ★|Crescent Pier ★)/gm
-    let topsectiontrimm = text.split(topSectionRegEx)[1]
+    let topsectiontrim = text.split(topSectionRegEx)[1]
     const usersOnlineRegEx = /[0-9]+ Users Online\n?Terms of Service\n?Community Guidelines/gm
-    let bottomsectiontrim = topsectiontrimm.split(usersOnlineRegEx)[0] // cut off bottom section
+    let bottomsectiontrim = topsectiontrim.split(usersOnlineRegEx)[0] // cut off bottom section
     let temp = bottomsectiontrim.split("Biography") ?? bottomsectiontrim // the rest = temp[0], biography and wearing = temp[1] - still needs to be split more
     const relationshipsRegEx = /(?:Relationships|Pre-City Contacts)/
     let mainandrelationships = temp[0].split(relationshipsRegEx) ?? "" // main section = mainandrelationships[0], relationships = mainandrelationships[1] - split #1 done
+    
     let bioandwearing = ""
+    let ascensionfeatures = ""
     if (temp[1]) {
-        bioandwearing = temp[1].split("Currently Wearing: ") ?? "" //biography = bioandwearing[0], wearing = bioandwearing[1] - split #2 done
+        bioandwearing = temp[1].split("Currently Wearing:") ?? "" //biography = bioandwearing[0], wearing = bioandwearing[1] - split #2 done
+        bioandwearing[0] = bioandwearing[0].trim()
+        if (bioandwearing[1].includes("Ascension Features:")) {
+            ascensionfeatures = bioandwearing[1].split("Ascension Features:")[1]
+            ascensionfeatures = ascensionfeatures.trim()
+            bioandwearing[1] = bioandwearing[1].split("Ascension Features:")[0]
+            bioandwearing[1] = bioandwearing[1].trim()
+        }
+        else {
+            bioandwearing[1] = bioandwearing[1].trim()
+        }
     }
-    let finalTrims = [mainandrelationships[0], mainandrelationships[1], bioandwearing[0], bioandwearing[1]] // [mainsection, relationships, biography, wearing]
+
+    let finalTrims = [mainandrelationships[0], mainandrelationships[1], bioandwearing[0], bioandwearing[1], ascensionfeatures] // [mainsection, relationships, biography, wearing]
     return finalTrims
 }
 
@@ -106,7 +126,7 @@ function parseCatAltTextMultiple(text) {
 // used for individual cat pages where the rest of the info is extracted from the cat page more cleanly than from the alt text
 function parseCatOwnerPoseEyesNameLocationPersonality(text) {
     
-    const catAltTextRegEx = /(?:(.+)'s Village: Profile » Scenery » Cats \[(.+)\] » Collections|This not-cat is a resident of (Gardenhome City).|This not-cat is a resident of (Crescent Pier).)\n?\n?(?:Note: This not-cat is currently out (traveling) the world!)?\n?\n?‹?\n?›?\n?(playing|standing|sleeping|upsidedown|sitting) (Not-cat|Mercat) (adult|kitten|bean) with a (black|choco|brown|tan|charc|grey|smoke|silver|red|ginger|orange|aprico|buff|cream|almond|beige|snow|albino) (solid|mackerel|classic|broken|lynxpoint|clouded|rosette|cloudpoint|spotted|mink|colorpoint|ticked|ripple|agouti|karpati|freckle)? ?(shorthair|longhair) coat ?(?:and )?(black|choco|brown|tan|charc|grey|smoke|silver|red|ginger|orange|aprico|buff|cream|almond|beige|snow)? ?(solid|mackerel|classic|broken|lynxpoint|clouded|rosette|cloudpoint|spotted|mink|colorpoint|ticked|ripple|agouti|karpati|freckle)? ?(?:trade markings)?(ruby|violet|amber|pink|blue|green|indigo|gold|teal|black)? ?(solid|mackerel|classic|broken|lynxpoint|clouded|rosette|cloudpoint|spotted|mink|colorpoint|ticked|ripple|agouti|karpati|freckle)? ?(?:tail)?(.+) (dark brown|dark aqua|pale red|pale violet|pale blue|pale green|pale gold|cool odd) (neutral|squint|sleepy|uwu|content|danger|sad|stern|right|left|wink|happy|pensive|ough|sparkle|wimdy|whoa|zoinks|sneer|cute) eyes\.(?:.+)?\n?(.+)\n(?:(.+) (?:Wind)? \[(.+)\])?\n?(?:(.+) Personality)?\n?(?:(.+) Aspect)?/gm
+    const catAltTextRegEx = /(?:(.+)'s Village: Profile » Scenery » Cats \[(.+)\] » Collections|This not-cat is a resident of (Gardenhome City).|This not-cat is a resident of (Crescent Pier).)\n?\n?(?:Note: This not-cat is currently out (traveling) the world!)?\n?\n?‹?\n?›?\n?(?:(?:gold|snow|black|silver|copper|cream|slate|stone) (?:single|double|burst|rays|spiral|wobbly|watching|offset)halo)(playing|standing|sleeping|upsidedown|sitting) (Not-cat|Mercat) (adult|kitten|bean) with a (black|choco|brown|tan|charc|grey|smoke|silver|red|ginger|orange|aprico|buff|cream|almond|beige|snow|albino) (solid|mackerel|classic|broken|lynxpoint|clouded|rosette|cloudpoint|spotted|mink|colorpoint|ticked|ripple|agouti|karpati|freckle)? ?(shorthair|longhair) coat ?(?:and )?(black|choco|brown|tan|charc|grey|smoke|silver|red|ginger|orange|aprico|buff|cream|almond|beige|snow)? ?(solid|mackerel|classic|broken|lynxpoint|clouded|rosette|cloudpoint|spotted|mink|colorpoint|ticked|ripple|agouti|karpati|freckle)? ?(?:trade markings)?(ruby|violet|amber|pink|blue|green|indigo|gold|teal|black)? ?(solid|mackerel|classic|broken|lynxpoint|clouded|rosette|cloudpoint|spotted|mink|colorpoint|ticked|ripple|agouti|karpati|freckle)? ?(?:tail)?(.+) (dark brown|dark aqua|pale red|pale violet|pale blue|pale green|pale gold|cool odd) (neutral|squint|sleepy|uwu|content|danger|sad|stern|right|left|wink|happy|pensive|ough|sparkle|wimdy|whoa|zoinks|sneer|cute) eyes\.(?:.+)?\n?(.+)\n(?:(.+) (?:Wind)? \[(.+)\])?\n?(?:(.+) Personality)?\n?(?:(.+) Aspect)?/gm
     let match = catAltTextRegEx.exec(text)
 
     let cat = {
@@ -225,10 +245,8 @@ function parsePersonalityAndTrinketData(text) {
 }
 
 function parseJobAndAdvClassData(text) {
-    console.log(text)
     const jobAndAdvClassRegEx = /Attributes and Occupations\n?Day Job: ([A-z ]+)(?: .+)?\n?(?:Hunter Level ([0-9]) \[([0-9]+|Max Level).+)?\n?(?:Gatherer Level ([0-9]) \[([0-9]+|Max Level).+)?\n?(?:Miner Level ([0-9]) \[([0-9]+|Max Level).+)?\n?(?:Fisher Level ([0-9]) \[([0-9]+|Max Level).+)?\n?(?:Bug Catcher Level ([0-9]) \[([0-9]+|Max Level).+)?\n?(?:Gardener Level ([0-9]) \[([0-9]+|Max Level).+)?\n?(?:Herbalist Level ([0-9]) \[([0-9]+|Max Level).+)?\n?(?:Farmer Level ([0-9]) \[([0-9]+|Max Level).+)?\n?(?:Flockherd Level ([0-9]) \[([0-9]+|Max Level).+)?\n?(?:Apothecary Level ([0-9]) \[([0-9]+|Max Level).+)?\n?(?:Clothier Level ([0-9]) \[([0-9]+|Max Level).+)?\n?(?:Scribe Level ([0-9]) \[([0-9]+|Max Level).+)?\n?(?:Artist Level ([0-9]) \[([0-9]+|Max Level).+)?\n?(?:Blacksmith Level ([0-9]) \[([0-9]+|Max Level).+)?\n?(?:Craftscat Level ([0-9]) \[([0-9]+|Max Level).+)?\n?(?:Builder Level ([0-9]) \[([0-9]+|Max Level).+)?\n?(?:Mason Level ([0-9]) \[([0-9]+|Max Level).+)?\n?(?:Baker Level ([0-9]) \[([0-9]+|Max Level).+)?\n?Adventuring Class: (.+)\n?(?:Fighter Level ([0-9]) \[([0-9]+|Max Level).+)?\n?(?:Thief Level ([0-9]) \[([0-9]+|Max Level).+)?\n?(?:Guardian Level ([0-9]) \[([0-9]+|Max Level).+)?\n?(?:Ranger Level ([0-9]) \[([0-9]+|Max Level).+)?\n?(?:Medic Level ([0-9]) \[([0-9]+|Max Level).+)?\n?(?:Scout Level ([0-9]) \[([0-9]+|Max Level).+)?\n?(?:Bard Level ([0-9]) \[([0-9]+|Max Level).+)?\n?/gm
     let match = jobAndAdvClassRegEx.exec(text)
-    console.log(match)
     for (let i = 2; i < match.length; i++) {
         if (i < 38) {
             if (i % 2 == 0) {
@@ -405,6 +423,55 @@ function parseWearing(text) {
     return cat
 }
 
+function parseAscensionFeatures(text) {
+    let wingsRegEx = /(?:(small|medium|large), (closed|open), (black|chocolate|brown|tan|charcoal|grey|smoke|silver|red|ginger|orange|apricot|buff|cream|almond|beige|snow|white)(?: and (white))? back wing with the (block|partial block|inverse block|barred|pied|banded) pattern)/gm
+    let antlersRegEx = /(?:(tiny|small|medium|large|left|right) (gold|snow|black|silver|copper|cream|slate|stone) antlers)/gm
+    let haloRegEx = /(?:(gold|snow|black|silver|copper|cream|slate|stone) (single|double|burst|rays|spiral|wobbly|watching|offset) halo)/gm
+    let extraEyesRegEx =/(?:(lots|two|three) spare eyes)/gm
+    let wings = wingsRegEx.exec(text) ?? ""
+    let antlers = antlersRegEx.exec(text) ?? ""
+    let halo = haloRegEx.exec(text) ?? ""
+    let extraEyes = extraEyesRegEx.exec(text) ?? ""
+    let cat = {
+        ascensionFeatures: {
+
+        }
+    }
+
+    if (wings !== "") {
+        if (typeof wings[4] !== "undefined") {
+        cat.ascensionFeatures.wings = {
+            size: wings[1],
+            position: wings[2],
+            color: wings[3] + "-" + wings[4],
+            pattern: wings[5]
+        }
+        }
+        else {
+            cat.ascensionFeatures.wings = {
+                size: wings[1],
+                position: wings[2],
+                color: wings[3],
+                pattern: wings[5]
+            }
+        }
+    }
+    if (antlers !== "") {
+        cat.ascensionFeatures.antlers = {
+            shape: antlers[1],
+            color: antlers[2]
+        }
+    }
+    cat.ascensionFeatures.halo = {
+        color: halo[1],
+        shape: halo[2]
+    }
+    if (extraEyes !== "") {
+        cat.ascensionFeatures.extraEyes = extraEyes[1]
+    }
+    return cat
+}
+
 function adjustStats(attributesandmayorboosts, personalityandtrinket) {
     // https://www.geeksforgeeks.org/how-to-use-dynamic-variable-names-in-javascript/
     const persoStatsArray = ["Bravery", "Benevolence", "Energy", "Extroversion", "Dedication"]
@@ -433,13 +500,10 @@ function adjustStats(attributesandmayorboosts, personalityandtrinket) {
 
 
 // add more requirements as I go
-function saveCat(poseeyesnamelocationpersonality, basicdata, appearancedata, catjobandadvclassdata, statsdata, relationshipsdata, wearingdata, biographydata) {
+function saveCat(poseeyesnamelocationpersonality, basicdata, appearancedata, catjobandadvclassdata, statsdata, relationshipsdata, wearingdata, biographydata, ascensionfeaturesdata) {
     //MERGE OBJECTS: https://stackoverflow.com/questions/171251/how-can-i-merge-properties-of-two-javascript-objects
-    let cat = {...basicdata, ...appearancedata, ...poseeyesnamelocationpersonality, ...catjobandadvclassdata, ...statsdata, ...relationshipsdata, ...wearingdata}
+    let cat = {...basicdata, ...appearancedata, ...poseeyesnamelocationpersonality, ...catjobandadvclassdata, ...statsdata, ...relationshipsdata, ...wearingdata, ...ascensionfeaturesdata}
     cat.biography = biographydata
-    if (cat.biography.includes("\n\nCurrently Wearing:\n")) {
-        cat.biography = cat.biography.split("\n\nCurrently Wearing:\n")[0]
-    }
     //fix eye data to be one object
     let eyesdata = {eyes: cat.eyes, color: cat.eyeColor}
     delete cat.eyes

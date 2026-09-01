@@ -70,7 +70,7 @@ function generateMainClass(pose, furlength, species, age) {
     if (species == "Mercat") {
         mainclass += "m-"
     }
-    if (age == "Adult" || age == "Adolescent") {
+    if (age == "Adult" || age == "Adolescent"||age == "Ascended") {
         mainclass += "adult-"
     }
     if (age == "Kitten" || age == "Young Kitten") {
