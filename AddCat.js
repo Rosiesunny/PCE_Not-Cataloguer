@@ -616,6 +616,19 @@ function tempDisplay(cat) {
     displayhtml += displayRelationships("Friends: ", cat.friends)
     displayhtml += displayRelationships("Family: ", cat.family)
     displayhtml += displayWearing("Wearing: ", cat.clothes?.wearing)
+    if (cat.age == "Ascended") {
+        displayhtml += "<br>Ascension Features:"
+        if (typeof cat.ascensionFeatures.wings !== "undefined") {
+            displayhtml += "<br> - Wings: " + cat.ascensionFeatures.wings.size + " " + cat.ascensionFeatures.wings.position + " " + cat.ascensionFeatures.wings.color + " " + cat.ascensionFeatures.wings.pattern
+        }
+        if (typeof cat.ascensionFeatures.antlers !== "undefined") {
+            displayhtml += "<br> - Antlers: " + cat.ascensionFeatures.antlers.shape + " " + cat.ascensionFeatures.antlers.color
+        }
+        displayhtml += "<br> - Halo: " + cat.ascensionFeatures.halo.color + " " + cat.ascensionFeatures.halo.shape
+        if (typeof cat.ascensionFeatures.extraEyes !== "undefined") {
+            displayhtml += "<br> - Extra Eyes: " + cat.ascensionFeatures.extraEyes
+        }
+    }
     displayhtml += displayKnownGenes("Known Gene String: ", cat.genes)
     displayhtml += addToDisplayHtml("Owner: ", cat.owner)
     
